@@ -1,0 +1,211 @@
+\documentclass[noaccount,foldmarks,list,nomfg,english,nodate]{style/comsys-letter}
+\usepackage{array}
+\setSignature{}
+\usepackage{pdfsync}
+
+%%% Set Variables Here:
+%%% ===================
+
+% Full and unique name of company:
+\def\company{SoNah UG (haftungsbeschränkt)}
+% Short name for reference inside the document:
+% Who signs the memorandum for the company?
+\def\companySignee{Victor ter Smitten}
+
+% Student's name:
+\def\student{Andrei Ionita}
+% Set gender of student to have words like "he" or "she" correctly used.
+% Set either \def\studentMale{} or \def\studentFemale{}
+\def\studentFemale{}
+% Type of the thesis, typically either Bachelor or Master
+\def\thesisType{Master}
+
+% Define company-side advisor(s):
+% This can either be a single name or a list of names, concatenated like lists in English language:
+\def\advisorsCompany{Victor ter Smitten/ Christian Bartsch/ Thomas Grimm}
+% Specify whether this is one advisor or multiple, and the gender in the former case.
+% Makes the document use either "he", or "she", or "they", respectively.
+% Define either of those:
+% \def\advisorsCompanyMale{}
+% \def\advisorsCompanyFemale{}
+% \def\advisorsCompanyMultiple{}
+\def\advisorsCompanyMultiple{}
+
+% Define COMSYS-side advisor(s):
+% Same rules as for the company-side advisors:
+\def\advisorsComsys{André Pomp} % at least one
+% Specify whether this is one advisor or multiple, and the gender in the former case.
+% Makes the document use either "he", or "she", or "they", respectively.
+% Define either of those:
+% \def\advisorsComsysMale{}
+% \def\advisorsComsysFemale{}
+% \def\advisorsComsysMultiple{}
+\def\advisorsComsysMale{}
+
+%%% ===================
+%%% end user variables
+
+% Translate gender macros to English words:
+\def\hisHer{his/her}
+\def\heShe{he/she}
+\def\heSheThey{he/she/they}
+\def\doDoes{do/does}
+\def\comsysThirdPersonS{(s)}
+\def\companyThirdPersonS{(s)}
+\def\comsysPluralS{(s)}
+\def\companyPluralS{(s)}
+
+\ifx\studentMale\undefined\else
+	\def\hisHer{his}
+	\def\heShe{he}
+\fi
+
+\ifx\studentFemale\undefined\else
+	\def\hisHer{her}
+	\def\heShe{she}
+\fi
+
+\ifx\advisorsComsysMale\undefined\else
+	\def\heSheThey{he}
+	\def\doDoes{does}
+	\def\comsysThirdPersonS{s}
+	\def\comsysPluralS{}
+\fi
+
+\ifx\advisorsComsysFemale\undefined\else
+	\def\heSheThey{she}
+	\def\doDoes{does}
+	\def\comsysThirdPersonS{s}
+	\def\comsysPluralS{}
+\fi
+
+\ifx\advisorsComsysMultiple\undefined\else
+	\def\heSheThey{they}
+	\def\doDoes{do}
+	\def\comsysThirdPersonS{}
+	\def\comsysPluralS{s}
+\fi
+
+\ifx\advisorsCompanyMale\undefined\else
+	\def\companyThirdPersonS{s}
+	\def\companyPluralS{}
+\fi
+
+\ifx\advisorsCompanyFemale\undefined\else
+	\def\companyThirdPersonS{s}
+	\def\companyPluralS{}
+\fi
+
+\ifx\advisorsCompanyMultiple\undefined\else
+	\def\companyThirdPersonS{}
+	\def\companyPluralS{s}
+\fi
+
+
+\setSubject{\Large Memorandum of Understanding}
+\begin{document}
+
+\paragraph{BETWEEN}~
+
+The Chair of Communication and Distributed Systems at RWTH Aachen University, represented by its chairholder Prof. Klaus Wehrle, in the following ``COMSYS''
+
+\paragraph{AND}~
+
+\company{}, represented by \companySignee{}, in the following ``the Company''
+
+\paragraph{AND}~
+
+\student{}, in the following ``the Student''.
+
+\section{Preamble}
+
+``Die Bachelor- bzw. Masterarbeit besteht aus einer schriftlichen Arbeit der Kandidatin bzw. des Kandidaten.
+Sie soll zeigen, dass die Kandidatin bzw. der Kandidat in der Lage ist, ein Problem innerhalb einer vorgegebenen Frist nach wissenschaftlichen Methoden unter Anleitung selbstständig zu bearbeiten.''\footnote{Übergreifende Prüfungsordnung für alle Bachelor- und Masterstudiengänge der Rheinisch-Westfälischen Technischen Hochschule Aachen mit Ausnahme der Lehramtsstudiengänge (ÜPO) vom 03.11.2014 in der Fassung der dritten Ordnung zur Änderung der Prüfungsordnung vom 24.06.2016}
+
+In this context RWTH Aachen University strives to assign topics with a particular emphasis on scientific research.
+Usually, the chairs at the computer science department of RWTH Aachen University, including COMSYS, provide topics from their fields of research.
+The thesis is then advised by researchers with particular interest in the topic.
+In special cases, it is possible for the chairs to cooperate with external partners, such as companies.
+This requires extensive collaboration between COMSYS and the Company based on a common understanding on the expectations on a \thesisType{} Thesis.
+As a foundation of a successful thesis the parties agree on this Memorandum of Understanding.
+
+%\section{Introduction}
+%
+%COMSYS and the company plan to jointly supervise the student during \hisHer{} \thesisType{} Thesis.
+%In order to ensure that all parties share a common view on what is expected from a \thesisType{} Thesis, the parties agree on this Memorandum of Understanding.
+
+\section{Conditions of Collaboration}
+
+COMSYS assigns \advisorsComsys{} (in the following ``the Advisor\comsysPluralS{}'') to advise the thesis.
+The company assigns \advisorsCompany{} (in the following ``the Employee\companyPluralS{} in charge'') to support the Advisor\comsysPluralS{}.
+Each of these persons needs to dedicate a significant amount of their time to the guidance of the Student and is committed to do this according to the guidelines stated in this document.
+Each party must ensure proper substitution regulations in case any of these persons is not available.
+
+All documents, source code, evaluation results etc. that are created by the student during the course of the thesis need to be shared with all parties.
+The student has to submit all source code and evaluation results on a storage medium together with the thesis.
+
+If not agreed differently in a separate written document, all involved parties aim towards jointly publishing the results of the thesis at an appropriate scientific venue.
+Joint inventions shall be pursued together.
+
+
+\section{Preliminary Status of COMSYS's Agreement to Advise the Thesis}
+
+Today COMSYS does not finally agree to advise the thesis.
+The final commitment is only given at the time when the Student officially registers the thesis with ZPA.
+The final commitment is then given through signature of the examiner on the registration sheet sent to ZPA.
+Up to this point COMSYS can at any point cancel the agreement if the conditions are not met and the Advisor\comsysPluralS{} \doDoes{} not have the impression that this can be easily changed.
+
+\section{Registration}
+
+The thesis is only registered with ZPA if the conditions listed in the following are met.
+It is the sole decision of COMSYS to approve the registration and without this approval the thesis will not be registered.
+The conditions are:
+\begin{itemize}
+	\item The topic and contents of the thesis are clear to all three parties, all three parties are convinced that the scientific contribution of the planned work is sufficient for a \thesisType{} Thesis, and all three parties believe that the student can do this.
+		The Advisor\comsysPluralS{} can ask the Student to write an extended abstract if \heSheThey{} think\comsysThirdPersonS{} this could help to make the topic clear.
+	\item The Student gave an initial presentation in-person at the facilities of COMSYS.
+	\item The presentation was open to the public.
+	\item During this presentation, the Student made clear that \heShe{} has an understanding of what \heShe{} shall do, convinced the audience that \heShe{} is able to do that, and convinced the audience that this is a proper \thesisType{} Thesis topic.
+	\item It is the Student's responsibility to find/acquire/convince a second examiner (if required by \hisHer{} Prüfungsordnung).
+\end{itemize}
+
+\section{Grading}
+
+The thesis is graded solely by the examiners.
+Feedback from the Employee\companyPluralS{} in charge might be asked for.
+Basis of the grading is the final thesis document which will be graded with respect to the quality of the scientific work, not the value of the implementation to the company.
+However, to ensure the credibility of the methodology and evaluation, the examiners need complete access to the code and data written and collected in the context of the thesis.
+%\newpage
+Grading criteria include (but are not necessarily limited to) the following questions:
+\begin{itemize}
+	\item What is the scientific value of the Student's contribution and is it well-presented in the written document?
+	\item Did the Student analyze the state-of-the-art properly and relate it properly to \hisHer{} work?
+	\item Did the Student properly evaluate \hisHer{} work and present the setup and results accordingly?
+	\item Did the Student follow the rules of scientific writing (proper structure, proper language, absence of plagiarism)?
+\end{itemize}
+
+\section{Final Talk}
+
+The Student needs to give a final presentation at the facilities of COMSYS.
+The presentation is open to the public.
+The presentation will be graded according to the Student's Prüfungsordnung (typically a separate grade).
+This grading is carried out solely by the examiner and generally follows the guidelines for the written document, but with a focus on the oral presentation, media support, and Q\&A.
+
+\section{Closing}
+
+The parties confirm their will to follow these guidelines and to contribute their share to a successful thesis.
+
+\vskip 1cm
+
+Aachen,  ~$\rule{6cm}{0.15mm}$
+
+\vskip 2cm
+
+\begin{tabular}{ccccc }
+	$\rule{5cm}{0.15mm}$ & \phantom{A}& $\rule{5cm}{0.15mm}$ & \phantom{A}& $\rule{5cm}{0.15mm}$ \\
+	\footnotesize (Klaus Wehrle) & & \footnotesize (\companySignee{}) & & \footnotesize (\student{})
+\end{tabular}
+
+
+\end{document}
+

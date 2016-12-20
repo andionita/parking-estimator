@@ -1,0 +1,46 @@
+\documentclass[landscape]{article}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{booktabs}% http://ctan.org/pkg/booktabs
+\usepackage{xcolor}
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+\newcommand\mytodo[1]{\textcolor{red}{#1}}
+\usepackage{array}
+\usepackage[style=numeric,backend=bibtex]{biblatex}
+\usepackage{caption}
+\usepackage{amsmath}
+\usepackage[landscape]{geometry}
+
+\begin{document}
+
+\huge Aktuelle Datenbasis:
+\begin{table}[!ht]
+	\resizebox{\textwidth}{!}{
+	\centering
+    \begin{tabular}{ | c | c | c | c | c |}
+    \hline
+    \textbf{Datentyp}& \textbf{Abdeckung} & \textbf{Pr\"azision/Raum} & \textbf{Pr\"azision/Zeit} & \textbf{Alter} \\ \hline
+    \textbf{Sensors} & ein paar Parkr\"aume & Parkplatz & Belegungs\"anderung & seit Sep 2016 \\ \hline
+    \textbf{Parkautomaten} & ein paar Stadtteile & Strasse & 3x pro Tag; 2 Tage & von 2008 und 2013 \\ \hline
+    \end{tabular}}
+	\caption{Aktuelle Datenbasis}
+\end{table}
+    
+\huge Kommende Daten:   
+\begin{table}[!ht]
+	\resizebox{\textwidth}{!}{
+	\centering
+    \begin{tabular}{ | c | c | c | c | c | c | c |}
+    \hline
+	\textbf{Datentyp}& \textbf{Abdeckung} & \textbf{Pr\"azision/Raum} & \textbf{Pr\"azision/Zeit} & \textbf{Zeitspanne} & \textbf{Umsetzung} & \textbf{Kommentar} \\ \hline
+	\textbf{Sensors} & Frankenberger Viertel & Parkplatz & Belegungs\"anderung & Live & in roll-out & \\ \hline
+    \textbf{Parkautomaten} & Frankenberger Viertel & Strasse & unklar & R\"uckwirkend & ASAP & Kommt von der Stadt\\ \hline
+	\textbf{Parkh\"auser} & Frankenberger Viertel & Parkhaus & Minute? & Live & ASAP & APAG crawlen\\ \hline
+	\textbf{Events} & Frankenberger Viertel? & TBD & TBD & n\"aher Zukunft & ASAP & Eventim crawlen?\\ \hline
+	\textbf{Wetter} & Aachen & Aachen & pro Stunde? & Aktuell + R\"uckwirkend & ASAP & API (Wetterdienst?) \\ \hline
+	\textbf{Verkehr/Baustellen} & Frankenberger Viertel? & Strasse? & TBD & Aktuell (+R\"uckwirkend?) & ASAP & Bing API \\ \hline
+    \end{tabular}}
+	\caption{Zukünftige Datenbasis}
+\end{table}
+
+\end{document}
