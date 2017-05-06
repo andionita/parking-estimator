@@ -1,0 +1,34 @@
+% $ biblatex auxiliary file $
+% $ biblatex version 2.5 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\entry{sfpark}{misc}{}
+  \field{howpublished}{\url{http://sfpark.org}}
+  \field{note}{Accessed: 2017-01-30}
+  \field{title}{SFpark project}
+\endentry
+
+\entry{blocks_source}{misc}{}
+  \field{howpublished}{\url{http://sivers.org/jadr}}
+  \field{note}{Accessed: 2017-02-19}
+  \field{title}{Japanese addresses: No street names. Block numbers.}
+\endentry
+
+\lossort
+\endlossort
+
+\endinput

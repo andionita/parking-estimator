@@ -1,0 +1,23 @@
+Title: Extending prediction of parking occupancy to unmonitored parking areas using background city information
+
+Basic description: Several smart cities around the world have begun monitoring parking areas in order to predict free spots and help drivers that are searching for them. The current results are indeed promising, however this approach is limited by the high cost of sensors that need to be installed throughout these cities in order to achieve an accurate prediction rate. This work investigates the extension of forecasted parking information from areas equipped with sensors to areas that are missing them. To this end, the parking areas will be represented in terms of GIS metadata, which is freely available, and using similarity measures, the occupancy rates computed for parking monitored areas could adapted to unmonitored areas.
+
+Technical details
+
+Parking sensor information: The data from the SFpark project in San Francisco will be used, which offers the richest such datasets to date[3]. 
+
+Prediction models: A prediction model will first be computed per street block, as this is the unit for which occupancy data is available. Afterwards, a clustering into larger parking areas will be necessary, without compromising accuracy[1], in order to capture a zone with richer GIS metadata. The prediction models will be computed using the state-of-art methods[1][2], like neural networks, autoregression modelds and support vector regression. 
+
+GIS metadata: Entities that provide parking will be collected, i.e. schools, kindergartens, hospitals, museums, shopping centers, restaurants, etc. Their capacities or geographical sizes will be taken into account. Information sources include OpenStreetMap, Google Maps, Bing Maps, etc. 
+
+Similarity measures: Upon representing the GIS metadata as vectors or sets functions like Cosine and Jaccard will be applied.
+
+Determining new occupancy values: To calculate the occupancy rates for a new parking zone, the models for the top N most similar known areas will be applied under the respective conditions (day of week, time of day, weather, events?, traffic?) and their results multiplied by the corresponding similarity values to arrive at the final score. Note that since exact numerical computation is necessary, the predition models will internally work with exact probability rates.
+
+Evaluation: To test the accuracy of the inferred occuapncy values, areas will be selected for which predictions are available directly from installed sensors.
+
+Originaly of work: Up to now, the smart parking literature concentrates on capturing data and predicting parking information using static or mobile sensors, by covering the areas for which future rates are calculated. An extrapolation approach as described here, to the best of my knowledge, has not been explored yet.
+
+[1] Xiao Chen, Parking Occupancy Prediction and Pattern Analysis, 2014
+[2] Rajabioun, 
+[3] sfpark.org

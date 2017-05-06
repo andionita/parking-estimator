@@ -1,0 +1,575 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.10.12)  20 FEB 2017 08:31
+entering extended mode
+**Proof_of_concept.tex
+(Proof_of_concept.tex
+LaTeX2e <2015/01/01> patch level 2
+Babel <3.9m> and hyphenation patterns for 69 languages loaded.
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\size10.clo"
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\tools\longtable.sty"
+Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
+\LTleft=\skip43
+\LTright=\skip44
+\LTpre=\skip45
+\LTpost=\skip46
+\LTchunksize=\count87
+\LTcapwidth=\dimen103
+\LT@head=\box26
+\LT@firsthead=\box27
+\LT@foot=\box28
+\LT@lastfoot=\box29
+\LT@cols=\count88
+\LT@rows=\count89
+\c@LT@tables=\count90
+\c@LT@chunks=\count91
+\LT@p@ftn=\toks14
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks15
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 94.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.def"
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count92
+))
+\Gin@req@height=\dimen104
+\Gin@req@width=\dimen105
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\booktabs\booktabs.sty"
+Package: booktabs 2005/04/14 v1.61803 publication quality tables
+\heavyrulewidth=\dimen106
+\lightrulewidth=\dimen107
+\cmidrulewidth=\dimen108
+\belowrulesep=\dimen109
+\belowbottomsep=\dimen110
+\aboverulesep=\dimen111
+\abovetopsep=\dimen112
+\cmidrulesep=\dimen113
+\cmidrulekern=\dimen114
+\defaultaddspace=\dimen115
+\@cmidla=\count93
+\@cmidlb=\count94
+\@aboverulesep=\dimen116
+\@belowrulesep=\dimen117
+\@thisruleclass=\count95
+\@lastruleclass=\count96
+\@thisrulewidth=\dimen118
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\xcolor\xcolor.sty"
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\color.cfg"
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\tools\array.sty"
+Package: array 2014/10/28 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen119
+\extrarowheight=\dimen120
+\NC@list=\toks16
+\extratabsurround=\skip47
+\backup@length=\skip48
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\biblatex\biblatex.sty"
+Package: biblatex 2015/04/19 v3.0 programmable bibliographies (PK/JW/AB)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\biblatex\biblatex1.sty"
+Package: biblatex1 2015/04/19 v3.0 programmable bibliographies (bibtex) (PK/JW/
+AB)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\etoolbox\etoolbox.sty"
+Package: etoolbox 2015/08/02 v2.2a e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count97
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\logreq\logreq.sty"
+Package: logreq 2010/08/04 v1.0 xml request logger
+\lrq@indent=\count98
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\logreq\logreq.def"
+File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\ifthen.sty"
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\url\url.sty"
+\Urlmuskip=\muskip10
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+\c@tabx@nest=\count99
+\c@listtotal=\count100
+\c@listcount=\count101
+\c@liststart=\count102
+\c@liststop=\count103
+\c@citecount=\count104
+\c@citetotal=\count105
+\c@multicitecount=\count106
+\c@multicitetotal=\count107
+\c@instcount=\count108
+\c@maxnames=\count109
+\c@minnames=\count110
+\c@maxitems=\count111
+\c@minitems=\count112
+\c@citecounter=\count113
+\c@savedcitecounter=\count114
+\c@uniquelist=\count115
+\c@uniquename=\count116
+\c@refsection=\count117
+\c@refsegment=\count118
+\c@maxextrayear=\count119
+\c@maxextraalpha=\count120
+\c@abbrvpenalty=\count121
+\c@highnamepenalty=\count122
+\c@lownamepenalty=\count123
+\c@maxparens=\count124
+\c@parenlevel=\count125
+\blx@tempcnta=\count126
+\blx@tempcntb=\count127
+\blx@tempcntc=\count128
+\blx@maxsection=\count129
+\blx@maxsegment=\count130
+\blx@notetype=\count131
+\blx@parenlevel@text=\count132
+\blx@parenlevel@foot=\count133
+\labelnumberwidth=\skip49
+\labelalphawidth=\skip50
+\shorthandwidth=\skip51
+\biblabelsep=\skip52
+\bibitemsep=\skip53
+\bibnamesep=\skip54
+\bibinitsep=\skip55
+\bibparsep=\skip56
+\bibhang=\skip57
+\blx@auxin=\read1
+\blx@auxout=\write3
+\c@mincomprange=\count134
+\c@maxcomprange=\count135
+\c@mincompwidth=\count136
+\c@labelname=\count137
+\c@savedlabelname=\count138
+\c@author=\count139
+\c@savedauthor=\count140
+\c@shortauthor=\count141
+\c@savedshortauthor=\count142
+\c@editor=\count143
+\c@savededitor=\count144
+\c@editora=\count145
+\c@savededitora=\count146
+\c@editorb=\count147
+\c@savededitorb=\count148
+\c@editorc=\count149
+\c@savededitorc=\count150
+\c@shorteditor=\count151
+\c@savedshorteditor=\count152
+\c@bookauthor=\count153
+\c@savedbookauthor=\count154
+\c@translator=\count155
+\c@savedtranslator=\count156
+\c@annotator=\count157
+\c@savedannotator=\count158
+\c@commentator=\count159
+\c@savedcommentator=\count160
+\c@introduction=\count161
+\c@savedintroduction=\count162
+\c@foreword=\count163
+\c@savedforeword=\count164
+\c@afterword=\count165
+\c@savedafterword=\count166
+\c@holder=\count167
+\c@savedholder=\count168
+\c@namea=\count169
+\c@savednamea=\count170
+\c@nameb=\count171
+\c@savednameb=\count172
+\c@namec=\count173
+\c@savednamec=\count174
+\c@institution=\count175
+\c@savedinstitution=\count176
+\c@language=\count177
+\c@savedlanguage=\count178
+\c@location=\count179
+\c@savedlocation=\count180
+\c@organization=\count181
+\c@savedorganization=\count182
+\c@origlocation=\count183
+\c@savedoriglocation=\count184
+\c@origpublisher=\count185
+\c@savedorigpublisher=\count186
+\c@pageref=\count187
+\c@savedpageref=\count188
+\c@publisher=\count189
+\c@savedpublisher=\count190
+\c@lista=\count191
+\c@savedlista=\count192
+\c@listb=\count193
+\c@savedlistb=\count194
+\c@listc=\count195
+\c@savedlistc=\count196
+\c@listd=\count197
+\c@savedlistd=\count198
+\c@liste=\count199
+\c@savedliste=\count200
+\c@listf=\count201
+\c@savedlistf=\count202
+Package biblatex Info: Trying to load compatibility code...
+Package biblatex Info: ... file 'blx-compat.def' found.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\biblatex\blx-compat.def"
+File: blx-compat.def 2015/04/19 v3.0 biblatex compatibility (PK/JW/AB)
+)
+Package biblatex Info: Trying to load generic definitions...
+Package biblatex Info: ... file 'biblatex.def' found.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\biblatex\biblatex.def"
+File: biblatex.def 
+\c@textcitecount=\count203
+\c@textcitetotal=\count204
+\c@textcitemaxnames=\count205
+\c@biburlnumpenalty=\count206
+\c@biburlucpenalty=\count207
+\c@biburllcpenalty=\count208
+\c@smartand=\count209
+)
+Package biblatex Info: Trying to load bibliography style 'numeric'...
+Package biblatex Info: ... file 'numeric.bbx' found.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\biblatex\bbx\numeric.bbx"
+File: numeric.bbx 2015/04/19 v3.0 biblatex bibliography style (PK/JW/AB)
+Package biblatex Info: Trying to load bibliography style 'standard'...
+Package biblatex Info: ... file 'standard.bbx' found.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\biblatex\bbx\standard.bbx"
+File: standard.bbx 2015/04/19 v3.0 biblatex bibliography style (PK/JW/AB)
+\c@bbx:relatedcount=\count210
+\c@bbx:relatedtotal=\count211
+))
+Package biblatex Info: Trying to load citation style 'numeric'...
+Package biblatex Info: ... file 'numeric.cbx' found.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\biblatex\cbx\numeric.cbx"
+File: numeric.cbx 2015/04/19 v3.0 biblatex citation style (PK/JW/AB)
+Package biblatex Info: Redefining '\cite'.
+Package biblatex Info: Redefining '\parencite'.
+Package biblatex Info: Redefining '\footcite'.
+Package biblatex Info: Redefining '\footcitetext'.
+Package biblatex Info: Redefining '\smartcite'.
+Package biblatex Info: Redefining '\supercite'.
+Package biblatex Info: Redefining '\textcite'.
+Package biblatex Info: Redefining '\textcites'.
+Package biblatex Info: Redefining '\cites'.
+Package biblatex Info: Redefining '\parencites'.
+Package biblatex Info: Redefining '\smartcites'.
+)
+Package biblatex Info: Trying to load configuration file...
+Package biblatex Info: ... file 'biblatex.cfg' found.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\biblatex\biblatex.cfg"
+File: biblatex.cfg 
+)))
+("C:\Program Files\MiKTeX 2.9\tex\latex\caption\caption.sty"
+Package: caption 2015/09/17 v3.3-111 Customizing captions (AR)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\caption\caption3.sty"
+Package: caption3 2015/09/20 v1.7-115 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 57.
+\captionmargin=\dimen121
+\captionmargin@=\dimen122
+\captionwidth=\dimen123
+\caption@tempdima=\dimen124
+\caption@indent=\dimen125
+\caption@parindent=\dimen126
+\caption@hangindent=\dimen127
+)
+\c@ContinuedFloat=\count212
+Package caption Info: longtable package is loaded.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\caption\ltcaption.sty"
+Package: ltcaption 2013/06/09 v1.4-94 longtable captions (AR)
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty"
+Package: amsmath 2013/01/14 v2.14 AMS math features
+\@mathmargin=\skip58
+
+For additional information on amsmath, use the `?' option.
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amstext.sty"
+Package: amstext 2000/06/29 v2.01
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty"
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks17
+\ex@=\dimen128
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty"
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen129
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty"
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count213
+LaTeX Info: Redefining \frac on input line 210.
+\uproot@=\count214
+\leftroot@=\count215
+LaTeX Info: Redefining \overline on input line 306.
+\classnum@=\count216
+\DOTSCASE@=\count217
+LaTeX Info: Redefining \ldots on input line 378.
+LaTeX Info: Redefining \dots on input line 381.
+LaTeX Info: Redefining \cdots on input line 466.
+\Mathstrutbox@=\box30
+\strutbox@=\box31
+\big@size=\dimen130
+LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
+\macc@depth=\count218
+\c@MaxMatrixCols=\count219
+\dotsspace@=\muskip11
+\c@parentequation=\count220
+\dspbrk@lvl=\count221
+\tag@help=\toks18
+\row@=\count222
+\column@=\count223
+\maxfields@=\count224
+\andhelp@=\toks19
+\eqnshift@=\dimen131
+\alignsep@=\dimen132
+\tagshift@=\dimen133
+\tagwidth@=\dimen134
+\totwidth@=\dimen135
+\lineht@=\dimen136
+\@envbody=\toks20
+\multlinegap=\skip59
+\multlinetaggap=\skip60
+\mathdisplay@stack=\toks21
+LaTeX Info: Redefining \[ on input line 2665.
+LaTeX Info: Redefining \] on input line 2666.
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\babel\babel.sty"
+Package: babel 2015/08/03 3.9m The Babel package
+
+*************************************
+* Local config file bblopts.cfg used
+*
+("C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\bblopts.cfg"
+File: bblopts.cfg 2006/07/31 v1.0 MiKTeX 'babel' configuration
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\babel-english\english.ldf"
+Language: english 2012/08/20 v3.3p English support from the babel system
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\babel\babel.def"
+File: babel.def 2015/08/03 3.9m Babel common definitions
+\babel@savecnt=\count225
+\U@D=\dimen137
+)
+\l@canadian = a dialect from \language\l@american 
+\l@australian = a dialect from \language\l@british 
+\l@newzealand = a dialect from \language\l@british 
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\a4wide\a4wide.sty"
+Package: a4wide 1994/08/30
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\ntgclass\a4.sty"
+Package: a4 2004/04/15 v1.2g A4 based page layout
+))
+Package biblatex Info: Trying to load language 'british'...
+Package biblatex Info: ... file 'british.lbx' found.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\biblatex\lbx\british.lbx"
+File: british.lbx 2015/04/19 v3.0 biblatex localization (PK/JW/AB)
+Package biblatex Info: Trying to load language 'english'...
+Package biblatex Info: ... file 'english.lbx' found.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\biblatex\lbx\english.lbx"
+File: english.lbx 2015/04/19 v3.0 biblatex localization (PK/JW/AB)
+))
+
+Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
+(biblatex)                Loading 'csquotes' recommended.
+
+\@quotelevel=\count226
+\@quotereset=\count227
+(Proof_of_concept.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+
+("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count228
+\scratchdimen=\dimen138
+\scratchbox=\box32
+\nofMPsegments=\count229
+\nofMParguments=\count230
+\everyMPshowfont=\toks22
+\MPscratchCnt=\count231
+\MPscratchDim=\dimen139
+\MPnumerator=\count232
+\makeMPintoPDFobject=\count233
+\everyMPtoPDFconversion=\toks23
+)
+Package biblatex Info: No input encoding detected.
+(biblatex)             Assuming 'ascii'.
+Package biblatex Info: Automatic encoding selection.
+(biblatex)             Assuming data encoding 'ascii'.
+Package biblatex Info: Trying to load bibliographic data...
+Package biblatex Info: ... file 'Proof_of_concept.bbl' found.
+ (Proof_of_concept.bbl)
+Package biblatex Info: Reference section=0 on input line 17.
+Package biblatex Info: Reference segment=0 on input line 17.
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+
+
+LaTeX Warning: No \author given.
+
+<blocks.jpg, id=1, 456.01352pt x 361.35pt>
+File: blocks.jpg Graphic file (type jpg)
+ <use blocks.jpg>
+Package pdftex.def Info: blocks.jpg used on input line 36.
+(pdftex.def)             Requested size: 216.81pt x 171.80293pt.
+
+<amazon_s3.jpg, id=2, 1153.30875pt x 325.215pt>
+File: amazon_s3.jpg Graphic file (type jpg)
+ <use amazon_s3.jpg>
+Package pdftex.def Info: amazon_s3.jpg used on input line 51.
+(pdftex.def)             Requested size: 289.07999pt x 81.51692pt.
+ [1
+
+{C:/Users/ionita/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 60.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 60.
+
+<sfpark_occupancy_screenshot.jpg, id=13, 1138.85475pt x 196.93575pt>
+File: sfpark_occupancy_screenshot.jpg Graphic file (type jpg)
+
+<use sfpark_occupancy_screenshot.jpg>
+Package pdftex.def Info: sfpark_occupancy_screenshot.jpg used on input line 72.
+
+(pdftex.def)             Requested size: 361.34999pt x 62.48582pt.
+ [2 <./blocks.jpg> <./amazon_s3.jpg> <./sfpark_occupancy_screenshot.jpg>]
+<dataset_screenshot.jpg, id=18, 502.87875pt x 285.4665pt>
+File: dataset_screenshot.jpg Graphic file (type jpg)
+
+<use dataset_screenshot.jpg>
+Package pdftex.def Info: dataset_screenshot.jpg used on input line 89.
+(pdftex.def)             Requested size: 289.07999pt x 164.09839pt.
+
+<bigml_source_field_datatypes.jpg, id=19, 716.07526pt x 326.4195pt>
+File: bigml_source_field_datatypes.jpg Graphic file (type jpg)
+
+<use bigml_source_field_datatypes.jpg>
+Package pdftex.def Info: bigml_source_field_datatypes.jpg used on input line 10
+1.
+(pdftex.def)             Requested size: 289.07999pt x 131.7758pt.
+
+<bigml_dataset.jpg, id=20, 716.6775pt x 294.50024pt>
+File: bigml_dataset.jpg Graphic file (type jpg)
+ <use bigml_dataset.jpg>
+Package pdftex.def Info: bigml_dataset.jpg used on input line 111.
+(pdftex.def)             Requested size: 289.07999pt x 118.7911pt.
+
+[3 <./dataset_screenshot.jpg> <./bigml_source_field_datatypes.jpg>]
+<bigml_clusters.jpg, id=24, 716.6775pt x 342.68025pt>
+File: bigml_clusters.jpg Graphic file (type jpg)
+ <use bigml_clusters.jpg>
+Package pdftex.def Info: bigml_clusters.jpg used on input line 121.
+(pdftex.def)             Requested size: 289.07999pt x 138.22525pt.
+
+<bigml_decisiontree.jpg, id=25, 735.9495pt x 520.344pt>
+File: bigml_decisiontree.jpg Graphic file (type jpg)
+
+<use bigml_decisiontree.jpg>
+Package pdftex.def Info: bigml_decisiontree.jpg used on input line 134.
+(pdftex.def)             Requested size: 216.81pt x 153.2937pt.
+ [4 <./bigml_dataset.jpg> <./bigml_clusters.jpg> <./bigml_decisiontree.jpg>]
+<cluster_errors.jpg, id=29, 716.6775pt x 342.68025pt>
+File: cluster_errors.jpg Graphic file (type jpg)
+ <use cluster_errors.jpg>
+Package pdftex.def Info: cluster_errors.jpg used on input line 156.
+(pdftex.def)             Requested size: 361.34999pt x 172.78287pt.
+
+[5 <./cluster_errors.jpg>] [6] (Proof_of_concept.aux)
+Package logreq Info: Writing requests to 'Proof_of_concept.run.xml'.
+ ) 
+Here is how much of TeX's memory you used:
+ 8878 strings out of 493673
+ 140098 string characters out of 3143956
+ 322945 words of memory out of 3000000
+ 12132 multiletter control sequences out of 15000+200000
+ 9230 words of font info for 34 fonts, out of 3000000 for 9000
+ 1025 hyphenation exceptions out of 8191
+ 36i,6n,45p,826b,1406s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Fi
+les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fo
+nts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
+/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
+msfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
+/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.
+pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on Proof_of_concept.pdf (6 pages, 958227 bytes).
+PDF statistics:
+ 70 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 46 words of extra memory for PDF output out of 10000 (max. 10000000)
+
