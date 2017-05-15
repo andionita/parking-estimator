@@ -1,0 +1,344 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.8 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\sortlist[entry]{none/global/}
+  \entry{dresden}{misc}{}
+    \field{labeltitlesource}{title}
+  \field{howpublished}{\url{http://codefor.de/projekte/2014-04-19-dd-freieparkplaetze.html}}
+    \field{note}{Accessed: 2017-03-16}
+    \field{title}{Freie Parkplätze Dresden}
+  \endentry
+
+  \entry{zurich}{misc}{}
+    \field{labeltitlesource}{title}
+  \field{howpublished}{\url{https://data.stadt-zuerich.ch/dataset/parkleitsystem}}
+    \field{note}{Accessed: 2017-03-16}
+    \field{title}{Parkleitsystem Zürich}
+  \endentry
+
+  \entry{cologne}{misc}{}
+    \field{labeltitlesource}{title}
+  \field{howpublished}{\url{https://www.offenedaten-koeln.de/dataset/parkhausbelegung}}
+    \field{note}{Accessed: 2017-03-16}
+    \field{title}{Parkhausbelegung Köln}
+  \endentry
+
+  \entry{philly}{misc}{}
+    \field{labeltitlesource}{title}
+  \field{howpublished}{\url{https://www.opendataphilly.org/dataset/airport-parking-availability}}
+    \field{note}{Accessed: 2017-03-16}
+    \field{title}{City of Philadelphia - Airport Parking Availability}
+  \endentry
+
+  \entry{monica}{misc}{}
+    \field{labeltitlesource}{title}
+  \field{howpublished}{\url{https://data.smgov.net/Transportation/Parking-Lot-Counts/ng8m-khuz}}
+    \field{note}{Accessed: 2017-03-16}
+    \field{title}{Santa Monica Open Data - Parking Lot Counts}
+  \endentry
+
+  \entry{sfpark}{misc}{}
+    \field{labeltitlesource}{title}
+    \field{howpublished}{\url{http://sfpark.org}}
+    \field{note}{Accessed: 2017-03-05}
+    \field{title}{SFpark project}
+  \endentry
+
+  \entry{blocks_source}{misc}{}
+    \field{labeltitlesource}{title}
+    \field{howpublished}{\url{http://sivers.org/jadr}}
+    \field{note}{Accessed: 2017-02-19}
+    \field{title}{Japanese addresses: No street names. Block numbers.}
+  \endentry
+
+  \entry{chen}{report}{}
+    \name{author}{1}{}{%
+      {{hash=CX}{%
+         family={Chen},
+         familyi={C\bibinitperiod},
+         given={Xiao},
+         giveni={X\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{CX1}
+    \strng{fullhash}{CX1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Parking occupancy prediction and pattern analysis}
+    \list{institution}{1}{%
+      {Technical report, Stanford University, 2014. Machine Learning Final
+  Projects}%
+    }
+    \field{type}{techreport}
+  \endentry
+
+  \entry{rajabioun}{article}{}
+    \name{author}{2}{}{%
+      {{hash=RT}{%
+         family={Rajabioun},
+         familyi={R\bibinitperiod},
+         given={Tooraj},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=IPA}{%
+         family={Ioannou},
+         familyi={I\bibinitperiod},
+         given={Petros\bibnamedelima A},
+         giveni={P\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{RTIPA1}
+    \strng{fullhash}{RTIPA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{5}
+    \field{pages}{2913\bibrangedash 2924}
+    \field{title}{On-street and off-street parking availability prediction
+  using multivariate spatiotemporal models}
+    \field{volume}{16}
+    \field{journaltitle}{IEEE Transactions on Intelligent Transportation
+  Systems}
+    \field{year}{2015}
+  \endentry
+
+  \entry{lin}{thesis}{}
+    \name{author}{1}{}{%
+      {{hash=LTS}{%
+         family={Lin},
+         familyi={L\bibinitperiod},
+         given={Trista\bibnamedelima Shuenying},
+         giveni={T\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{LTS1}
+    \strng{fullhash}{LTS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Smart parking: Network, infrastructure and urban service}
+    \list{institution}{1}{%
+      {Lyon, INSA}%
+    }
+    \field{type}{phdthesis}
+    \field{year}{2015}
+  \endentry
+
+  \entry{googleblog}{misc}{}
+    \field{labeltitlesource}{title}
+  \field{howpublished}{\url{https://research.googleblog.com/2016/10/graph-powered-machine-learning-at-google.html}}
+    \field{note}{Accessed: 2017-05-14}
+    \field{title}{Google Blog Entry on Semi-Supervised Machine Leaning}
+  \endentry
+
+  \entry{tiedemann2015concept}{inproceedings}{}
+    \name{author}{5}{}{%
+      {{hash=TT}{%
+         family={Tiedemann},
+         familyi={T\bibinitperiod},
+         given={Tim},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=VT}{%
+         family={V{\"o}gele},
+         familyi={V\bibinitperiod},
+         given={Thomas},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=KMM}{%
+         family={Krell},
+         familyi={K\bibinitperiod},
+         given={Mario\bibnamedelima Michael},
+         giveni={M\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+      {{hash=MJH}{%
+         family={Metzen},
+         familyi={M\bibinitperiod},
+         given={Jan\bibnamedelima Hendrik},
+         giveni={J\bibinitperiod\bibinitdelim H\bibinitperiod},
+      }}%
+      {{hash=KF}{%
+         family={Kirchner},
+         familyi={K\bibinitperiod},
+         given={Frank},
+         giveni={F\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{TT+1}
+    \strng{fullhash}{TTVTKMMMJHKF1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Workshops at the Twenty-Ninth AAAI Conference on
+  Artificial Intelligence}
+    \field{title}{Concept of a Data Thread Based Parking Space Occupancy
+  Prediction in a Berlin Pilot Region}
+    \field{year}{2015}
+  \endentry
+
+  \entry{Hoessinger2014}{article}{}
+    \name{author}{7}{}{%
+      {{hash=HR}{%
+         family={H{\"o}ssinger},
+         familyi={H\bibinitperiod},
+         given={Reinhard},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=WP}{%
+         family={Widhalm},
+         familyi={W\bibinitperiod},
+         given={Peter},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=UM}{%
+         family={Ulm},
+         familyi={U\bibinitperiod},
+         given={Michael},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=HK}{%
+         family={Heimbuchner},
+         familyi={H\bibinitperiod},
+         given={Klaus},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=WE}{%
+         family={Wolf},
+         familyi={W\bibinitperiod},
+         given={Eike},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=AR}{%
+         family={Apel},
+         familyi={A\bibinitperiod},
+         given={Roland},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=UT}{%
+         family={Uhlmann},
+         familyi={U\bibinitperiod},
+         given={Tina},
+         giveni={T\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HR+1}
+    \strng{fullhash}{HRWPUMHKWEARUT1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1007/s13177-013-0069-5
+    \endverb
+    \field{issn}{1868-8659}
+    \field{number}{2}
+    \field{pages}{37\bibrangedash 47}
+    \field{title}{Development of a Real-Time Model of the Occupancy of
+  Short-Term Parking Zones}
+    \verb{url}
+    \verb http://dx.doi.org/10.1007/s13177-013-0069-5
+    \endverb
+    \field{volume}{12}
+    \field{journaltitle}{International Journal of Intelligent Transportation
+  Systems Research}
+    \field{year}{2014}
+  \endentry
+
+  \entry{Klappenecker2014}{article}{}
+    \name{author}{3}{}{%
+      {{hash=KA}{%
+         family={Klappenecker},
+         familyi={K\bibinitperiod},
+         given={Andreas},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=LH}{%
+         family={Lee},
+         familyi={L\bibinitperiod},
+         given={Hyunyoung},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=WJL}{%
+         family={Welch},
+         familyi={W\bibinitperiod},
+         given={Jennifer\bibnamedelima L},
+         giveni={J\bibinitperiod\bibinitdelim L\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Elsevier}%
+    }
+    \strng{namehash}{KALHWJL1}
+    \strng{fullhash}{KALHWJL1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{pages}{243\bibrangedash 249}
+    \field{title}{Finding available parking spaces made easy}
+    \field{volume}{12}
+    \field{journaltitle}{Ad Hoc Networks}
+    \field{year}{2014}
+  \endentry
+
+  \entry{wu2014agile}{article}{}
+    \name{author}{5}{}{%
+      {{hash=WEHK}{%
+         family={Wu},
+         familyi={W\bibinitperiod},
+         given={Eric Hsiao-Kuang},
+         giveni={E\bibinitperiod\bibinitdelim H\bibinitperiod-K\bibinitperiod},
+      }}%
+      {{hash=SJ}{%
+         family={Sahoo},
+         familyi={S\bibinitperiod},
+         given={Jagruti},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=LCY}{%
+         family={Liu},
+         familyi={L\bibinitperiod},
+         given={Chi-Yun},
+         giveni={C\bibinitperiod-Y\bibinitperiod},
+      }}%
+      {{hash=JMH}{%
+         family={Jin},
+         familyi={J\bibinitperiod},
+         given={Ming-Hui},
+         giveni={M\bibinitperiod-H\bibinitperiod},
+      }}%
+      {{hash=LSH}{%
+         family={Lin},
+         familyi={L\bibinitperiod},
+         given={Shu-Hui},
+         giveni={S\bibinitperiod-H\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{WEHK+1}
+    \strng{fullhash}{WEHKSJLCYJMHLSH1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{1}
+    \field{pages}{35\bibrangedash 49}
+    \field{title}{Agile urban parking recommendation service for intelligent
+  vehicular guiding system}
+    \field{volume}{6}
+    \field{journaltitle}{IEEE Intelligent Transportation Systems Magazine}
+    \field{year}{2014}
+  \endentry
+\endsortlist
+\endinput
