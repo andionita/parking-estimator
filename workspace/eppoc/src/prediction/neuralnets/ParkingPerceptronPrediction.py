@@ -10,7 +10,7 @@ from sklearn.preprocessing import PolynomialFeatures
 
 
 # read from input file that has its missing values already filled 
-data = pd.read_csv('C:\\Users\\andigenu\\parking\\sfpark\\training_data\\sklearn\\all_blocks_for_prediction_minus_timestamp_filled.csv', sep=',')
+data = pd.read_csv('C:\\Users\\andigenu\\parking\\sfpark\\training_data_sklearn\\tuned_occupancy_daymonth.csv', sep=',')
 
 X = data[list(data.columns)[:-1]]
 y = data['OCCUPANCY_1H']
