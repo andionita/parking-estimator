@@ -1,0 +1,6 @@
+'''
+Created on 15.05.2017
+
+@author: andigenu
+'''
+result = pd.DataFrame({['A':5, 'B':6, 'C':10, 'A':7]})

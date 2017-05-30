@@ -1,0 +1,24 @@
+'''
+Created on 26.05.2017
+
+@author: andigenu
+'''
+import pandas as pd
+
+data = pd.read_csv('C:\\Users\\andigenu\\parking\\sfpark\\training_data_sklearn\\essential_traffic.csv', sep=',')
+
+avg_traffic_occ = data.groupby(['DISTRICT'])['AVERAGE_TRAFFIC_OCCUPANCY'].mean()
+#avg_traffic_occ.columns = ['DISTRICT', 'AVERAGE_TRAFFIC_OCCUPANCY']
+print(avg_traffic_occ)
+avg_vehicle_count = data.groupby(['DISTRICT'])['AVERAGE_VEHICLE_COUNT'].mean()
+print(avg_vehicle_count)
+median_speed = data.groupby(['DISTRICT'])['MEDIAN_SPEED'].mean()
+print(median_speed)
+avg_speed = data.groupby(['DISTRICT'])['MEDIAN_SPEED'].mean()
+print(avg_speed)
+
+results = pd.concat([avg_traffic_occ['DISTRICT'], avg_traffic_occ['AVERAGE_TRAFFIC_OCCUPANCY'],
+                        avg_vehicle_count['AVERAGE_VEHICLE_COUNT'], avg_vehicle_count['MEDIAN_SPEED'],
+                        avg_speed['MEDIAN_SPEED']])
+#result.to_csv('C:\\Users\\andigenu\\parking\\sfpark\\training_data_sklearn\\essential_traffic.csv', sep=',', index=False)
+

@@ -1,0 +1,152 @@
+'''
+Created on 19.05.2017
+
+@author: andigenu
+'''
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy.interpolate import interp1d
+from sklearn.model_selection import GridSearchCV
+from sklearn.svm import SVR, LinearSVR, SVC
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import ExtraTreesRegressor
+from sklearn.feature_selection import SelectFromModel
+
+# read in data from csv file
+result = pd.read_csv('C:\\Users\\andigenu\\parking\\sfpark\\training_data_sklearn\\tuned_occupancy_calendarweek.csv', sep=',')
+
+encoder_block = LabelEncoder()
+blocks_transformed = encoder_block.fit(result['STREET_BLOCK'].as_matrix())
+'''
+#encoder_weekday = LabelEncoder()
+label_encoder_weekday = LabelEncoder()
+encoder_weekday = OneHotEncoder()
+# need to provide a one column matrix to the encoder
+#weekday_transformed = encoder_weekday.fit_transform(data['DAY_TYPE'].as_matrix())
+label_weekday_transformed = label_encoder_weekday.fit_transform(data['DAY_TYPE'].as_matrix())
+weekday_transformed = encoder_weekday.fit_transform(label_weekday_transformed.reshape(-1, 1))
+# converting to a dense matrix so that it usable further
+# putting together columns into a new dataframe
+#result = pd.concat([pd.DataFrame(blocks_transformed.reshape(-1, 1), columns=['STREET_BLOCK']), data['MONTH'], data['DAY'], data['HOUR'], data['TOTAL_SPOTS'], data['PRICE_RATE'], pd.DataFrame(weekday_transformed.reshape(-1, 1), columns=['DAY_TYPE']), data['OCCUPIED']], axis=1)
+#result = pd.concat([pd.DataFrame(blocks_transformed.reshape(-1, 1), columns=['STREET_BLOCK']), data['CALENDAR_WEEK'], data['WEEKDAY'], data['HOUR'], data['TOTAL_SPOTS'], data['PRICE_RATE'], pd.DataFrame(weekday_transformed.reshape(-1, 1), columns=['DAY_TYPE']), data['OCCUPIED']], axis=1)
+#result = pd.concat([pd.DataFrame(data_transformed.todense()), data['CALENDAR_WEEK'], data['DAY_OF_WEEK'], data['HOUR'], data['OCCUPANCY'], data['OCCUPANCY_1H']], axis=1)
+#result = pd.concat([pd.DataFrame(blocks_transformed.reshape(-1, 1), columns=['STREET_BLOCK']), data['MONTH'], data['DAY'], data['HOUR'], data['TOTAL_SPOTS'], data['PRICE_RATE'], pd.DataFrame(weekday_transformed.todense()), data['OCCUPIED']], axis=1)
+result = pd.concat([pd.DataFrame(blocks_transformed.reshape(-1, 1), columns=['STREET_BLOCK']), data['YEAR'], data['CALENDAR_WEEK'], data['WEEKDAY'], data['HOUR'], data['TOTAL_SPOTS'], data['PRICE_RATE'], data['OCCUPIED']], axis=1)
+#result = pd.concat([pd.DataFrame(blocks_transformed.reshape(-1, 1), columns=['STREET_BLOCK']), data['YEAR'], data['CALENDAR_WEEK'], data['WEEKDAY'], data['HOUR'], data['TOTAL_SPOTS'], data['PRICE_RATE'], pd.DataFrame(weekday_transformed.todense(), columns=['IS_WEEKDAY', 'IS_WEEKEND']), data['OCCUPIED']], axis=1)
+'''
+
+def isWeekday(day):
+    if day == 'weekday':
+        return 0
+    else:
+        return 1
+
+result['DAY_TYPE'] = result['DAY_TYPE'].apply(isWeekday) 
+#result['STREET_BLOCK'] = result['STREET_BLOCK'].astype('category')
+result['STREET_BLOCK'] = encoder_block.transform(result['STREET_BLOCK'].as_matrix())
+#result[['OCCUPIED']] = result[['OCCUPIED']].astype(int)
+
+result = result.sort_values(by=['STREET_BLOCK', 'YEAR', 'CALENDAR_WEEK', 'WEEKDAY', 'HOUR'])
+
+X = result[['STREET_BLOCK', 'YEAR', 'CALENDAR_WEEK', 'WEEKDAY', 'HOUR', 'DAY_TYPE', 'TOTAL_SPOTS', 'PRICE_RATE']]
+y = result['OCCUPIED']
+
+#X_train, X_test, y_train, y_test = train_test_split(X, y)
+dataset_threshold_p = 0.9
+dataset_threshold = int(len(X.index) * dataset_threshold_p)
+X_train = X[:dataset_threshold]
+X_test = X[dataset_threshold + 1:]
+y_train = y[:dataset_threshold]
+y_test = y[dataset_threshold + 1:]
+
+
+# Filter features
+
+# Saving dataframe (original index, streetblock, date)
+pre_regressor = ExtraTreesRegressor()
+
+print('Fitting the model for feature selection...')
+pre_regressor.fit(X_train, y_train)
+print(X_train.columns.values)
+print(pre_regressor.feature_importances_)
+
+print('Rating the importance of individual features...')
+selector = SelectFromModel(pre_regressor, prefit=True)
+Xnew_train = selector.transform(X_train)
+Xnew_test = selector.transform(X_test)
+print('Original no of features: ' + str(len(X_train.columns)))
+print('New no of features: ' + str(Xnew_train.shape[1]))
+
+print('Filtered-in columns: ' + str(X_train.columns[selector.get_support()].values))
+filteredout_columns = X_train.columns[np.invert(selector.get_support())].values
+X_train = X_train.drop(filteredout_columns, axis=1)
+X_test = X_test.drop(filteredout_columns, axis=1)
+
+regressor = DecisionTreeRegressor()
+
+print('Fitting the model...')
+regressor.fit(X_train, y_train)
+
+print('Predicting...')
+print('R-squared: %.4f' % regressor.score(X_test, y_test))
+#scores = cross_val_score(regressor, X, y, cv = 5)
+#print(scores.mean())
+
+y_predicted = regressor.predict(X_test)
+test = pd.concat([X_test, y_test], axis=1)
+#print('test length: ' + str(len(test.index)) )
+
+test['PREDICTED'] = y_predicted.reshape(-1,1)
+
+# generate scatter-plots (with interpolation) for single days with real occupancy (green) vs predicted occupancy (red)
+# works as expected only when split of train + test data is clean (not randomous)
+listfigs = []
+xCurrent = []
+ytestCurrent = []
+ypredCurrent = []
+indexFig = 0
+for i, r in test.iterrows():
+    figid = 'Block: ' + str(int(result.loc[i, 'STREET_BLOCK'])) + ', Year: ' + str(int(result.loc[i, 'YEAR'])) + ', Week: ' + str(int(result.loc[i, 'CALENDAR_WEEK'])) + ', Weekday: ' + str(int(result.loc[i, 'WEEKDAY']))
+    if listfigs.count(figid) == 0:
+        if len(listfigs) > 0 and len(xCurrent) >= 20:
+            # plot previous figure
+            indexFig += 1
+            #print('xCurrent len: ' + str(len(xCurrent)))
+            #print(xCurrent)
+            #print('ytestCurrent len: ' + str(len(ytestCurrent)))
+            #print(ytestCurrent)
+            #print('ypredCurrent len: ' + str(len(ypredCurrent)))
+            #print(ypredCurrent)            
+            xLin = np.linspace(min(xCurrent), max(xCurrent), num=500, endpoint=True)
+            #df1 = pd.DataFrame({'x': xCurrent, 'y': ytestCurrent})
+            #df1 = df1.sort_values(by=['y'])
+            #df2 = pd.DataFrame({'x': xCurrent, 'y': ypredCurrent})
+            #df2 = df2.sort_values(by=['y'])
+            #f1 = interp1d(df1['x'], df1['y'])
+            f1 = interp1d(xCurrent, ytestCurrent)
+            #f2 = interp1d(df2['x'], df2['y'])
+            f2 = interp1d(xCurrent, ypredCurrent)
+            fig = plt.figure(indexFig)
+            fig.suptitle(figid)
+            plt.plot(xCurrent, ytestCurrent, 'o', color='green')
+            plt.plot(xLin, f1(xLin), '-', color='green')
+            plt.plot(xCurrent, ypredCurrent, 'o', color='red')
+            plt.plot(xLin, f2(xLin), '-', color='red')
+            plt.xlabel('Hours')
+            plt.ylabel('Occupancy')
+            plt.legend(['data real', '', 'data predicted', ''])
+            if indexFig == 20:
+                break
+        listfigs.append(figid)
+        # reset for new figure
+        xCurrent = []
+        ytestCurrent = []
+        ypredCurrent = []
+    if xCurrent.count(int(r['HOUR'])) == 0:
+        xCurrent.append(int(r['HOUR']))
+        ytestCurrent.append(r['OCCUPIED'])
+        ypredCurrent.append(r['PREDICTED'])
+plt.show()

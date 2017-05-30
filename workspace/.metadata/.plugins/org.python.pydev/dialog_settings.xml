@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.python.pydev.ui.wizards.files.TemplateSelectDialog">
+		<section name="DialogBoundsSettings">
+			<item value="304" key="DIALOG_WIDTH"/>
+			<item value="1|Segoe UI|9.75|0|WINDOWS|1|-13|0|0|0|400|0|0|0|0|3|2|1|34|Segoe UI" key="DIALOG_FONT_NAME"/>
+			<item value="327" key="DIALOG_HEIGHT"/>
+			<item value="97" key="DIALOG_X_ORIGIN"/>
+			<item value="9" key="DIALOG_Y_ORIGIN"/>
+		</section>
+	</section>
+	<section name="pydev_completion_proposal_size">
+	</section>
+</section>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;main.maps.bing.RoutesRestClient&apos; to &apos;BingRoutesRestClient&apos;&#x0D;&#x0A;- Original project: &apos;parking&apos;&#x0D;&#x0A;- Original element: &apos;main.maps.bing.RoutesRestClient&apos;&#x0D;&#x0A;- Renamed element: &apos;main.maps.bing.BingRoutesRestClient&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;RoutesRestClient&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src\/main\/java&lt;main.maps.bing{RoutesRestClient.java[RoutesRestClient" matchStrategy="1" name="BingRoutesRestClient" qualified="false" references="true" similarDeclarations="false" stamp="1485353461394" textual="false" version="1.0"/>
+</session>

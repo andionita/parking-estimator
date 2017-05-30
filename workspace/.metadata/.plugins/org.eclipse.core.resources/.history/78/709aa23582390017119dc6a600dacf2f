@@ -1,0 +1,14 @@
+'''
+Created on 15.05.2017
+
+@author: andigenu
+'''
+import matplotlib.pyplot as plt
+import random
+import numpy
+
+y = random.sample(xrange(100), 10)
+plt.scatter(range(0, 1000), y, s=0.001)
+plt.xlabel('Occupancy Rate')
+plt.ylabel('Data Points')
+plt.show()
