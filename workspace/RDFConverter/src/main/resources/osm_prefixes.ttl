@@ -1,0 +1,4 @@
+@prefix ogc: <http://www.opengis.net/ont/geosparql#> .
+@prefix geom: <http://geovocab.org/geometry#> .
+@prefix lgdo: <http://linkedgeodata.org/ontology/> .
+

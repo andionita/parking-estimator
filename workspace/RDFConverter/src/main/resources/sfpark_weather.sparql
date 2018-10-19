@@ -1,0 +1,37 @@
+PREFIX sao:   <http://iot.ee.surrey.ac.uk/citypulse/resources/ontologies/sao.ttl>  
+PREFIX ns1:   <http://purl.oclc.org/NET/ssnx/ssn#>  
+PREFIX ct:    <http://www.insight-centre.org/citytraffic#>
+PREFIX tl:    <http://purl.org/NET/c4dm/timeline.owl#>  
+PREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>  
+PREFIX prov:  <http://purl.org/NET/provenance.owl#>
+PREFIX unit3: <http://purl.oclc.org/NET/muo/ucum/unit/temperature>
+PREFIX unit4: <http://purl.org/iot/vocab/m3-lite#>
+
+SELECT ?locationId (concat(xsd:string(day(?datetime)), '.', xsd:string(month(?datetime)), '.', xsd:string(year(?datetime))) as ?date) ?tempMax ?tempMin ?precipitation
+		WHERE {  
+			?obs a sao:Point .
+			?obs prov:used ?temperatureMaxNode .
+			?temperatureMaxNode sao:hasUnitOfMeasurement unit3:degree-Fahrenheit .
+			?temperatureMaxNode sao:value ?tempMax .
+			
+			?obs prov:used ?temperatureMinNode .
+			?temperatureMinNode sao:hasUnitOfMeasurement unit3:degree-Fahrenheit .
+			?temperatureMinNode sao:value ?tempMin .
+
+			?obs prov:used ?precipitationNode .
+			?precipitationNode sao:hasUnitOfMeasurement unit4:Inch .
+			?precipitationNode sao:value ?precipitation .
+
+			?obs sao:time ?timeNode .
+			?timeNode tl:at ?datetime .
+
+			?obs ns1:featureOfInterest ?location .
+			?location a sao:FeatureOfInterest .
+			?location ct:hasFirstNode ?locationNode .
+			?locationNode ct:hasNodeName  ?locationId . 
+			
+			FILTER strstarts(strafter(str(?temperatureMaxNode), '#'), 'max_temp') 
+			FILTER strstarts(strafter(str(?temperatureMinNode), '#'), 'min_temp')
+		}
+
+		ORDER BY ?datetime

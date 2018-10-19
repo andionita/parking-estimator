@@ -1,0 +1,25 @@
+@prefix lgdo:  <http://linkedgeodata.org/ontology/> .
+@prefix ogc:   <http://www.opengis.net/ont/geosparql#> .
+@prefix geom:  <http://geovocab.org/geometry#> .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/osm/sfpark#NAZjGOA66I>
+        a              lgdo:Place_of_worship ;
+        geom:geometry  [ ogc:asWKT  "POINT(-122.48090458229 37.7133685569612)" ] ;
+        lgdo:id        "1205459527" ;
+        lgdo:name      "Holy Trinity Greek Orthodox Church" .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/osm/sfpark#atDx7Z4QXv>
+        a              lgdo:Toilets ;
+        geom:geometry  [ ogc:asWKT  "POINT(-122.489586889342 37.7124393893385)" ] ;
+        lgdo:id        "3833126992" .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/osm/sfpark#4UwS7OGBtG>
+        a              lgdo:Drinking_water ;
+        geom:geometry  [ ogc:asWKT  "POINT(-122.489419623036 37.712428800669)" ] ;
+        lgdo:id        "2351681766" .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/osm/sfpark#AUEtpOlICF>
+        a              lgdo:School ;
+        geom:geometry  [ ogc:asWKT  "POINT(-122.475606139081 37.7132275658515)" ] ;
+        lgdo:id        "1205459563" ;
+        lgdo:name      "Brandeis Hillel Day School" .

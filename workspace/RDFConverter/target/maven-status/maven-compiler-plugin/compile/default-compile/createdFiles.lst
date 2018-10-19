@@ -1,0 +1,6 @@
+org/ionita/parking/utils/RandomGenerator.class
+org/ionita/parking/rdf/csv2rdf/TrafficConverter.class
+org/ionita/parking/rdf/csv2rdf/AmenityConverter.class
+org/ionita/parking/rdf/csv2rdf/WeatherConverter.class
+org/ionita/parking/rdf/csv2rdf/OccupancyConverter.class
+org/ionita/parking/rdf/sparql/ExtractData.class

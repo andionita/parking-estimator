@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>SFpark - Visualisation</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script-->
+	<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js" integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA==" crossorigin="">
+    </script>
+
+	<style>
+		#map {
+			width: 1024px;
+			height: 768px;
+		}
+	</style>
+
+	
+</head>
+<body>
+
+<form action="">
+<input type="checkbox" id="similarity-mode" name="similarity-mode" value="on" unchecked>Enable Similarity Mode
+</form>
+
+<div id="map"></div>
+
+<script src="clusters_with_to_with_data_merged_similarity.js" type="text/javascript"></script>
+
+<script src="model_results.js" type="text/javascript"></script>
+
+<script src="clusters_wout_to_with_data_merged_similarity.js" type="text/javascript"></script>
+
+<script>
+
+	var map = L.map("map").setView([37.7738, -122.4602], 13);
+
+	var geojsonWith = null;
+	var geojsonWout = null; 
+	
+	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+		maxZoom: 18,
+		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+			'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+			'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+		id: 'mapbox.light'
+	}).addTo(map);
+	
+	var defaultStyleWith = {
+  		"color": "LightSalmon"
+	};
+
+	var defaultStyleWout = {
+  		"color": "LightSkyBlue"
+	};
+
+	function onEachFeatureWith(feature, layer) {
+		layer.on({
+			mouseover: function (event) {
+				var layer = event.target;
+				layer.setStyle({"color": "darkRed"});
+				
+				if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+					layer.bringToFront();
+				}
+
+				//console.log("mousoover: similarity mode is " + document.getElementById("similarity-mode").checked);
+				if ( document.getElementById("similarity-mode").checked ) {
+					
+					// highlight similar clusters on the map 
+					var similarCWithids = feature.properties.similar_cwithids.slice(0, 1);
+
+					geojsonWith.eachLayer( function (layer) {
+						var cwithid = layer.feature.properties.cwithid;
+						// look if cwithid is among similarCWithids
+						var index, entry;
+						for (index = 0; index < similarCWithids.length; index++ ) {
+							entry = similarCWithids[index];
+							if ( entry == cwithid) {
+								layer.setStyle({"color": "darkRed"});
+								break;
+							}
+						}
+					});
+
+					var clusterid =  feature.properties.cwithid;
+
+					// popup: display table with model results of similar clusters
+					var popupTable = "<table><tr><td>Similar ID</td><td>Similarity</td>";
+					popupTable += "<td>Model</td><td>Training</td><td>Error</td><td>Type</td></tr>";
+					
+					var resultClusters = jsonModelResults.features;
+					// search for the right cluster (for which the model was built)
+					var matchingModelResult;
+					for ( var i = 0; i < resultClusters.length; i++ ) {
+						var result = resultClusters[i];
+						if ( result.clusterid == clusterid ) {
+							matchingModelResult = result;
+							break;
+						}
+					}
+
+					// fill in the table for this cluster
+					similarClusterIds = matchingModelResult.properties.similar_clusterids;
+					cosines = matchingModelResult.properties.cosines;
+					modelNames = matchingModelResult.properties.model_names;
+					trainingErrors = matchingModelResult.properties.training_errors;
+					errors = matchingModelResult.properties.errors;
+					errorTypes = matchingModelResult.properties.error_types;
+					for ( var i = 0; i < similarClusterIds.length; i++) {
+						popupTable += "<tr>";
+						popupTable += "<td align='center'>" + similarClusterIds[i] + "</td>";
+						popupTable += "<td>" + cosines[i].toFixed(5) + "</td>";
+						popupTable += "<td>" + modelNames[i] + "</td>";
+						popupTable += "<td>" + trainingErrors[i].toFixed(2) + "</td>";
+						popupTable += "<td>" + errors[i].toFixed(2) + "</td>";
+						popupTable += "<td>" + errorTypes[i] + "</td>";
+						popupTable += "</tr>";
+					}
+					popupTable += "</table>";
+
+					var dataPoints = matchingModelResult.data_points.toLocaleString();
+					var antet = "Cluster ID: " + clusterid + "      (" + dataPoints +  " Data Points)";
+					var popupContent =  antet + "<br><br>" + popupTable;
+					layer.bindPopup(popupContent);
+				
+				} else {
+					// popup is simple
+					var popupContent = "cwithid: " + feature.properties.cwithid;
+					popupContent += "<br>" + "occupancyPoints: " + feature.properties.occupancy_points.toLocaleString();
+
+					layer.bindPopup(popupContent);
+				}
+			},
+			mouseout: function( event) {
+				var layer = event.target;
+				layer.setStyle(defaultStyleWith);
+
+				//console.log("mouseout: similarity mode is " + document.getElementById("similarity-mode").checked);
+				if ( document.getElementById("similarity-mode").checked ) {
+					geojsonWith.eachLayer( function (layer) {
+						layer.setStyle(defaultStyleWith);
+					});
+				}
+			}
+		})
+	}
+
+	function onEachFeatureWout(feature, layer) {
+		layer.on({
+			mouseover: function (event) {
+				var layer = event.target;
+				layer.setStyle({"color": "darkBlue"});
+				
+				if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+					layer.bringToFront();
+				}
+
+				//console.log("mousoover: similarity mode is " + document.getElementById("similarity-mode").checked);
+				if ( document.getElementById("similarity-mode").checked ) {
+					
+					// highlight similar clusters on the map 
+					var similarCWithids = feature.properties.similar_cwithids.slice(0, 3);
+
+					geojsonWith.eachLayer( function (layer) {
+						var cwithid = layer.feature.properties.cwithid;
+						//console.log("cwithid = " + cwithid)
+						// look if cwithid is among similarCWithids
+						var index, entry;
+						for (index = 0; index < similarCWithids.length; index++ ) {
+							entry = similarCWithids[index];
+							//console.log("entry = " + entry);
+							if ( entry == cwithid) {
+								layer.setStyle({"color": "darkRed"});
+								break;
+							}
+						}
+					});
+
+					//dropdownList = "<form action='' method='POST'>";
+					var dropdownList = "<select id='estimation' onchange='changeEstimation()'>";
+					dropdownList += "<option value='-1' selected>--</option>";
+					for ( var value = 0; value <= 100; value += 10 ) { 
+						dropdownList += "<option value='" + value + "''>" + value + "</option>";
+					}
+					dropdownList += "</select>";
+					//dropdownList += "</form>";
+
+					// display table with prediction of similar clusters
+					var popupTable = "<table id='cwout-results'><tr><td>Similar ID</td><td>Similarity</td>";
+					popupTable += "<td align='center'>Result</td></tr>";
+					
+					var cwithids = feature.properties.similar_cwithids;
+					var cosines = feature.properties.cosines;
+					var index;
+					for ( index = 0; index < cwithids.length; index++ ) {
+						popupTable += "<tr>"
+						popupTable += "<td align='center'>" + cwithids[index] + "</td>";
+						popupTable += "<td>" + cosines[index].toFixed(5) + "</td>";
+						popupTable += "<td></td>";
+						popupTable += "</tr>"
+					}
+
+					var antet = "Cluster ID: " + feature.properties.cwoutid;
+					antet += " &emsp; Estimation: " + dropdownList;
+					var popupContent =  antet + "<br><br>" + popupTable;
+					layer.bindPopup(popupContent);
+				
+				} else {
+					// popup is simple
+					var popupContent = "cwoutid: " + feature.properties.cwoutid;
+					layer.bindPopup(popupContent);
+				}
+
+			},
+			mouseout: function( event) {
+				var layer = event.target;
+				layer.setStyle(defaultStyleWout);
+
+				//console.log("mouseout: similarity mode is " + document.getElementById("similarity-mode").checked);
+				if ( document.getElementById("similarity-mode").checked ) {
+					geojsonWith.eachLayer( function (layer) {
+						layer.setStyle(defaultStyleWith);
+					});
+				}
+			}
+		})
+	}
+			
+	geojsonWout = L.geoJSON(clustersWout, {
+
+			style: defaultStyleWout,
+
+			onEachFeature: onEachFeatureWout
+		}
+	).addTo(map); 
+
+	geojsonWith = L.geoJSON(clustersWith, {
+
+		style: defaultStyleWith,
+		
+		onEachFeature: onEachFeatureWith
+
+		}
+	).addTo(map);
+
+	function changeEstimation() {
+		var estimationEl = document.getElementById("estimation");
+		var newEstimation = parseInt(estimationEl[estimationEl.selectedIndex].value);
+
+		var table = document.getElementById("cwout-results");
+
+		for ( var i = 1; i < table.rows.length; i++) {
+
+			// calculate estimation interval 
+			var similarity = table.rows[i].cells[1].innerHTML;
+			var startInterval = Math.max(0, newEstimation - (1 - similarity)*100);
+			var endInterval = Math.min(100, newEstimation + (1 - similarity)*100);
+			table.rows[i].cells[2].innerHTML = "[" + startInterval.toFixed(3) +" - " + endInterval.toFixed(3) + "]";
+		}			
+	} 
+
+</script>
+
+</body>
+</html>

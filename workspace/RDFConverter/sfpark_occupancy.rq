@@ -1,0 +1,22 @@
+PREFIX sao:   <http://iot.ee.surrey.ac.uk/citypulse/resources/ontologies/sao.ttl>
+PREFIX ns1:   <http://purl.oclc.org/NET/ssnx/ssn#>
+PREFIX ct:    <http://www.insight-centre.org/citytraffic#>
+PREFIX tl:    <http://purl.org/NET/c4dm/timeline.owl#>
+PREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>
+PREFIX dbpedia-owl: <http://dbpedia.org/ontology#>
+
+SELECT ?blockid (concat(xsd:string(day(?datetime)), '.', xsd:string(month(?datetime)), ".", xsd:string(year(?datetime))) as ?date) (concat(xsd:string(hours(?datetime)), ":", xsd:string(minutes(?datetime))) as ?time) ?totalSpots ?currentFree
+FROM <sfpark_occupancy.ttl>
+WHERE {
+		?x ns1:featureOfInterest ?block .
+		?block a sao:FeatureOfInterest .
+		?block ct:hasFirstNode ?blocknode .
+		?blocknode ct:hasNodeName  ?blockid .
+		
+		?x dbpedia-owl:numberOfParkingSpaces ?totalSpots .
+		
+		?x sao:value ?currentFree .
+
+		?x sao:time ?timeNode .
+		?timeNode tl:at ?datetime .
+}

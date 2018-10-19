@@ -1,0 +1,123 @@
+@prefix sao:   <http://iot.ee.surrey.ac.uk/citypulse/resources/ontologies/sao.ttl> .
+@prefix dbpedia-owl: <http://dbpedia.org/ontology#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix unit0: <http://purl.oclc.org/NET/muo/citypulse/unit/traffic> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix unit1: <http://purl.oclc.org/NET/muo/citypulse/unit/time> .
+@prefix pulsepds: <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/parkingDataStream#> .
+@prefix unit2: <http://purl.oclc.org/NET/muo/citypulse/unit/velocity> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix unit3: <http://purl.oclc.org/NET/muo/ucum/unit/temperature> .
+@prefix ns1:   <http://purl.oclc.org/NET/ssnx/ssn#> .
+@prefix ct:    <http://www.insight-centre.org/citytraffic#> .
+@prefix unit4: <http://purl.org/iot/vocab/m3-lite#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml:   <http://www.w3.org/XML/1998/namespace> .
+@prefix tl:    <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix prov:  <http://purl.org/NET/provenance.owl#> .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#max_temp_xsAymiwitj>
+        a                         sao:Point ;
+        sao:hasUnitOfMeasurement  unit3:degree-Fahrenheit ;
+        sao:value                 "62" .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#precipitation_YaxbZ8mHtq>
+        a                         sao:Point ;
+        sao:hasUnitOfMeasurement  unit4:Inch ;
+        sao:value                 "7717" .
+
+<Date#1>  a     "http://purl.org/NET/c4dm/timeline.owl#DateTimeInterval" ;
+        tl:at   "2006-01-01T00:00:00Z"^^xsd:dateTime .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#min_temp_jqpdu1nSWF>
+        a                         sao:Point ;
+        sao:hasUnitOfMeasurement  unit3:degree-Fahrenheit ;
+        sao:value                 "49" .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#max_temp_5Ph5b2sThQ>
+        a                         sao:Point ;
+        sao:hasUnitOfMeasurement  unit3:degree-Fahrenheit ;
+        sao:value                 "58" .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#max_temp_X0evEWTj61>
+        a                         sao:Point ;
+        sao:hasUnitOfMeasurement  unit3:degree-Fahrenheit ;
+        sao:value                 "54" .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#observation_u27cQPwnyA>
+        a                      sao:Point ;
+        sao:time               <Date#4> ;
+        ns1:featureOfInterest  <Area_Name#San_Francisco> ;
+        prov:used              <http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#precipitation_edVIG6Rj0m> , <http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#min_temp_OcaNi4QLtL> , <http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#max_temp_xsAymiwitj> .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#min_temp_OcaNi4QLtL>
+        a                         sao:Point ;
+        sao:hasUnitOfMeasurement  unit3:degree-Fahrenheit ;
+        sao:value                 "50" .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#observation_4Kr48kq6sL>
+        a                      sao:Point ;
+        sao:time               <Date#1> ;
+        ns1:featureOfInterest  <Area_Name#San_Francisco> ;
+        prov:used              <http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#precipitation_8PnljXHxa7> , <http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#min_temp_RtLhR4nkaC> , <http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#max_temp_5Ph5b2sThQ> .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#precipitation_edVIG6Rj0m>
+        a                         sao:Point ;
+        sao:hasUnitOfMeasurement  unit4:Inch ;
+        sao:value                 "197" .
+
+<Date#4>  a     "http://purl.org/NET/c4dm/timeline.owl#DateTimeInterval" ;
+        tl:at   "2006-01-04T00:00:00Z"^^xsd:dateTime .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#min_temp_RtLhR4nkaC>
+        a                         sao:Point ;
+        sao:hasUnitOfMeasurement  unit3:degree-Fahrenheit ;
+        sao:value                 "48" .
+
+<Date#3>  a     "http://purl.org/NET/c4dm/timeline.owl#DateTimeInterval" ;
+        tl:at   "2006-01-03T00:00:00Z"^^xsd:dateTime .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#observation_6C1AecefRj>
+        a                      sao:Point ;
+        sao:time               <Date#3> ;
+        ns1:featureOfInterest  <Area_Name#San_Francisco> ;
+        prov:used              <http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#precipitation_TFjN3u2ZIg> , <http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#min_temp_XFE2FiaeVx> , <http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#max_temp_X0evEWTj61> .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark>
+        a          sao:StreamEvent ;
+        prov:used  <http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#observation_u27cQPwnyA> , <http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#observation_6C1AecefRj> , <http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#observation_mrdWU1hZEe> , <http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#observation_4Kr48kq6sL> .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#max_temp_xUYzdmBM7v>
+        a                         sao:Point ;
+        sao:hasUnitOfMeasurement  unit3:degree-Fahrenheit ;
+        sao:value                 "53" .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#min_temp_XFE2FiaeVx>
+        a                         sao:Point ;
+        sao:hasUnitOfMeasurement  unit3:degree-Fahrenheit ;
+        sao:value                 "47" .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#precipitation_8PnljXHxa7>
+        a                         sao:Point ;
+        sao:hasUnitOfMeasurement  unit4:Inch ;
+        sao:value                 "1299" .
+
+<Date#2>  a     "http://purl.org/NET/c4dm/timeline.owl#DateTimeInterval" ;
+        tl:at   "2006-01-02T00:00:00Z"^^xsd:dateTime .
+
+<Area_Name#San_Francisco>
+        a                sao:FeatureOfInterest ;
+        ct:hasFirstNode  [ a               ct:Node ;
+                           ct:hasNodeName  "San Francisco"
+                         ] .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#precipitation_TFjN3u2ZIg>
+        a                         sao:Point ;
+        sao:hasUnitOfMeasurement  unit4:Inch ;
+        sao:value                 "2008" .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#observation_mrdWU1hZEe>
+        a                      sao:Point ;
+        sao:time               <Date#2> ;
+        ns1:featureOfInterest  <Area_Name#San_Francisco> ;
+        prov:used              <http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#precipitation_YaxbZ8mHtq> , <http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#min_temp_jqpdu1nSWF> , <http://iot.ee.surrey.ac.uk/citypulse/datasets/weather/sfpark#max_temp_xUYzdmBM7v> .
