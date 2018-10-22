@@ -1,0 +1,31 @@
+PREFIX sao:   <http://iot.ee.surrey.ac.uk/citypulse/resources/ontologies/sao.ttl>  
+PREFIX ns1:   <http://purl.oclc.org/NET/ssnx/ssn#>  
+PREFIX ct:    <http://www.insight-centre.org/citytraffic#>  
+PREFIX tl:    <http://purl.org/NET/c4dm/timeline.owl#>  
+PREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>  
+PREFIX prov:  <http://purl.org/NET/provenance.owl#>
+PREFIX unit0: <http://purl.oclc.org/NET/muo/citypulse/unit/traffic>
+PREFIX unit2: <http://purl.oclc.org/NET/muo/citypulse/unit/velocity>
+
+SELECT ?locationId (concat(xsd:string(day(?datetime)), '.', xsd:string(month(?datetime)), '.', xsd:string(year(?datetime))) 					as ?date) (concat(xsd:string(hours(?datetime)), ':', xsd:string(minutes(?datetime))) as ?time) ?vechicleCount ?avgSpeed  
+		WHERE {  
+			?obs a sao:Point .
+			?obs prov:used ?vehicleCountNode .
+			?vehicleCountNode sao:hasUnitOfMeasurement unit0:vehicle-count.
+			?vehicleCountNode sao:value ?vechicleCount .
+
+			?obs prov:used ?avgSpeedNode .
+			?avgSpeedNode sao:hasUnitOfMeasurement unit2:km-per-hour .
+			?avgSpeedNode sao:value ?avgSpeed .
+
+			?obs sao:time ?timeNode .
+			?timeNode tl:at ?datetime .
+			
+			?obs ns1:featureOfInterest ?location .
+			?location a sao:FeatureOfInterest .
+			?location ct:hasFirstNode ?locationNode .
+			?locationNode ct:hasNodeName  ?locationId . 
+		}
+
+		ORDER BY ?datetime
+

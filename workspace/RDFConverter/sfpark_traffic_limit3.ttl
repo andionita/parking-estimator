@@ -1,0 +1,59 @@
+@prefix sao:   <http://iot.ee.surrey.ac.uk/citypulse/resources/ontologies/sao.ttl> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix unit0: <http://purl.oclc.org/NET/muo/citypulse/unit/traffic> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix unit1: <http://purl.oclc.org/NET/muo/citypulse/unit/time> .
+@prefix pulsepds: <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/parkingDataStream#> .
+@prefix unit2: <http://purl.oclc.org/NET/muo/citypulse/unit/velocity> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix unit3: <http://purl.oclc.org/NET/muo/ucum/unit/temperature> .
+@prefix ns1:   <http://purl.oclc.org/NET/ssnx/ssn#> .
+@prefix ct:    <http://www.insight-centre.org/citytraffic#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml:   <http://www.w3.org/XML/1998/namespace> .
+@prefix tl:    <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix prov:  <http://purl.org/NET/provenance.owl#> .
+
+<TIMESTAMP#1>  a  "http://purl.org/NET/c4dm/timeline.owl#Instant" ;
+        tl:at   "2011-02-11T00:00:00Z"^^xsd:dateTime .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark_traffic#vehicleCount_1>
+        a                         sao:Point ;
+        sao:hasUnitOfMeasurement  unit0:vehicle-count ;
+        sao:time                  <TIMESTAMP#1> ;
+        sao:value                 "79.5" ;
+        ns1:featureOfInterest     <LOCATION_ID#CC-1_EB_Hayes> .
+
+<TIMESTAMP#2>  a  "http://purl.org/NET/c4dm/timeline.owl#Instant" ;
+        tl:at   "2011-02-11T01:00:00Z"^^xsd:dateTime .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark_traffic#vehicleCount_2>
+        a                         sao:Point ;
+        sao:hasUnitOfMeasurement  unit0:vehicle-count ;
+        sao:time                  <TIMESTAMP#2> ;
+        sao:value                 "85.25" ;
+        ns1:featureOfInterest     <LOCATION_ID#CC-1_EB_Hayes> .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark_traffic#averageSpeed_1>
+        a                         sao:Point ;
+        sao:hasUnitOfMeasurement  unit2:km-per-hour ;
+        sao:time                  <TIMESTAMP#1> ;
+        sao:value                 "21.950000000000003" ;
+        ns1:featureOfInterest     <LOCATION_ID#CC-1_EB_Hayes> .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark_traffic>
+        a          sao:StreamEvent ;
+        prov:used  <http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark_traffic#averageSpeed_2> , <http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark_traffic#vehicleCount_2> , <http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark_traffic#averageSpeed_1> , <http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark_traffic#vehicleCount_1> .
+
+<LOCATION_ID#CC-1_EB_Hayes>
+        a                sao:FeatureOfInterest ;
+        ct:hasFirstNode  [ a               ct:Node ;
+                           ct:hasNodeName  "Location ID:CC-1;Street:EB Hayes;District:Civic Center;"
+                         ] .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark_traffic#averageSpeed_2>
+        a                         sao:Point ;
+        sao:hasUnitOfMeasurement  unit2:km-per-hour ;
+        sao:time                  <TIMESTAMP#2> ;
+        sao:value                 "22.012500000000003" ;
+        ns1:featureOfInterest     <LOCATION_ID#CC-1_EB_Hayes> .

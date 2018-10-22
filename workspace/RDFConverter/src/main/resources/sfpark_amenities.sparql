@@ -1,0 +1,14 @@
+PREFIX dbpedia-owl: <http://dbpedia.org/ontology#>  
+PREFIX ogc: <http://www.opengis.net/ont/geosparql#>
+PREFIX geom: <http://geovocab.org/geometry#>
+PREFIX lgdo: <http://linkedgeodata.org/ontology/>
+
+
+SELECT ?id ?name ?amenity ?geometry 
+		WHERE {  
+			?amenityNode a ?amenity .  
+			?amenityNode lgdo:id ?id .
+        	?amenityNode lgdo:name ?name .
+        	?amenityNode geom:geometry ?geometryNode .
+        	?geometryNode ogc:asWKT ?geometry .
+		}

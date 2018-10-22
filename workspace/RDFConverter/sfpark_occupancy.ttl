@@ -1,0 +1,70 @@
+@prefix sao:   <http://iot.ee.surrey.ac.uk/citypulse/resources/ontologies/sao.ttl> .
+@prefix dbpedia-owl: <http://dbpedia.org/ontology#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix unit0: <http://purl.oclc.org/NET/muo/citypulse/unit/traffic> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix unit1: <http://purl.oclc.org/NET/muo/citypulse/unit/time> .
+@prefix pulsepds: <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/parkingDataStream#> .
+@prefix unit2: <http://purl.oclc.org/NET/muo/citypulse/unit/velocity> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix unit3: <http://purl.oclc.org/NET/muo/ucum/unit/temperature> .
+@prefix ns1:   <http://purl.oclc.org/NET/ssnx/ssn#> .
+@prefix ct:    <http://www.insight-centre.org/citytraffic#> .
+@prefix unit4: <http://purl.org/iot/vocab/m3-lite#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml:   <http://www.w3.org/XML/1998/namespace> .
+@prefix tl:    <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix prov:  <http://purl.org/NET/provenance.owl#> .
+
+<BLOCK_ID#902>  a        sao:FeatureOfInterest ;
+        ct:hasFirstNode  [ a               ct:Node ;
+                           ct:hasNodeName  "902"
+                         ] .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/sfpark#occupied_spots_Ygv63JgIeq>
+        a                         sao:Point ;
+        dbpedia-owl:numberOfParkingSpaces
+                "47" ;
+        sao:hasUnitOfMeasurement  unit0:vehicle-count ;
+        sao:time                  [ a       "http://purl.org/NET/c4dm/timeline.owl#Instant" ;
+                                    tl:at   "2011-04-01T03:00:00Z"^^xsd:dateTime
+                                  ] ;
+        sao:value                 "6" ;
+        ns1:featureOfInterest     <BLOCK_ID#902> .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/sfpark#occupied_spots_nyUJX2FrtY>
+        a                         sao:Point ;
+        dbpedia-owl:numberOfParkingSpaces
+                "47" ;
+        sao:hasUnitOfMeasurement  unit0:vehicle-count ;
+        sao:time                  [ a       "http://purl.org/NET/c4dm/timeline.owl#Instant" ;
+                                    tl:at   "2011-04-01T02:00:00Z"^^xsd:dateTime
+                                  ] ;
+        sao:value                 "6" ;
+        ns1:featureOfInterest     <BLOCK_ID#902> .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/sfpark#occupied_spots_WDmIFOdfoO>
+        a                         sao:Point ;
+        dbpedia-owl:numberOfParkingSpaces
+                "47" ;
+        sao:hasUnitOfMeasurement  unit0:vehicle-count ;
+        sao:time                  [ a       "http://purl.org/NET/c4dm/timeline.owl#Instant" ;
+                                    tl:at   "2011-04-01T01:00:00Z"^^xsd:dateTime
+                                  ] ;
+        sao:value                 "5" ;
+        ns1:featureOfInterest     <BLOCK_ID#902> .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/sfpark>
+        a          sao:StreamEvent ;
+        prov:used  <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/sfpark#occupied_spots_Ygv63JgIeq> , <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/sfpark#occupied_spots_nyUJX2FrtY> , <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/sfpark#occupied_spots_WDmIFOdfoO> , <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/sfpark#occupied_spots_msL5OMFbrM> .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/sfpark#occupied_spots_msL5OMFbrM>
+        a                         sao:Point ;
+        dbpedia-owl:numberOfParkingSpaces
+                "47" ;
+        sao:hasUnitOfMeasurement  unit0:vehicle-count ;
+        sao:time                  [ a       "http://purl.org/NET/c4dm/timeline.owl#Instant" ;
+                                    tl:at   "2011-04-01T00:00:00Z"^^xsd:dateTime
+                                  ] ;
+        sao:value                 "5" ;
+        ns1:featureOfInterest     <BLOCK_ID#902> .

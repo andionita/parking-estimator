@@ -1,0 +1,106 @@
+@prefix sao:   <http://iot.ee.surrey.ac.uk/citypulse/resources/ontologies/sao.ttl> .
+@prefix dbpedia-owl: <http://dbpedia.org/ontology#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix unit0: <http://purl.oclc.org/NET/muo/citypulse/unit/traffic> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix unit1: <http://purl.oclc.org/NET/muo/citypulse/unit/time> .
+@prefix pulsepds: <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/parkingDataStream#> .
+@prefix unit2: <http://purl.oclc.org/NET/muo/citypulse/unit/velocity> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix unit3: <http://purl.oclc.org/NET/muo/ucum/unit/temperature> .
+@prefix ns1:   <http://purl.oclc.org/NET/ssnx/ssn#> .
+@prefix ct:    <http://www.insight-centre.org/citytraffic#> .
+@prefix unit4: <http://purl.org/iot/vocab/m3-lite#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml:   <http://www.w3.org/XML/1998/namespace> .
+@prefix tl:    <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix prov:  <http://purl.org/NET/provenance.owl#> .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark#vehicleCount_UCU4UfUa1L>
+        a                         sao:Point ;
+        sao:hasUnitOfMeasurement  unit0:vehicle-count ;
+        sao:value                 "72.25" .
+
+<TIMESTAMP#6RePtO98SV>
+        a       "http://purl.org/NET/c4dm/timeline.owl#Instant" ;
+        tl:at   "2011-02-11T01:00:00Z"^^xsd:dateTime .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark#averageSpeed_kFY2vepwXj>
+        a                         sao:Point ;
+        sao:hasUnitOfMeasurement  unit2:km-per-hour ;
+        sao:value                 "21.349999999999998" .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark#vehicleCount_ytwJYqvNZ3>
+        a                         sao:Point ;
+        sao:hasUnitOfMeasurement  unit0:vehicle-count ;
+        sao:value                 "85.25" .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark#observation_1NfKIyTY2e>
+        a                      sao:Point ;
+        sao:time               <TIMESTAMP#6RePtO98SV> ;
+        ns1:featureOfInterest  <LOCATION_ID#CC-1> ;
+        prov:used              <http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark#averageSpeed_Z6gVOupFoi> , <http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark#vehicleCount_SfLhvprUgY> .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark#observation_QoSRaFTytz>
+        a                      sao:Point ;
+        sao:time               <TIMESTAMP#o9jKEeigID> ;
+        ns1:featureOfInterest  <LOCATION_ID#CC-1> ;
+        prov:used              <http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark#averageSpeed_vsXtjAAkl5> , <http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark#vehicleCount_UCU4UfUa1L> .
+
+<LOCATION_ID#CC-1>  a    sao:FeatureOfInterest ;
+        ct:hasFirstNode  [ a               ct:Node ;
+                           ct:hasNodeName  "CC-1"
+                         ] .
+
+<TIMESTAMP#POOR0WV1rW>
+        a       "http://purl.org/NET/c4dm/timeline.owl#Instant" ;
+        tl:at   "2011-02-11T02:00:00Z"^^xsd:dateTime .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark>
+        a          sao:StreamEvent ;
+        prov:used  <http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark#observation_QoSRaFTytz> , <http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark#observation_RHdVegUfl4> , <http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark#observation_hiqcvZDHAH> , <http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark#observation_1NfKIyTY2e> .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark#observation_hiqcvZDHAH>
+        a                      sao:Point ;
+        sao:time               <TIMESTAMP#POOR0WV1rW> ;
+        ns1:featureOfInterest  <LOCATION_ID#CC-1> ;
+        prov:used              <http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark#averageSpeed_E8kkKgztin> , <http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark#vehicleCount_ytwJYqvNZ3> .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark#vehicleCount_SfLhvprUgY>
+        a                         sao:Point ;
+        sao:hasUnitOfMeasurement  unit0:vehicle-count ;
+        sao:value                 "79.5" .
+
+<TIMESTAMP#lX3z04M6sB>
+        a       "http://purl.org/NET/c4dm/timeline.owl#Instant" ;
+        tl:at   "2011-02-11T03:00:00Z"^^xsd:dateTime .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark#vehicleCount_km18RBz7sI>
+        a                         sao:Point ;
+        sao:hasUnitOfMeasurement  unit0:vehicle-count ;
+        sao:value                 "78.375" .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark#averageSpeed_vsXtjAAkl5>
+        a                         sao:Point ;
+        sao:hasUnitOfMeasurement  unit2:km-per-hour ;
+        sao:value                 "11.0625" .
+
+<TIMESTAMP#o9jKEeigID>
+        a       "http://purl.org/NET/c4dm/timeline.owl#Instant" ;
+        tl:at   "2011-02-11T04:00:00Z"^^xsd:dateTime .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark#averageSpeed_E8kkKgztin>
+        a                         sao:Point ;
+        sao:hasUnitOfMeasurement  unit2:km-per-hour ;
+        sao:value                 "22.012500000000003" .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark#observation_RHdVegUfl4>
+        a                      sao:Point ;
+        sao:time               <TIMESTAMP#lX3z04M6sB> ;
+        ns1:featureOfInterest  <LOCATION_ID#CC-1> ;
+        prov:used              <http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark#averageSpeed_kFY2vepwXj> , <http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark#vehicleCount_km18RBz7sI> .
+
+<http://iot.ee.surrey.ac.uk/citypulse/datasets/traffic/sfpark#averageSpeed_Z6gVOupFoi>
+        a                         sao:Point ;
+        sao:hasUnitOfMeasurement  unit2:km-per-hour ;
+        sao:value                 "21.950000000000003" .

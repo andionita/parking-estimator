@@ -1,0 +1,64 @@
+============
+RDFConverter
+============
+
+
+How to build
+------------
+mvn clean package
+
+
+CSV -> RDF
+----------
+Input CSV files in src/main/resources
+Output files will be returned in the project root directory
+
+- Occupancy conversion
+mvn exec:java -Dexec.mainClass="org.ionita.parking.rdf.csv2rdf.OccupancyConverter"
+Input: src/main/resources/tuned_occupancy_030917_final.csv
+Output: sfpark_occupancy.ttl
+
+- Traffic conversion
+mvn exec:java -Dexec.mainClass="org.ionita.parking.rdf.csv2rdf.TrafficConverter"
+Input: src/main/resources/sfpark_traffic.csv
+Output: sfpark_traffic.ttl
+
+- Weather conversion
+mvn exec:java -Dexec.mainClass="org.ionita.parking.rdf.csv2rdf.WeatherConverter"
+Input: src/main/resources/Weather.csv
+Output: sfpark_weather.ttl
+
+- Amenity conversion
+mvn exec:java -Dexec.mainClass="org.ionita.parking.rdf.csv2rdf.AmenityConverter"
+Input: src/main/resources/poi_reduced.csv
+Output: poi_reduced.ttl
+
+
+SPARQL extraction (RDF -> CSV)
+------------------------------
+Input TTL files in src/main/resources
+Output files will be returned in the project root directory
+
+- Occupancy extraction
+mvn exec:java -Dexec.mainClass="org.ionita.parking.rdf.sparql.ExtractData" -Dexec.args="occupancy"
+Input: src/main/resources/sfpark_occupancy.ttl
+Output: sfpark_occupancy_back.csv
+
+- Traffic extraction
+mvn exec:java -Dexec.mainClass="org.ionita.parking.rdf.sparql.ExtractData" -Dexec.args="traffic"
+Input: src/main/resources/sfpark_traffic.ttl
+Output: sfpark_traffic_back.csv
+
+- Weather extraction
+mvn exec:java -Dexec.mainClass="org.ionita.parking.rdf.sparql.ExtractData" -Dexec.args="weather"
+Input: src/main/resources/sfpark_weather.ttl
+Output: sfpark_weather_back.csv
+
+- Amenity extraction
+mvn exec:java -Dexec.mainClass="org.ionita.parking.rdf.sparql.ExtractData" -Dexec.args="amenities"
+Input: src/main/resources/poi_reduced.ttl
+Output: poi_reduced_back.csv
+
+
+NOTICE that Jena builds RDF models into memory. For large files this will require larger amounts of memory. Alternatively, please adjust the number of lines of CSV file to be processed by editing the respective .java file.
+

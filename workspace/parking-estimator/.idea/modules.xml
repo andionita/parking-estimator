@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../Playground/.idea/Playground.iml" filepath="$PROJECT_DIR$/../Playground/.idea/Playground.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../SonahPrediction/.idea/SonahPrediction.iml" filepath="$PROJECT_DIR$/../SonahPrediction/.idea/SonahPrediction.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/eppoc.iml" filepath="$PROJECT_DIR$/.idea/eppoc.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,72 @@
+@prefix sao:   <http://iot.ee.surrey.ac.uk/citypulse/resources/ontologies/sao.ttl> .
+@prefix dbpedia-owl: <http://dbpedia.org/ontology#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix unit0: <http://purl.oclc.org/NET/muo/citypulse/unit/traffic> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix unit1: <http://purl.oclc.org/NET/muo/citypulse/unit/time> .
+@prefix pulsepds: <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/parkingDataStream#> .
+@prefix unit2: <http://purl.oclc.org/NET/muo/citypulse/unit/velocity> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix unit3: <http://purl.oclc.org/NET/muo/ucum/unit/temperature> .
+@prefix ns1:   <http://purl.oclc.org/NET/ssnx/ssn#> .
+@prefix ct:    <http://www.insight-centre.org/citytraffic#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml:   <http://www.w3.org/XML/1998/namespace> .
+@prefix tl:    <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix prov:  <http://purl.org/NET/provenance.owl#> .
+
+[ <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/#blockid>
+          "902"^^xsd:double ;
+  <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/#currentFree>
+          "5"^^xsd:double ;
+  <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/#date>
+          "31.03.2011" ;
+  <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/#time>
+          "23:00" ;
+  <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/#totalSpots>
+          "47"^^xsd:double ;
+  <http://w3c/future-csv-vocab/row>
+          1
+] .
+
+[ <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/#blockid>
+          "902"^^xsd:double ;
+  <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/#currentFree>
+          "6"^^xsd:double ;
+  <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/#date>
+          "01.04.2011" ;
+  <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/#time>
+          "00:00" ;
+  <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/#totalSpots>
+          "47"^^xsd:double ;
+  <http://w3c/future-csv-vocab/row>
+          2
+] .
+
+[ <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/#blockid>
+          "902"^^xsd:double ;
+  <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/#currentFree>
+          "5"^^xsd:double ;
+  <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/#date>
+          "31.03.2011" ;
+  <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/#time>
+          "22:00" ;
+  <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/#totalSpots>
+          "47"^^xsd:double ;
+  <http://w3c/future-csv-vocab/row>
+          4
+] .
+
+[ <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/#blockid>
+          "902"^^xsd:double ;
+  <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/#currentFree>
+          "6"^^xsd:double ;
+  <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/#date>
+          "01.04.2011" ;
+  <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/#time>
+          "01:00" ;
+  <http://iot.ee.surrey.ac.uk/citypulse/datasets/parking/#totalSpots>
+          "47"^^xsd:double ;
+  <http://w3c/future-csv-vocab/row>
+          3
+] .
