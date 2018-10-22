@@ -22,7 +22,7 @@ The input data is the following:
 - City data
 --- POI and other layers from OSM: osm/osm_sfpark_blocks.osm
 --- amenity data from Google: scripts/csvs/amenities_min2sources_categoriesV2.csv
-
+--- amenity polygon area computed from OSM data: scripts/csvs/amenity_polygon_area.csv
 
 Setup
 -----
