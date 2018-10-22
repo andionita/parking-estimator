@@ -1,0 +1,77 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: parking_paper.aux
+The style file: ACM-Reference-Format.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Database file #1: parking_paper_references.bib
+Warning--entry type for "ionita2017master" isn't style-file defined
+--line 219 of file parking_paper_references.bib
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=20001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Warning--no number and no volume in xchen
+Warning--page numbers missing in both pages and numpages fields in xchen
+Warning--page numbers missing in both pages and numpages fields in zchen
+Warning--empty publisher in hoessinger
+Warning--empty address in hoessinger
+Warning--page numbers missing in both pages and numpages fields in hoessinger
+Warning--empty publisher in koster
+Warning--empty address in koster
+Warning--empty publisher in mathur
+Warning--empty address in mathur
+Warning--empty publisher in nandugudi
+Warning--empty address in nandugudi
+Warning--empty publisher in rajabioun2013
+Warning--empty address in rajabioun2013
+Warning--empty publisher in richter
+Warning--empty address in richter
+Warning--empty publisher in tiedemann
+Warning--empty address in tiedemann
+Warning--page numbers missing in both pages and numpages fields in tiedemann
+Warning--empty publisher in xu
+Warning--empty address in xu
+You've used 23 entries,
+            5795 wiz_defined-function locations,
+            1631 strings with 22575 characters,
+and the built_in function-call counts, 32623 in all, are:
+= -- 4010
+> -- 932
+< -- 0
++ -- 299
+- -- 947
+* -- 2363
+:= -- 3242
+add.period$ -- 113
+call.type$ -- 23
+change.case$ -- 158
+chr.to.int$ -- 21
+cite$ -- 44
+duplicate$ -- 2197
+empty$ -- 1567
+format.name$ -- 370
+if$ -- 6915
+int.to.chr$ -- 4
+int.to.str$ -- 1
+missing$ -- 56
+newline$ -- 236
+num.names$ -- 182
+pop$ -- 866
+preamble$ -- 1
+purify$ -- 361
+quote$ -- 0
+skip$ -- 792
+stack$ -- 0
+substring$ -- 4212
+swap$ -- 183
+text.length$ -- 1268
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 622
+warning$ -- 21
+while$ -- 172
+width$ -- 0
+write$ -- 445
+(There were 22 warnings)

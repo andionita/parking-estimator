@@ -1,0 +1,325 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{23}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[\protect\citeauthoryear{Agency}{Agency}{2013a}]%
+        {sfpark}
+\bibfield{author}{\bibinfo{person}{San Francisco Municipal~Transportation
+  Agency}.} \bibinfo{year}{2011--2013}\natexlab{a}.
+\newblock \bibinfo{title}{SFpark}.
+\newblock   (\bibinfo{year}{2011--2013}).
+\newblock
+\showURL{%
+\url{http://sfpark.org}}
+
+
+\bibitem[\protect\citeauthoryear{Agency}{Agency}{2013b}]%
+        {sfpark_open_data}
+\bibfield{author}{\bibinfo{person}{San Francisco Municipal~Transportation
+  Agency}.} \bibinfo{year}{2011--2013}\natexlab{b}.
+\newblock \bibinfo{title}{SFpark - Open Data}.
+\newblock   (\bibinfo{year}{2011--2013}).
+\newblock
+\showURL{%
+\url{http://sfpark.org/how-it-works/open-data-page/}}
+
+
+\bibitem[\protect\citeauthoryear{Agency}{Agency}{2013c}]%
+        {sfpark_evaluation}
+\bibfield{author}{\bibinfo{person}{San Francisco Municipal~Transportation
+  Agency}.} \bibinfo{year}{2011--2013}\natexlab{c}.
+\newblock \bibinfo{title}{SFpark - Pilot Project Evaluation Summary}.
+\newblock   (\bibinfo{year}{2011--2013}).
+\newblock
+\showURL{%
+\url{http://sfpark.org/wp-content/uploads/2014/06/SFpark_Eval_Summary_2014.pdf}}
+
+
+\bibitem[\protect\citeauthoryear{Caicedo, Blazquez, and Miranda}{Caicedo
+  et~al\mbox{.}}{2012}]%
+        {caicedo}
+\bibfield{author}{\bibinfo{person}{Felix Caicedo}, \bibinfo{person}{Carola
+  Blazquez}, {and} \bibinfo{person}{Pablo Miranda}.}
+  \bibinfo{year}{2012}\natexlab{}.
+\newblock \showarticletitle{Prediction of parking space availability in real
+  time}.
+\newblock \bibinfo{journal}{{\em Expert Systems with Applications\/}}
+  \bibinfo{volume}{39}, \bibinfo{number}{8} (\bibinfo{year}{2012}),
+  \bibinfo{pages}{7281--7290}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Chen}{Chen}{2014}]%
+        {xchen}
+\bibfield{author}{\bibinfo{person}{Xiao Chen}.}
+  \bibinfo{year}{2014}\natexlab{}.
+\newblock \showarticletitle{Parking occupancy prediction and pattern analysis}.
+\newblock \bibinfo{journal}{{\em Dept. Comput. Sci., Stanford Univ., Stanford,
+  CA, USA, Tech. Rep. CS229-2014\/}} (\bibinfo{year}{2014}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Chen, Xia, and Irawan}{Chen
+  et~al\mbox{.}}{2013}]%
+        {zchen}
+\bibfield{author}{\bibinfo{person}{Zhirong Chen},
+  \bibinfo{person}{Jianhong~Cecilia Xia}, {and} \bibinfo{person}{Buntoro
+  Irawan}.} \bibinfo{year}{2013}\natexlab{}.
+\newblock \showarticletitle{Development of fuzzy logic forecast models for
+  location-based parking finding services}.
+\newblock \bibinfo{journal}{{\em Mathematical Problems in Engineering\/}}
+  \bibinfo{volume}{2013} (\bibinfo{year}{2013}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{GmbH}{GmbH}{2016}]%
+        {dbbahn_data}
+\bibfield{author}{\bibinfo{person}{DB~BahnPark GmbH}.}
+  \bibinfo{year}{2016}\natexlab{}.
+\newblock \bibinfo{title}{DB - Parkplätze API}.
+\newblock   (\bibinfo{year}{2016}).
+\newblock
+\showURL{%
+\url{http://data.deutschebahn.com/dataset/api-parkplatz}}
+
+
+\bibitem[\protect\citeauthoryear{Hossinger, Heimbuchner, and Uhlmann}{Hossinger
+  et~al\mbox{.}}{2012}]%
+        {hoessinger}
+\bibfield{author}{\bibinfo{person}{Reinhard Hossinger}, \bibinfo{person}{Klaus
+  Heimbuchner}, {and} \bibinfo{person}{Tina Uhlmann}.}
+  \bibinfo{year}{2012}\natexlab{}.
+\newblock \showarticletitle{Development of a Real-time Model of the Utilisation
+  of Short-term Parking Zones}. In \bibinfo{booktitle}{{\em 19th ITS World
+  Congress}}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Ioni\cb{t}\u{a}}{Ioni\cb{t}\u{a}}{2017}]%
+        {ionita2017master}
+\bibfield{author}{\bibinfo{person}{Andrei Ioni\cb{t}\u{a}}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \bibinfo{title}{Extending Estimation of Parking Occupancy to
+  Untracked City Areas using City Background Information}.
+\newblock   (\bibinfo{date}{4 Dec.} \bibinfo{year}{2017}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Koster, Oliveira, Volpato, Delvequio, and
+  Koch}{Koster et~al\mbox{.}}{2014}]%
+        {koster}
+\bibfield{author}{\bibinfo{person}{Andrew Koster}, \bibinfo{person}{Allysson
+  Oliveira}, \bibinfo{person}{Orlando Volpato}, \bibinfo{person}{Viviane
+  Delvequio}, {and} \bibinfo{person}{Fernando Koch}.}
+  \bibinfo{year}{2014}\natexlab{}.
+\newblock \showarticletitle{Recognition and recommendation of parking places}.
+  In \bibinfo{booktitle}{{\em Ibero-American Conference on Artificial
+  Intelligence}}. Springer, \bibinfo{pages}{675--685}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Köln and DKAN}{Köln and DKAN}{2015}]%
+        {cologne_data}
+\bibfield{author}{\bibinfo{person}{Stadt Köln} {and} \bibinfo{person}{DKAN}.}
+  \bibinfo{year}{2015}\natexlab{}.
+\newblock \bibinfo{title}{\"Offene Daten K\"oln}.
+\newblock   (\bibinfo{year}{2015}).
+\newblock
+\showURL{%
+\url{https://www.offenedaten-koeln.de/dataset/taxonomy/term/52/field_tags/Transport%20und%20Verkehr-52?query=park&sorting=changed%7CDESC}}
+
+
+\bibitem[\protect\citeauthoryear{Mathur, Jin, Kasturirangan, Chandrasekaran,
+  Xue, Gruteser, and Trappe}{Mathur et~al\mbox{.}}{2010}]%
+        {mathur}
+\bibfield{author}{\bibinfo{person}{Suhas Mathur}, \bibinfo{person}{Tong Jin},
+  \bibinfo{person}{Nikhil Kasturirangan}, \bibinfo{person}{Janani
+  Chandrasekaran}, \bibinfo{person}{Wenzhi Xue}, \bibinfo{person}{Marco
+  Gruteser}, {and} \bibinfo{person}{Wade Trappe}.}
+  \bibinfo{year}{2010}\natexlab{}.
+\newblock \showarticletitle{Parknet: drive-by sensing of road-side parking
+  statistics}. In \bibinfo{booktitle}{{\em Proceedings of the 8th international
+  conference on Mobile systems, applications, and services}}. ACM,
+  \bibinfo{pages}{123--136}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Nandugudi, Ki, Nuessle, and Challen}{Nandugudi
+  et~al\mbox{.}}{2014}]%
+        {nandugudi}
+\bibfield{author}{\bibinfo{person}{Anandatirtha Nandugudi},
+  \bibinfo{person}{Taeyeon Ki}, \bibinfo{person}{Carl Nuessle}, {and}
+  \bibinfo{person}{Geoffrey Challen}.} \bibinfo{year}{2014}\natexlab{}.
+\newblock \showarticletitle{Pocketparker: Pocketsourcing parking lot
+  availability}. In \bibinfo{booktitle}{{\em Proceedings of the 2014 ACM
+  International Joint Conference on Pervasive and Ubiquitous Computing}}. ACM,
+  \bibinfo{pages}{963--973}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{of~Santa~Monica}{of~Santa~Monica}{2014}]%
+        {santa_monica_data}
+\bibfield{author}{\bibinfo{person}{City of Santa~Monica}.}
+  \bibinfo{year}{2014}\natexlab{}.
+\newblock \bibinfo{title}{Santa Monica - Open Data}.
+\newblock   (\bibinfo{year}{2014}).
+\newblock
+\showURL{%
+\url{https://data.smgov.net/Transportation/Parking-Lot-Counts/ng8m-khuz}}
+
+
+\bibitem[\protect\citeauthoryear{of~Surrey~(UK), (Denmark), (Sweden),
+  of~Ireland/DERI~(Ireland), of~Applied Sciences Osnabrück~(Germany),
+  (Austria, Romania), of~Aarhus~(Demark), of~Bra\cb{s}ov~(Romania), and
+  (USA)}{of~Surrey~(UK) et~al\mbox{.}}{2016}]%
+        {city_pulse}
+\bibfield{author}{\bibinfo{person}{University of Surrey~(UK)},
+  \bibinfo{person}{Alexandra~Institute (Denmark)}, \bibinfo{person}{Ericsson
+  (Sweden)}, \bibinfo{person}{National~University of Ireland/DERI~(Ireland)},
+  \bibinfo{person}{University of Applied Sciences Osnabrück~(Germany)},
+  \bibinfo{person}{Siemens (Austria}, \bibinfo{person}{Romania)},
+  \bibinfo{person}{City of Aarhus~(Demark)}, \bibinfo{person}{City of
+  Bra\cb{s}ov~(Romania)}, {and} \bibinfo{person}{Wright State~University
+  (USA)}.} \bibinfo{year}{2013--2016}\natexlab{}.
+\newblock \bibinfo{title}{City Pulse}.
+\newblock   (\bibinfo{year}{2013--2016}).
+\newblock
+\showURL{%
+\url{http://www.ict-citypulse.eu/page/}}
+
+
+\bibitem[\protect\citeauthoryear{Rajabioun, Foster, and Ioannou}{Rajabioun
+  et~al\mbox{.}}{2013}]%
+        {rajabioun2013}
+\bibfield{author}{\bibinfo{person}{Tooraj Rajabioun}, \bibinfo{person}{Brandon
+  Foster}, {and} \bibinfo{person}{Petros Ioannou}.}
+  \bibinfo{year}{2013}\natexlab{}.
+\newblock \showarticletitle{Intelligent parking assist}. In
+  \bibinfo{booktitle}{{\em Control \& Automation (MED), 2013 21st Mediterranean
+  Conference on}}. IEEE, \bibinfo{pages}{1156--1161}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Rajabioun and Ioannou}{Rajabioun and
+  Ioannou}{2015}]%
+        {rajabioun2015}
+\bibfield{author}{\bibinfo{person}{Tooraj Rajabioun} {and}
+  \bibinfo{person}{Petros~A Ioannou}.} \bibinfo{year}{2015}\natexlab{}.
+\newblock \showarticletitle{On-street and off-street parking availability
+  prediction using multivariate spatiotemporal models}.
+\newblock \bibinfo{journal}{{\em IEEE Transactions on Intelligent
+  Transportation Systems\/}} \bibinfo{volume}{16}, \bibinfo{number}{5}
+  (\bibinfo{year}{2015}), \bibinfo{pages}{2913--2924}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Richter, Di~Martino, and Mattfeld}{Richter
+  et~al\mbox{.}}{2014}]%
+        {richter}
+\bibfield{author}{\bibinfo{person}{Felix Richter}, \bibinfo{person}{Sergio
+  Di~Martino}, {and} \bibinfo{person}{Dirk~C Mattfeld}.}
+  \bibinfo{year}{2014}\natexlab{}.
+\newblock \showarticletitle{Temporal and spatial clustering for a parking
+  prediction service}. In \bibinfo{booktitle}{{\em Tools with Artificial
+  Intelligence (ICTAI), 2014 IEEE 26th International Conference on}}. IEEE,
+  \bibinfo{pages}{278--282}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Shoup}{Shoup}{2001}]%
+        {traffic_congestion}
+\bibfield{author}{\bibinfo{person}{Donald Shoup}.}
+  \bibinfo{year}{2001}\natexlab{}.
+\newblock \bibinfo{title}{Free parking or free markets}.
+\newblock   (\bibinfo{year}{2001}).
+\newblock
+\showURL{%
+\url{https://www.accessmagazine.org/spring-2011/free-parking-free-markets/}}
+
+
+\bibitem[\protect\citeauthoryear{Smith}{Smith}{2016}]%
+        {car_increase}
+\bibfield{author}{\bibinfo{person}{Matthew~Nitch Smith}.}
+  \bibinfo{year}{2016}\natexlab{}.
+\newblock \bibinfo{title}{The number of cars worldwide is set to double by
+  2040}.
+\newblock   (\bibinfo{year}{2016}).
+\newblock
+\showURL{%
+\url{https://www.weforum.org/agenda/2016/04/the-number-of-cars-worldwide-is-set-to-double-by-2040}}
+
+
+\bibitem[\protect\citeauthoryear{Tiedemann, V{\"o}gele, Krell, Metzen, and
+  Kirchner}{Tiedemann et~al\mbox{.}}{2015}]%
+        {tiedemann}
+\bibfield{author}{\bibinfo{person}{Tim Tiedemann}, \bibinfo{person}{Thomas
+  V{\"o}gele}, \bibinfo{person}{Mario~Michael Krell},
+  \bibinfo{person}{Jan~Hendrik Metzen}, {and} \bibinfo{person}{Frank
+  Kirchner}.} \bibinfo{year}{2015}\natexlab{}.
+\newblock \showarticletitle{Concept of a Data Thread Based Parking Space
+  Occupancy Prediction in a Berlin Pilot Region.}. In \bibinfo{booktitle}{{\em
+  AAAI Workshop: AI for Transportation}}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Xu, Wolfson, Yang, Stenneth, Philip, and
+  Nelson}{Xu et~al\mbox{.}}{2013}]%
+        {xu}
+\bibfield{author}{\bibinfo{person}{Bo Xu}, \bibinfo{person}{Ouri Wolfson},
+  \bibinfo{person}{Jie Yang}, \bibinfo{person}{Leon Stenneth},
+  \bibinfo{person}{S~Yu Philip}, {and} \bibinfo{person}{Peter~C Nelson}.}
+  \bibinfo{year}{2013}\natexlab{}.
+\newblock \showarticletitle{Real-time street parking availability estimation}.
+  In \bibinfo{booktitle}{{\em Mobile Data Management (MDM), 2013 IEEE 14th
+  International Conference on}}, Vol.~\bibinfo{volume}{1}. IEEE,
+  \bibinfo{pages}{16--25}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Z\"urich}{Z\"urich}{2015}]%
+        {zurich_data}
+\bibfield{author}{\bibinfo{person}{Stadt Z\"urich}.}
+  \bibinfo{year}{2015}\natexlab{}.
+\newblock \bibinfo{title}{Stadt Z\"urich - Open Data}.
+\newblock   (\bibinfo{year}{2015}).
+\newblock
+\showURL{%
+\url{https://data.stadt-zuerich.ch/dataset/parkleitsystem}}
+
+
+\end{thebibliography}

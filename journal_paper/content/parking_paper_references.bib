@@ -1,0 +1,646 @@
+%%% ====================================================================
+%%%  BibTeX-file{
+%%%     author          = "Gerry Murray",
+%%%     version         = "1.2",
+%%%     date            = "2 April 2012",
+%%%     filename        = "acmsmall-sample-bibfile.bib",
+%%%     address         = "ACM, NY",
+%%%     email           = "murray at hq.acm.org",
+%%%     codetable       = "ISO/ASCII",
+%%%     keywords        = "ACM Reference Format, bibliography, citation, references",
+%%%     supported       = "yes",
+%%%     docstring       = "This BibTeX database file contains 'bibdata' entries
+%%%                        that 'match' the examples provided in the Specifications Document
+%%%                        AND, also, 'legacy'-type bibs. It should assist authors in
+%%%                        choosing the 'correct' at-bibtype and necessary bib-fields
+%%%                        so as to obtain the appropriate ACM Reference Format output.
+%%%                        It also contains many 'Standard Abbreviations'. "
+%%%  }
+%%% ====================================================================
+
+% Journals
+
+% First the Full Name is given, then the abbreviation used in the AMS Math
+% Reviews, with an indication if it could not be found there.
+% Note the 2nd overwrites the 1st, so swap them if you want the full name.
+
+ %{AMS}
+ @String{AMSTrans = "American Mathematical Society Translations" }
+ @String{AMSTrans = "Amer. Math. Soc. Transl." }
+ @String{BullAMS = "Bulletin of the American Mathematical Society" }
+ @String{BullAMS = "Bull. Amer. Math. Soc." }
+ @String{ProcAMS = "Proceedings of the American Mathematical Society" }
+ @String{ProcAMS = "Proc. Amer. Math. Soc." }
+ @String{TransAMS = "Transactions of the American Mathematical Society" }
+ @String{TransAMS = "Trans. Amer. Math. Soc." }
+
+ %ACM
+ @String{CACM = "Communications of the {ACM}" }
+ @String{CACM = "Commun. {ACM}" }
+ @String{CompServ = "Comput. Surveys" }
+ @String{JACM = "J. ACM" }
+ @String{ACMMathSoft = "{ACM} Transactions on Mathematical Software" }
+ @String{ACMMathSoft = "{ACM} Trans. Math. Software" }
+ @String{SIGNUM = "{ACM} {SIGNUM} Newsletter" }
+ @String{SIGNUM = "{ACM} {SIGNUM} Newslett." }
+
+ @String{AmerSocio = "American Journal of Sociology" }
+ @String{AmerStatAssoc = "Journal of the American Statistical Association" }
+ @String{AmerStatAssoc = "J. Amer. Statist. Assoc." }
+ @String{ApplMathComp = "Applied Mathematics and Computation" }
+ @String{ApplMathComp = "Appl. Math. Comput." }
+ @String{AmerMathMonthly = "American Mathematical Monthly" }
+ @String{AmerMathMonthly = "Amer. Math. Monthly" }
+ @String{BIT = "{BIT}" }
+ @String{BritStatPsych = "British Journal of Mathematical and Statistical
+          Psychology" }
+ @String{BritStatPsych = "Brit. J. Math. Statist. Psych." }
+ @String{CanMathBull = "Canadian Mathematical Bulletin" }
+ @String{CanMathBull = "Canad. Math. Bull." }
+ @String{CompApplMath = "Journal of Computational and Applied Mathematics" }
+ @String{CompApplMath = "J. Comput. Appl. Math." }
+ @String{CompPhys = "Journal of Computational Physics" }
+ @String{CompPhys = "J. Comput. Phys." }
+ @String{CompStruct = "Computers and Structures" }
+ @String{CompStruct = "Comput. \& Structures" }
+ @String{CompJour = "The Computer Journal" }
+ @String{CompJour = "Comput. J." }
+ @String{CompSysSci = "Journal of Computer and System Sciences" }
+ @String{CompSysSci = "J. Comput. System Sci." }
+ @String{Computing = "Computing" }
+ @String{ContempMath = "Contemporary Mathematics" }
+ @String{ContempMath = "Contemp. Math." }
+ @String{Crelle = "Crelle's Journal" }
+ @String{GiornaleMath = "Giornale di Mathematiche" }
+ @String{GiornaleMath = "Giorn. Mat." } % didn't find in AMS MR., ibid.
+
+ %IEEE
+ @String{Computer = "{IEEE} Computer" }
+ @String{IEEETransComp = "{IEEE} Transactions on Computers" }
+ @String{IEEETransComp = "{IEEE} Trans. Comput." }
+ @String{IEEETransAC = "{IEEE} Transactions on Automatic Control" }
+ @String{IEEETransAC = "{IEEE} Trans. Automat. Control" }
+ @String{IEEESpec = "{IEEE} Spectrum" } % didn't find in AMS MR
+ @String{ProcIEEE = "Proceedings of the {IEEE}" }
+ @String{ProcIEEE = "Proc. {IEEE}" } % didn't find in AMS MR
+ @String{IEEETransAeroElec = "{IEEE} Transactions on Aerospace and Electronic
+     Systems" }
+ @String{IEEETransAeroElec = "{IEEE} Trans. Aerospace Electron. Systems" }
+
+ @String{IMANumerAna = "{IMA} Journal of Numerical Analysis" }
+ @String{IMANumerAna = "{IMA} J. Numer. Anal." }
+ @String{InfProcLet = "Information Processing Letters" }
+ @String{InfProcLet = "Inform. Process. Lett." }
+ @String{InstMathApp = "Journal of the Institute of Mathematics and
+     its Applications" }
+ @String{InstMathApp = "J. Inst. Math. Appl." }
+ @String{IntControl = "International Journal of Control" }
+ @String{IntControl = "Internat. J. Control" }
+ @String{IntNumerEng = "International Journal for Numerical Methods in
+     Engineering" }
+ @String{IntNumerEng = "Internat. J. Numer. Methods Engrg." }
+ @String{IntSuper = "International Journal of Supercomputing Applications" }
+ @String{IntSuper = "Internat. J. Supercomputing Applic." } % didn't find
+%% in AMS MR
+ @String{Kibernetika = "Kibernetika" }
+ @String{JResNatBurStand = "Journal of Research of the National Bureau
+     of Standards" }
+ @String{JResNatBurStand = "J. Res. Nat. Bur. Standards" }
+ @String{LinAlgApp = "Linear Algebra and its Applications" }
+ @String{LinAlgApp = "Linear Algebra Appl." }
+ @String{MathAnaAppl = "Journal of Mathematical Analysis and Applications" }
+ @String{MathAnaAppl = "J. Math. Anal. Appl." }
+ @String{MathAnnalen = "Mathematische Annalen" }
+ @String{MathAnnalen = "Math. Ann." }
+ @String{MathPhys = "Journal of Mathematical Physics" }
+ @String{MathPhys = "J. Math. Phys." }
+ @String{MathComp = "Mathematics of Computation" }
+ @String{MathComp = "Math. Comp." }
+ @String{MathScand = "Mathematica Scandinavica" }
+ @String{MathScand = "Math. Scand." }
+ @String{TablesAidsComp = "Mathematical Tables and Other Aids to Computation" }
+ @String{TablesAidsComp = "Math. Tables Aids Comput." }
+ @String{NumerMath = "Numerische Mathematik" }
+ @String{NumerMath = "Numer. Math." }
+ @String{PacificMath = "Pacific Journal of Mathematics" }
+ @String{PacificMath = "Pacific J. Math." }
+ @String{ParDistComp = "Journal of Parallel and Distributed Computing" }
+ @String{ParDistComp = "J. Parallel and Distrib. Comput." } % didn't find
+%% in AMS MR
+ @String{ParComputing = "Parallel Computing" }
+ @String{ParComputing = "Parallel Comput." }
+ @String{PhilMag = "Philosophical Magazine" }
+ @String{PhilMag = "Philos. Mag." }
+ @String{ProcNAS = "Proceedings of the National Academy of Sciences
+                    of the USA" }
+ @String{ProcNAS = "Proc. Nat. Acad. Sci. U. S. A." }
+ @String{Psychometrika = "Psychometrika" }
+ @String{QuartMath = "Quarterly Journal of Mathematics, Oxford, Series (2)" }
+ @String{QuartMath = "Quart. J. Math. Oxford Ser. (2)" }
+ @String{QuartApplMath = "Quarterly of Applied Mathematics" }
+ @String{QuartApplMath = "Quart. Appl. Math." }
+ @String{RevueInstStat = "Review of the International Statisical Institute" }
+ @String{RevueInstStat = "Rev. Inst. Internat. Statist." }
+
+ %SIAM
+ @String{JSIAM = "Journal of the Society for Industrial and Applied
+     Mathematics" }
+ @String{JSIAM = "J. Soc. Indust. Appl. Math." }
+ @String{JSIAMB = "Journal of the Society for Industrial and Applied
+     Mathematics, Series B, Numerical Analysis" }
+ @String{JSIAMB = "J. Soc. Indust. Appl. Math. Ser. B Numer. Anal." }
+ @String{SIAMAlgMeth = "{SIAM} Journal on Algebraic and Discrete Methods" }
+ @String{SIAMAlgMeth = "{SIAM} J. Algebraic Discrete Methods" }
+ @String{SIAMAppMath = "{SIAM} Journal on Applied Mathematics" }
+ @String{SIAMAppMath = "{SIAM} J. Appl. Math." }
+ @String{SIAMComp = "{SIAM} Journal on Computing" }
+ @String{SIAMComp = "{SIAM} J. Comput." }
+ @String{SIAMMatrix = "{SIAM} Journal on Matrix Analysis and Applications" }
+ @String{SIAMMatrix = "{SIAM} J. Matrix Anal. Appl." }
+ @String{SIAMNumAnal = "{SIAM} Journal on Numerical Analysis" }
+ @String{SIAMNumAnal = "{SIAM} J. Numer. Anal." }
+ @String{SIAMReview = "{SIAM} Review" }
+ @String{SIAMReview = "{SIAM} Rev." }
+ @String{SIAMSciStat = "{SIAM} Journal on Scientific and Statistical
+     Computing" }
+ @String{SIAMSciStat = "{SIAM} J. Sci. Statist. Comput." }
+
+ @String{SoftPracExp = "Software Practice and Experience" }
+ @String{SoftPracExp = "Software Prac. Experience" } % didn't find in AMS MR
+ @String{StatScience = "Statistical Science" }
+ @String{StatScience = "Statist. Sci." }
+ @String{Techno = "Technometrics" }
+ @String{USSRCompMathPhys = "{USSR} Computational Mathematics and Mathematical
+     Physics" }
+ @String{USSRCompMathPhys = "{U. S. S. R.} Comput. Math. and Math. Phys." }
+ @String{VLSICompSys = "Journal of {VLSI} and Computer Systems" }
+ @String{VLSICompSys = "J. {VLSI} Comput. Syst." }
+ @String{ZAngewMathMech = "Zeitschrift fur Angewandte Mathematik und
+     Mechanik" }
+ @String{ZAngewMathMech = "Z. Angew. Math. Mech." }
+ @String{ZAngewMathPhys = "Zeitschrift fur Angewandte Mathematik und Physik" }
+ @String{ZAngewMathPhys = "Z. Angew. Math. Phys." }
+
+% Publishers % ================================================= |
+
+ @String{Academic = "Academic Press" }
+ @String{ACMPress = "{ACM} Press" }
+ @String{AdamHilger = "Adam Hilger" }
+ @String{AddisonWesley = "Addison-Wesley" }
+ @String{AllynBacon = "Allyn and Bacon" }
+ @String{AMS = "American Mathematical Society" }
+ @String{Birkhauser = "Birkha{\"u}ser" }
+ @String{CambridgePress = "Cambridge University Press" }
+ @String{Chelsea = "Chelsea" }
+ @String{ClaredonPress = "Claredon Press" }
+ @String{DoverPub = "Dover Publications" }
+ @String{Eyolles = "Eyolles" }
+ @String{HoltRinehartWinston = "Holt, Rinehart and Winston" }
+ @String{Interscience = "Interscience" }
+ @String{JohnsHopkinsPress = "The Johns Hopkins University Press" }
+ @String{JohnWileySons = "John Wiley and Sons" }
+ @String{Macmillan = "Macmillan" }
+ @String{MathWorks = "The Math Works Inc." }
+ @String{McGrawHill = "McGraw-Hill" }
+ @String{NatBurStd = "National Bureau of Standards" }
+ @String{NorthHolland = "North-Holland" }
+ @String{OxfordPress = "Oxford University Press" }  %address Oxford or London?
+ @String{PergamonPress = "Pergamon Press" }
+ @String{PlenumPress = "Plenum Press" }
+ @String{PrenticeHall = "Prentice-Hall" }
+ @String{SIAMPub = "{SIAM} Publications" }
+ @String{Springer = "Springer-Verlag" }
+ @String{TexasPress = "University of Texas Press" }
+ @String{VanNostrand = "Van Nostrand" }
+ @String{WHFreeman = "W. H. Freeman and Co." }
+
+%Entries
+
+@thesis{ionita2017master,
+	author = {Andrei Ioni\cb{t}\u{a}},
+	title = {Extending Estimation of Parking Occupancy to Untracked City Areas using City Background Information},
+	type = {Master's Thesis},
+	institution = {RWTH Aachen University},
+	date = 2017,
+    month = dec,
+    day = 4,
+    year = {2017}
+}
+
+
+@article{lin,
+	title={A Survey of Smart Parking Solutions},
+	author={Lin, Trista and Rivano, Herv{\'e} and Le Mou{\"e}l, Fr{\'e}d{\'e}ric},
+	journal={IEEE Transactions on Intelligent Transportation Systems},
+	year={2017},
+	publisher={IEEE}
+}
+
+@phdthesis{lin2,
+	title={Smart parking: Network, infrastructure and urban service},
+	author={Lin, Trista Shuenying},
+	year={2015},
+	school={Lyon, INSA}
+}
+
+@inproceedings{xu,
+	title={Real-time street parking availability estimation},
+	author={Xu, Bo and Wolfson, Ouri and Yang, Jie and Stenneth, Leon and Philip, S Yu and Nelson, Peter C},
+	booktitle={Mobile Data Management (MDM), 2013 IEEE 14th International Conference on},
+	volume={1},
+	pages={16--25},
+	year={2013},
+	organization={IEEE}
+}
+
+@article{zchen,
+	title={Development of fuzzy logic forecast models for location-based parking finding services},
+	author={Chen, Zhirong and Xia, Jianhong Cecilia and Irawan, Buntoro},
+	journal={Mathematical Problems in Engineering},
+	volume={2013},
+	year={2013},
+	publisher={Hindawi Publishing Corporation}
+}
+
+@inproceedings{vlahogianni,
+	title={Exploiting new sensor technologies for real-time parking prediction in urban areas},
+	author={Vlahogianni, Eleni I and Kepaptsoglou, Kostanstinos and Tsetsos, Vassileios and Karlaftis, Matthew G},
+	booktitle={Transportation Research Board 93rd Annual Meeting Compendium of Papers},
+	pages={14--1673},
+	year={2014}
+}
+
+@inproceedings{rajabioun2013,
+	title={Intelligent parking assist},
+	author={Rajabioun, Tooraj and Foster, Brandon and Ioannou, Petros},
+	booktitle={Control \& Automation (MED), 2013 21st Mediterranean Conference on},
+	pages={1156--1161},
+	year={2013},
+	organization={IEEE}
+}
+
+@article{rajabioun2015,
+	title={On-street and off-street parking availability prediction using multivariate spatiotemporal models},
+	author={Rajabioun, Tooraj and Ioannou, Petros A},
+	journal={IEEE Transactions on Intelligent Transportation Systems},
+	volume={16},
+	number={5},
+	pages={2913--2924},
+	year={2015},
+	publisher={IEEE}
+}
+
+@inproceedings{tiedemann,
+	title={Concept of a Data Thread Based Parking Space Occupancy Prediction in a Berlin Pilot Region.},
+	author={Tiedemann, Tim and V{\"o}gele, Thomas and Krell, Mario Michael and Metzen, Jan Hendrik and Kirchner, Frank},
+	booktitle={AAAI Workshop: AI for Transportation},
+	year={2015}
+}
+
+@article{wu,
+	title={Agile urban parking recommendation service for intelligent vehicular guiding system},
+	author={Wu, Eric Hsiao-Kuang and Sahoo, Jagruti and Liu, Chi-Yun and Jin, Ming-Hui and Lin, Shu-Hui},
+	journal={IEEE Intelligent Transportation Systems Magazine},
+	volume={6},
+	number={1},
+	pages={35--49},
+	year={2014},
+	publisher={IEEE}
+}
+
+@inproceedings{caliskan,
+	title={Predicting parking lot occupancy in vehicular ad hoc networks},
+	author={Caliskan, Murat and Barthels, Andreas and Scheuermann, Bjorn and Mauve, Martin},
+	booktitle={Vehicular Technology Conference, 2007. VTC2007-Spring. IEEE 65th},
+	pages={277--281},
+	year={2007},
+	organization={IEEE}
+}
+
+@article{klappenecker,
+	title={Finding available parking spaces made easy},
+	author={Klappenecker, Andreas and Lee, Hyunyoung and Welch, Jennifer L},
+	journal={Ad Hoc Networks},
+	volume={12},
+	pages={243--249},
+	year={2014},
+	publisher={Elsevier}
+}
+
+@inproceedings{szczurek,
+	title={Learning the relevance of parking information in VANETs},
+	author={Szczurek, Piotr and Xu, Bo and Wolfson, Ouri and Lin, Jie and Rishe, Naphtali},
+	booktitle={Proceedings of the seventh ACM international workshop on VehiculAr InterNETworking},
+	pages={81--82},
+	year={2010},
+	organization={ACM}
+}
+
+@inproceedings{nandugudi,
+	title={Pocketparker: Pocketsourcing parking lot availability},
+	author={Nandugudi, Anandatirtha and Ki, Taeyeon and Nuessle, Carl and Challen, Geoffrey},
+	booktitle={Proceedings of the 2014 ACM International Joint Conference on Pervasive and Ubiquitous Computing},
+	pages={963--973},
+	year={2014},
+	organization={ACM}
+}
+
+@article{caicedo,
+	title={Prediction of parking space availability in real time},
+	author={Caicedo, Felix and Blazquez, Carola and Miranda, Pablo},
+	journal={Expert Systems with Applications},
+	volume={39},
+	number={8},
+	pages={7281--7290},
+	year={2012},
+	publisher={Elsevier}
+}
+
+@inproceedings{hoessinger,
+	title={Development of a Real-time Model of the Utilisation of Short-term Parking Zones},
+	author={Hossinger, Reinhard and Heimbuchner, Klaus and Uhlmann, Tina},
+	booktitle={19th ITS World Congress},
+	year={2012}
+}
+
+@article{xchen,
+	title={Parking occupancy prediction and pattern analysis},
+	author={Chen, Xiao},
+	journal={Dept. Comput. Sci., Stanford Univ., Stanford, CA, USA, Tech. Rep. CS229-2014},
+	year={2014}
+}
+
+@inproceedings{richter,
+	title={Temporal and spatial clustering for a parking prediction service},
+	author={Richter, Felix and Di Martino, Sergio and Mattfeld, Dirk C},
+	booktitle={Tools with Artificial Intelligence (ICTAI), 2014 IEEE 26th International Conference on},
+	pages={278--282},
+	year={2014},
+	organization={IEEE}
+}
+
+@article{kotb,
+	title={iParker—A New Smart Car-Parking System Based on Dynamic Resource Allocation and Pricing},
+	author={Kotb, Amir O and Shen, Yao-Chun and Zhu, Xu and Huang, Yi},
+	journal={IEEE Transactions on Intelligent Transportation Systems},
+	volume={17},
+	number={9},
+	pages={2637--2647},
+	year={2016},
+	publisher={IEEE}
+}
+
+@inproceedings{mathur,
+	title={Parknet: drive-by sensing of road-side parking statistics},
+	author={Mathur, Suhas and Jin, Tong and Kasturirangan, Nikhil and Chandrasekaran, Janani and Xue, Wenzhi and Gruteser, Marco and Trappe, Wade},
+	booktitle={Proceedings of the 8th international conference on Mobile systems, applications, and services},
+	pages={123--136},
+	year={2010},
+	organization={ACM}
+}
+
+@article{ji,
+	title={Short-term forecasting of available parking space using wavelet neural network model},
+	author={Ji, Yanjie and Tang, Dounan and Blythe, Phil and Guo, Weihong and Wang, Wei},
+	journal={IET Intelligent Transport Systems},
+	volume={9},
+	number={2},
+	pages={202--209},
+	year={2014},
+	publisher={IET}
+}
+
+@inproceedings{koster,
+	title={Recognition and recommendation of parking places},
+	author={Koster, Andrew and Oliveira, Allysson and Volpato, Orlando and Delvequio, Viviane and Koch, Fernando},
+	booktitle={Ibero-American Conference on Artificial Intelligence},
+	pages={675--685},
+	year={2014},
+	organization={Springer}
+}
+
+@inproceedings{pullola,
+	title={Towards an intelligent GPS-based vehicle navigation system for finding street parking lots},
+	author={Pullola, Sherisha and Atrey, Pradeep K and El Saddik, Abdulmotaleb},
+	booktitle={Signal Processing and Communications, 2007. ICSPC 2007. IEEE International Conference on},
+	pages={1251--1254},
+	year={2007},
+	organization={IEEE}
+}
+
+@inproceedings{zheng,
+	title={Parking availability prediction for sensor-enabled car parks in smart cities},
+	author={Zheng, Yanxu and Rajasegarar, Sutharshan and Leckie, Christopher},
+	booktitle={Intelligent Sensors, Sensor Networks and Information Processing (ISSNIP), 2015 IEEE Tenth International Conference on},
+	pages={1--6},
+	year={2015},
+	organization={IEEE}
+}
+
+@online{rdf_primer,
+	author = {RDF Working Group},
+	title = {RDF 1.1 Primer},
+	year = 2014,
+	url = {https://www.w3.org/TR/rdf11-primer/},
+	urldate = {2017-11-07}
+}
+
+@online{rdf_syntax,
+	author = {RDF Working Group},
+	title = {RDF 1.1 Concepts and Abstract Syntax},
+	year = 2014,
+	url = {https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/},
+	urldate = {2017-11-07}
+}
+
+@online{rdf_semantics,
+	author = {RDF Working Group},
+	title = {RDF 1.1 Semantics},
+	year = 2014,
+	url = {https://www.w3.org/TR/2014/REC-rdf11-mt-20140225/},
+	urldate = {2017-11-07}
+}
+
+@online{linked_data,
+	author = {Tim Berners-Lee},
+	title = {Linked Data},
+	year = 2006,
+	url = {https://www.w3.org/DesignIssues/LinkedData.html},
+	urldate = {2017-11-07}
+}
+
+@online{sparql,
+	author = {SPARQL Working Group},
+	title = {SPARQL 1.1 Overview},
+	year = 2013,
+	url = {https://www.w3.org/TR/sparql11-overview/},
+	urldate = {2017-11-07}
+}
+
+@inproceedings{xgboost_paper,
+	title={Xgboost: A scalable tree boosting system},
+	author={Chen, Tianqi and Guestrin, Carlos},
+	booktitle={Proceedings of the 22nd acm sigkdd international conference on knowledge discovery and data mining},
+	pages={785--794},
+	year={2016},
+	organization={ACM}
+}
+
+@article{shin,
+	title={A study on smart parking guidance algorithm},
+	author={Shin, Jong-Ho and Jun, Hong-Bae},
+	journal={Transportation Research Part C: Emerging Technologies},
+	volume={44},
+	pages={299--317},
+	year={2014},
+	publisher={Elsevier}
+}
+
+@online{apache_jena,
+	title = {Apache Jena},
+	author={The Apache Software Foundation},
+	url = {https://jena.apache.org/},
+	urldate = {2017-11-12},
+	year={2017}
+}
+
+@online{city_pulse,
+	title = {City Pulse},
+	url = {http://www.ict-citypulse.eu/page/},
+	urldate = {2017-11-12},
+	year={2013--2016},
+	author={University of Surrey (UK) and Alexandra Institute (Denmark) and Ericsson (Sweden) and National University of Ireland/DERI (Ireland) and University of Applied Sciences Osnabrück (Germany) and Siemens (Austria and Romania) and City of Aarhus (Demark) and City of Bra\cb{s}ov (Romania) and Wright State University (USA)}
+}
+
+@online{osm2pgsql,
+	title = {Osm2pgsql},
+	url = {http://wiki.openstreetmap.org/wiki/Osm2pgsql},
+	urldate = {2017-11-12},
+	author = {OpenStreetMap Wiki},
+	year = {2014}
+}
+
+@book{brink2016real,
+	title={Real-world machine learning},
+	author={Brink, Henrik and Richards, Joseph and Fetherolf, Mark},
+	year={2016},
+	publisher={Manning Publications Co.}
+}
+
+@book{hackeling2014mastering,
+	title={Mastering Machine Learning with scikit-learn},
+	author={Hackeling, Gavin},
+	year={2014},
+	publisher={Packt Publishing Ltd}
+}
+
+@book{witten2016data,
+	title={Data Mining: Practical machine learning tools and techniques},
+	author={Witten, Ian H and Frank, Eibe and Hall, Mark A and Pal, Christopher J},
+	year={2016},
+	publisher={Morgan Kaufmann}
+}
+
+@online{sfpark,
+	title = {SFpark},
+	url = {http://sfpark.org},
+	urldate = {2017-11-12},
+	author = {San Francisco Municipal Transportation Agency},
+	year = {2011--2013}
+}
+
+@online{sfpark_evaluation,
+	title = {SFpark - Pilot Project Evaluation Summary},
+	url = {http://sfpark.org/wp-content/uploads/2014/06/SFpark_Eval_Summary_2014.pdf},
+	urldate = {2017-11-12},
+	author = {San Francisco Municipal Transportation Agency},
+	year = {2011--2013}
+}
+
+@online{sfpark_open_data,
+	title = {SFpark - Open Data},
+	url = {http://sfpark.org/how-it-works/open-data-page/},
+	urldate = {2017-11-12},
+	author = {San Francisco Municipal Transportation Agency},
+	year = {2011--2013}
+}
+
+@online{car_increase,
+	title = {The number of cars worldwide is set to double by 2040},
+	url = {https://www.weforum.org/agenda/2016/04/the-number-of-cars-worldwide-is-set-to-double-by-2040},
+	urldate = {2017-11-12},
+	author = {Matthew Nitch Smith},
+	year = {2016}
+}
+
+@online{traffic_congestion,
+	title = {Free parking or free markets},
+	url = {https://www.accessmagazine.org/spring-2011/free-parking-free-markets/},
+	urldate = {2017-11-12},
+	author = {Donald Shoup},
+	year = {2001}
+}
+
+@online{openstreetmap,
+	title = {OpenStreetMap},
+	url = {https://www.openstreetmap.org/},
+	urldate = {2017-11-13},
+	author = {OpenStreetMap Community},
+	year = {2004}
+}
+
+@online{google_business,
+	title = {Google My Business},
+	url = {https://www.google.com/business/},
+	urldate = {2017-11-13},
+	author = {Google},
+	year = {2017}
+}
+
+@online{cologne_data,
+	title = {\"Offene Daten K\"oln},
+	url = {https://www.offenedaten-koeln.de/dataset/taxonomy/term/52/field_tags/Transport%20und%20Verkehr-52?query=park&sorting=changed%7CDESC},
+	urldate = {2017-11-29},
+	author = {Stadt Köln and DKAN},
+	year = {2015}
+}
+
+@online{zurich_data,
+	title = {Stadt Z\"urich - Open Data},
+	url = {https://data.stadt-zuerich.ch/dataset/parkleitsystem},
+	urldate = {2017-11-29},
+	author = {Stadt Z\"urich},
+	year = {2015}
+}
+
+@online{santa_monica_data,
+	title = {Santa Monica - Open Data},
+	url = {https://data.smgov.net/Transportation/Parking-Lot-Counts/ng8m-khuz},
+	urldate = {2017-11-29},
+	year = {2014},
+	author = {City of Santa Monica}
+}
+
+@online{dbbahn_data,
+	title = {DB - Parkplätze API},
+	url = {http://data.deutschebahn.com/dataset/api-parkplatz},
+	urldate = {2017-11-29},
+	year = {2016},
+	author = {DB BahnPark GmbH}
+}
+
+@online{google_visit_duraiton,
+	title = {Google - Popular times, wait times, and visit duration},
+	url = {https://support.google.com/business/answer/6263531?hl=en},
+	urldate = {2017-12-01},
+	author = {Google},
+	year = {2017}
+}
+
+@online{leaflet,
+	title = {Leaflet - an open-source JavaScript library for mobile-friendly interactive maps},
+	url = {http://leafletjs.com/},
+	urldate = {2017-12-01},
+	author = {Vladimir Agafonkin},
+	year = {2017}
+}

@@ -1,0 +1,279 @@
+\documentclass[sigconf]{acmart}
+\usepackage[utf8]{inputenc}
+
+\usepackage{booktabs} % For formal tables
+\usepackage{textcomp} %copyrght sympbol
+
+% for including tikz pictures
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-3dplot}
+\usepackage[mode=buildnew]{standalone}
+
+% for number formatting
+\usepackage[
+decimalsymbol = .,     % Dezimaltrennzeichen
+]{siunitx}
+
+% for subfigures
+\usepackage{caption}
+\usepackage{subfig}
+
+\usepackage{todonotes}
+
+\usepackage{cleveref}
+
+% for comma-below romanian character
+\usepackage{combelow}
+
+% Copyright
+%\setcopyright{none}
+%\setcopyright{acmcopyright}
+%\setcopyright{acmlicensed}
+\setcopyright{rightsretained}
+%\setcopyright{usgov}
+%\setcopyright{usgovmixed}
+%\setcopyright{cagov}
+%\setcopyright{cagovmixed}
+
+
+% DOI
+%\acmDOI{10.475/123_4}
+
+% ISBN
+%\acmISBN{123-4567-24-567/08/06}
+
+%Conference
+\acmConference[WIMS 2018]{8th International Conference on Web Intelligence, Mining and Semantics}{June 2018}{Novi Sad, Serbia} 
+\acmYear{2018}
+\copyrightyear{2018}
+
+
+%\acmArticle{4}
+%\acmPrice{15.00}
+
+% These commands are optional
+%\acmBooktitle{Transactions of the ACM Woodstock conference}
+%\editor{Jennifer B. Sartor}
+%\editor{Theo D'Hondt}
+%\editor{Wolfgang De Meuter}
+
+
+\begin{document}
+%\title{Extending Estimation of Parking Occupancy to Untracked City Areas using City Background Information}
+
+\title{Where to Park? Predicting Free Parking Spots in Unmonitored City Areas}
+
+%\titlenote{Produces the permission block, and
+%  copyright information}
+%\subtitle{Extended Abstract}
+%\subtitlenote{The full version of the author's guide is available as
+%  \texttt{acmart.pdf} document}
+
+
+\author{Andrei Ionita}
+%\authornote{Dr.~Trovato insisted his name be first.}
+%\orcid{1234-5678-9012}
+\affiliation{%
+  \institution{Informatik, RWTH Aachen University}
+ % \streetaddress{P.O. Box 1212}
+  \city{Aachen} 
+  \state{Germany} 
+  %\postcode{43017-6221}
+}
+\email{andrei.ionita@rwth-aachen.de}
+
+\author{André Pomp}
+\affiliation{%
+  \institution{Institute of Information Management in Mechanical Engineering, RWTH Aachen}
+% \streetaddress{P.O. Box 1212}
+\city{Aachen} 
+\country{Germany} 
+%\postcode{43017-6221}	
+}
+\email{andre.pomp@ima.rwth-aachen.de}
+
+
+\author{Michael Cochez}
+\affiliation{%
+	\institution{Fraunhofer FIT}
+	% \streetaddress{P.O. Box 1212}
+	\city{Aachen} 
+	\country{Germany} \\
+	\institution{Computer Science 5, RWTH Aachen}
+	% \streetaddress{P.O. Box 1212}
+	\city{Aachen} 
+	\country{Germany} \\
+	%\postcode{43017-6221}	
+%	\institution{Faculty of Information Technology, University of Jyväskylä}
+	% \streetaddress{P.O. Box 1212}
+%	\city{Jyvaskyla} 
+%	\country{Finland}
+}
+\email{michael.cochez@fit.fraunhofer.de}
+
+\author{Tobias Meisen}
+\affiliation{%
+	\institution{Institute of Information Management in Mechanical Engineering, RWTH Aachen}
+	% \streetaddress{P.O. Box 1212}
+	\city{Aachen} 
+	\country{Germany} 
+	%\postcode{43017-6221}	
+}
+\email{tobias.meisen@ima.rwth-aachen.de}
+
+
+\author{Stefan Decker}
+\affiliation{%
+	\institution{Computer Science 5, RWTH Aachen}
+	% \streetaddress{P.O. Box 1212}
+	\city{Aachen} 
+	\country{Germany} \\
+	\institution{Fraunhofer FIT}
+	% \streetaddress{P.O. Box 1212}
+	\city{Aachen} 
+	\country{Germany} 
+	%\postcode{43017-6221}	
+}
+\email{stefan.decker@dbis.rwth-aachen.de}
+
+
+%\author{G.K.M. Tobin}
+%\authornote{The secretary disavows any knowledge of this author's actions.}
+%\affiliation{%
+%  \institution{Institute for Clarity in Documentation}
+%  \streetaddress{P.O. Box 1212}
+%  \city{Dublin} 
+%  \state{Ohio} 
+%  \postcode{43017-6221}
+%}
+%\email{webmaster@marysville-ohio.com}
+
+%\author{Lars Th{\o}rv{\"a}ld}
+%\authornote{This author is the
+%  one who did all the really hard work.}
+%\affiliation{%
+%  \institution{The Th{\o}rv{\"a}ld Group}
+%  \streetaddress{1 Th{\o}rv{\"a}ld Circle}
+%  \city{Hekla} 
+%  \country{Iceland}}
+%\email{larst@affiliation.org}
+
+%\author{Valerie B\'eranger}
+%\affiliation{%
+%  \institution{Inria Paris-Rocquencourt}
+%  \city{Rocquencourt}
+%  \country{France}
+%}
+%\author{Aparna Patel} 
+%\affiliation{%
+% \institution{Rajiv Gandhi University}
+% \streetaddress{Rono-Hills}
+% \city{Doimukh} 
+% \state{Arunachal Pradesh}
+% \country{India}}
+%\author{Huifen Chan}
+%\affiliation{%
+%  \institution{Tsinghua University}
+%  \streetaddress{30 Shuangqing Rd}
+%  \city{Haidian Qu} 
+%  \state{Beijing Shi}
+%  \country{China}
+%}
+
+%\author{Charles Palmer}
+%\affiliation{%
+%  \institution{Palmer Research Laboratories}
+%  \streetaddress{8600 Datapoint Drive}
+%  \city{San Antonio}
+%  \state{Texas} 
+%  \postcode{78229}}
+%\email{cpalmer@prl.com}
+
+%\author{John Smith}
+%\affiliation{\institution{The Th{\o}rv{\"a}ld Group}}
+%\email{jsmith@affiliation.org}
+
+%\author{Julius P.~Kumquat}
+%\affiliation{\institution{The Kumquat Consortium}}
+%\email{jpkumquat@consortium.net}
+
+% The default list of authors is too long for headers.
+%\renewcommand{\shortauthors}{A. Ionita et al.}
+
+
+\begin{abstract}
+Several smart cities around the world have begun monitoring parking areas in order to estimate free spots and help drivers that are looking for parking.
+The current results are indeed promising, however, this approach is limited by the high costs of sensors that need to be installed throughout the city in order to achieve an accurate estimation rate.
+This work investigates the extension of estimating parking information from areas equipped with sensors to areas that are missing them.
+To this end, similarity values between city neighborhoods are computed based on background data, i.e., from geographic information systems.
+Using the derived similarity values, we analyze the adaptation of occupancy rates from monitored- to unmonitored parking areas.
+\end{abstract}
+
+%
+% The code below should be generated by the tool at
+% http://dl.acm.org/ccs.cfm
+% Please copy and paste the code instead of the example below. 
+%
+\begin{CCSXML}
+	<ccs2012>
+%	<concept>
+%	<concept_id>10002951.10003227.10003351</concept_id>
+%	<concept_desc>Information systems~Data mining</concept_desc>
+%	<concept_significance>300</concept_significance>
+%	</concept>
+	<concept>
+	<concept_id>10002951.10003227.10003351.10003444</concept_id>
+	<concept_desc>Information systems~Clustering</concept_desc>
+	<concept_significance>300</concept_significance>
+	</concept>
+	<concept>
+	<concept_id>10002951.10003260.10003309.10003315</concept_id>
+	<concept_desc>Information systems~Semantic web description languages</concept_desc>
+	<concept_significance>300</concept_significance>
+	</concept>
+%	<concept>
+%	<concept_id>10010147.10010178.10010187.10010195</concept_id>
+%	<concept_desc>Computing methodologies~Ontology engineering</concept_desc>
+%	<concept_significance>300</concept_significance>
+%	</concept>
+	<concept>
+	<concept_id>10010147.10010257.10010258.10010260.10003697</concept_id>
+	<concept_desc>Computing methodologies~Cluster analysis</concept_desc>
+	<concept_significance>300</concept_significance>
+	</concept>
+	</ccs2012>
+\end{CCSXML}
+
+%\ccsdesc[300]{Information systems~Data mining}
+\ccsdesc[300]{Information systems~Clustering}
+\ccsdesc[300]{Information systems~Semantic web description languages}
+%\ccsdesc[300]{Computing methodologies~Ontology engineering}
+\ccsdesc[300]{Computing methodologies~Cluster analysis}
+
+
+\copyrightyear{2018}
+\acmYear{2018}
+\setcopyright{acmlicensed}
+\acmConference[WIMS '18]{8th International Conference on Web Intelligence, Mining and Semantics}{June 25--27, 2018}{Novi Sad, Serbia}
+\acmBooktitle{WIMS '18: 8th International Conference on Web Intelligence, Mining and Semantics, June 25--27, 2018, Novi Sad, Serbia}
+\acmPrice{15.00}
+\acmDOI{10.1145/3227609.3227648}
+\acmISBN{978-1-4503-5489-9/18/06}
+
+
+
+\keywords{smart parking, machine learning, semantic annotation, data mining}
+
+
+\maketitle
+
+%\todo[inline]{MC: The ACM codes have to be redone properly. Just took some.}
+
+\input{parking_paper_content}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{parking_paper_references} 
+%\nocite{*}
+
+\end{document}

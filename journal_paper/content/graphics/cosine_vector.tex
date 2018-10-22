@@ -1,0 +1,42 @@
+\documentclass[dvipsnames,border=10pt,tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-3dplot}
+\usepackage{xcolor}
+
+\begin{document}
+
+% set camera viewing angle in order to look 3D
+\tdplotsetmaincoords{60}{120}
+
+\newcommand{\Plength}{1}%
+\newcommand{\Phoriz}{55}%
+\newcommand{\Pvert}{60}%
+
+\begin{tikzpicture}
+[
+scale=3,
+tdplot_main_coords,
+axis/.style={->,thick},
+vector/.style={-stealth, red, very thick},
+vector component/.style={dashed, blue, thick}
+]
+
+\draw[axis] (0,0,0) -- (1,0,0) node[anchor=north east] {\footnotesize Cat 1};
+\draw[axis] (0,0,0) -- (0,1,0) node[anchor=north west] {\footnotesize Cat 2};
+\draw[axis] (0,0,0) -- (0,0,1) node[anchor=south] {\footnotesize Cat 3};
+
+\coordinate (O) at (0,0,0);
+\tdplotsetcoord{P}{\Plength}{\Phoriz}{\Pvert}
+\draw[vector] (O) -- (P) node[anchor=south west]{\footnotesize Cosine Vector};
+
+\draw[vector component] (O) -- (Pxy);
+\draw[vector component] (Pxy) -- (P);
+
+\draw[vector component] (Pxy) -- (Px) node [left]  {};
+\draw[vector component] (Pxy) -- (Py) node [above] {};
+\draw[vector component] (P) -- (Pz) node [above right] {};
+
+\end{tikzpicture}  
+
+\end{document}
