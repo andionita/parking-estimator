@@ -7,13 +7,18 @@ machine learning models
 import argparse
 import sqlalchemy
 import pandas as pd
-
+import sshtunnel
+from sshtunnel import SSHTunnelForwarder
 from BestClusterModelSelection import runSingle
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run Cluster Model Selection for all clusters')
 
-    engine = sqlalchemy.create_engine('postgres://andio:andigenu@localhost:5432/sfpark')
+    server = SSHTunnelForwarder('cloud31.dbis.rwth-aachen.de', ssh_username="ionita", ssh_password="andigenu", remote_bind_address=('127.0.0.1', 5432))
+    
+    server.start()
+
+    engine = sqlalchemy.create_engine('postgres://aionita:andigenu@localhost:' + str(server.local_bind_port) + '/sfpark')
 
     allClusters = pd.read_sql_query("""SELECT DISTINCT(cwithid) FROM blocks WHERE has_occupancy ORDER BY cwithid;""",
                                     engine)
@@ -27,3 +32,4 @@ if __name__ == "__main__":
         print('--------------------')
         runSingle(row['cwithid'], None, False, False )
 
+    server.stop()

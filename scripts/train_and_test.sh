@@ -13,47 +13,47 @@ else
 	echo "Skipping model training"
 fi
 
-echo "Exporting cluster ids and datapoints..."
-psql -U andio -h localhost -f scripts/cluster_datapoints.sql sfpark
-sh scripts/copy_as_javascript.sh . leaflet/js cluster_datapoints
-echo "Exporting the current error type for machine learning model testing..."
-psql -U andio -h localhost -f scripts/model_errortype.sql sfpark
-sh scripts/copy_as_javascript.sh . leaflet/js model_errortype
+#echo "Exporting cluster ids and datapoints..."
+#psql -U andio -h localhost -f scripts/cluster_datapoints.sql sfpark
+#sh scripts/copy_as_javascript.sh . leaflet/js cluster_datapoints
+#echo "Exporting the current error type for machine learning model testing..."
+#psql -U andio -h localhost -f scripts/model_errortype.sql sfpark
+#sh scripts/copy_as_javascript.sh . leaflet/js model_errortype
 
-echo "Exporting model results for Source Clusters for Decision Trees..."
-sh scripts/model_results_source_method.sh 'dt' | psql -U andio -h localhost sfpark
-sh scripts/copy_as_javascript.sh . leaflet/js model_results_source_method_dt
-echo "Exporting model results for Source Clusters for SVM..."
-sh scripts/model_results_source_method.sh 'svm' | psql -U andio -h localhost sfpark
-sh scripts/copy_as_javascript.sh . leaflet/js model_results_source_method_svm
-echo "Exporting model results for Source Clusters for MLP..."
-sh scripts/model_results_source_method.sh 'mlp' | psql -U andio -h localhost sfpark
-sh scripts/copy_as_javascript.sh . leaflet/js model_results_source_method_mlp
-echo "Exporting model results for Source Clusters for XGB..."
-sh scripts/model_results_source_method.sh 'xgb' | psql -U andio -h localhost sfpark
-sh scripts/copy_as_javascript.sh . leaflet/js model_results_source_method_xgb
+#echo "Exporting model results for Source Clusters for Decision Trees..."
+#sh scripts/model_results_source_method.sh 'dt' | psql -U andio -h localhost sfpark
+#sh scripts/copy_as_javascript.sh . leaflet/js model_results_source_method_dt
+#echo "Exporting model results for Source Clusters for SVM..."
+#sh scripts/model_results_source_method.sh 'svm' | psql -U andio -h localhost sfpark
+#sh scripts/copy_as_javascript.sh . leaflet/js model_results_source_method_svm
+#echo "Exporting model results for Source Clusters for MLP..."
+#sh scripts/model_results_source_method.sh 'mlp' | psql -U andio -h localhost sfpark
+#sh scripts/copy_as_javascript.sh . leaflet/js model_results_source_method_mlp
+#echo "Exporting model results for Source Clusters for XGB..."
+#sh scripts/model_results_source_method.sh 'xgb' | psql -U andio -h localhost sfpark
+#sh scripts/copy_as_javascript.sh . leaflet/js model_results_source_method_xgb
 
-echo "Exporting model results for Source Clusters that have best results..."
-sh scripts/model_results_source_method_best.sh | psql -U andio -h localhost sfpark
-sh scripts/copy_as_javascript.sh . leaflet/js model_results_source_method_best
+#echo "Exporting model results for Source Clusters that have best results..."
+#sh scripts/model_results_source_method_best.sh | psql -U andio -h localhost sfpark
+#sh scripts/copy_as_javascript.sh . leaflet/js model_results_source_method_best
 
-echo "Exporting model results for Target Clusters for Decision Trees..."
-sh scripts/model_results_target_method.sh 'dt' | psql -U andio -h localhost sfpark
-sh scripts/copy_as_javascript.sh . leaflet/js model_results_target_method_dt
-echo "Exporting model results for Target Clusters for SVM..."
-sh scripts/model_results_target_method.sh 'svm' | psql -U andio -h localhost sfpark
-sh scripts/copy_as_javascript.sh . leaflet/js model_results_target_method_svm
-echo "Exporting model results for Target Clusters for MLP..."
-sh scripts/model_results_target_method.sh 'mlp' | psql -U andio -h localhost sfpark
-sh scripts/copy_as_javascript.sh . leaflet/js model_results_target_method_mlp
-echo "Exporting model results for Target Clusters for XGB..."
-sh scripts/model_results_target_method.sh 'xgb' | psql -U andio -h localhost sfpark
-sh scripts/copy_as_javascript.sh . leaflet/js model_results_target_method_xgb
+#echo "Exporting model results for Target Clusters for Decision Trees..."
+#sh scripts/model_results_target_method.sh 'dt' | psql -U andio -h localhost sfpark
+#sh scripts/copy_as_javascript.sh . leaflet/js model_results_target_method_dt
+#echo "Exporting model results for Target Clusters for SVM..."
+#sh scripts/model_results_target_method.sh 'svm' | psql -U andio -h localhost sfpark
+#sh scripts/copy_as_javascript.sh . leaflet/js model_results_target_method_svm
+#echo "Exporting model results for Target Clusters for MLP..."
+#sh scripts/model_results_target_method.sh 'mlp' | psql -U andio -h localhost sfpark
+#sh scripts/copy_as_javascript.sh . leaflet/js model_results_target_method_mlp
+#echo "Exporting model results for Target Clusters for XGB..."
+#sh scripts/model_results_target_method.sh 'xgb' | psql -U andio -h localhost sfpark
+#sh scripts/copy_as_javascript.sh . leaflet/js model_results_target_method_xgb
 
-echo "Exporting model results for Target Clusters that have best results..."
-sh scripts/model_results_target_method_best.sh | psql -U andio -h localhost sfpark
-sh scripts/copy_as_javascript.sh . leaflet/js model_results_target_method_best
+#echo "Exporting model results for Target Clusters that have best results..."
+#sh scripts/model_results_target_method_best.sh | psql -U andio -h localhost sfpark
+#sh scripts/copy_as_javascript.sh . leaflet/js model_results_target_method_best
 
 echo "Applying models for Clusters without Parking Data..."
 python workspace/parking-estimator/src/modeltraining/ModelPredictionCwout.py
-sh scripts/copy_as_javascript.sh workspace/parking-estimator/jsons leaflet/js estimations_cwout
+#sh scripts/copy_as_javascript.sh workspace/parking-estimator/jsons leaflet/js estimations_cwout

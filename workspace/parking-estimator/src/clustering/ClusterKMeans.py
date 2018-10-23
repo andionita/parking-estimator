@@ -8,10 +8,12 @@ Input parameters: n_clusters - the number of clusters with parking data
 from shapely import wkt
 from sqlalchemy import MetaData, Table, update
 from sklearn.cluster import KMeans
+from sshtunnel import SSHTunnelForwarder
 
 import pandas as pd
 import numpy as np
 import sqlalchemy
+import sshtunnel
 
 import math
 import argparse
@@ -83,12 +85,18 @@ if __name__ == "__main__":
     print( str(cwith_no) + " areas have parking data, " + str(cwout_no) + " have no parking data")
     print
 
-    engine = sqlalchemy.create_engine('postgres://andio:andigenu@localhost:5432/sfpark')
+    server = SSHTunnelForwarder('cloud31.dbis.rwth-aachen.de', ssh_username="ionita", ssh_password="andigenu", remote_bind_address=('127.0.0.1', 5432))
+
+    server.start()
+
+    engine = sqlalchemy.create_engine('postgres://aionita:andigenu@localhost:' + str(server.local_bind_port) + '/sfpark')
     conn = engine.connect()
     metadata = MetaData(engine)
     blocksTable = Table('blocks', metadata, autoload=True)
 
     cluster_zone(True, cwith_no, blocksTable, engine)
     cluster_zone(False, int(cwith_no * 2.6), blocksTable, engine)
+
+    server.stop()
 
     print("Clustering finished.")
