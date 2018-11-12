@@ -27,7 +27,7 @@ from scipy.stats import uniform as sp_randreal
 def queryAllExceptCluster( clusterId, engine ):
     print("Querying database for all occupancy data, except for cluster id: " + str(clusterId))
 
-    return pd.read_sql_query("""SELECT o.timestamp, array_agg(o.block_id) AS blocks,
+    return pd.read_sql_query("""SELECT b.cwithid, o.timestamp, array_agg(o.block_id) AS blocks,
                                                     round(AVG(o.price_rate)::numeric,2) AS price_rate,
                                                     round(AVG(o.total_spots)::numeric,2) AS total_spots,
                                                     round(AVG(o.occupied)::numeric,2) AS occupied,
@@ -35,8 +35,8 @@ def queryAllExceptCluster( clusterId, engine ):
                                                     (SELECT DISTINCT ON (cid, has_occupancy) emdvalue FROM cluster_emd_gaussians ceg WHERE ceg.cid = b.cwithid AND ceg.has_occupancy ) as emd
                                                     FROM occupancy o INNER JOIN blocks b ON o.block_id = b.block_id
                                                     WHERE b.has_occupancy AND b.cwithid <> """ + str(clusterId) + """
-                                                    GROUP BY o.timestamp
-                                                    ORDER BY o.timestamp;""", engine)
+                                                    GROUP BY b.cwithid, o.timestamp
+                                                    ORDER BY b.cwithid, o.timestamp;""", engine)
 
 
 def queryCluster( clusterId, engine ):
