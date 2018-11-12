@@ -94,7 +94,8 @@ CREATE TABLE cluster_emd_gaussians (
 	cid integer,
 	has_occupancy boolean,
 	dimname varchar(50),
-	dimvalue bigint
+	dimvalue bigint,
+	emdvalue double precision
 );
 
 CREATE TABLE amenities (
