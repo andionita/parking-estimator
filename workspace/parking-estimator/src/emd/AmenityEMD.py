@@ -50,7 +50,8 @@ def calculateGaussianForCwith(cid):
 
     # Normalize Gaussian
     current_gaussian /= current_volume
-
+    stmt = gaussiansTable.update().where(gaussiansTable.c.cid==int(cid)).where(gaussiansTable.c.has_occupancy==True).values(emdvalue=current_volume)
+    conn.execute(stmt)
     return current_gaussian
 
 
@@ -85,6 +86,10 @@ def calculateGaussianForCwout(cid):
 
     # Normalize gaussian
     current_gaussian /= current_volume
+
+    stmt = gaussiansTable.update().where(gaussiansTable.c.cid==int(cid)).where(gaussiansTable.c.has_occupancy==False).values(emdvalue=current_volume)
+    conn.execute(stmt)
+
     return current_gaussian
 
 
@@ -138,6 +143,7 @@ if __name__ == "__main__":
     conn = engine.connect()
     metadata = MetaData(engine)
     similarityTable = Table('cluster_similarity', metadata, autoload=True)
+    gaussiansTable = Table('cluster_emd_gaussians', metadata, autoload=True)
 
     # Retrieving the bordering values for all Gaussians
     limits = pd.read_sql_query("SELECT MAX(mean_duration), MIN(mean_duration), MAX(stdev_duration) FROM amenities", engine)

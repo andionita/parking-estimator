@@ -275,16 +275,12 @@ def runSingleAll(clusterId, method):
 
 
 if __name__ == "__main__":
-<<<<<<< bruegel
-    engine = sqlalchemy.create_engine('postgres://aionita:andigenu@localhost:5432/sfpark')
-=======
     server = SSHTunnelForwarder('cloud31.dbis.rwth-aachen.de', ssh_username="ionita", ssh_password="andigenu", remote_bind_address=('127.0.0.1', 5432))
 
     server.start()
 
     #engine = sqlalchemy.create_engine('postgres://aionita:andigenu@localhost:5432/sfpark')
     engine = sqlalchemy.create_engine('postgres://aionita:andigenu@localhost:' + str(server.local_bind_port) + '/sfpark')
->>>>>>> local
     conn = engine.connect()
 
     # Querying the cluster ids of the areas with parking data
