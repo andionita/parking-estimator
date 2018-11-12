@@ -26,9 +26,11 @@ def queryAllExceptCluster( clusterId, engine ):
     print("Querying database for all occupancy data, except for cluster id: " + str(clusterId))
 
     return pd.read_sql_query("""SELECT o.timestamp, array_agg(o.block_id) AS blocks,
-                                                    round(AVG(o.price_rate)::numeric,2) AS avg_price_rate,
-                                                    round(AVG(o.total_spots)::numeric,2) AS avg_total_spots,
-                                                    round(AVG(o.occupied)::numeric,2) AS avg_occupied
+                                                    round(AVG(o.price_rate)::numeric,2) AS price_rate,
+                                                    round(AVG(o.total_spots)::numeric,2) AS total_spots,
+                                                    round(AVG(o.occupied)::numeric,2) AS occupied,
+                                                    (SELECT array_agg(dimvalue) FROM cluster_cosine_vectors ccv WHERE b.cwithid = ccv.cid AND ccv.has_occupancy) as cosine,
+                                                    (SELECT DISTINCT ON (cid, has_occupancy) emdvalue FROM cluster_emd_gaussians ceg WHERE ceg.cid = b.cwithid AND ceg.has_occupancy ) as emd
                                                     FROM occupancy o INNER JOIN blocks b ON o.block_id = b.block_id
                                                     WHERE b.has_occupancy AND b.cwithid <> """ + str(clusterId) + """
                                                     GROUP BY o.timestamp
@@ -39,9 +41,11 @@ def queryCluster( clusterId, engine ):
     print("Querying database for occupancy data for cluster id: " + str(clusterId))
 
     return pd.read_sql_query("""SELECT b.cwithid, o.timestamp, array_agg(o.block_id) AS blocks,
-                                                    round(AVG(o.price_rate)::numeric,2) AS avg_price_rate,
-                                                    round(AVG(o.total_spots)::numeric,2) AS avg_total_spots,
-                                                    round(AVG(o.occupied)::numeric,2) AS avg_occupied
+                                                    round(AVG(o.price_rate)::numeric,2) AS price_rate,
+                                                    round(AVG(o.total_spots)::numeric,2) AS total_spots,
+                                                    round(AVG(o.occupied)::numeric,2) AS occupied,
+                                                    (SELECT array_agg(dimvalue) FROM cluster_cosine_vectors ccv WHERE b.cwithid = ccv.cid AND ccv.has_occupancy) as cosine,
+                                                    (SELECT DISTINCT ON (cid, has_occupancy) emdvalue FROM cluster_emd_gaussians ceg WHERE ceg.cid = b.cwithid AND ceg.has_occupancy ) as emd
                                                     FROM occupancy o INNER JOIN blocks b ON o.block_id = b.block_id
                                                     WHERE b.has_occupancy AND cwithid = """ + str(clusterId) + """
                                                     GROUP BY b.cwithid, o.timestamp
@@ -64,9 +68,12 @@ def preprocess( trainingDataframe ):
     trainingDataframe['weekday'] = dt.weekday
     trainingDataframe['hour'] = dt.hour
 
+    trainingDataframe[['cosine_cat1', 'cosine_cat2', 'cosine_cat3']] = pd.DataFrame(trainingDataframe['cosine'].values.tolist(), index=trainingDataframe['cosine'].index)
+
     trainingDataframe = trainingDataframe.drop(['timestamp'], axis=1)
     if 'blocks' in trainingDataframe.columns:
         trainingDataframe = trainingDataframe.drop(['blocks'], axis=1)
+    trainingDataframe = trainingDataframe.drop(['cosine'], axis=1)
 
     return trainingDataframe
 
@@ -214,8 +221,8 @@ def runSingleAll(clusterId, method):
         clusterDataframe = preprocess(trainingDataframe)
         print("\nNumber of samples = " + str(len(trainingDataframe.index)))
 
-        X = trainingDataframe[['year', 'week', 'weekday', 'hour', 'avg_price_rate', 'avg_total_spots']]
-        y = trainingDataframe['avg_occupied']
+        X = trainingDataframe[['year', 'week', 'weekday', 'hour', 'price_rate', 'cosine_cat1', 'cosine_cat2', 'cosine_cat3', 'emd', 'total_spots']]
+        y = trainingDataframe['occupied']
 
         models = {}
         trainingScores = {}
@@ -241,8 +248,8 @@ def runSingleAll(clusterId, method):
         targetClusterData = queryCluster(clusterId, engine)
         targetClusterData = preprocess(targetClusterData)
 
-        X_test = targetClusterData[['year', 'week', 'weekday', 'hour', 'avg_price_rate', 'avg_total_spots']]
-        y_test = targetClusterData['avg_occupied']
+        X_test = targetClusterData[['year', 'week', 'weekday', 'hour', 'price_rate', 'cosine_cat1', 'cosine_cat2', 'cosine_cat3', 'emd', 'total_spots']]
+        y_test = targetClusterData['occupied']
 
         # Determining the model with the best test error (RMSE)
         minError = 101
@@ -273,7 +280,8 @@ def runSingleAll(clusterId, method):
 
 
 if __name__ == "__main__":
-    engine = sqlalchemy.create_engine('postgres://aionita:andigenu@localhost:5432/sfpark')
+    #engine = sqlalchemy.create_engine('postgres://aionita:andigenu@localhost:5432/sfpark')
+    engine = sqlalchemy.create_engine('postgres://andio:andigenu@localhost:5432/sfpark')
     conn = engine.connect()
 
     # Querying the cluster ids of the areas with parking data
