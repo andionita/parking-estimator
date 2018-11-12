@@ -3,82 +3,82 @@ var json_cluster_datapoints =
     "features": [
         {
             "clusterid": 0,
-            "data_points": 6434,
-            "type": "Feature"
-        },
-        {
-            "clusterid": 1,
-            "data_points": 4459,
-            "type": "Feature"
-        },
-        {
-            "clusterid": 2,
-            "data_points": 6584,
-            "type": "Feature"
-        },
-        {
-            "clusterid": 3,
-            "data_points": 7112,
-            "type": "Feature"
-        },
-        {
-            "clusterid": 4,
-            "data_points": 7823,
-            "type": "Feature"
-        },
-        {
-            "clusterid": 5,
-            "data_points": 7397,
-            "type": "Feature"
-        },
-        {
-            "clusterid": 6,
-            "data_points": 6134,
-            "type": "Feature"
-        },
-        {
-            "clusterid": 7,
-            "data_points": 7050,
-            "type": "Feature"
-        },
-        {
-            "clusterid": 8,
-            "data_points": 7141,
-            "type": "Feature"
-        },
-        {
-            "clusterid": 9,
-            "data_points": 5170,
-            "type": "Feature"
-        },
-        {
-            "clusterid": 10,
-            "data_points": 6419,
-            "type": "Feature"
-        },
-        {
-            "clusterid": 11,
-            "data_points": 7005,
-            "type": "Feature"
-        },
-        {
-            "clusterid": 12,
             "data_points": 7095,
             "type": "Feature"
         },
         {
+            "clusterid": 1,
+            "data_points": 9586,
+            "type": "Feature"
+        },
+        {
+            "clusterid": 2,
+            "data_points": 7963,
+            "type": "Feature"
+        },
+        {
+            "clusterid": 3,
+            "data_points": 9847,
+            "type": "Feature"
+        },
+        {
+            "clusterid": 4,
+            "data_points": 9112,
+            "type": "Feature"
+        },
+        {
+            "clusterid": 5,
+            "data_points": 6134,
+            "type": "Feature"
+        },
+        {
+            "clusterid": 6,
+            "data_points": 8044,
+            "type": "Feature"
+        },
+        {
+            "clusterid": 7,
+            "data_points": 10244,
+            "type": "Feature"
+        },
+        {
+            "clusterid": 8,
+            "data_points": 7549,
+            "type": "Feature"
+        },
+        {
+            "clusterid": 9,
+            "data_points": 7397,
+            "type": "Feature"
+        },
+        {
+            "clusterid": 10,
+            "data_points": 8208,
+            "type": "Feature"
+        },
+        {
+            "clusterid": 11,
+            "data_points": 7147,
+            "type": "Feature"
+        },
+        {
+            "clusterid": 12,
+            "data_points": 9056,
+            "type": "Feature"
+        },
+        {
             "clusterid": 13,
-            "data_points": 6567,
+            "data_points": 7554,
             "type": "Feature"
         },
         {
             "clusterid": 14,
-            "data_points": 7880,
+            "data_points": 8198,
             "type": "Feature"
         },
         {
             "clusterid": 15,
-            "data_points": 9834,
+            "data_points": 10587,
             "type": "Feature"
         },
         {
