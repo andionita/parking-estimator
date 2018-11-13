@@ -12,6 +12,7 @@ import xgboost as xg
 import sqlalchemy
 from sqlalchemy import MetaData, Table
 from sqlalchemy.sql import insert
+from sqlalchemy import exc
 import datetime
 import time
 
@@ -275,9 +276,6 @@ def runSingleAll(clusterId, method):
         targetClusterData = queryCluster(clusterId, engine)
         targetClusterData = preprocess(targetClusterData)
 
-        metadata = MetaData(engine)
-        modelsTable = Table('models', metadata, autoload=True)
-
         X_test = targetClusterData[['year', 'week', 'weekday', 'hour', 'price_rate', 'cosine_cat1', 'cosine_cat2', 'cosine_cat3', 'emd', 'total_spots']]
         y_test = targetClusterData['occupied']
 
@@ -309,7 +307,10 @@ def runSingleAll(clusterId, method):
                                                     model_name = model_name_stmt, training_error = trainingScores[modelName],
                                                     error = rmse, error_type = 'RMSE',
                                                     training_time = timeElapsed[modelName])
-                conn.execute(stmt)
+                try:
+                    conn.execute(stmt)
+                except exc.SQLAlchemyError as e:
+                    print(e)
 
                 if rmse < minError:
                     minError = rmse
@@ -329,6 +330,7 @@ if __name__ == "__main__":
     #engine = sqlalchemy.create_engine('postgres://aionita:andigenu@localhost:5432/sfpark')
     engine = sqlalchemy.create_engine('postgres://aionita:andigenu@localhost:' + str(server.local_bind_port) + '/sfpark')
     conn = engine.connect()
+    modelsTable = Table('models', MetaData(engine), autoload=True)
 
     # Querying the cluster ids of the areas with parking data
     cwithidFrame = pd.read_sql_query("""SELECT DISTINCT ON (cwithid) cwithid FROM blocks WHERE has_occupancy""", engine);
