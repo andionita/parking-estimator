@@ -258,12 +258,12 @@ def runSingleAll(clusterId, method):
             print('-----\n')
             start = time.time()
             models['mlp'], trainingScores['mlp'] = buildModel('mlp', clusterId, X, y)
-            timeElapsed['svm'] = time.time() - start
+            timeElapsed['mlp'] = time.time() - start
             print('Time elapsed: ' + str(timeElapsed['mlp']))
             print('-----\n')
             start = time.time()
             models['xgb'], trainingScores['xgb'] = buildModel('xgb', clusterId, X, y)
-            timeElapsed['svm'] = time.time() - start
+            timeElapsed['xgb'] = time.time() - start
             print('Time elapsed: ' + str(timeElapsed['xgb']))
             print
 
