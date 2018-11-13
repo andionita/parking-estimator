@@ -10,6 +10,9 @@ import pandas as pd
 import numpy as np
 import xgboost as xg
 import sqlalchemy
+from sqlalchemy import MetaData, Table
+from sqlalchemy.sql import insert
+
 import os.path
 import sshtunnel
 from sshtunnel import SSHTunnelForwarder
