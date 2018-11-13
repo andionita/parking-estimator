@@ -12,6 +12,8 @@ import xgboost as xg
 import sqlalchemy
 from sqlalchemy import MetaData, Table
 from sqlalchemy.sql import insert
+import datetime
+import time
 
 import os.path
 import sshtunnel
@@ -212,6 +214,10 @@ def runSingleAll(clusterId, method):
     :return:
     '''
 
+    # Set the timestamp when this run is executed
+    runTimestamp = datetime.datetime.now()
+    runTimestamp.strftime('%Y-%m-%d %H:%M:%S')
+
     print
     print('-----> TRAINING MODELS <----')
     print
@@ -231,18 +237,34 @@ def runSingleAll(clusterId, method):
 
         models = {}
         trainingScores = {}
+        timeElapsed = {}
 
         if method is not None:
+            start = time.time()
             models[method], trainingScores[method] = buildModel(method, clusterId, X, y)
+            timeElapsed[method] = time.time() - start
+            print('Time elapsed: ' + str(timeElapsed[method]))
 
         else:
+            start = time.time()
             models['dt'], trainingScores['dt'] = buildModel('dt', clusterId, X, y)
+            timeElapsed['dt'] = time.time() - start
+            print('Time elapsed: ' + str(timeElapsed['dt']))
             print('-----\n')
+            start = time.time()
             models['svm'], trainingScores['svm'] = buildModel('svm', clusterId, X, y)
+            timeElapsed['svm'] = time.time() - start
+            print('Time elapsed: ' + str(timeElapsed['svm']))
             print('-----\n')
+            start = time.time()
             models['mlp'], trainingScores['mlp'] = buildModel('mlp', clusterId, X, y)
+            timeElapsed['svm'] = time.time() - start
+            print('Time elapsed: ' + str(timeElapsed['mlp']))
             print('-----\n')
+            start = time.time()
             models['xgb'], trainingScores['xgb'] = buildModel('xgb', clusterId, X, y)
+            timeElapsed['svm'] = time.time() - start
+            print('Time elapsed: ' + str(timeElapsed['xgb']))
             print
 
         print
@@ -279,9 +301,9 @@ def runSingleAll(clusterId, method):
                 print('RMSE = %.3f' % rmse)
 
                 # Write model info into the database
-                stmt = modelsTable.insert().values(clusterid = clusterId,
+                stmt = modelsTable.insert().values(clusterid = (-1) * clusterId,
                                                    data_points = len(clusterDataframe.index),
-                                                    run_timestamp = runTimestamp, similar_clusterid = simClusterId,
+                                                    run_timestamp = runTimestamp, similar_clusterid = clusterId,
                                                     model_name = modelName + "_total_extended", training_error = trainingScores[modelName],
                                                     error = rmse, error_type = 'RMSE',
                                                     training_time = timeElapsed[modelName])
