@@ -230,10 +230,10 @@ def runSingleAll(clusterId, method):
     else:
 
         clusterDataframe = preprocess(trainingDataframe)
-        print("\nNumber of samples = " + str(len(trainingDataframe.index)))
+        print("\nNumber of samples = " + str(len(clusterDataframe.index)))
 
-        X = trainingDataframe[['year', 'week', 'weekday', 'hour', 'price_rate', 'cosine_cat1', 'cosine_cat2', 'cosine_cat3', 'emd', 'total_spots']]
-        y = trainingDataframe['occupied']
+        X = clusterDataframe[['year', 'week', 'weekday', 'hour', 'price_rate', 'cosine_cat1', 'cosine_cat2', 'cosine_cat3', 'emd', 'total_spots']]
+        y = clusterDataframe['occupied']
 
         models = {}
         trainingScores = {}
@@ -301,10 +301,12 @@ def runSingleAll(clusterId, method):
                 print('RMSE = %.3f' % rmse)
 
                 # Write model info into the database
-                stmt = modelsTable.insert().values(clusterid = (-1) * clusterId,
+                clusterid_stmt = (-1) * int(clusterId)
+                model_name_stmt = str(modelName) + "_total_extended"
+                stmt = modelsTable.insert().values(clusterid = clusterid_stmt,
                                                    data_points = len(clusterDataframe.index),
                                                     run_timestamp = runTimestamp, similar_clusterid = clusterId,
-                                                    model_name = modelName + "_total_extended", training_error = trainingScores[modelName],
+                                                    model_name = model_name_stmt, training_error = trainingScores[modelName],
                                                     error = rmse, error_type = 'RMSE',
                                                     training_time = timeElapsed[modelName])
                 conn.execute(stmt)
