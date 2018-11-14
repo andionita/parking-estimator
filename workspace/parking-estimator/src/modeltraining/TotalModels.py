@@ -208,7 +208,6 @@ def runSingleAll(clusterId, method):
         models = {}
         trainingScores = {}
         timeElapsed = {}
-        '''
         if method is not None:
             start = time.time()
             models[method], trainingScores[method] = buildModel(method, clusterId, X, y)
@@ -236,11 +235,10 @@ def runSingleAll(clusterId, method):
             timeElapsed['xgb'] = time.time() - start
             print('Time elapsed: ' + str(timeElapsed['xgb']))
             print
-        '''
 
-        models['mlp'] = None
-        trainingScores['mlp'] = 42.42
-        timeElapsed['mlp'] = 422
+    #    models['mlp'] = None
+    #    trainingScores['mlp'] = 42.42
+    #    timeElapsed['mlp'] = 422
 
         print
         print('----> SELECTING BEST MODELS <-----')
@@ -259,13 +257,9 @@ def runSingleAll(clusterId, method):
             if len(targetClusterData.index) == 0:
                 print("Query for cluster " + str(clusterId) + " returned empty set. Please make sure that this cluster id exists.")
             else:
-                '''
                 y_pred = modelContent.predict(X_test)
                 rmse = np.sqrt(mean_squared_error(y_test, y_pred))
-                '''
-
-                rmse = 42.44
-
+    #            rmse = 42.44
                 print('Model ' + str(modelName))
                 print('RMSE = %.3f' % rmse)
                 # Write model info into the database
@@ -298,8 +292,8 @@ def runSingleAll(clusterId, method):
 
 
 if __name__ == "__main__":
-    reload(sys)
-    sys.setdefaultencoding("utf-8")
+    #reload(sys)
+    #sys.setdefaultencoding("utf-8")
     server = SSHTunnelForwarder('cloud31.dbis.rwth-aachen.de', ssh_username="ionita", ssh_password="andigenu", remote_bind_address=('127.0.0.1', 5432))
     server.start()
     #engine = sqlalchemy.create_engine('postgres://aionita:andigenu@localhost:5432/sfpark')
