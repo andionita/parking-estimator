@@ -270,7 +270,7 @@ def runSingleAll(clusterId, method):
                 print('RMSE = %.3f' % rmse)
                 # Write model info into the database
                 clusterid_stmt = (-1) * int(clusterId)
-                model_name_stmt = str(modelName) + "_total_extended"
+                model_name_stmt = str(modelName) + "_total"
                 stmt = modelsTable.insert().values(clusterid=clusterId,
                                                    data_points=len(clusterDataframe.index),
                                                    run_timestamp=runTimestamp, similar_clusterid=clusterId,
