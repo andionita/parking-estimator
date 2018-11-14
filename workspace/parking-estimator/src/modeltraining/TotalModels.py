@@ -15,6 +15,7 @@ from sqlalchemy.sql import insert
 from sqlalchemy import exc
 import datetime
 import time
+import sys
 
 import os.path
 import sshtunnel
@@ -280,7 +281,9 @@ def runSingleAll(clusterId, method):
                     conn.execute(stmt)
                 #except exc.SQLAlchemyError as e:
                 except Exception as e:
-                    print(str(e))
+                    print(e)
+                except:
+                    print("Unexpected error:", sys.exc_info()[0])
                 if rmse < minError:
                     minError = rmse
                     #selectedModel = modelContent
