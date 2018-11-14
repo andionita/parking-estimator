@@ -278,7 +278,8 @@ def runSingleAll(clusterId, method):
                                                    training_time=timeElapsed[modelName])
                 try:
                     conn.execute(stmt)
-                except exc.SQLAlchemyError as e:
+                #except exc.SQLAlchemyError as e:
+                except Exception as e:
                     print(str(e))
                 if rmse < minError:
                     minError = rmse
