@@ -280,8 +280,8 @@ def runSingleAll(clusterId, method):
                 try:
                     conn.execute(stmt)
                 #except exc.SQLAlchemyError as e:
-                except Exception as e:
-                    print(e)
+                #except Exception as e:
+                #    print(e)
                 except:
                     print("Unexpected error:", sys.exc_info()[0])
                 if rmse < minError:
