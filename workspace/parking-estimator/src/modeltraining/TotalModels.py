@@ -283,7 +283,7 @@ def runSingleAll(clusterId, method):
                 #except Exception as e:
                 #    print(e)
                 except sqlalchemy.exc.DataError as e:
-                    print(e.errno + " " + e.strerror)
+                    print(e.strerror)
                 except sqlalchemy.exc.ProgrammingError as e2:
                     print(e2)
                 except:
