@@ -237,6 +237,7 @@ def runSingleAll(clusterId, method):
             print
         '''
 
+        models['mlp'] = None
         trainingScores['mlp'] = 42.42
         timeElapsed['mlp'] = 422
 
