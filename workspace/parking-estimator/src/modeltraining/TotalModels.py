@@ -296,7 +296,6 @@ def runSingleAll(clusterId, method):
 
 
 if __name__ == "__main__":
-    sys.setdefaultencoding('utf8')
     server = SSHTunnelForwarder('cloud31.dbis.rwth-aachen.de', ssh_username="ionita", ssh_password="andigenu", remote_bind_address=('127.0.0.1', 5432))
     server.start()
     #engine = sqlalchemy.create_engine('postgres://aionita:andigenu@localhost:5432/sfpark')
