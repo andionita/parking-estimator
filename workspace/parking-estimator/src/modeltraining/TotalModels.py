@@ -50,10 +50,8 @@ def queryCluster( clusterId ):
     return pd.read_sql_query("""SELECT b.cwithid, o.timestamp, array_agg(o.block_id) AS blocks,
                                                     round(AVG(o.price_rate)::numeric,2) AS price_rate,
                                                     round(AVG(o.total_spots)::numeric,2) AS total_spots,
-                                                    round(AVG(o.occupied)::numeric,2) AS occupied ''',
-                                                    (SELECT array_agg(dimvalue) FROM cluster_cosine_vectors ccv WHERE b.cwithid = ccv.cid AND ccv.has_occupancy) as cosine,
-                                                    (SELECT DISTINCT ON (cid, has_occupancy) emdvalue FROM cluster_emd_gaussians ceg WHERE ceg.cid = b.cwithid AND ceg.has_occupancy ) as emd
-                                                    '''FROM occupancy o INNER JOIN blocks b ON o.block_id = b.block_id
+                                                    round(AVG(o.occupied)::numeric,2) AS occupied
+                                                    FROM occupancy o INNER JOIN blocks b ON o.block_id = b.block_id
                                                     WHERE b.has_occupancy AND cwithid = """ + str(clusterId) + """
                                                     GROUP BY b.cwithid, o.timestamp
                                                     ORDER BY b.cwithid, o.timestamp;""", engine)
