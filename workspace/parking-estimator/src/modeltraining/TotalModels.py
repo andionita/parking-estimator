@@ -50,10 +50,10 @@ def queryCluster( clusterId ):
     return pd.read_sql_query("""SELECT b.cwithid, o.timestamp, array_agg(o.block_id) AS blocks,
                                                     round(AVG(o.price_rate)::numeric,2) AS price_rate,
                                                     round(AVG(o.total_spots)::numeric,2) AS total_spots,
-                                                    round(AVG(o.occupied)::numeric,2) AS occupied,
+                                                    round(AVG(o.occupied)::numeric,2) AS occupied ''',
                                                     (SELECT array_agg(dimvalue) FROM cluster_cosine_vectors ccv WHERE b.cwithid = ccv.cid AND ccv.has_occupancy) as cosine,
                                                     (SELECT DISTINCT ON (cid, has_occupancy) emdvalue FROM cluster_emd_gaussians ceg WHERE ceg.cid = b.cwithid AND ceg.has_occupancy ) as emd
-                                                    FROM occupancy o INNER JOIN blocks b ON o.block_id = b.block_id
+                                                    '''FROM occupancy o INNER JOIN blocks b ON o.block_id = b.block_id
                                                     WHERE b.has_occupancy AND cwithid = """ + str(clusterId) + """
                                                     GROUP BY b.cwithid, o.timestamp
                                                     ORDER BY b.cwithid, o.timestamp;""", engine)
@@ -72,12 +72,12 @@ def preprocess( trainingDataframe ):
     trainingDataframe['week'] = dt.week
     trainingDataframe['weekday'] = dt.weekday
     trainingDataframe['hour'] = dt.hour
-    trainingDataframe[['cosine_cat1', 'cosine_cat2', 'cosine_cat3']] = pd.DataFrame(trainingDataframe['cosine'].values.tolist(), index=trainingDataframe['cosine'].index)
+    #trainingDataframe[['cosine_cat1', 'cosine_cat2', 'cosine_cat3']] = pd.DataFrame(trainingDataframe['cosine'].values.tolist(), index=trainingDataframe['cosine'].index)
     # drop unneeded columns
     trainingDataframe = trainingDataframe.drop(['timestamp'], axis=1)
     if 'blocks' in trainingDataframe.columns:
         trainingDataframe = trainingDataframe.drop(['blocks'], axis=1)
-    trainingDataframe = trainingDataframe.drop(['cosine'], axis=1)
+    #trainingDataframe = trainingDataframe.drop(['cosine'], axis=1)
     return trainingDataframe
 
 
@@ -203,7 +203,7 @@ def runSingleAll(clusterId, method):
     else:
         clusterDataframe = preprocess(trainingDataframe)
         print("\nNumber of samples = " + str(len(clusterDataframe.index)))
-        X = clusterDataframe[['year', 'week', 'weekday', 'hour', 'price_rate', 'cosine_cat1', 'cosine_cat2', 'cosine_cat3', 'emd', 'total_spots']]
+        X = clusterDataframe[['year', 'week', 'weekday', 'hour', 'price_rate', ''''cosine_cat1', 'cosine_cat2', 'cosine_cat3', 'emd',''' 'total_spots']]
         y = clusterDataframe['occupied']
         models = {}
         trainingScores = {}
@@ -246,7 +246,7 @@ def runSingleAll(clusterId, method):
         # Retrieve the cluster occupancy data for testing
         targetClusterData = queryCluster(clusterId)
         targetClusterData = preprocess(targetClusterData)
-        X_test = targetClusterData[['year', 'week', 'weekday', 'hour', 'price_rate', 'cosine_cat1', 'cosine_cat2', 'cosine_cat3', 'emd', 'total_spots']]
+        X_test = targetClusterData[['year', 'week', 'weekday', 'hour', 'price_rate', ''''cosine_cat1', 'cosine_cat2', 'cosine_cat3', 'emd',''' 'total_spots']]
         y_test = targetClusterData['occupied']
         # Determining the model with the best test error (RMSE)
         minError = 1001
