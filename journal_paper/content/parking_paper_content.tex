@@ -447,32 +447,53 @@ The \textit{traffic data} do not share the same location unit with the parking o
 In fact, the events are marked for streets, whose association to blocks is not determinable. \textit{Parking revenue data} is provided for districts, which again are too general to make a difference in training.
 Finally, \textit{weather data} and \textit{fuel data} are given per city, hence making even less an impact to improve the model.
 
+{\color{green}
 The evaluation here consists in comparing the test-errors of cluster models with the independently-computed similarity values. More specifically, a \textit{source} cluster's model will tested on a \textit{target} cluster. The resulting error (measured as root mean square) will be compared to the similarity (cosine or EMD) between the \textit{source} and the \textit{target} clusters.  
+}
 
-As indicated in \Cref{realization:machine_learning_models}, the training data is averaged on all blocks so that it can be applied later on other clusters. The averaging is performed per timestamp, i.e., if multiple blocks have an occupancy record for the same time and block, the occupancy rate will be averaged for both of these. Features such as \textit{price} and \textit{parking capacity per block} are averaged as well. This means that the original collection of data records shrinks. In \autoref{tab:models_training_points}, the number of training records per cluster is shown, together with the number of occupancy records for that cluster. On average, there are $10.5$ blocks that share the same data points.
+\subsection{Aggregating training data}
+\label{evaluation:aggregating_training_data}
+As indicated in \Cref{realization:machine_learning_models}, the training data is aggregated across all blocks so that it can be applied later on other clusters. The averaging is performed per timestamp, i.e., if multiple blocks have an occupancy record for the same time and block, the occupancy rate will be averaged for both of these. Features such as \textit{price} and \textit{parking capacity per block} are averaged as well. This means that the original collection of data records shrinks{\color{green}, which should improve the training time. In \autoref{tab:models_training_points}, the expansion/shrinking rate is shown for various number of clusters.}
+
+%\begin{table}[!ht]
+%	\setlength\extrarowheight{5pt}
+%	\centering
+%	\footnotesize
+%	\begin{tabular}{| c | S[table-format=5.0] | S[table-format=6] | S[table-format=2.1] |}
+%		\hline
+%		\textbf{Cluster ID} & \textbf{Data Points} & \textbf{Occupancy Points} & \textbf{\begin{tabular}{@{}c@{}}Blocks\\per Timestamp\end{tabular}} \\ \hline
+%		0 & 9879 & 120320 & 12.2 \\ \hline
+%		1 & 12387 & 203728 & 16.4 \\ \hline
+%		2 & 8713 & 61839 & 7.1 \\ \hline
+%		3 & 6134 & 22371 & 3.6 \\ \hline
+%		4 & 9586 & 110463 & 11.5 \\ \hline
+%		5 & 9112 & 87316 & 9.6 \\ \hline
+%		6 & 10244 & 118096 & 11.5 \\ \hline
+%		7 & 9500 & 115588 & 12.2 \\ \hline
+%		8 & 9051 & 112245 & 12.4 \\ \hline
+%		9 & 8713 & 76230 & 8.7 \\ \hline
+%		\textbf{Average}	& 9332 & 102820 & 10.5 \\ \hline
+%	\end{tabular}
+%	\captionsetup{justification=centering}
+%	\caption{Number of training points per model alongside the initial occupancy points within the containing blocks.}
+%	\label{tab:models_training_points}
+%\end{table}
 
 \begin{table}[!ht]
+	{\color{orange}
 	\setlength\extrarowheight{5pt}
 	\centering
 	\footnotesize
 	\begin{tabular}{| c | S[table-format=5.0] | S[table-format=6] | S[table-format=2.1] |}
 		\hline
-		\textbf{Cluster ID} & \textbf{Data Points} & \textbf{Occupancy Points} & \textbf{\begin{tabular}{@{}c@{}}Blocks\\per Timestamp\end{tabular}} \\ \hline
-		0 & 9879 & 120320 & 12.2 \\ \hline
-		1 & 12387 & 203728 & 16.4 \\ \hline
-		2 & 8713 & 61839 & 7.1 \\ \hline
-		3 & 6134 & 22371 & 3.6 \\ \hline
-		4 & 9586 & 110463 & 11.5 \\ \hline
-		5 & 9112 & 87316 & 9.6 \\ \hline
-		6 & 10244 & 118096 & 11.5 \\ \hline
-		7 & 9500 & 115588 & 12.2 \\ \hline
-		8 & 9051 & 112245 & 12.4 \\ \hline
-		9 & 8713 & 76230 & 8.7 \\ \hline
-		\textbf{Average}	& 9332 & 102820 & 10.5 \\ \hline
+		{cluster size} & {aggregated datapoints} & {all datapoints} & {shrinking/expansion rate} \\ \hline
+		8 &	9741 & 128525 &	12.3 \\ \hline
+		16 & 8409 &	73332 &	8.3 \\ \hline
+		32 & 6257 &	29355 &	4.6 \\ \hline
 	\end{tabular}
 	\captionsetup{justification=centering}
-	\caption{Number of training points per model alongside the initial occupancy points within the containing blocks.}
-	\label{tab:models_training_points}
+	\caption{\color{orange} Number of datapoints aggregated per timestamp vs. all datapoints alongside the shrinking rate; for 8, 16 and 32 clusters; values have been averaged across clusters}
+	\label{tab:models_training_points}}
 \end{table}
 
 %\subsection{Model Evaluation for Clusters \textit{with} Parking Data}
@@ -634,41 +655,239 @@ Notice the drop-down list from which the time can be selected.}
 	\label{fig:cwout_table}
 \end{figure*}
 
-\section{Future Work}
+{\color{green}
+\section{Extensions}
+\label{extensions}
+%Up to this point it was our goal to show that the approach involving clustering and similarity improves upon the simple machine learning approach. 
+In the following we present some extensions and variations that consolidate the approach presented, if not improve upon it. 
+
+Firstly, in \autoref{extensions:entire_datapoints}) we investigate the results by skipping the aggregating step in machine learning training (recall \autoref{evaluation:aggregating_training_data}). Instead of averaging the datapoints over timestamp per cluster, we build the cluster models using the entire occupancy data.
+
+Secondly, in \autoref{extensions:amenity_area} we use another amenity value on which of the similarity functions are applied (recall \autoref{extensions:amenity_area}). Instead of \textit{amenity time spent}, \textit{amenity area} will extracted and leveraged. 
+
+Thirdly, in \autoref{extensions:machine_learning_better} we question whether the similarity function approach is the most efficient and transfer its purpose to the machine learning phrase (recall \autoref{extensions:machine_learning_better}). The model will receive absolute \textit{cosine} and \textit{emd Gaussian} values as additional features and its error will be compared to the previous models. 
+
+%Furthermore, we added a configuration with 32 clusters on which we tested or hypotheses.
+
+\subsection{Using all occupancy datapoints}
+\label{extensions:entire_datapoints}
+Recall that in \Cref{evaluation:model_training}, the training data for a cluster is aggregated per timestamp, i.e. the \textit{price}, \textit{capacity} and \textit{occupancy} attributes (see \autoref{extensions:aggregating_datapoints} for an example). The training phase was subsequently more time-consuming as it involved digesting a significantly larger dataset (see \autoref{tab:models_training_points} for the expansion/shrinking rates for various number of clusters). Among the resulting models, \textit{extreme gradient boosting} proved to performed the best in terms of test errors (as in the aggregated points case). Otherwise, the models ended up poorer compared to the models with averaged values in terms of training and test errors. (see \autoref{extensions:train_test_errors}). Correlating the occupancy results delivered by theses models with the unchanged similarity values results in generally inferior numbers to correlations based on model from aggregated datapoints. Apart from the ranked emd correlation for 8 and 16 clusters and the ranked cosine for 16 clusters, all other correlation measures are not improved upon (see \autoref{extensions:correlation_values}).
+
+\begin{table*}
+{\color{green}
+\footnotesize
+\begin{tabular}{  c : c  }
+		\begin{tabular}{ | c | c | c | c | c |}
+			\hline
+			\textbf{block id} & \textbf{timestamp} & \textbf{price rate} & \textbf{total spots} & \textbf{occupied} \\ \hline
+			902 & {2011-04-02 7:00:00} & 0 & 46 & 58 \\ \hline
+			32800 & {2011-04-02 7:00:00} & 0 & 32 & 2 \\ \hline
+			33005 & {2011-04-02 7:00:00} & 3 & 36 & 12 \\ \hline
+			902 & {2011-04-02 8:00:00} & 2 & 46 & 54 \\ \hline
+			32800 & {2011-04-02 8:00:00} & 4 & 32 & 5 \\ \hline
+			33005 & {2011-04-02 8:00:00} & 3 & 36 & 22 \\ \hline
+		\end{tabular}
+ & 
+		\begin{tabular}{ | c | c | c | c | c |}
+			\hline
+			\textbf{cluster id} & \textbf{timestamp} & \textbf{price rate} & \textbf{total spots} & \textbf{occupied} \\ \hline
+			1 & {2011-04-02 10:00:00} & 1 & 34 & 26 \\ \hline
+			1 & {2011-04-02 11:00:00} & 3 & 34 & 27 \\ \hline
+		\end{tabular}
+\end{tabular}}
+\caption{\color{green} Example of aggregating datapoints; left-hand side are three blocks belonging to cluster 1 which are transformed into two entries by averaging \textit{price rate}, \textit{total spots} and \textit{occupied} attributes per timestamp (right-hand side)}
+\label{extensions:aggregating_datapoints}
+\end{table*}
+
+\begin{table}[!ht]
+	{\color{green}
+	\centering
+	\small
+	%\setlength\extrarowheight{5pt}
+	%\resizebox{\textwidth}{!}{
+	\begin{tabular}{ | c | c | c | c | c | c | }
+		\hline
+		{cluster size} & datapoints & {training error} & {test error} \\ \hline
+		8	&	aggregate &	12.92	&	20.13 \\ \hline
+		8	&	all		&	19.41	&	26.86 \\ \hline
+		16	&	aggregate	&	13.52	&	20.52 \\ \hline
+		16	&	all		&	19.05	&	26.36 \\ \hline
+		32	&	aggregate	&	14.59	&	21.67 \\ \hline
+		32	&	all		&	18.54	&	27.50 \\ \hline
+	\end{tabular}%}
+	\caption{\color{green} Train and test error for the ML models build with all datapoints; the same values are shows by comparison for the models build on aggregate datapoints for 8, 16 and 32 clusters; all models above were build using extreme gradient boosting}
+	\label{extensions:train_test_errors}}
+\end{table}
+
+
+\begin{table}[!ht]
+	{\color{green}
+	\centering
+	\small
+	%\setlength\extrarowheight{5pt}
+	%\resizebox{\textwidth}{!}{
+	\begin{tabular}{ | c | c | c | c | c | c | }
+		\hline
+		{cluster size} & datapoints & cosine & rank\_cosine & emd & rank\_emd \\ \hline
+		8	&	aggregate	&	-0.47	&	-0.50	&	0.26	&	0.17 \\ \hline
+		8	&	all		&	-0.41	&	-0.42	&	0.34	&	0.25 \\ \hline
+		16	&	aggregate	&	-0.11	&	-0.11	&	0.14	&	0.10 \\ \hline
+		16	&	all		&	-0.02	&	-0.14	&	0.13	&	0.12 \\ \hline
+		32	&	aggregate	&	-0.13	&	-0.06	&	0.09	&	0.07 \\ \hline
+		32	&	all		&	-0.01	&	-0.02	&	0.03	&	0.01 \\ \hline
+	\end{tabular}%}
+	\caption{\color{green} Resulting correlation values for ML models built using all datapoints alongside correlations of models based on aggregate datapoints for 8, 16 and 32 clusters; all models above were build using extreme gradient boosting}
+	\label{extensions:correlation_values}}
+\end{table}
+
+
+\subsection{Amenity area as similarity basis}
+\label{extensions:amenity_area}
+Together with the similarity functions we considered \textit{timespent} as the basis for creating the urban profile (recall \autoref{evaluation:urban_measure}). However, there are other measures that reflect the parking demand corresponding towards an amenity, one of them being area of the particular amenity, which is available in OpenStreetMap. OSM provides a \textit{polygon layer} for a certain geographic bounding box, which contains information across all the surfaces in that region (recall \autoref{sec:citydata}). In extracting this information we had two options. 
+
+Matching the amenities' POIs with the containing OSM polygon and then computing the polygon areas per amenity was the option tried first. This has several disadvantages: the relation POI : polygon is in practice by no means 1:1, i.e. many cases arose where multiple POIs were contained by the same polygon, in which case the area was split between them; a POI might also be on the edge of several polygons, in which case we have to either (arbitrarily) assign it to the first polygon or to all. The deciding factor against this option was, however, the high \textit{coefficient of variation} for the area values. 
+
+The coefficient of variation (CV) is a measure of dispersion of a probability distribution and is defined as the ratio between the standard deviation and the mean of a sample (see \autoref{extensions:cv}). When calculating the coefficient of variation based on the matching of POI with the polygons, it came out $2.1$.
+
+\begin{equation}
+c_v = \frac{\sigma}{\mu} 
+\label{extensions:cv}
+\end{equation}
+
+The other option was to use the \textit{amenity} attribute in the polygon layer for the region. We could avoid the cumbersome matching by leveraging solely the polygon layer and calculating the amenity area mean and its standard deviation (see \autoref{extensions:amenity_area_values}). On top of that, the coefficient of variation is $0.9$ in this case, significantly lower than before. Note that we have reduced the values by a factor of 20, as it turned out that the actual mean and standard deviation were large enough to make the emd Gaussian computation extremely slow. As the standard deviation is linear with regard to the mean, both mean and standard deviation values were reduced conveniently. 
+
+Replacing the amenity area's key values in the similarity computation, i.e. category in cosine similarity, mean and standard deviation in earth mover's distance, we arrive at the following correlation values (see \autoref{extensions:correlation_amenity_area}). It is clear that the area did not lead to an improvement of the correlation values.
+
+\begin{table*}[!ht]
+	{\color{green}
+	\footnotesize
+	\begin{tabular}{ | l | c | c | c || l | c | c | c |}
+		\hline		
+		\textbf{amenity name} & \textbf{mean} & \textbf{stdev} & \textbf{cat} & \textbf{amenity name} & \textbf{mean} & \textbf{stdev} & \textbf{cat} \\ \hline
+		arts\_centre & 68 & 60 & 2 & bank & 39 & 20 & 2 \\ \hline
+		bar & 19 & 8 & 1 & bicycle\_parking & 8 & 7 & 1 \\ \hline
+		biergarten & 11 & 12 & 1 & brokerage & 39 & 9 & 2 \\ \hline
+		bus\_station & 588 & 737 & 3 & cafe & 17 & 10 & 1 \\ \hline
+		car\_rental & 70 & 43 & 2 & car\_wash & 43 & 48 & 2 \\ \hline
+		childcare & 101 & 130 & 3 & cinema & 75 & 43 & 2 \\ \hline
+		clinic & 61 & 32 & 2 & community\_centre & 52 & 74 & 2 \\ \hline
+		conference\_centre & 401 & 519 & 3 & courthouse & 459 & 201 & 3 \\ \hline
+		dentist & 17 & 12 & 1 & doctors & 324 & 568 & 3 \\ \hline
+		embassy & 68 & 38 & 2 & fast\_food & 25 & 24 & 1 \\ \hline
+		fire\_station & 52 & 27 & 2 & fountain & 24 & 22 & 1 \\ \hline
+		fuel & 25 & 27 & 1 & library & 102 & 124 & 3 \\ \hline
+		marketplace & 325 & 228 & 3 & music\_rehearsal\_place & 33 & 15 & 1 \\ \hline
+		nightclub & 32 & 9 & 1 & nursing\_home & 97 & 47 & 2 \\ \hline
+		parking & 182 & 309 & 3 & pharmacy & 65 & 38 & 2 \\ \hline
+		place\_of\_worship & 60 & 62 & 2 & police & 137 & 124 & 3 \\ \hline
+		post\_office & 39 & 11 & 2 & pub & 25 & 25 & 1 \\ \hline
+		public\_building & 280 & 236 & 3 & recycling & 28 & 20 & 1 \\ \hline
+		restaurant & 22 & 16 & 1 & school & 740 & 1280 & 3 \\ \hline
+		social\_centre & 30 & 21 & 1 & social\_facility & 356 & 801 & 3 \\ \hline
+		stripclub & 50 & 10 & 2 & studio & 268 & 307 & 3 \\ \hline
+		swimming\_pool & 16 & 9 & 1 & swingerclub & 27 & 4 & 1 \\ \hline
+		theatre & 174 & 191 & 3 & toilets & 7 & 5 & 1 \\ \hline
+		training & 72 & 94 & 2 & veterinary & 21 & 7 & 1 \\ \hline
+	\end{tabular}
+	\caption{\color{green} Amenity area values gathered from OMS polygon layer for the SF\textit{park} region; mean and standard deviation values were reduced by a 20x factor; categories are 0 - 35, 36 - 100, 100+}
+	\label{extensions:amenity_area_values}}
+\end{table*}
+
+\begin{table*}[!ht]
+	{\color{green}
+	\centering
+	\small
+	%\setlength\extrarowheight{5pt}
+	%\resizebox{\textwidth}{!}{
+	\begin{tabular}{ | c | c | c | c | c | c | c | }
+		\hline
+		{cluster size} & {amenity type} & method & cosine & rank\_cosine & emd & rank\_emd \\ \hline
+		8 & timespent & xgb & -0.47 & -0.50 & 0.26 & 0.17 \\ \hline
+		8 & area & xgb & -0.20 & -0.18 & 0.14 & 0.22 \\ \hline
+		16 & timespent & xgb & -0.11 & -0.11 & 0.14 & 0.10 \\ \hline
+		16 & area & xgb & -0.05 & -0.01 & 0.05 & 0.03 \\ \hline
+		32 & timespent & xgb & -0.13 & -0.06 & 0.09 & 0.07 \\ \hline
+		32 & area & xgb & 0.08 & 0.06 & -0.05 & -0.02 \\ \hline
+	\end{tabular}%}
+	\caption{\color{green} The correlation results based on the amenity area values.}
+	\label{extensions:correlation_amenity_area}}
+\end{table*}
+
+\subsection{Machine learning better than the similarity functions?}
+\label{extensions:machine_learning_better}
+An alternative to building urban measures and similarity functions is to let machine learning figure out the similarities by itself. One can simply add the city data as further training information for clusters. The purpose is to find better similarities by leveraging unknown patterns in the city data. Hence, features representing cosine and emd are added to the model, as follows: 
+\begin{itemize}
+	\item a feature corresponding to the k categories the amenities are split in, specifically the magnitudes of the vectors for each category;
+	\item a feature corresponding to the emd Gaussian value for that cluster, specifically the area under the emd Gaussian.
+\end{itemize}
+The subsequently built machine learning models cannot however be formed on a single cluster, as the additional features would be the same for all datapoints, of course. Therefore, models on $n-1$ out of $n$ clusters will be build and tested on the remaining cluster (as it was done in the total models evaluation - recall \autoref{small_vs_large}). The resulting training and test errors are show in \autoref{extensions:extended_models_comparison}. (discussion)
+
+\begin{table}[!ht]
+	{\color{green}
+	\footnotesize
+	\begin{tabular}{ | c | c | c | c | }
+		\hline		
+		\textbf{cluster size}  & \textbf{model} & \textbf{training error avg} & \textbf{test error avg} \\ \hline
+		8 & {xgb} & 17.90 & 18.01 \\ \hline
+		8 & {xgb extended} & 17.46 & 19.08 \\ \hline
+		8 & {dt} & 18.85 & 18.52 \\ \hline
+		8 & {dt extended} & 19.84 & 19.46 \\ \hline
+		%8 & {svm} & TBD & TBD \\ \hline
+		%8 & {svm extended} & 20.15 & 23.62 \\ \hline
+		%8 & {mlp} & TBD & TBD \\ \hline
+		%8 & {mlp extended} & 54.62 & 203.22 \\ \hline
+		16 & {xgb} & TBD & TBD \\ \hline
+		16 & {xgb extended} & 17.63 & 17.02 \\ \hline
+		16 & {dt} & TBD & TBD \\ \hline
+		16 & {dt extended} & 18.77 & 17.81 \\ \hline
+		%16 & {svm} & TBD & TBD \\ \hline
+		%16 & {svm extended} & 22.52 & 23.49 \\ \hline
+		%16 & {mlp} & TBD & TBD \\ \hline
+		%16 & {mlp extended} & 22.53	& 19.36 \\ \hline
+	\end{tabular}}
+	\caption{\color{green} Models extended with cosine and emd features compared to previous models with regard to training- and testing errors; all models are total models}
+	\label{extensions:extended_models_comparison}
+\end{table}
+
+\section{Further possible variations}
 \label{conclusion:future_work}
+} % \color{green}
 To further investigate parking occupancy prediction given the assumptions in this work, there are several improvements or alternative approaches that can be realized.
 
 \begin{enumerate}
 	\item \textbf{Use other parking settings}.
-In the present work, several pieces of data could not be integrated because of merging issues, i.e., the location unit did not coincide with the occupancy data's block.
-Traffic, events, weather, etc. could improve estimation results and hence the final estimations for clusters without parking data.
-Other sources for parking occupancy data can be found for the cities of Cologne~\cite{cologne_data}, Zurich~\cite{zurich_data}, Santa Monica~\cite{santa_monica_data}.
-In Germany, Deutsche Bahn provides an API to obtain data from parking around train stations~\cite{dbbahn_data}.
-Data pertaining to street occupancy is, however, hard to find.
-At the time of writing, open data portals mostly provide the location of parking lots, parking meters, parking price and opening times, if applicable.  
+	In the present work, several pieces of data could not be integrated because of merging issues, i.e., the location unit did not coincide with the occupancy data's block.
+	Traffic, events, weather, etc. could improve estimation results and hence the final estimations for clusters without parking data.
+	Other sources for parking occupancy data can be found for the cities of Cologne~\cite{cologne_data}, Zurich~\cite{zurich_data}, Santa Monica~\cite{santa_monica_data}.
+	In Germany, Deutsche Bahn provides an API to obtain data from parking around train stations~\cite{dbbahn_data}.
+	Data pertaining to street occupancy is, however, hard to find.
+	At the time of writing, open data portals mostly provide the location of parking lots, parking meters, parking price and opening times, if applicable.  
 	
 	\item \textbf{Use more city data}.
-The parking profiles in the present work are relying on the public amenities from OpenStreetMap.
-OSM has great potential as a collaborative map service but it lacks many pieces of information that could be useful.
-Data such as opening hours would be interesting to include in the parking demand profile, which would then take into account the number of public amenities that are available at a certain point in time.
-Furthermore, the stay duration data collected for the present approach is currently limited.
-Adding more stay duration data may fine tune the emerging similarity values.
-Overall, more and finer city data, together with an appropriate representation and similarity function could eventually improve the occupancy estimations for clusters without parking data. 
+	The parking profiles in the present work are relying on the public amenities from OpenStreetMap.
+	OSM has great potential as a collaborative map service but it lacks many pieces of information that could be useful.
+	Data such as opening hours would be interesting to include in the parking demand profile, which would then take into account the number of public amenities that are available at a certain point in time.
+	Furthermore, the stay duration data collected for the present approach is currently limited.
+	Adding more stay duration data may fine tune the emerging similarity values.
+	Overall, more and finer city data, together with an appropriate representation and similarity function could eventually improve the occupancy estimations for clusters without parking data. 
 	
+	{\color{red}
 	\item \textbf{Integrate city data in machine learning models}.
-An alternative to building urban measures and similarity functions is to let machine learning figure out the similarities by itself.
-One can add the city data as further training information for clusters.
-The models are then applied on clusters without parking data and return occupancy estimations.
-The difference here is that models will be built for all clusters, including the ones without parking data.
-This also has the disadvantage of not using most of the parking data for training.
-The benefit of finding better similarities by leveraging unknown patterns in the city data may, however, outweigh this drawback. 
+	An alternative to building urban measures and similarity functions is to let machine learning figure out the similarities by itself.
+	One can add the city data as further training information for clusters.
+	The models are then applied on clusters without parking data and return occupancy estimations.
+	The difference here is that models will be built for all clusters, including the ones without parking data.
+	This also has the disadvantage of not using most of the parking data for training.
+	The benefit of finding better similarities by leveraging unknown patterns in the city data may, however, outweigh this drawback. 
+	}
 	
 	\item \textbf{Apply semi-supervised machine learning}.
-Another relevant machine learning approach in this case is based on organizing the city areas as an undirected graph.
-The vertices represent the clusters with their respective occupancy data, while the edges between them are assigned similarity values.
-Initially, only a part of the vertices have the occupancy value known, i.e., the clusters with parking data, while the rest has undetermined occupancy, i.e., the clusters without parking data.
-At each step, the value for a vertex whose value is undetermined is being computed by considering the occupancies of the linked vertices and their corresponding similarity values.
+	Another relevant machine learning approach in this case is based on organizing the city areas as an undirected graph.
+	The vertices represent the clusters with their respective occupancy data, while the edges between them are assigned similarity values.
+	Initially, only a part of the vertices have the occupancy value known, i.e., the clusters with parking data, while the rest has undetermined occupancy, i.e., the clusters without parking data.
+	At each step, the value for a vertex whose value is undetermined is being computed by considering the occupancies of the linked vertices and their corresponding similarity values.
 \end{enumerate} 
+
 
 \section{Conclusion}
 In this work, we have presented an attempt at approximating street parking occupancy in cities.
@@ -695,6 +914,7 @@ In the same configuration, both \textit{cosine similarity} and \textit{EMD dista
 Overall, \textit{cosine similarity} achieved better correlations than \textit{emd}.
 Finally, the models for 8 clusters produced superior results over the models for 16 clusters. 
 
+{\color{green}(add conclusion of new results)}
 
 %\begin{acks}
 %  The authors would like to thank Dr. Yuhua Li for providing the
