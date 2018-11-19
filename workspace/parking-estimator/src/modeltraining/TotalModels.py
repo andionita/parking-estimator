@@ -203,7 +203,8 @@ def runSingleAll(clusterId, method):
     else:
         clusterDataframe = preprocess(trainingDataframe)
         print("\nNumber of samples = " + str(len(clusterDataframe.index)))
-        X = clusterDataframe[['year', 'week', 'weekday', 'hour', 'price_rate', ''''cosine_cat1', 'cosine_cat2', 'cosine_cat3', 'emd',''' 'total_spots']]
+        #X = clusterDataframe[['year', 'week', 'weekday', 'hour', 'price_rate', 'cosine_cat1', 'cosine_cat2', 'cosine_cat3', 'emd', 'total_spots']]
+        X = clusterDataframe[['year', 'week', 'weekday', 'hour', 'price_rate', 'total_spots']]
         y = clusterDataframe['occupied']
         models = {}
         trainingScores = {}
@@ -246,7 +247,8 @@ def runSingleAll(clusterId, method):
         # Retrieve the cluster occupancy data for testing
         targetClusterData = queryCluster(clusterId)
         targetClusterData = preprocess(targetClusterData)
-        X_test = targetClusterData[['year', 'week', 'weekday', 'hour', 'price_rate', ''''cosine_cat1', 'cosine_cat2', 'cosine_cat3', 'emd',''' 'total_spots']]
+        #X_test = targetClusterData[['year', 'week', 'weekday', 'hour', 'price_rate', 'cosine_cat1', 'cosine_cat2', 'cosine_cat3', 'emd', 'total_spots']]
+        X_test = targetClusterData[['year', 'week', 'weekday', 'hour', 'price_rate', 'total_spots']]
         y_test = targetClusterData['occupied']
         # Determining the model with the best test error (RMSE)
         minError = 1001
