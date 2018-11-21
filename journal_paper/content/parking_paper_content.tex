@@ -527,8 +527,8 @@ Extreme gradient boosting claims the first spot in both cases.
 	\begin{tabular}{ | c | c | c | c | c |}
 		\hline
 		& \textbf{dt} & \textbf{svm} & \textbf{mlp} & \textbf{xgb} \\ \hline
-		\textbf{8 clusters} & 24.6\% & 17.5\% & 12.3\% & 45.6\% \\ \hline
-		\textbf{16 clusters} & 14.6\% & 13.8\% & 13.8\% & 57.9\% \\ \hline
+		\textbf{8 clusters} & 24.6\% & 17.5\% & 12.3\% & \textbf{45.6\%} \\ \hline
+		\textbf{16 clusters} & 14.6\% & 13.8\% & 13.8\% & \textbf{57.9\%} \\ \hline
 	\end{tabular}
 	\caption{The proportion of best models among decision trees, support vector machine, multilayer perceptron and gradient boosting  measured as RMSE when applied on all pairs of clusters}
 	\label{evaluation:best_model_method}
@@ -601,15 +601,15 @@ We have evaluated both cosine and EMD similarity values in configurations of 8 a
 Additionally, we varied the \textit{merge distance} to see how the correlation behaves.
 The similarity values are hence calculated for 100m, 200m, and 400m merge distance respectively.
 In \autoref{evaluation:similarity_vs_estimation} the final results are shown.
-For each correlation measure, the percent of similarity values were calculated that correlated positively, in case of EMD distance, or negatively, for cosine similarity, with the estimation errors.
-The models taken were trained with gradient boosted trees. 
+{\color{orange}For each similarity measure (cosine, rank cosine, emd, rank emd), the correlation value between the similarity and parking occupancy values is averaged over all clusters. For cosine measure, a negative correlation is optimal, whereas for emd, a positive correlation value is beneficial. The models taken were trained with gradient boosted trees. 
 
-We notice that the cosine similarity achieves better results than EMD for the same testing configuration, peaking at 100\% negative correlation for 8 clusters and 100m merge distance.
+We notice that the cosine similarity achieves better results than EMD for the same testing configuration, peaking for 8 clusters and 100m merge distance.
 Its average Pearson coefficient is $-0.55$, while the mean Spearman rank coefficient is $-0.49$.
-EMD positively correlates the most for the same testing configuration, when the average Pearson coefficient is at $0.28$ and Spearman's rank coefficient equals $0.23$.
-There is a clear descending trend in correlations, as the merge distance increases.  Also, the results for 8 clusters are superior to the ones when the city is split in 16 clusters.
+EMD positively correlates the most for the same testing configuration (8 clusters, 100m), when the average Pearson coefficient is at $0.28$ and Spearman's rank coefficient equals $0.23$.
+There is a clear descending trend in correlations, as the merge distance increases.  Also, the results for 8 clusters are superior to the ones when the city is split in 16 clusters.}
 
 \begin{table}[!ht]
+	{\color{orange}
 	\centering
 	\small
 	%\setlength\extrarowheight{5pt}
@@ -618,24 +618,31 @@ There is a clear descending trend in correlations, as the merge distance increas
 		\hline
 		{} & \multicolumn{4}{c|}{8 clusters} \\ \hline
 		{merge distance} & cosine & rank\_cosine & emd & rank\_emd \\ \hline
-		100m & \textbf{100\%} & \textbf{100\%} & \textbf{87.5\%} & \textbf{75\%} \\ \hline
-		200m & 75\% & 75\% & 75\% & 75\% \\ \hline
-		400m & 62.5\% & 50\% & 75\% & 75\% \\ \hline
+		100m & \textbf{-0.55} & \textbf{-0.49} & \textbf{0.28} & 0.23 \\ \hline
+		%100m & \textbf{100\%} & \textbf{100\%} & \textbf{87.5\%} & \textbf{75\%} \\ \hline
+		200m & -0.34 & -0.30 & 0.26	& 0.23 \\ \hline
+		%200m & 75\% & 75\% & 75\% & 75\% \\ \hline
+		400m & -0.23 & -0.08 & 0.25 & \textbf{0.27} \\ \hline
+		%400m & 62.5\% & 50\% & 75\% & 75\% \\ \hline
 	\end{tabular}%}
 	\vspace{3em}
 	\begin{tabular}{ | c | c | c | c | c | }
 		\hline
 		{} & \multicolumn{4}{c|}{16 clusters} \\ \hline
 		{merge distance} & cosine & rank\_cosine & emd & rank\_emd \\ \hline
-		100m & 75\% & 75\% & 68.75\% & 62.5\% \\ \hline
-		200m & 75\% & 75\% & 56.3\% & 56.3\% \\ \hline
-		400m & 68.8\% & 68.8\% & 62.5\% & 62.5\% \\ \hline
+		100m & \textbf{-0.20} & \textbf{-0.17} & \textbf{0.10} & \textbf{0.11} \\ \hline
+		%100m & 75\% & 75\% & 68.75\% & 62.5\% \\ \hline
+		200m & -0.13 & -0.11 & 0.02 & 0.02 \\ \hline
+		%200m & 75\% & 75\% & 56.3\% & 56.3\% \\ \hline
+		400m & -0.17 & -0.17 & 0.08 & 0.11 \\ \hline
+		%400m & 68.8\% & 68.8\% & 62.5\% & 62.5\% \\ \hline
 	\end{tabular}
 	
-	\caption{Correlations between similarity values and model estimations errors for pairs of clusters \textit{with} parking data ($\mathcal{C}_{source}, \mathcal{C}_{target})$.
+	\caption{\color{orange}Correlations between similarity values and model estimations errors for pairs of clusters \textit{with} parking data ($\mathcal{C}_{source}, \mathcal{C}_{target})$.
 For cosine similarity, the proportions show the negative correlation, while for EMD, they express the positive correlation.
 The Pearson coefficient and Spearman's rank coefficient were used. }
 	\label{evaluation:similarity_vs_estimation}
+	} %{\color{orange}
 \end{table}	
 
 \subsection{Estimations for Clusters \textit{without} Parking Data}
@@ -680,10 +687,10 @@ Recall that in \Cref{evaluation:model_training}, the training data for a cluster
 		\begin{tabular}{ | c | c | c | c | c |}
 			\hline
 			\textbf{block id} & \textbf{timestamp} & \textbf{price rate} & \textbf{total spots} & \textbf{occupied} \\ \hline
-			902 & {2011-04-02 7:00:00} & 0 & 46 & 58 \\ \hline
+			902   & {2011-04-02 7:00:00} & 0 & 46 & 58 \\ \hline
 			32800 & {2011-04-02 7:00:00} & 0 & 32 & 2 \\ \hline
 			33005 & {2011-04-02 7:00:00} & 3 & 36 & 12 \\ \hline
-			902 & {2011-04-02 8:00:00} & 2 & 46 & 54 \\ \hline
+			902   & {2011-04-02 8:00:00} & 2 & 46 & 54 \\ \hline
 			32800 & {2011-04-02 8:00:00} & 4 & 32 & 5 \\ \hline
 			33005 & {2011-04-02 8:00:00} & 3 & 36 & 22 \\ \hline
 		\end{tabular}
@@ -691,8 +698,8 @@ Recall that in \Cref{evaluation:model_training}, the training data for a cluster
 		\begin{tabular}{ | c | c | c | c | c |}
 			\hline
 			\textbf{cluster id} & \textbf{timestamp} & \textbf{price rate} & \textbf{total spots} & \textbf{occupied} \\ \hline
-			1 & {2011-04-02 10:00:00} & 1 & 34 & 26 \\ \hline
-			1 & {2011-04-02 11:00:00} & 3 & 34 & 27 \\ \hline
+			1 & {2011-04-02 7:00:00} & \textbf{1} & \textbf{34} & \textbf{26} \\ \hline
+			1 & {2011-04-02 8:00:00} & \textbf{3} & \textbf{34} & \textbf{27} \\ \hline
 		\end{tabular}
 \end{tabular}}
 \caption{\color{green} Example of aggregating datapoints; left-hand side are three blocks belonging to cluster 1 which are transformed into two entries by averaging \textit{price rate}, \textit{total spots} and \textit{occupied} attributes per timestamp (right-hand side)}
@@ -708,11 +715,11 @@ Recall that in \Cref{evaluation:model_training}, the training data for a cluster
 	\begin{tabular}{ | c | c | c | c | c | c | }
 		\hline
 		{cluster size} & datapoints & {training error} & {test error} \\ \hline
-		8	&	aggregate &	12.92	&	20.13 \\ \hline
-		8	&	all		&	19.41	&	26.86 \\ \hline
-		16	&	aggregate	&	13.52	&	20.52 \\ \hline
-		16	&	all		&	19.05	&	26.36 \\ \hline
-		32	&	aggregate	&	14.59	&	21.67 \\ \hline
+		8	&	aggregate &	\textbf{12.92}	& \textbf{20.13} \\ \hline
+		8	&	all		&	19.41	&	26.86 \\ \hline \hline
+		16	&	aggregate	&	\textbf{13.52}	&	\textbf{20.52} \\ \hline
+		16	&	all		&	19.05	&	26.36 \\ \hline \hline
+		32	&	aggregate	&	\textbf{14.59}	&	\textbf{21.67} \\ \hline
 		32	&	all		&	18.54	&	27.50 \\ \hline
 	\end{tabular}%}
 	\caption{\color{green} Train and test error for the ML models build with all datapoints; the same values are shows by comparison for the models build on aggregate datapoints for 8, 16 and 32 clusters; all models above were build using extreme gradient boosting}
@@ -729,11 +736,11 @@ Recall that in \Cref{evaluation:model_training}, the training data for a cluster
 	\begin{tabular}{ | c | c | c | c | c | c | }
 		\hline
 		{cluster size} & datapoints & cosine & rank\_cosine & emd & rank\_emd \\ \hline
-		8	&	aggregate	&	-0.47	&	-0.50	&	0.26	&	0.17 \\ \hline
-		8	&	all		&	-0.41	&	-0.42	&	0.34	&	0.25 \\ \hline
-		16	&	aggregate	&	-0.11	&	-0.11	&	0.14	&	0.10 \\ \hline
-		16	&	all		&	-0.02	&	-0.14	&	0.13	&	0.12 \\ \hline
-		32	&	aggregate	&	-0.13	&	-0.06	&	0.09	&	0.07 \\ \hline
+		8	&	aggregate	&	\textbf{-0.47}	&	\textbf{-0.50}	&	0.26	&	0.17 \\ \hline
+		8	&	all		&	-0.41	&	-0.42	&	\textbf{0.34}	&	\textbf{0.25} \\ \hline \hline
+		16	&	aggregate	&	\textbf{-0.11}	&	-0.11	&	\textbf{0.14}	&	0.10 \\ \hline
+		16	&	all		&	-0.02	&	\textbf{-0.14}	&	0.13	&	\textbf{0.12} \\ \hline \hline
+		32	&	aggregate	&	\textbf{-0.13}	&	\textbf{-0.06}	&	\textbf{0.09}	&	\textbf{0.07} \\ \hline
 		32	&	all		&	-0.01	&	-0.02	&	0.03	&	0.01 \\ \hline
 	\end{tabular}%}
 	\caption{\color{green} Resulting correlation values for ML models built using all datapoints alongside correlations of models based on aggregate datapoints for 8, 16 and 32 clusters; all models above were build using extreme gradient boosting}
@@ -802,12 +809,12 @@ Replacing the amenity area's key values in the similarity computation, i.e. cate
 	\begin{tabular}{ | c | c | c | c | c | c | c | }
 		\hline
 		{cluster size} & {amenity type} & method & cosine & rank\_cosine & emd & rank\_emd \\ \hline
-		8 & timespent & xgb & -0.47 & -0.50 & 0.26 & 0.17 \\ \hline
-		8 & area & xgb & -0.20 & -0.18 & 0.14 & 0.22 \\ \hline
-		16 & timespent & xgb & -0.11 & -0.11 & 0.14 & 0.10 \\ \hline
-		16 & area & xgb & -0.05 & -0.01 & 0.05 & 0.03 \\ \hline
-		32 & timespent & xgb & -0.13 & -0.06 & 0.09 & 0.07 \\ \hline
-		32 & area & xgb & 0.08 & 0.06 & -0.05 & -0.02 \\ \hline
+		8 & timespent & xgb & \textbf{-0.47} & \textbf{-0.50} & \textbf{0.26} & 0.17 \\ \hline
+		8 & area & xgb & -0.20 & -0.18 & 0.14 & \textbf{0.22} \\ \hline \hline
+		16 & timespent & xgb & \textbf{-0.11} & \textbf{-0.11} & \textbf{0.14} & \textbf{0.10} \\ \hline
+		16 & area & xgb & -0.05 & -0.01 & 0.05 & 0.03 \\ \hline \hline
+		32 & timespent & xgb & \textbf{-0.13} & \textbf{-0.06} & \textbf{0.09} & \textbf{0.07} \\ \hline
+		32 & area & xgb & 0.08 & 0.06 & -0.05 & -0.02 \\ \hline \hline
 	\end{tabular}%}
 	\caption{\color{green} The correlation results based on the amenity area values.}
 	\label{extensions:correlation_amenity_area}}
@@ -828,18 +835,18 @@ The subsequently built machine learning models cannot however be formed on a sin
 	\begin{tabular}{ | c | c | c | c | }
 		\hline		
 		\textbf{cluster size}  & \textbf{model} & \textbf{training error avg} & \textbf{test error avg} \\ \hline
-		8 & {xgb} & 17.90 & 18.01 \\ \hline
-		8 & {xgb extended} & 17.46 & 19.08 \\ \hline
-		8 & {dt} & 18.85 & 18.52 \\ \hline
-		8 & {dt extended} & 19.84 & 19.46 \\ \hline
+		8 & {xgb} & 17.90 & \textbf{18.01} \\ \hline
+		8 & {xgb extended} & \textbf{17.46} & 19.08 \\ \hline \hline
+		8 & {dt} & \textbf{18.85} & \textbf{18.52} \\ \hline
+		8 & {dt extended} & 19.84 & 19.46 \\ \hline \hline
 		%8 & {svm} & TBD & TBD \\ \hline
 		%8 & {svm extended} & 20.15 & 23.62 \\ \hline
 		%8 & {mlp} & TBD & TBD \\ \hline
 		%8 & {mlp extended} & 54.62 & 203.22 \\ \hline
-		16 & {xgb} & TBD & TBD \\ \hline
-		16 & {xgb extended} & 17.63 & 17.02 \\ \hline
-		16 & {dt} & TBD & TBD \\ \hline
-		16 & {dt extended} & 18.77 & 17.81 \\ \hline
+		16 & {xgb} & 18.42 & 18.26 \\ \hline
+		16 & {xgb extended} & \textbf{17.63} & \textbf{17.02} \\ \hline \hline
+		16 & {dt} & 19.14 & 18.83 \\ \hline
+		16 & {dt extended} & \textbf{18.77} & \textbf{17.81} \\ \hline
 		%16 & {svm} & TBD & TBD \\ \hline
 		%16 & {svm extended} & 22.52 & 23.49 \\ \hline
 		%16 & {mlp} & TBD & TBD \\ \hline
