@@ -19,6 +19,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     all_datapoints = args['all-datapoints']
+    print("Executing with arguments: all-datapoints=" + str(all_datapoints))
 
     server = SSHTunnelForwarder('cloud31.dbis.rwth-aachen.de', ssh_username="ionita", ssh_password="andigenu", remote_bind_address=('127.0.0.1', 5432))
 
