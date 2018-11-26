@@ -393,7 +393,7 @@ if __name__ == "__main__":
         method = method.lower()
     nodb = args.nodb
     noeval = args.noeval
-    all_datapoints = args['all-datapoints']
+    all_datapoints = args.all_datapoints
     print("Executing with arguments " + str(clusterId) + " method: " + str(method)
             + " n_clusters: " + str(n_clusters)
             + " nodb: " + str(nodb) + " noeval: " + str(noeval)
