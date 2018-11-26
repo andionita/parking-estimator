@@ -9,6 +9,7 @@ Input parameters:
 - method
 - nodb -> option of not writing the results in the database
 - noeval -> option of not evaluating the built models
+# TODO:
 
 Usage:
 BestClusterModelSelection.py [-h] [--method METHOD] [--nodb] [--noeval] clusterId
@@ -20,6 +21,8 @@ import argparse
 import sqlalchemy
 from sqlalchemy import MetaData, Table
 from sqlalchemy.sql import select, insert
+import sshtunnel
+from sshtunnel import SSHTunnelForwarder
 
 import pandas as pd
 import os.path
@@ -97,16 +100,21 @@ def preprocess( clusterDataframe ):
     return clusterDataframe
 
 
-def buildModel( method, clusterId, X, y ):
+def buildModel( method, clusterId, n_clusters, X, y, all_datapoints ):
     '''
     Trains a machine learning model using a given method (dt, svm, mlp or xgb) for a given cluster id and training data.
     :param method:
     :param clusterId:
     :param X: the input training data
     :param y: the output training data
+    todo
+
     :return: the pair consisting of the resulting model object together with its training error
     '''
-    filename = 'workspace/parking-estimator/persisted/clusterId' + str(clusterId) + '_' + method + '.pkl'
+    datapoints_str = 'agg'
+    if all_datapoints:
+        datapoints_str = 'all'
+    filename = 'workspace/parking-estimator/persisted/clusterId' + str(clusterId) + '_' + str(method) + '_' + str(datapoints_str) + "_" + str(n_clusters) + '.pkl'
 
     modelBest = None
     meanScore = None
@@ -213,13 +221,15 @@ def buildModel( method, clusterId, X, y ):
     return (modelBest, meanScore)
 
 
-def runSingle(clusterId, method, nodb, noeval):
+def runSingle(clusterId, n_clusters, method, nodb, noeval, all_datapoints):
     '''
     Runs the training and testing for a cluster and a given method.
     :param clusterId:
+    todo
     :param method:
     :param nodb:
     :param noeval:
+    todo
     :return:
     '''
 
@@ -227,15 +237,21 @@ def runSingle(clusterId, method, nodb, noeval):
     runTimestamp = datetime.datetime.now()
     runTimestamp.strftime('%Y-%m-%d %H:%M:%S')
 
-    engine = sqlalchemy.create_engine('postgres://andio:andigenu@localhost:5432/sfpark')
+    server = SSHTunnelForwarder('cloud31.dbis.rwth-aachen.de', ssh_username="ionita", ssh_password="andigenu", remote_bind_address=('127.0.0.1', 5432))
+
+    server.start()
+
+    engine = sqlalchemy.create_engine('postgres://aionita:andigenu@localhost:' + str(server.local_bind_port) + '/sfpark')
     conn = engine.connect()
 
     print
     print('-----> TRAINING MODELS <----')
     print
     # Retrieve training data for cluster
-    clusterDataframe = queryClusterAvg(clusterId, engine)
-    #clusterDataframe = queryClusterAll(clusterId, engine)
+    if all_datapoints:
+        clusterDataframe = queryClusterAll(clusterId, engine)
+    else:
+        clusterDataframe = queryClusterAvg(clusterId, engine)
 
     if len(clusterDataframe.index) == 0:
         print("Query for cluster " + str(clusterId) + " returned empty set. Are you sure this clusterId exists?")
@@ -254,28 +270,28 @@ def runSingle(clusterId, method, nodb, noeval):
 
         if method is not None:
             start = time.time()
-            models[method], trainingScores[method] = buildModel(method, clusterId, X, y)
+            models[method], trainingScores[method] = buildModel(method, clusterId, n_clusters, X, y, all_datapoints)
             timeElapsed[method] = time.time() - start
             print('Time elapsed: ' + str(timeElapsed[method]))
 
         else:
             start = time.time()
-            models['dt'], trainingScores['dt'] = buildModel('dt', clusterId, X, y)
+            models['dt'], trainingScores['dt'] = buildModel('dt', clusterId, n_clusters, X, y, all_datapoints)
             timeElapsed['dt'] = time.time() - start
             print('Time elapsed: ' + str(timeElapsed['dt']))
             print('-----\n')
             start = time.time()
-            models['svm'], trainingScores['svm'] = buildModel('svm', clusterId, X, y)
+            models['svm'], trainingScores['svm'] = buildModel('svm', clusterId, n_clusters, X, y, all_datapoints)
             timeElapsed['svm'] = time.time() - start
             print('Time elapsed: ' + str(timeElapsed['svm']))
             print('-----\n')
             start = time.time()
-            models['mlp'], trainingScores['mlp'] = buildModel('mlp', clusterId, X, y)
+            models['mlp'], trainingScores['mlp'] = buildModel('mlp', clusterId, n_clusters, X, y, all_datapoints)
             timeElapsed['mlp'] = time.time() - start
             print('Time elapsed: ' + str(timeElapsed['mlp']))
             print('-----\n')
             start = time.time()
-            models['xgb'], trainingScores['xgb'] = buildModel('xgb', clusterId, X, y)
+            models['xgb'], trainingScores['xgb'] = buildModel('xgb', clusterId, n_clusters, X, y, all_datapoints)
             timeElapsed['xgb'] = time.time() - start
             print('Time elapsed: ' + str(timeElapsed['xgb']))
             print
@@ -298,8 +314,10 @@ def runSingle(clusterId, method, nodb, noeval):
         for index, row in similarClusters.iterrows():
             simClusterId = int(row['cid2'])
 
-            similarClusterData = queryClusterAvg(simClusterId, engine)
-            #similarClusterData = queryClusterAll(simClusterId, engine)
+            if all_datapoints:
+                similarClusterData = queryClusterAll(simClusterId, engine)
+            else:
+                similarClusterData = queryClusterAvg(simClusterId, engine)
             similarClusterData = preprocess(similarClusterData)
 
             X_test = similarClusterData[['year', 'week', 'weekday', 'hour', 'price_rate', 'total_spots']]
@@ -343,12 +361,16 @@ def runSingle(clusterId, method, nodb, noeval):
             print('Best model is ' + selectedModelName)
             print('----------------------------------\n')
 
+    server.stop()
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Select the best Estimating Model for a Cluster by building or '
                                                  'load it, if it already exists')
     # clusterId (positional argument)
     parser.add_argument('clusterId', metavar='clusterId', type=int, help='cluster id (cwithid)')
+    # n_clusters (positional argument)
+    parser.add_argument('n_clusters', metavar='n_clusters', type=int, help='total number of clusters')
     # --method (optional)
     parser.add_argument('--method',
                         help='enforcing building a model using the specified method; '
@@ -359,17 +381,24 @@ if __name__ == "__main__":
     # --noeval (optional)
     parser.add_argument('--noeval', action='store_true',
                         help='skip the phase of selecting best model for similar clusters')
+    # --all-datapoints (optional)
+    parser.add_argument('--all-datapoints', action='store_true',
+                        help='do not aggregate datapoints per timestamp, instead use all occupancy data')
     args = parser.parse_args()
 
     clusterId = args.clusterId
+    n_clusters = args.n_clusters
     method = args.method
     if method is not None:
         method = method.lower()
     nodb = args.nodb
     noeval = args.noeval
+    all_datapoints = args.all_datapoints
     print("Executing with arguments " + str(clusterId) + " method: " + str(method)
-            + " nodb: " + str(nodb) + " noeval: " + str(noeval))
+            + " n_clusters: " + str(n_clusters)
+            + " nodb: " + str(nodb) + " noeval: " + str(noeval)
+            + " all_datapoints: " + str(all_datapoints))
     print
 
     # Train models for a cluster and method
-    runSingle(clusterId, method, nodb, noeval)
+    runSingle(clusterId, n_clusters, method, nodb, noeval, all_datapoints)

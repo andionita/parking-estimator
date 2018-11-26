@@ -14,7 +14,6 @@ WITH aux1 AS
       WHERE b.has_occupancy
       GROUP BY b.cwithid
       ORDER BY b.cwithid) AS aux2
---   WHERE a.name = ANY(aux2.amenity_list)
    GROUP BY aux2.cwithid, a.category
    ORDER BY aux2.cwithid, a.category)
 INSERT INTO cluster_cosine_vectors (cid, has_occupancy, dimid, dimvalue)
@@ -36,7 +35,6 @@ WITH aux AS
       WHERE NOT b.has_occupancy
       GROUP BY b.cwoutid
       ORDER BY b.cwoutid) AS TEMP
---   WHERE a.name = ANY(TEMP.amenity_list)
    GROUP BY TEMP.cwoutid, a.category
    ORDER BY TEMP.cwoutid, a.category)
 INSERT INTO cluster_cosine_vectors (cid, has_occupancy, dimid, dimvalue)
