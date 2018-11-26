@@ -114,7 +114,7 @@ def buildModel( method, clusterId, n_clusters, X, y, all_datapoints ):
     datapoints_str = 'agg'
     if all_datapoints:
         datapoints_str = 'all'
-    filename = 'workspace/parking-estimator/persisted/clusterId' + str(clusterId) + '_' + method + '_' + datapoints_str + "_" + n_clusters + '.pkl'
+    filename = 'workspace/parking-estimator/persisted/clusterId' + str(clusterId) + '_' + str(method) + '_' + str(datapoints_str) + "_" + str(n_clusters) + '.pkl'
 
     modelBest = None
     meanScore = None
