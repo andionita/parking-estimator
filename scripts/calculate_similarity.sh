@@ -3,13 +3,13 @@
 echo
 echo "-------------------------------------------------"
 echo "Calculating Cosine Similarity between clusters..."
-psql -U andio -h localhost -f ~/parking-estimator_git/scripts/clustering_process_2cosine.sql sfpark
+ssh ionita@cloud31.dbis.rwth-aachen.de "psql -U aionita -h localhost -f ~/parking/scripts/clustering_process_2cosine.sql sfpark"
 
 
 echo
 echo "-------------------------------------------------"
 echo "Calculating Earth Mover's Distance between clusters..."
-psql -U andio -h localhost -f ~/parking-estimator_git/scripts/clustering_process_2a_emd.sql sfpark
+ssh ionita@cloud31.dbis.rwth-aachen.de "psql -U aionita -h localhost -f ~/parking/scripts/clustering_process_2a_emd.sql sfpark"
 
 python3 workspace/parking-estimator/src/emd/AmenityEMD.py
 
