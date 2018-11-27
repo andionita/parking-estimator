@@ -1,2 +1,2 @@
 # persisted models
-/workspace/parking-estimator/persisted/
+/workspace/parking-estimator/persisted/*.pkl
