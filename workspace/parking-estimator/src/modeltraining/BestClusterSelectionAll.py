@@ -21,11 +21,7 @@ if __name__ == "__main__":
     all_datapoints = args.all_datapoints
     print("Executing with arguments: all-datapoints=" + str(all_datapoints))
 
-    server = SSHTunnelForwarder('cloud31.dbis.rwth-aachen.de', ssh_username="ionita", ssh_password="andigenu", remote_bind_address=('127.0.0.1', 5432))
-
-    server.start()
-
-    engine = sqlalchemy.create_engine('postgres://aionita:andigenu@localhost:' + str(server.local_bind_port) + '/sfpark')
+    engine = sqlalchemy.create_engine('postgres://andio:andigenu@localhost:5432/sfpark')
 
     allClusters = pd.read_sql_query("""SELECT DISTINCT(cwithid) FROM blocks WHERE has_occupancy ORDER BY cwithid;""",
                                     engine)
@@ -38,5 +34,3 @@ if __name__ == "__main__":
         print( '     Cluster ' + str(row['cwithid']) )
         print('--------------------')
         runSingle(row['cwithid'], n_clusters, None, False, False, all_datapoints )
-
-    server.stop()

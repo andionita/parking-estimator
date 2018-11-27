@@ -6,6 +6,7 @@ For the purpose of the thesis, it is enough that the results are written to stdo
 
 @author: Andrei Ionita
 '''
+import argparse
 import pandas as pd
 import numpy as np
 import xgboost as xg
@@ -31,8 +32,8 @@ from sklearn.metrics import mean_squared_error
 from scipy.stats import uniform as sp_randreal
 
 
-def queryAllExceptCluster( clusterId ):
-    print("Querying database for all occupancy data, except for cluster id: " + str(clusterId))
+def queryExtendedAllExceptCluster( clusterId ):
+    print("Querying database for all occupancy data, except for cluster id: " + str(clusterId) + " (extended version)")
     return pd.read_sql_query("""SELECT b.cwithid, o.timestamp, array_agg(o.block_id) AS blocks,
                                                     round(AVG(o.price_rate)::numeric,2) AS price_rate,
                                                     round(AVG(o.total_spots)::numeric,2) AS total_spots,
@@ -44,6 +45,16 @@ def queryAllExceptCluster( clusterId ):
                                                     GROUP BY b.cwithid, o.timestamp
                                                     ORDER BY b.cwithid, o.timestamp;""", engine)
 
+def queryAllExceptCluster( clusterId ):
+    print("Querying database for all occupancy data, except for cluster id: " + str(clusterId) )
+    return pd.read_sql_query("""SELECT b.cwithid, o.timestamp, array_agg(o.block_id) AS blocks,
+                                                    round(AVG(o.price_rate)::numeric,2) AS price_rate,
+                                                    round(AVG(o.total_spots)::numeric,2) AS total_spots,
+                                                    round(AVG(o.occupied)::numeric,2) AS occupied
+                                                    FROM occupancy o INNER JOIN blocks b ON o.block_id = b.block_id
+                                                    WHERE b.has_occupancy AND b.cwithid <> """ + str(clusterId) + """
+                                                    GROUP BY b.cwithid, o.timestamp
+                                                    ORDER BY b.cwithid, o.timestamp;""", engine)
 
 def queryCluster( clusterId ):
     print("Querying database for occupancy data for cluster id: " + str(clusterId))
@@ -70,25 +81,30 @@ def preprocess( trainingDataframe ):
     trainingDataframe['week'] = dt.week
     trainingDataframe['weekday'] = dt.weekday
     trainingDataframe['hour'] = dt.hour
-    #trainingDataframe[['cosine_cat1', 'cosine_cat2', 'cosine_cat3']] = pd.DataFrame(trainingDataframe['cosine'].values.tolist(), index=trainingDataframe['cosine'].index)
+    if 'cosine' in trainingDataframe:
+        trainingDataframe[['cosine_cat1', 'cosine_cat2', 'cosine_cat3']] = pd.DataFrame(trainingDataframe['cosine'].values.tolist(), index=trainingDataframe['cosine'].index)
+        trainingDataframe = trainingDataframe.drop(['cosine'], axis=1)
     # drop unneeded columns
     trainingDataframe = trainingDataframe.drop(['timestamp'], axis=1)
     if 'blocks' in trainingDataframe.columns:
         trainingDataframe = trainingDataframe.drop(['blocks'], axis=1)
-    #trainingDataframe = trainingDataframe.drop(['cosine'], axis=1)
     return trainingDataframe
 
 
-def buildModel( method, clusterId, X, y ):
+def buildModel( method, clusterId, X, y, extended, n_clusters ):
     '''
     Trains a machine learning model using a given method (dt, svm, mlp or xgb) for a given cluster id and training data.
     :param method:
     :param clusterId:
     :param X: the input training data
     :param y: the output training data
+    todo
     :return: the pair consisting of the resulting model object together with its training error
     '''
-    filename = 'workspace/parking-estimator/persisted/total_extended_model_except_' + str(clusterId) + '_' + method + '.pkl'
+    extended_str = ''
+    if extended:
+        extended_str = '_extended'
+    filename = 'workspace/parking-estimator/persisted/total_model_except_' + str(clusterId) + '_' + method + '_' + str(n_clusters) + str(extended) + '.pkl'
     # In case we later want to skip model training and load a persisted model
     #if os.path.isfile(filename):
     #    print('Loading existing model...')
@@ -181,11 +197,12 @@ def buildModel( method, clusterId, X, y ):
     return (modelBest, meanScore)
 
 
-def runSingleAll(clusterId, method):
+def runSingleAll(clusterId, method, extended, n_clusters):
     '''
     Runs the training and testing for a cluster and a given method.
     :param clusterId:
     :param method:
+    todo
     :return:
     '''
     # Set the timestamp when this run is executed
@@ -195,42 +212,47 @@ def runSingleAll(clusterId, method):
     print('-----> TRAINING MODELS <----')
     print
     # Retrieve training data (all minus given cluster)
-    trainingDataframe = queryAllExceptCluster(clusterId)
+    if extended:
+        trainingDataframe = queryExtendedAllExceptCluster(clusterId)
+    else:
+        trainingDataframe = queryAllExceptCluster(clusterId)
     if len(trainingDataframe.index) == 0:
         print("Query for data returned empty set. Are you sure data exists except for the clusterid " + clusterId + "?")
     else:
         clusterDataframe = preprocess(trainingDataframe)
         print("\nNumber of samples = " + str(len(clusterDataframe.index)))
-        #X = clusterDataframe[['year', 'week', 'weekday', 'hour', 'price_rate', 'cosine_cat1', 'cosine_cat2', 'cosine_cat3', 'emd', 'total_spots']]
-        X = clusterDataframe[['year', 'week', 'weekday', 'hour', 'price_rate', 'total_spots']]
+        if extended:
+            X = clusterDataframe[['year', 'week', 'weekday', 'hour', 'price_rate', 'cosine_cat1', 'cosine_cat2', 'cosine_cat3', 'emd', 'total_spots']]
+        else:
+            X = clusterDataframe[['year', 'week', 'weekday', 'hour', 'price_rate', 'total_spots']]
         y = clusterDataframe['occupied']
         models = {}
         trainingScores = {}
         timeElapsed = {}
         if method is not None:
             start = time.time()
-            models[method], trainingScores[method] = buildModel(method, clusterId, X, y)
+            models[method], trainingScores[method] = buildModel(method, clusterId, X, y, extended, n_clusters)
             timeElapsed[method] = time.time() - start
             print('Time elapsed: ' + str(timeElapsed[method]))
         else:
             # build models for all methods (dt, svm, mlp, xgb)
             start = time.time()
-            models['dt'], trainingScores['dt'] = buildModel('dt', clusterId, X, y)
+            models['dt'], trainingScores['dt'] = buildModel('dt', clusterId, X, y, extended, n_clusters)
             timeElapsed['dt'] = time.time() - start
             print('Time elapsed: ' + str(timeElapsed['dt']))
             print('-----\n')
             start = time.time()
-            models['svm'], trainingScores['svm'] = buildModel('svm', clusterId, X, y)
+            models['svm'], trainingScores['svm'] = buildModel('svm', clusterId, X, y, extended, n_clusters)
             timeElapsed['svm'] = time.time() - start
             print('Time elapsed: ' + str(timeElapsed['svm']))
             print('-----\n')
             start = time.time()
-            models['mlp'], trainingScores['mlp'] = buildModel('mlp', clusterId, X, y)
+            models['mlp'], trainingScores['mlp'] = buildModel('mlp', clusterId, X, y, extended, n_clusters)
             timeElapsed['mlp'] = time.time() - start
             print('Time elapsed: ' + str(timeElapsed['mlp']))
             print('-----\n')
             start = time.time()
-            models['xgb'], trainingScores['xgb'] = buildModel('xgb', clusterId, X, y)
+            models['xgb'], trainingScores['xgb'] = buildModel('xgb', clusterId, X, y, extended, n_clusters)
             timeElapsed['xgb'] = time.time() - start
             print('Time elapsed: ' + str(timeElapsed['xgb']))
             print
@@ -245,8 +267,10 @@ def runSingleAll(clusterId, method):
         # Retrieve the cluster occupancy data for testing
         targetClusterData = queryCluster(clusterId)
         targetClusterData = preprocess(targetClusterData)
-        #X_test = targetClusterData[['year', 'week', 'weekday', 'hour', 'price_rate', 'cosine_cat1', 'cosine_cat2', 'cosine_cat3', 'emd', 'total_spots']]
-        X_test = targetClusterData[['year', 'week', 'weekday', 'hour', 'price_rate', 'total_spots']]
+        if extended:
+            X_test = targetClusterData[['year', 'week', 'weekday', 'hour', 'price_rate', 'cosine_cat1', 'cosine_cat2', 'cosine_cat3', 'emd', 'total_spots']]
+        else:
+            X_test = targetClusterData[['year', 'week', 'weekday', 'hour', 'price_rate', 'total_spots']]
         y_test = targetClusterData['occupied']
         # Determining the model with the best test error (RMSE)
         minError = 1001
@@ -294,15 +318,19 @@ def runSingleAll(clusterId, method):
 if __name__ == "__main__":
     #reload(sys)
     #sys.setdefaultencoding("utf-8")
-    server = SSHTunnelForwarder('cloud31.dbis.rwth-aachen.de', ssh_username="ionita", ssh_password="andigenu", remote_bind_address=('127.0.0.1', 5432))
-    server.start()
-    #engine = sqlalchemy.create_engine('postgres://aionita:andigenu@localhost:5432/sfpark')
-    engine = sqlalchemy.create_engine('postgres://aionita:andigenu@localhost:' + str(server.local_bind_port) + '/sfpark')
+    parser = argparse.ArgumentParser(description='This module trains models based on the entire parking data except one cluster')
+    parser.add_argument('--extended', action='store_true',
+                        help='include cosine and emd as features in the training data')
+    args = parser.parse_args()
+    extended = args.extended
+    print("Executing with arguments extended=" + str(extended))
+    engine = sqlalchemy.create_engine('postgres://andio:andigenu@localhost:5432/sfpark')
     conn = engine.connect()
     modelsTable = Table('models', MetaData(engine), autoload=True)
     # Querying the cluster ids of the areas with parking data
-    cwithidFrame = pd.read_sql_query("""SELECT DISTINCT ON (cwithid) cwithid FROM blocks WHERE has_occupancy""", engine);
+    cwithidFrame = pd.read_sql_query("""SELECT DISTINCT ON (cwithid) cwithid FROM blocks WHERE has_occupancy""", engine)
+    n_clusters = len(cwithidFrame.index)
+    print('Building Total Models for ' + str(n_clusters) + ' clusters.')
     for index, row in cwithidFrame.iterrows():
         cwithid = row['cwithid']
-        runSingleAll(cwithid, None)
-    server.stop()
+        runSingleAll(cwithid, None, extended, n_clusters)

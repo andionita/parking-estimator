@@ -64,8 +64,13 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Compute Estimations for Clusters without Data')
     # clusterId (positional argument)
     parser.add_argument('--simtype', help='similarity or distance, e.g. cosine or emd; by default cosine')
+
+    parser.add_argument('--all-datapoints', action='store_true',
+                            help='do not aggregate datapoints per timestamp, instead use all occupancy data')
     args = parser.parse_args()
     simtype = args.simtype
+    all_datapoints = args.all_datapoints
+    print("Executing with arguments simtype=" + str(simtype) + " and all_datapoints=" + str(all_datapoints))
 
     # Setting timestamps for training data to the following day, eight times thoughout the day
     today = datetime.today()
@@ -90,11 +95,7 @@ if __name__ == "__main__":
     testrecords = bcms.preprocess(testrecords)
     testrecords = testrecords[['year', 'week', 'weekday', 'hour', 'price_rate', 'total_spots']]
 
-    server = SSHTunnelForwarder('cloud31.dbis.rwth-aachen.de', ssh_username="ionita", ssh_password="andigenu", remote_bind_address=('127.0.0.1', 5432))
-    
-    server.start()
-
-    engine = sqlalchemy.create_engine('postgres://aionita:andigenu@localhost:' + str(server.local_bind_port) + '/sfpark')
+    engine = sqlalchemy.create_engine('postgres://andio:andigenu@localhost:5432/sfpark')
 
     # Query cwith - cwout associations for both cosine and emd similarities
     cwout_results_cosine = get_cwout_results('cosine')
@@ -103,6 +104,9 @@ if __name__ == "__main__":
     # Merge the dataframes
     cwout_results = pd.concat([cwout_results_cosine, cwout_results_emd]).sort_index(kind = 'merge')
 
+    datapoints_str = 'agg'
+    if all_datapoints:
+        datapoints_str = 'all'
     resultingJsonArray = []
     # Iterate through the clusters without parking data and for each model with parking data compute an estimation
     # On odd iterations, estimations based on cosine similarity will be made
@@ -117,7 +121,7 @@ if __name__ == "__main__":
         innerJsonArray = []
         print('Processing Cluster Wout ' + str(cwoutid) )
         for i in range(0, len(cwithids)):
-            filename = 'workspace/parking-estimator/persisted/clusterId' + str(cwithids[i]) + '_' + str(model_names[i]) + '.pkl'
+            filename = 'workspace/parking-estimator/persisted/clusterId' + str(cwithids[i]) + '_' + str(model_names[i]) + '_' + str(datapoints_str) + "_" + str(len(cwithids)) + '.pkl'
             model = joblib.load(filename)
             estimations = model.predict(testrecords)
             results = [{"timepoint" : str(t), "estimation": str(e)} for t, e in zip(timestamps, estimations)]
@@ -137,7 +141,7 @@ if __name__ == "__main__":
         similarity_types = cwout_results.iloc[index + 1]['similarity_types']
 
         for i in range(0, len(cwithids)):
-            filename = 'workspace/parking-estimator/persisted/clusterId' + str(cwithids[i]) + '_' + str(model_names[i]) + '.pkl'
+            filename = 'workspace/parking-estimator/persisted/clusterId' + str(cwithids[i]) + '_' + str(model_names[i]) + '_' + str(datapoints_str) + "_" + str(len(cwithids)) + '.pkl'
             model = joblib.load(filename)
             estimations = model.predict(testrecords)
             results = [{"timepoint" : str(t), "estimation": str(e)} for t, e in zip(timestamps, estimations)]
@@ -158,5 +162,3 @@ if __name__ == "__main__":
     # Save the timepoints as json
     with open('workspace/parking-estimator/jsons/estimations_cwout.json', 'w') as outfile:
         json.dump(resultingJsonArray, outfile)
-
-    server.stop()
