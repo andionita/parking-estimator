@@ -324,7 +324,10 @@ if __name__ == "__main__":
     args = parser.parse_args()
     extended = args.extended
     print("Executing with arguments extended=" + str(extended))
-    engine = sqlalchemy.create_engine('postgres://andio:andigenu@localhost:5432/sfpark')
+    server = SSHTunnelForwarder('cloud31.dbis.rwth-aachen.de', ssh_username="ionita", ssh_password="andigenu", remote_bind_address=('127.0.0.1', 5432))
+    server.start()
+
+    engine = sqlalchemy.create_engine('postgres://aionita:andigenu@localhost:' + str(server.local_bind_port) + '/sfpark')
     conn = engine.connect()
     modelsTable = Table('models', MetaData(engine), autoload=True)
     # Querying the cluster ids of the areas with parking data
@@ -334,3 +337,4 @@ if __name__ == "__main__":
     for index, row in cwithidFrame.iterrows():
         cwithid = row['cwithid']
         runSingleAll(cwithid, None, extended, n_clusters)
+    server.stop()

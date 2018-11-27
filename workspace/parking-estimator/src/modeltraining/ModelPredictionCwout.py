@@ -95,7 +95,9 @@ if __name__ == "__main__":
     testrecords = bcms.preprocess(testrecords)
     testrecords = testrecords[['year', 'week', 'weekday', 'hour', 'price_rate', 'total_spots']]
 
-    engine = sqlalchemy.create_engine('postgres://andio:andigenu@localhost:5432/sfpark')
+    server = SSHTunnelForwarder('cloud31.dbis.rwth-aachen.de', ssh_username="ionita", ssh_password="andigenu", remote_bind_address=('127.0.0.1', 5432))
+    server.start()
+    engine = sqlalchemy.create_engine('postgres://aionita:andigenu@localhost:' + str(server.local_bind_port) + '/sfpark')
 
     # Query cwith - cwout associations for both cosine and emd similarities
     cwout_results_cosine = get_cwout_results('cosine')
@@ -162,3 +164,5 @@ if __name__ == "__main__":
     # Save the timepoints as json
     with open('workspace/parking-estimator/jsons/estimations_cwout.json', 'w') as outfile:
         json.dump(resultingJsonArray, outfile)
+
+    server.stop()

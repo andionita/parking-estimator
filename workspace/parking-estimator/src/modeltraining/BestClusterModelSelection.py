@@ -237,7 +237,9 @@ def runSingle(clusterId, n_clusters, method, nodb, noeval, all_datapoints):
     runTimestamp = datetime.datetime.now()
     runTimestamp.strftime('%Y-%m-%d %H:%M:%S')
 
-    engine = sqlalchemy.create_engine('postgres://andio:andigenu@localhost:5432/sfpark')
+    server = SSHTunnelForwarder('cloud31.dbis.rwth-aachen.de', ssh_username="ionita", ssh_password="andigenu", remote_bind_address=('127.0.0.1', 5432))
+    server.start()
+    engine = sqlalchemy.create_engine('postgres://aionita:andigenu@localhost:' + str(server.local_bind_port) + '/sfpark')
     conn = engine.connect()
 
     print
@@ -357,7 +359,7 @@ def runSingle(clusterId, n_clusters, method, nodb, noeval, all_datapoints):
             print('Best model is ' + selectedModelName)
             print('----------------------------------\n')
 
-    #server.stop()
+    server.stop()
 
 
 if __name__ == "__main__":
