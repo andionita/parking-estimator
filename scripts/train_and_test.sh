@@ -5,10 +5,17 @@
 #		models for all clusters will be trained
 #   train_and_test.sh --skip-training
 #		skips model training (persisted models will be used)
+#   train_and_test.sh --all-datapoints
+#               when building models do not aggregate datapoints per timestamp, instead use all occupancy data 
+
 
 if [ "$1" != "--skip-training" ]; then
 	echo "Starting to train the models..."
-	python workspace/parking-estimator/src/modeltraining/BestClusterSelectionAll.py
+	if [ "$1" == "--all-datapoints" ]; then
+		python workspace/parking-estimator/src/modeltraining/BestClusterSelectionAll.py --all-datapoints
+	else
+		python workspace/parking-estimator/src/modeltraining/BestClusterSelectionAll.py
+	fi
 else
 	echo "Skipping model training"
 fi
