@@ -1,2 +1,7 @@
 # persisted models
 /workspace/parking-estimator/persisted/*.pkl
+
+# ignoric compiled python modules
+*.pyc
+
+
