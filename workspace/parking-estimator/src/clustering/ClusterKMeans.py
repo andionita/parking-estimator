@@ -85,18 +85,12 @@ if __name__ == "__main__":
     print( str(cwith_no) + " areas have parking data, " + str(cwout_no) + " have no parking data")
     print
 
-    server = SSHTunnelForwarder('cloud31.dbis.rwth-aachen.de', ssh_username="ionita", ssh_password="andigenu", remote_bind_address=('127.0.0.1', 5432))
-
-    server.start()
-
-    engine = sqlalchemy.create_engine('postgres://aionita:andigenu@localhost:' + str(server.local_bind_port) + '/sfpark')
+    engine = sqlalchemy.create_engine('postgres://andio:andigenu@localhost:5432/sfpark')
     conn = engine.connect()
     metadata = MetaData(engine)
     blocksTable = Table('blocks', metadata, autoload=True)
 
     cluster_zone(True, cwith_no, blocksTable, engine)
     cluster_zone(False, int(cwith_no * 2.6), blocksTable, engine)
-
-    server.stop()
 
     print("Clustering finished.")

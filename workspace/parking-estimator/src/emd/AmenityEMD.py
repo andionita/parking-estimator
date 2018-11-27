@@ -135,11 +135,7 @@ def calculateDistance(gaussianMap1, has1, gaussianMap2, has2):
 
 
 if __name__ == "__main__":
-    server = SSHTunnelForwarder('cloud31.dbis.rwth-aachen.de', ssh_username="ionita", ssh_password="andigenu", remote_bind_address=('127.0.0.1', 5432))
-
-    server.start()
-
-    engine = sqlalchemy.create_engine('postgres://aionita:andigenu@localhost:' + str(server.local_bind_port) + '/sfpark')
+    engine = sqlalchemy.create_engine('postgres://andio:andigenu@localhost:5432/sfpark')
     conn = engine.connect()
     metadata = MetaData(engine)
     similarityTable = Table('cluster_similarity', metadata, autoload=True)
@@ -210,5 +206,3 @@ if __name__ == "__main__":
     print('Clusters WITHOUT Parking Data : Clusters WITHOUT Parking Data')
     print('-------------------------------------------------------------')
     calculateDistance(gaussianMapWout, False, gaussianMapWout, False)
-
-    server.stop()

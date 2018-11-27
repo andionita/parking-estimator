@@ -294,10 +294,7 @@ def runSingleAll(clusterId, method):
 if __name__ == "__main__":
     #reload(sys)
     #sys.setdefaultencoding("utf-8")
-    server = SSHTunnelForwarder('cloud31.dbis.rwth-aachen.de', ssh_username="ionita", ssh_password="andigenu", remote_bind_address=('127.0.0.1', 5432))
-    server.start()
-    #engine = sqlalchemy.create_engine('postgres://aionita:andigenu@localhost:5432/sfpark')
-    engine = sqlalchemy.create_engine('postgres://aionita:andigenu@localhost:' + str(server.local_bind_port) + '/sfpark')
+    engine = sqlalchemy.create_engine('postgres://andio:andigenu@localhost:5432/sfpark')
     conn = engine.connect()
     modelsTable = Table('models', MetaData(engine), autoload=True)
     # Querying the cluster ids of the areas with parking data
@@ -305,4 +302,3 @@ if __name__ == "__main__":
     for index, row in cwithidFrame.iterrows():
         cwithid = row['cwithid']
         runSingleAll(cwithid, None)
-    server.stop()
