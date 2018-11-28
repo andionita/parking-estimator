@@ -16,10 +16,22 @@ if __name__ == "__main__":
 
     parser.add_argument('--all-datapoints', action='store_true',
                         help='do not aggregate datapoints per timestamp, instead use all occupancy data')
+    # --skip-training (optional)
+    parser.add_argument('--skip-training', action='store_true',
+                        help='skip the training phrase and load a model already available locally')
+    # --test-all-datapoints (optional)
+    parser.add_argument('--test-all-datapoints', action='store_true',
+                        help='choose the clusters with all datapoints as testing bed')
 
     args = parser.parse_args()
     all_datapoints = args.all_datapoints
-    print("Executing with arguments: all-datapoints=" + str(all_datapoints))
+    skip_training = args.skip_training
+    if skip_training is None:
+        skip_training = False
+    test_all_datapoints = args.test_all_datapoints
+    print("Executing with arguments: all-datapoints=" + str(all_datapoints)
+            + " skip training: " + str(skip_training)
+            + " test_all_datapoints: " + str(test_all_datapoints))
 
     server = SSHTunnelForwarder('cloud31.dbis.rwth-aachen.de', ssh_username="ionita", ssh_password="andigenu", remote_bind_address=('127.0.0.1', 5432))
     server.start()
@@ -35,6 +47,6 @@ if __name__ == "__main__":
         print('--------------------')
         print( '     Cluster ' + str(row['cwithid']) )
         print('--------------------')
-        runSingle(row['cwithid'], n_clusters, None, False, False, all_datapoints )
+	runSingle(row['cwithid'], n_clusters, None, False, False, all_datapoints, skip_training, test_all_datapoints )
 
     server.stop()
