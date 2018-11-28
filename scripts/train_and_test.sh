@@ -62,5 +62,9 @@ fi
 #sh scripts/copy_as_javascript.sh . leaflet/js model_results_target_method_best
 
 echo "Applying models for Clusters without Parking Data..."
-python workspace/parking-estimator/src/modeltraining/ModelPredictionCwout.py
+if [ "$1" == "--all-datapoints" ]; then
+	python workspace/parking-estimator/src/modeltraining/ModelPredictionCwout.py --all-datapoints
+else
+	python workspace/parking-estimator/src/modeltraining/ModelPredictionCwout.py
+fi
 #sh scripts/copy_as_javascript.sh workspace/parking-estimator/jsons leaflet/js estimations_cwout
