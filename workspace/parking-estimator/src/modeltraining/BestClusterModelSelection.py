@@ -49,7 +49,7 @@ def queryClusterAll( clusterId, engine ):
     :param engine:
     :return: the dataframe resulting from the database result query
     '''
-    print("Querying database for occupancy data for cluster id: " + str(clusterId))
+    print("Querying database for ALL occupancy data for cluster id: " + str(clusterId))
 
     return pd.read_sql_query("""SELECT b.cwithid, o.timestamp, o.block_id AS blocks,
                                                     o.price_rate AS price_rate,
@@ -221,7 +221,7 @@ def buildModel( method, clusterId, n_clusters, X, y, all_datapoints ):
     return (modelBest, meanScore)
 
 
-def runSingle(clusterId, n_clusters, method, nodb, noeval, all_datapoints):
+def runSingle(clusterId, n_clusters, method, nodb, noeval, all_datapoints, skip_training, test_all_datapoints):
     '''
     Runs the training and testing for a cluster and a given method.
     :param clusterId:
@@ -240,122 +240,145 @@ def runSingle(clusterId, n_clusters, method, nodb, noeval, all_datapoints):
     engine = sqlalchemy.create_engine('postgres://andio:andigenu@localhost:5432/sfpark')
     conn = engine.connect()
 
-    print
-    print('-----> TRAINING MODELS <----')
-    print
-    # Retrieve training data for cluster
-    if all_datapoints:
-        clusterDataframe = queryClusterAll(clusterId, engine)
+    models = {}
+    trainingScores = {}
+    timeElapsed = {}
+    if skip_training:
+        print("Skipping training phase... loading models from local system.")
+        datapoints_str = 'agg'
+        if all_datapoints:
+            datapoints_str = 'all'
+        models['xgb'] = joblib.load('workspace/parking-estimator/persisted/clusterId' + str(clusterId) + '_xgb_' + str(datapoints_str) + "_" + str(n_clusters) + '.pkl')
+        trainingScores['xgb'] = -1
+        timeElapsed['xgb'] = -1
+
+        models['dt'] = joblib.load('workspace/parking-estimator/persisted/clusterId' + str(clusterId) + '_dt_' + str(datapoints_str) + "_" + str(n_clusters) + '.pkl')
+        trainingScores['dt'] = -1
+        timeElapsed['dt'] = -1
+
+        models['svm'] = joblib.load('workspace/parking-estimator/persisted/clusterId' + str(clusterId) + '_svm_' + str(datapoints_str) + "_" + str(n_clusters) + '.pkl')
+        trainingScores['svm'] = -1
+        timeElapsed['svm'] = -1
+
+        models['mlp'] = joblib.load('workspace/parking-estimator/persisted/clusterId' + str(clusterId) + '_mlp_' + str(datapoints_str) + "_" + str(n_clusters) + '.pkl')
+        trainingScores['mlp'] = -1
+        timeElapsed['mlp'] = -1
+        clusterDataframe = pd.DataFrame()
+
     else:
-        clusterDataframe = queryClusterAvg(clusterId, engine)
+        print
+        print('-----> TRAINING MODELS <----')
+        print
+        # Retrieve training data for cluster
+        if all_datapoints:
+            clusterDataframe = queryClusterAll(clusterId, engine)
+        else:
+            clusterDataframe = queryClusterAvg(clusterId, engine)
 
-    if len(clusterDataframe.index) == 0:
-        print("Query for cluster " + str(clusterId) + " returned empty set. Are you sure this clusterId exists?")
-
-    else:
-
-        clusterDataframe = preprocess(clusterDataframe)
-        print("\nNumber of samples = " + str(len(clusterDataframe.index)))
-
-        X = clusterDataframe[['year', 'week', 'weekday', 'hour', 'price_rate', 'total_spots']]
-        y = clusterDataframe['occupied']
-
-        models = {}
-        trainingScores = {}
-        timeElapsed = {}
-
-        if method is not None:
-            start = time.time()
-            models[method], trainingScores[method] = buildModel(method, clusterId, n_clusters, X, y, all_datapoints)
-            timeElapsed[method] = time.time() - start
-            print('Time elapsed: ' + str(timeElapsed[method]))
+        if len(clusterDataframe.index) == 0:
+            print("Query for cluster " + str(clusterId) + " returned empty set. Are you sure this clusterId exists?")
 
         else:
-            start = time.time()
-            models['dt'], trainingScores['dt'] = buildModel('dt', clusterId, n_clusters, X, y, all_datapoints)
-            timeElapsed['dt'] = time.time() - start
-            print('Time elapsed: ' + str(timeElapsed['dt']))
-            print('-----\n')
-            start = time.time()
-            models['svm'], trainingScores['svm'] = buildModel('svm', clusterId, n_clusters, X, y, all_datapoints)
-            timeElapsed['svm'] = time.time() - start
-            print('Time elapsed: ' + str(timeElapsed['svm']))
-            print('-----\n')
-            start = time.time()
-            models['mlp'], trainingScores['mlp'] = buildModel('mlp', clusterId, n_clusters, X, y, all_datapoints)
-            timeElapsed['mlp'] = time.time() - start
-            print('Time elapsed: ' + str(timeElapsed['mlp']))
-            print('-----\n')
-            start = time.time()
-            models['xgb'], trainingScores['xgb'] = buildModel('xgb', clusterId, n_clusters, X, y, all_datapoints)
-            timeElapsed['xgb'] = time.time() - start
-            print('Time elapsed: ' + str(timeElapsed['xgb']))
-            print
 
-        if noeval:
-            sys.exit()
+            clusterDataframe = preprocess(clusterDataframe)
+            print("\nNumber of samples = " + str(len(clusterDataframe.index)))
 
-        print
-        print('----> SELECTING BEST MODELS <-----')
-        print
+            X = clusterDataframe[['year', 'week', 'weekday', 'hour', 'price_rate', 'total_spots']]
+            y = clusterDataframe['occupied']
 
-        # Retrieve the most similar clusters (with data) according to the similarity measure
-        similarClusters = pd.read_sql_query("""SELECT DISTINCT ON (cid2) cid2 FROM cluster_similarity cs
-                                            WHERE cid1 = """ + str(clusterId) + """ AND has1 AND has2""", engine)
 
-        metadata = MetaData(engine)
+            if method is not None:
+                start = time.time()
+                models[method], trainingScores[method] = buildModel(method, clusterId, n_clusters, X, y, all_datapoints)
+                timeElapsed[method] = time.time() - start
+                print('Time elapsed: ' + str(timeElapsed[method]))
 
-        modelsTable = Table('models', metadata, autoload=True)
-
-        for index, row in similarClusters.iterrows():
-            simClusterId = int(row['cid2'])
-
-            if all_datapoints:
-                similarClusterData = queryClusterAll(simClusterId, engine)
             else:
-                similarClusterData = queryClusterAvg(simClusterId, engine)
-            similarClusterData = preprocess(similarClusterData)
-
-            X_test = similarClusterData[['year', 'week', 'weekday', 'hour', 'price_rate', 'total_spots']]
-            y_test = similarClusterData['occupied']
-
-            # Determining the model with the best test error (RMSE)
-            minError = 101
-            selectedModel = None
-            selectedModelName = None
-            for modelName, modelContent in models.items():
-                print('Determining best model for cwith id ' + str(simClusterId) +
-                      ' with model from cluster ' + str(clusterId) +
-                      ' of type ' + modelName)
-
-                if len(similarClusterData.index) == 0:
-                    print("Query for cluster " + str(simClusterId) + " returned empty set. "
-                                                                     "Please make sure that this cluster id exists.")
-
-                else:
-                    y_pred = modelContent.predict(X_test)
-
-                    rmse = np.sqrt(mean_squared_error(y_test, y_pred))
-                    print('RMSE = %.3f' % rmse)
-
-                    if not nodb:
-                        # Write model info into the database
-                        stmt = modelsTable.insert().values(clusterid = clusterId,
-                                                           data_points = len(clusterDataframe.index),
-                                                    run_timestamp = runTimestamp, similar_clusterid = simClusterId,
-                                                    model_name = modelName, training_error = trainingScores[modelName],
-                                                    error = rmse, error_type = 'RMSE',
-                                                    training_time = timeElapsed[modelName])
-                        conn.execute(stmt)
-
-                    if rmse < minError:
-                        minError = rmse
-                        selectedModel = modelContent
-                        selectedModelName = modelName
+                start = time.time()
+                models['dt'], trainingScores['dt'] = buildModel('dt', clusterId, n_clusters, X, y, all_datapoints)
+                timeElapsed['dt'] = time.time() - start
+                print('Time elapsed: ' + str(timeElapsed['dt']))
+                print('-----\n')
+                start = time.time()
+                models['svm'], trainingScores['svm'] = buildModel('svm', clusterId, n_clusters, X, y, all_datapoints)
+                timeElapsed['svm'] = time.time() - start
+                print('Time elapsed: ' + str(timeElapsed['svm']))
+                print('-----\n')
+                start = time.time()
+                models['mlp'], trainingScores['mlp'] = buildModel('mlp', clusterId, n_clusters, X, y, all_datapoints)
+                timeElapsed['mlp'] = time.time() - start
+                print('Time elapsed: ' + str(timeElapsed['mlp']))
+                print('-----\n')
+                start = time.time()
+                models['xgb'], trainingScores['xgb'] = buildModel('xgb', clusterId, n_clusters, X, y, all_datapoints)
+                timeElapsed['xgb'] = time.time() - start
+                print('Time elapsed: ' + str(timeElapsed['xgb']))
                 print
 
-            print('Best model is ' + selectedModelName)
-            print('----------------------------------\n')
+            if noeval:
+                sys.exit()
+
+    print
+    print('----> SELECTING BEST MODELS <-----')
+    print
+
+    # Retrieve the most similar clusters (with data) according to the similarity measure
+    similarClusters = pd.read_sql_query("""SELECT DISTINCT ON (cid2) cid2 FROM cluster_similarity cs
+                                        WHERE cid1 = """ + str(clusterId) + """ AND has1 AND has2""", engine)
+
+    metadata = MetaData(engine)
+
+    modelsTable = Table('models', metadata, autoload=True)
+
+    for index, row in similarClusters.iterrows():
+        simClusterId = int(row['cid2'])
+
+        if test_all_datapoints:
+            similarClusterData = queryClusterAll(simClusterId, engine)
+        else:
+            similarClusterData = queryClusterAvg(simClusterId, engine)
+        similarClusterData = preprocess(similarClusterData)
+
+        X_test = similarClusterData[['year', 'week', 'weekday', 'hour', 'price_rate', 'total_spots']]
+        y_test = similarClusterData['occupied']
+
+        # Determining the model with the best test error (RMSE)
+        minError = 101
+        selectedModel = None
+        selectedModelName = None
+        for modelName, modelContent in models.items():
+            print('Determining best model for cwith id ' + str(simClusterId) +
+                  ' with model from cluster ' + str(clusterId) +
+                  ' of type ' + modelName)
+
+            if len(similarClusterData.index) == 0:
+                print("Query for cluster " + str(simClusterId) + " returned empty set. "
+                                                                 "Please make sure that this cluster id exists.")
+
+            else:
+                y_pred = modelContent.predict(X_test)
+
+                rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+                print('RMSE = %.3f' % rmse)
+
+                if not nodb:
+                    # Write model info into the database
+                    stmt = modelsTable.insert().values(clusterid = clusterId,
+                                                       data_points = len(clusterDataframe.index),
+                                                run_timestamp = runTimestamp, similar_clusterid = simClusterId,
+                                                model_name = modelName, training_error = trainingScores[modelName],
+                                                error = rmse, error_type = 'RMSE',
+                                                training_time = timeElapsed[modelName])
+                    conn.execute(stmt)
+
+                if rmse < minError:
+                    minError = rmse
+                    selectedModel = modelContent
+                    selectedModelName = modelName
+            print
+
+        print('Best model is ' + selectedModelName)
+        print('----------------------------------\n')
 
     #server.stop()
 
@@ -380,6 +403,12 @@ if __name__ == "__main__":
     # --all-datapoints (optional)
     parser.add_argument('--all-datapoints', action='store_true',
                         help='do not aggregate datapoints per timestamp, instead use all occupancy data')
+    # --skip-training (optional)
+    parser.add_argument('--skip-training', action='store_true',
+                        help='skip the training phrase and load a model already available locally')
+    # --test-all-datapoints (optional)
+    parser.add_argument('--test-all-datapoints', action='store_true',
+                        help='choose the clusters with all datapoints as testing bed')
     args = parser.parse_args()
 
     clusterId = args.clusterId
@@ -390,11 +419,17 @@ if __name__ == "__main__":
     nodb = args.nodb
     noeval = args.noeval
     all_datapoints = args.all_datapoints
+    skip_training = args.skip_training
+    if skip_training is None:
+        skip_training = False
+    test_all_datapoints = args.test_all_datapoints
     print("Executing with arguments " + str(clusterId) + " method: " + str(method)
             + " n_clusters: " + str(n_clusters)
             + " nodb: " + str(nodb) + " noeval: " + str(noeval)
-            + " all_datapoints: " + str(all_datapoints))
+            + " all_datapoints: " + str(all_datapoints)
+            + " skip training: " + str(skip_training)
+            + " test_all_datapoints: " + str(test_all_datapoints))
     print
 
     # Train models for a cluster and method
-    runSingle(clusterId, n_clusters, method, nodb, noeval, all_datapoints)
+    runSingle(clusterId, n_clusters, method, nodb, noeval, all_datapoints, skip_training, test_all_datapoints)

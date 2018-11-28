@@ -7,18 +7,11 @@
 #		skips model training (persisted models will be used)
 #   train_and_test.sh --all-datapoints
 #               when building models do not aggregate datapoints per timestamp, instead use all occupancy data 
+#   train_and_test.sh --test-all-datapoints
+#               choose the clusters with all datapoints as testing bed
 
-
-if [ "$1" != "--skip-training" ]; then
-	echo "Starting to train the models..."
-	if [ "$1" == "--all-datapoints" ]; then
-		python workspace/parking-estimator/src/modeltraining/BestClusterSelectionAll.py --all-datapoints
-	else
-		python workspace/parking-estimator/src/modeltraining/BestClusterSelectionAll.py
-	fi
-else
-	echo "Skipping model training"
-fi
+echo "Starting to train the models..."
+python workspace/parking-estimator/src/modeltraining/BestClusterSelectionAll.py $1 $2 $3
 
 #echo "Exporting cluster ids and datapoints..."
 #psql -U andio -h localhost -f scripts/cluster_datapoints.sql sfpark
@@ -62,7 +55,7 @@ fi
 #sh scripts/copy_as_javascript.sh . leaflet/js model_results_target_method_best
 
 echo "Applying models for Clusters without Parking Data..."
-if [ "$1" == "--all-datapoints" ]; then
+if [[ $1 == '--all-datapoints' || $2 == '--all-datapoints' || $3 = '--all-datapoints' ]]; then
 	python workspace/parking-estimator/src/modeltraining/ModelPredictionCwout.py --all-datapoints
 else
 	python workspace/parking-estimator/src/modeltraining/ModelPredictionCwout.py
