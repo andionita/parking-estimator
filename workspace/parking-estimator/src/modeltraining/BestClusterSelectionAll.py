@@ -14,6 +14,9 @@ from BestClusterModelSelection import runSingle
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run Cluster Model Selection for all clusters')
 
+    # n_cluster (positional)
+    parser.add_argument('n_clusters', metavar='clusters', type=int, help='additionally provide the total number of clusters')
+    # --all-datapoints (optional)
     parser.add_argument('--all-datapoints', action='store_true',
                         help='do not aggregate datapoints per timestamp, instead use all occupancy data')
     # --skip-training (optional)
@@ -22,9 +25,7 @@ if __name__ == "__main__":
     # --test-all-datapoints (optional)
     parser.add_argument('--test-all-datapoints', action='store_true',
                         help='choose the clusters with all datapoints as testing bed')
-    # --n-cluster (optional)
-    parser.add_argument('--n-cluster', action='store_true',
-                        help='additionally provide the total number of clusters')
+
 
 
     args = parser.parse_args()

@@ -1,16 +1,14 @@
 #!/bin/bash
 
 # Sample usage:
-#   train_and_test.sh
-#		models for all clusters will be trained
+#   train_and_test.sh <n_clusters>
+#		models for all clusters will be trained by providing the number of clusters
 #   train_and_test.sh --skip-training
 #		skips model training (persisted models will be used)
 #   train_and_test.sh --all-datapoints
-#               when building models do not aggregate datapoints per timestamp, instead use all occupancy data 
+#               when building models do not aggregate datapoints per timestamp, instead use all occupancy data
 #   train_and_test.sh --test-all-datapoints
 #               choose the clusters with all datapoints as testing bed
-#   train_and_test.sh --n-clusters
-#               additionally provide the total number of clusters
 
 echo "Starting to train the models..."
 python workspace/parking-estimator/src/modeltraining/BestClusterSelectionAll.py $1 $2 $3 $4
