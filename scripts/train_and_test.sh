@@ -9,9 +9,11 @@
 #               when building models do not aggregate datapoints per timestamp, instead use all occupancy data 
 #   train_and_test.sh --test-all-datapoints
 #               choose the clusters with all datapoints as testing bed
+#   train_and_test.sh --n-clusters
+#               additionally provide the total number of clusters
 
 echo "Starting to train the models..."
-python workspace/parking-estimator/src/modeltraining/BestClusterSelectionAll.py $1 $2 $3
+python workspace/parking-estimator/src/modeltraining/BestClusterSelectionAll.py $1 $2 $3 $4
 
 #echo "Exporting cluster ids and datapoints..."
 #psql -U andio -h localhost -f scripts/cluster_datapoints.sql sfpark
@@ -55,7 +57,7 @@ python workspace/parking-estimator/src/modeltraining/BestClusterSelectionAll.py 
 #sh scripts/copy_as_javascript.sh . leaflet/js model_results_target_method_best
 
 echo "Applying models for Clusters without Parking Data..."
-if [[ $1 == '--all-datapoints' || $2 == '--all-datapoints' || $3 = '--all-datapoints' ]]; then
+if [[ $1 == '--all-datapoints' || $2 == '--all-datapoints' || $3 == '--all-datapoints' || $4 == '--all-datapoints' ]]; then
 	python workspace/parking-estimator/src/modeltraining/ModelPredictionCwout.py --all-datapoints
 else
 	python workspace/parking-estimator/src/modeltraining/ModelPredictionCwout.py

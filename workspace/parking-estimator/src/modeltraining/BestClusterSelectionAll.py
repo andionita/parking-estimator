@@ -22,6 +22,10 @@ if __name__ == "__main__":
     # --test-all-datapoints (optional)
     parser.add_argument('--test-all-datapoints', action='store_true',
                         help='choose the clusters with all datapoints as testing bed')
+    # --n-cluster (optional)
+    parser.add_argument('--n-cluster', action='store_true',
+                        help='additionally provide the total number of clusters')
+
 
     args = parser.parse_args()
     all_datapoints = args.all_datapoints
@@ -29,18 +33,12 @@ if __name__ == "__main__":
     if skip_training is None:
         skip_training = False
     test_all_datapoints = args.test_all_datapoints
+    n_clusters = args.n_clusters
     print("Executing with arguments: all-datapoints=" + str(all_datapoints)
             + " skip training: " + str(skip_training)
-            + " test_all_datapoints: " + str(test_all_datapoints))
+            + " test_all_datapoints: " + str(test_all_datapoints)
+            + " n_clusters: " + str(n_clusters))
 
-    server = SSHTunnelForwarder('cloud31.dbis.rwth-aachen.de', ssh_username="ionita", ssh_password="andigenu", remote_bind_address=('127.0.0.1', 5432))
-    server.start()
-    engine = sqlalchemy.create_engine('postgres://aionita:andigenu@localhost:' + str(server.local_bind_port) + '/sfpark')
-
-    allClusters = pd.read_sql_query("""SELECT DISTINCT(cwithid) FROM blocks WHERE has_occupancy ORDER BY cwithid;""",
-                                    engine)
-
-    n_clusters = len(allClusters.index)
     print('Running Model Selection for ' + str(n_clusters) + ' clusters.')
     print
     for index, row in allClusters.iterrows():
@@ -48,5 +46,3 @@ if __name__ == "__main__":
         print( '     Cluster ' + str(row['cwithid']) )
         print('--------------------')
 	runSingle(row['cwithid'], n_clusters, None, False, False, all_datapoints, skip_training, test_all_datapoints )
-
-    server.stop()
