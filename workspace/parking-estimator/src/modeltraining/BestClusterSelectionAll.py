@@ -42,8 +42,8 @@ if __name__ == "__main__":
 
     print('Running Model Selection for ' + str(n_clusters) + ' clusters.')
     print
-    for index, row in allClusters.iterrows():
+    for clusterId in range(n_clusters):
         print('--------------------')
-        print( '     Cluster ' + str(row['cwithid']) )
+        print( '     Cluster ' + str(clusterId) )
         print('--------------------')
-	runSingle(row['cwithid'], n_clusters, None, False, False, all_datapoints, skip_training, test_all_datapoints )
+	runSingle(clusterId, n_clusters, None, False, False, all_datapoints, skip_training, test_all_datapoints )
