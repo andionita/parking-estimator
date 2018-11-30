@@ -1,0 +1,225 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Trim Size: 9.75in x 6.5in
+%% Text Area: 8in (include Runningheads) x 5in
+%% ws-ijait.tex   :   01-10-2014
+%% Tex file to use with ws-ijait.cls written in Latex2E.
+%% The content, structure, format and layout of this style file is the
+%% property of World Scientific Publishing Co. Pte. Ltd.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+
+\documentclass{ws-ijait}
+
+\usepackage[utf8]{inputenc}
+
+
+\usepackage{combelow} % for comma-below romanian character
+
+\usepackage{url} % for url in references
+
+%\usepackage{booktabs} % For formal tables
+%\usepackage{textcomp} %copyrght sympbol
+
+% for including tikz pictures
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-3dplot}
+\usepackage[mode=buildnew]{standalone}
+
+% for number formatting
+%\usepackage[
+%decimalsymbol = .,     % Dezimaltrennzeichen
+%]{siunitx}
+
+% for subfigures
+%\usepackage{caption}
+%\usepackage{subfig}
+
+%\usepackage{todonotes}
+
+%\usepackage{cleveref}
+
+% for comma-below romanian character
+%\usepackage{combelow}
+
+% for vertical dash lines in tables
+%\usepackage{arydshln}
+
+% Copyright
+%\setcopyright{none}
+%\setcopyright{acmcopyright}
+%\setcopyright{acmlicensed}
+%\setcopyright{rightsretained}
+%\setcopyright{usgov}
+%\setcopyright{usgovmixed}
+%\setcopyright{cagov}
+%\setcopyright{cagovmixed}
+
+
+% DOI
+%\acmDOI{10.475/123_4}
+
+% ISBN
+%\acmISBN{123-4567-24-567/08/06}
+
+%Conference
+%\acmConference[WIMS 2018]{8th International Conference on Web Intelligence, Mining and Semantics}{June 2018}{Novi Sad, Serbia} 
+%\acmYear{2018}
+%\copyrightyear{2018}
+
+
+%\acmArticle{4}
+%\acmPrice{15.00}
+
+% These commands are optional
+%\acmBooktitle{Transactions of the ACM Woodstock conference}
+%\editor{Jennifer B. Sartor}
+%\editor{Theo D'Hondt}
+%\editor{Wolfgang De Meuter}
+
+\begin{document}
+
+\markboth{Andrei Ionita, André Pomp, Michael Cochez, Tobias Meisen, Stefan Decker}
+{Where to Park? Predicting Free Parking Spots in Unmonitored City Areas}
+
+%%%%%%%%%%%%%%%%%%%%% Publisher's Area please ignore %%%%%%%%%%%%%%%
+%
+\catchline{}{}{}{}{}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Where to Park? Predicting Free Parking Spots in Unmonitored City Areas}
+
+%\title{Instructions for Typesetting Manuscripts\\
+%Using \LaTeX\footnote{For the title, try not to use more than
+%3 lines. Typeset the title in 10 pt Times Roman and
+%boldface.}
+%}
+
+\author{Andrei Ionita}
+\address{%
+	Computer Science, RWTH Aachen University \\
+	Aachen, Germany \\
+	andrei.ionita@rwth-aachen.de
+}
+
+%\author{First Author\footnote{
+%Typeset names in 8~pt Times Roman. Use the footnote
+%to indicate the present or permanent address of the author.}}
+%\address{University Department, University Name, Address\\
+%City, State ZIP/Zone,
+%Country\footnote{State completely without abbreviations, the
+%affiliation and mailing address, including country. Typeset in 8~pt
+%Times italic.}\\
+%first\_author@university.edu}
+
+\author{André Pomp}
+\address{%
+	Institute of Information Management in Mechanical Engineering, RWTH Aachen \\
+	Aachen, Germany \\
+	andre.pomp@ima.rwth-aachen.de
+}
+
+%\author{Second Author}
+%\address{Group, Laboratory, Address\\
+%City, State ZIP/Zone, Country\\
+%second\_author@group.com}
+
+\author{Michael Cochez}
+\address{
+	Fraunhofer FIT \\
+	Aachen, Germany \\
+	Computer Science 5, RWTH Aachen \\
+	Aachen, Germany \\
+	Faculty of Information Technology, University of Jyväskylä \\
+	Jyväskylä, Finland \\
+	michael.cochez@fit.fraunhofer.de
+}
+
+\author{Tobias Meisen}
+\address{%
+	Institute of Information Management in Mechanical Engineering, RWTH Aachen \\
+	Aachen, Germany \\
+	tobias.meisen@ima.rwth-aachen.de
+}
+
+\author{Stefan Decker}
+\address{%
+	Computer Science 5, RWTH Aachen \\
+	Aachen, Germany \\
+	Fraunhofer FIT \\
+	Aachen, Germany \\
+	stefan.decker@dbis.rwth-aachen.de
+}
+
+\maketitle
+
+\begin{history}
+\received{(Day Month Year)}
+\revised{(Day Month Year)}
+\accepted{(Day Month Year)}
+%\comby{(xxxxxxxxxx)}
+\end{history}
+
+\begin{abstract}
+Several smart cities around the world have begun monitoring parking areas in order to estimate free spots and help drivers that are looking for parking.
+The current results are indeed promising, however, this approach is limited by the high costs of sensors that need to be installed throughout the city in order to achieve an accurate estimation rate.
+This work investigates the extension of estimating parking information from areas equipped with sensors to areas that are missing them.
+To this end, similarity values between city neighborhoods are computed based on background data, i.e., from geographic information systems.
+Using the derived similarity values, we analyze the adaptation of occupancy rates from monitored- to unmonitored parking areas.
+\end{abstract}
+
+%\begin{CCSXML}
+%	<ccs2012>
+	%	<concept>
+	%	<concept_id>10002951.10003227.10003351</concept_id>
+	%	<concept_desc>Information systems~Data mining</concept_desc>
+	%	<concept_significance>300</concept_significance>
+	%	</concept>
+%	<concept>
+%	<concept_id>10002951.10003227.10003351.10003444</concept_id>
+%	<concept_desc>Information systems~Clustering</concept_desc>
+%	<concept_significance>300</concept_significance>
+%	</concept>
+%	<concept>
+%	<concept_id>10002951.10003260.10003309.10003315</concept_id>
+%	<concept_desc>Information systems~Semantic web description languages</concept_desc>
+%	<concept_significance>300</concept_significance>
+%	</concept>
+	%	<concept>
+	%	<concept_id>10010147.10010178.10010187.10010195</concept_id>
+	%	<concept_desc>Computing methodologies~Ontology engineering</concept_desc>
+	%	<concept_significance>300</concept_significance>
+	%	</concept>
+%	<concept>
+%	<concept_id>10010147.10010257.10010258.10010260.10003697</concept_id>
+%	<concept_desc>Computing methodologies~Cluster analysis</concept_desc>
+%	<concept_significance>300</concept_significance>
+%	</concept>
+%	</ccs2012>
+%\end{CCSXML}
+
+%\ccsdesc[300]{Information systems~Data mining}
+%\ccsdesc[300]{Information systems~Clustering}
+%\ccsdesc[300]{Information systems~Semantic web description languages}
+%\ccsdesc[300]{Computing methodologies~Ontology engineering}
+%\ccsdesc[300]{Computing methodologies~Cluster analysis}
+
+
+%\copyrightyear{2018}
+%\acmYear{2018}
+%\setcopyright{acmlicensed}
+%\acmConference[WIMS '18]{8th International Conference on Web Intelligence, Mining and Semantics}{June 25--27, 2018}{Novi Sad, Serbia}
+%\acmBooktitle{WIMS '18: 8th International Conference on Web Intelligence, Mining and Semantics, June 25--27, 2018, Novi Sad, Serbia}
+%\acmPrice{15.00}
+%\acmDOI{10.1145/3227609.3227648}
+%\acmISBN{978-1-4503-5489-9/18/06}
+
+\keywords{smart parking, machine learning, semantic annotation, data mining}
+
+\input{parking_paper_content_ijait}
+
+\bibliographystyle{ws-ijait}
+\bibliography{parking_paper_references_ijait}
+
+\end{document} 
