@@ -332,17 +332,11 @@ def runSingle(clusterId, n_clusters, method, nodb, noeval, all_datapoints, skip_
     print('----> SELECTING BEST MODELS <-----')
     print
 
-    # Retrieve the most similar clusters (with data) according to the similarity measure
-    similarClusters = pd.read_sql_query("""SELECT DISTINCT ON (cid2) cid2 FROM cluster_similarity cs
-                                        WHERE cid1 = """ + str(clusterId) + """ AND has1 AND has2""", engine)
-
     metadata = MetaData(engine)
 
     modelsTable = Table('models', metadata, autoload=True)
 
-    for index, row in similarClusters.iterrows():
-        simClusterId = int(row['cid2'])
-
+    for simClusterId in range(n_clusters):
         if test_all_datapoints:
             similarClusterData = queryClusterAll(simClusterId, engine)
         else:
