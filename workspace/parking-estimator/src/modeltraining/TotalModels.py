@@ -324,6 +324,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     extended = args.extended
     print("Executing with arguments extended=" + str(extended))
+
     engine = sqlalchemy.create_engine('postgres://andio:andigenu@localhost:5432/sfpark')
     conn = engine.connect()
     modelsTable = Table('models', MetaData(engine), autoload=True)

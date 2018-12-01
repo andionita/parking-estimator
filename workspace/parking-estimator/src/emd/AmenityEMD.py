@@ -142,7 +142,6 @@ def calculateDistance(gaussianMap1, has1, gaussianMap2, has2):
 
 
 if __name__ == "__main__":
-
     engine = sqlalchemy.create_engine('postgres://andio:andigenu@localhost:5432/sfpark')
     conn = engine.connect()
     metadata = MetaData(engine)

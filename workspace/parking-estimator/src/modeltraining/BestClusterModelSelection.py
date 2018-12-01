@@ -248,19 +248,27 @@ def runSingle(clusterId, n_clusters, method, nodb, noeval, all_datapoints, skip_
         datapoints_str = 'agg'
         if all_datapoints:
             datapoints_str = 'all'
-        models['xgb'] = joblib.load('workspace/parking-estimator/persisted/clusterId' + str(clusterId) + '_xgb_' + str(datapoints_str) + "_" + str(n_clusters) + '.pkl')
+        filename = 'workspace/parking-estimator/persisted/clusterId' + str(clusterId) + '_xgb_' + str(datapoints_str) + "_" + str(n_clusters) + '.pkl'
+        print("Loading model from file " + str(filename))
+        models['xgb'] = joblib.load(filename)
         trainingScores['xgb'] = -1
         timeElapsed['xgb'] = -1
 
-        models['dt'] = joblib.load('workspace/parking-estimator/persisted/clusterId' + str(clusterId) + '_dt_' + str(datapoints_str) + "_" + str(n_clusters) + '.pkl')
+        filename = 'workspace/parking-estimator/persisted/clusterId' + str(clusterId) + '_dt_' + str(datapoints_str) + "_" + str(n_clusters) + '.pkl'
+        print("Loading model from file " + str(filename))
+        models['dt'] = joblib.load(filename)
         trainingScores['dt'] = -1
         timeElapsed['dt'] = -1
 
-        models['svm'] = joblib.load('workspace/parking-estimator/persisted/clusterId' + str(clusterId) + '_svm_' + str(datapoints_str) + "_" + str(n_clusters) + '.pkl')
+        filename = 'workspace/parking-estimator/persisted/clusterId' + str(clusterId) + '_svm_' + str(datapoints_str) + "_" + str(n_clusters) + '.pkl'
+        print("Loading model from file " + str(filename))
+        models['svm'] = joblib.load(filename)
         trainingScores['svm'] = -1
         timeElapsed['svm'] = -1
 
-        models['mlp'] = joblib.load('workspace/parking-estimator/persisted/clusterId' + str(clusterId) + '_mlp_' + str(datapoints_str) + "_" + str(n_clusters) + '.pkl')
+        filename = 'workspace/parking-estimator/persisted/clusterId' + str(clusterId) + '_mlp_' + str(datapoints_str) + "_" + str(n_clusters) + '.pkl'
+        print("Loading model from file " + str(filename))
+        models['mlp'] = joblib.load(filename)
         trainingScores['mlp'] = -1
         timeElapsed['mlp'] = -1
         clusterDataframe = pd.DataFrame()
@@ -321,18 +329,11 @@ def runSingle(clusterId, n_clusters, method, nodb, noeval, all_datapoints, skip_
     print
     print('----> SELECTING BEST MODELS <-----')
     print
-
-    # Retrieve the most similar clusters (with data) according to the similarity measure
-    similarClusters = pd.read_sql_query("""SELECT DISTINCT ON (cid2) cid2 FROM cluster_similarity cs
-                                        WHERE cid1 = """ + str(clusterId) + """ AND has1 AND has2""", engine)
-
     metadata = MetaData(engine)
 
     modelsTable = Table('models', metadata, autoload=True)
 
-    for index, row in similarClusters.iterrows():
-        simClusterId = int(row['cid2'])
-
+    for simClusterId in range(n_clusters):
         if test_all_datapoints:
             similarClusterData = queryClusterAll(simClusterId, engine)
         else:
@@ -380,7 +381,6 @@ def runSingle(clusterId, n_clusters, method, nodb, noeval, all_datapoints, skip_
         print('Best model is ' + selectedModelName)
         print('----------------------------------\n')
 
-    #server.stop()
 
 
 if __name__ == "__main__":
