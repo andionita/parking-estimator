@@ -16,7 +16,7 @@ python3 workspace/parking-estimator/src/emd/AmenityEMD.py
 #echo
 #echo "-------------------------------------------------"
 #echo "Exporting results to JSON..."
-#ssh ionita@cloud31.dbis.rwth-aachen.de "psql -U aionita -h localhost -f ~/parking/scripts/clustering_process_3tojson.sql sfpark"
+#psql -U andio -h localhost -f ~/parking-estimator_git/scripts/clustering_process_3tojson.sql sfpark"
 
 #sh scripts/copy_as_javascript.sh . leaflet/js clusters_wout
 
