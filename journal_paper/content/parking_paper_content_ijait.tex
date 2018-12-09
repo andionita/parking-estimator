@@ -19,7 +19,9 @@ We start by giving an intuitive example which bridges the understanding path tow
 Further, other contributions to the field of smart parking are presented, followed by the concrete approach.
 The evaluation in this case carries out the instantiation of the proposed approach with an actual use case. We present the results and an analysis.
 We finish off by pointing out aspects that can be further pursued and by summarizing the outcome.
-This work is a short version of an earlier master thesis by the first author of this article~\cite{ionita2017master}.
+This work extends our previous work \cite{ionita2018park}. Compared to the previous paper, this work introduces a more detailed and refined evaluation of our approach.
+Instead of aggregrating data points for the machine learning models over the timestamp, we build the cluster models using the entire occupancy data. 
+In addition, we refined the amenity value for the similarity functions. Finally, we evaluated if we can improve the results by using the similarity functions as additional features. 
 
 \section{Motivating Example}
 In this section, we provide a motivating example illustrating the necessity for introducing the concept of \emph{parking demand profiles} to improve the accuracy of machine learning models for predicting free parking spots in smart cities. 
@@ -847,7 +849,7 @@ An alternative to building urban measures and similarity functions is to let mac
 	\item a feature corresponding to the k categories the amenities are split in, specifically the magnitudes of the vectors for each category;
 	\item a feature corresponding to the emd Gaussian value for that cluster, specifically the area under the emd Gaussian.
 \end{itemlist}
-The subsequently built machine learning models cannot however be formed on a single cluster, as the additional features would be the same for all datapoints, of course. Therefore, models on $n-1$ out of $n$ clusters will be build and tested on the remaining cluster (as it was done in the total models evaluation - recall \ref{small_vs_large}). The resulting training and test errors are show in \ref{extensions:extended_models_comparison}. (discussion)
+The subsequently built machine learning models cannot however be formed on a single cluster, as the additional features would be the same for all datapoints, of course. Therefore, models on $n-1$ out of $n$ clusters will be build and tested on the remaining cluster (as it was done in the total models evaluation - recall \ref{small_vs_large}). The resulting training and test errors are show in \ref{extensions:extended_models_comparison}. 
 
 \begin{table}[!ht]
 	%\footnotesize
