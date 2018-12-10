@@ -331,16 +331,17 @@ sim(\mathcal{C}_{with}^k,\mathcal{C}_{wout}^j) > sim(\mathcal{C}_{with}^i,\mathc
 $$\forall i \in \{0,...,|\mathcal{C}_{with}|-1\} \text{ and } \forall j \in \{0,...,|\mathcal{C}_{wout}|-1\}$$.
 
 \section{Evaluation}
-For evaluating our approach, we require parking and city data. As parking data, we use those from the SF\textit{park} project and determine the data sets that are relevant for our purposes. As city data, we take OpenStreetMap data from San Francisco and obtain the available public amenity information. Google Places provides the visiting duration values for the amenities. Based on these data sets, we determine relevant values for the \textit{merge distance}. Since we cannot evaluate the performance of our approach using clusters \textit{without} data, we evaluated the performance on clusters for which data were available. Therefore, we first calculated the similarity score between a cluster $c$ and all other clusters. Afterwards, we calculated the estimation errors when applying the model of cluster $c$ to all other clusters.
+To evaluate our approach, we require parking and city data. As parking data, we use those from the SF\textit{park} project and determine the data sets that are relevant for our purposes. As city data, we take OpenStreetMap data from San Francisco and obtain available public amenity information. Google Places provides the visiting duration values for the amenities. Based on these data sets, we determine relevant values for the \textit{merge distance}. Since we cannot evaluate the performance of our approach using clusters \textit{without} data, we evaluated the performance on clusters for which data were available. Therefore, we first calculated the similarity score between a cluster $c$ and all other clusters. Afterwards, we calculated the estimation errors when applying the model of cluster $c$ to all other clusters.
 
 \subsection{SF\textit{park} Parking Data}
 \label{evaluation:sfpark}
-The SF\textit{park} data are visualized in \ref{fig:before_clustering} using a built Leaflet application.
-The actual SF\textit{park} data has some particularities.
+The SF\textit{park} data are visualized in \cref{fig:before_clustering} using a Leaflet application built as part of this work.
+The actual SF\textit{park} data has some peculiarities.
 While the \textit{occupancy data} is provided with reference to \textit{blocks} as location units, all the other data sets use different location units.
 For the traffic and events data sets, the location units are street names.
 For parking revenue, they are districts.
 In case of weather and fuel price, the location reference is valid for the whole city of San Francisco. 
+Hence, there is a need to align the different data sets before they can be used together.
 
 \begin{figure}[!ht]
 	\centering
@@ -352,11 +353,12 @@ In case of weather and fuel price, the location reference is valid for the whole
 \subsection{OpenStreetMap for San Francisco}
 \label{evaluation:osm_for_sf}
 Following the selection of SF\textit{park} data as parking data, the city data is found in the corresponding OpenStreetMap layer for San Francisco.
-The actual public amenity information collected from POIs is listed in \ref{tab:amenities_list}.
+\todo[inline]{MC I rewrote this a bit. Still correct?}
+The types of the public amenities collected from the POIs are listed in \ref{tab:amenities_list}.
 
 \begin{table}[!ht]
 	%\scriptsize
-	\tbl{List of all OSM amenities found in the SF\textit{park} blocks.}
+	\tbl{List of all OSM amenity types found in the SF\textit{park} blocks.}
 	{\begin{tabular}{ | l  l  l  l | }
 		\hline
 		arts\_centre & dojo & marketplace & shelter \\
