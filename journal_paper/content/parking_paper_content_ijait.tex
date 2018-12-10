@@ -52,7 +52,7 @@ We shall briefly describe the research in the area of smart parking, while conce
 %\subsection{Smart Parking Overview}
 %\label{sec:relwork_smart_parking}
 
-%For an overview of smart parking projects, including development cost and the number of parking spaces covered, see Figure \Cref{fig:smart_parking_projects}.
+%For an overview of smart parking projects, including development cost and the number of parking spaces covered, see \Cref{fig:smart_parking_projects}.
 
 %\begin{figure}[!ht]
 %	\centering
@@ -133,7 +133,7 @@ In the scientific literature there have been an increased number of publications
 
 %On the topic of prediction, there are a number of papers that approach the problem. The circumstances differ in each case, so that it is worth mentioning the papers individually first. Afterwards we will attempt to compare these approaches by extracting the most relevant aspects, e.g. method, type of data, features, error, deployment location, etc., in a table. 
 
-%As in Section \Cref{sec:relwork_smart_parking}, all relevant work found on the topic are listed in Tables \Cref{tab:related_work2} and \Cref{tab:related_work3}. The key data shown emphasizes the prediction character of the papers by highlighting their general approach, features, methods, and evaluation.
+%As in \Cref{sec:relwork_smart_parking}, all relevant work found on the topic are listed in Tables \Cref{tab:related_work2} and \Cref{tab:related_work3}. The key data shown emphasizes the prediction character of the papers by highlighting their general approach, features, methods, and evaluation.
 
 %\begin{table}[!ht]
 %	%\setlength\extrarowheight{5pt}
@@ -208,7 +208,7 @@ Chen et al. \cite{zchen} develop an Android application that finds a parking loc
 Vlahogianni et al. \cite{vlahogianni} define prediction measures to find out the duration of free parking spaces. Additionally, they calculate 1-hour parking availability forecasts. The authors use neural networks for time-series in the form of a multilayer perceptrons to accurately predict occupancy up to one hour ahead. Their findings show a Weibull distribution for the duration of free parking spaces. The system developed was incorporated into the routing service of the city of Santander, Spain.
 
 Rajabioun and Ioannou \cite{rajabioun2013} introduce an information system for parking guidance that enables communication between vehicles and the infrastructure. It proposes a prediction algorithm that forecasts the availability for parking locations based on real-time parking information. It takes into account parameters such as parking duration, arrival time, destination, pricing, walking distance, parking capacity, rates of vehicles occupying and leaving parking spots, time restrictions, parking rules, events that disrupt parking availability, etc. Their algorithm uses a probabilistic density distribution model. The parking data was collected both from on-street parking meters and off-street garages in Los Angeles and San Francisco, USA. In a following paper, Rajabioun and Ioannou \cite{rajabioun2015} propose a multivariate autoregressive model that considers the temporal and spatial correlations of parking availability when making predictions
-%(cf. Figure \Cref{fig:related_work_rajabioun})
+%(cf. \Cref{fig:related_work_rajabioun})
 . The authors hold that the model, which is integrated into a parking guidance and information system, recommends parking locations with high accuracy. 
 
 %\begin{figure}[!ht]
@@ -219,7 +219,7 @@ Rajabioun and Ioannou \cite{rajabioun2013} introduce an information system for p
 %\end{figure}
 
 Tiedemann et al. \cite{tiedemann} present the development of a prediction system that gives estimated occupancies for parking spaces. The occupancy data is collected online via roadside parking sensors and the prediction is realized using neural gas machine learning combined with data threads. The authors notice that some factors play a significant part in the predictions, such as holidays, weather and use the neural gas clustering to separate the data, before the data thread method is applied
-%(cf. Figure \Cref{fig:related_work_tiedemann})
+%(cf. \Cref{fig:related_work_tiedemann})
 . The system is developed by the DFKI Robotics Innovation Center, while the sensors are manufactured by Siemens AG and are installed in street lights. The pilot region for the project is Berlin, Germany.
 
 %\begin{figure}[!ht]
@@ -234,7 +234,7 @@ Wu et al. \cite{wu} present a information system that recommends parking options
 Caliskan et al. \cite{caliskan} model the prediction of available parking spaces as a vehicular ad-hoc network (VANET). The network disseminates parking data in order to help with the estimation of future occupancy of parking lots. The pieces of disseminated data are timestamp, total capacity of parking lot, number of parking spaces that are currently occupied, the arrival rate, and the parking rate. The latter two are used in the modeling of continuous-time homogeneous Markov chains. The approach is otherwise based on queuing theory. The evaluation was carried out in Brunswick, Germany, where about 10000 vehicles were connected in the ad-hoc network. Klappenecker et al. \cite{klappenecker} builds on the result of Caliskan and uses an improved version of continuous-time Markov chains for predicting availability of parking spaces. Predictions are communicated between cars in an ad-hoc network. The approach simplifies the computations of transitional probabilities inside a Markov chain model. The system applies to parking lots that are connected to the ad-hoc network. These communicate the number of occupied spaces, capacity, arrival and parking rate. Also based on VANETs is Szczurek et al. \cite{szczurek} work, which propose a novel approach that combines machine learning with the information disseminated in ad-hoc vehicular networks. The building block of the system are parking reports, which are issued by vehicles leaving a parking space and comprise a report identifier, a location, and a timestamp. The parking reports are being learned by a model, which then indicates whether a parking is available for a specific vehicle. A conditional relevance is used to determine whether a particular report is useful for a specific vehicle. This is modeled using a Naive Bayes method. A parking availability report R is labeled relevant by vehicle V, if the parking space referenced in R is available when V reaches it. Upon evaluation of the methods, the authors reported an improvement in parking discovery times for vehicles.
 
 PocketParker is a crowdsourcing system, proposed by Nandugudi et al. \cite{nandugudi}, that uses smartphone data to predict parking availability. The system is used for parking lots. It requires no input from the user, it notices automatically when a user starts to drive or stops, i.e., departure and arrival events
-%(cf. Figure \Cref{fig:related_work_nandugudi})
+%(cf. \Cref{fig:related_work_nandugudi})
 . Based on these two events, the system builds a probability distribution model that is used to answer queries about parking availability. PocketParker has proved robust to hidden parkers, i.e., parking vehicles that are not using the application. In the authors' simulation, it has reached 94\% rate for parking availability prediction with 105 users over 45 days.
 
 %\begin{figure}[!ht]
@@ -249,7 +249,7 @@ Caicedo et al. \cite{caicedo} develop a methodology for predicting real-time par
 H\"ossinger et al. \cite{hoessinger} present a simple real-time occupancy model based on various pieces of data collected in the city of Vienna, Austria. An average day curve model was built using the ticket data from mobile-phone parking, the counts of car parks, and the traffic flow volumes in the city.  The data was collected following agreements with the respective mobile phone companies, through surveys and by accessing a dedicated traffic website, respectively. The predictions are valid for short-time spans and applicable to the above mentioned city.
 
 Chen \cite{xchen} tackles the parking problem by aggregating parking lots. The paper shows that the prediction  error of parking occupancy decreases by combining multiple parking lots. The trained models take into account factors such as day, time, event, distance, parking price, etc. The author tries out multiple models, such as ARIMA, linear regression, support vector regression and feed forward neural network. It turns out that the neural networks algorithm scores the best when the model is evaluated on the SF\textit{park} data \cite{sfpark_open_data}. Furthermore, the paper investigates the specifics of aggregated parking lots 
-%(cf. Figure \Cref{fig:related_work_xchen}) 
+%(cf. \Cref{fig:related_work_xchen}) 
 and finds certain artifacts in the occupancy graph when clustering the respective parking locations.
 
 %\begin{figure}[!ht]
@@ -271,7 +271,7 @@ With iParker, Kotb et al. \cite{kotb} propose a system that handles parking rese
 %\end{figure}
 
 ParkNet, developed by Mathur et al. \cite{mathur} is a system made up of vehicles that captures parking space information while driving. Every ParkNet vehicle is equipped with a GPS receiver and an ultrasonic sensor facing sideways
-%(cf. Figure \Cref{fig:related_work_mathur})
+%(cf. \Cref{fig:related_work_mathur})
 . The latter determines whether it passes by parking spaces and whether they are occupied. The data is sent to a central server that aggregates it, in order to build parking space occupancy maps in real-time. The information is queried by clients that search for a free parking space. The system was evaluated in Highland Park, New Jersey and San Francisco on 500 miles road-side parking data and yield 95\% accurate parking maps and 90\% parking occupancy accuracy. The authors show that the system can further be improved if the sensors are fitted into taxicabs or city buses.
 
 Ji et al. \cite{ji} presents a forecasting method based on wavelet neural networks. These are feed-forward neural networks that have continuous wavelet function as activation function for the hidden layers. The system was tested in Newcastle upon Tyne, England and evaluation was performed using real-time data of up to 1 day in advance.
@@ -324,7 +324,7 @@ The data was collected using parking sensors. These provided the central server 
 SF\textit{park} made available real-time information on parking rates and parking occupancy through a smart phone application. The SF\textit{park} project and its success played an important role when choosing to base our project on it.
 
 \section{Concept}
-For implementing our approach, we extract parking data from SF\textit{park}. In addition, we collect city data from various sources (cf. Section \Cref{sec:citydata}). To ensure that our approach will be compatible with data available in other cities, we annotate our data using ontologies from the CityPulse project~\cite{city_pulse} and store them in RDF format. Afterwards, we merge the data sets and perform a clustering process. Next, we define the parking profile by introducing two similarity functions: \textit{cosine similarity} and \textit{earth mover's distance}.
+For implementing our approach, we extract parking data from SF\textit{park}. In addition, we collect city data from various sources (cf. \Cref{sec:citydata}). To ensure that our approach will be compatible with data available in other cities, we annotate our data using ontologies from the CityPulse project~\cite{city_pulse} and store them in RDF format. Afterwards, we merge the data sets and perform a clustering process. Next, we define the parking profile by introducing two similarity functions: \textit{cosine similarity} and \textit{earth mover's distance}.
 Finally, we explain the machine learning training process and define the estimations for clusters without parking data.
 
 %\begin{figure}
@@ -378,7 +378,7 @@ An overview of the different properties available in the data set are shown in \
 
 \subsection{City Data}
 \label{sec:citydata}
-We established that city data reflects parking demand in a city area. We obtain it by collecting public amenity information as provided by OpenSteetMap\footnote{\url{https://www.openstreetmap.org} The maps used in this article are \textcopyright OpenStreetMap contributors}. The OSM data is available as shapefiles containing geometries such as points, polylines and polygons. We extract the \textit{points of interest} (POIs). A POI contains an \textit{amenity} attribute indicating the public service located at this position as it was annotated by the OSM users (cf. Figure \Cref{fig:pois}).
+We established that city data reflects parking demand in a city area. We obtain it by collecting public amenity information as provided by OpenSteetMap\footnote{\url{https://www.openstreetmap.org} The maps used in this article are \textcopyright OpenStreetMap contributors}. The OSM data is available as shapefiles containing geometries such as points, polylines and polygons. We extract the \textit{points of interest} (POIs). A POI contains an \textit{amenity} attribute indicating the public service located at this position as it was annotated by the OSM users (cf. \Cref{fig:pois}).
 
 \begin{figure}[!ht]
 	\centering
@@ -388,7 +388,7 @@ We established that city data reflects parking demand in a city area. We obtain 
 \end{figure}
 
 The amenity information accounts for the times of parking (i.e., morning, day, night, etc.) and, up to some degree, for the duration of parking. An example of a service indicating this is Google Maps.
-It displays typical \textit{visiting duration} or \textit{time spent} values and popularity of the place for specific points in time. The average values are based on the users' smart phone GPS sensors (cf. Figure \Cref{fig:visit_duration}). To obtain the duration values, we manually extract information from Google Maps. The duration information is aggregated by Google using a crowdsourcing approach. 
+It displays typical \textit{visiting duration} or \textit{time spent} values and popularity of the place for specific points in time. The average values are based on the users' smart phone GPS sensors (cf. \Cref{fig:visit_duration}). To obtain the duration values, we manually extract information from Google Maps. The duration information is aggregated by Google using a crowdsourcing approach. 
 
 \begin{figure}[!ht]
 	\centering
@@ -408,17 +408,17 @@ The parking location units are provided together alongside the various types of 
 The city data, on the other hand, references POI geometries, which are points expressed in a particular reference system, which differs from the one of the parking locations.
 Therefore, after establishing the coordinate systems of both geometries, we define a \textit{merge distance} that matches a parking space to a public amenity. 
 
-The merge distance can be intuitively understood as the radius around a public amenity. It is defined to represent the parking area that is relevant for a particular public amenity, or, more straightforward, the walking distance from the parked car to, e.g., the restaurant, the office, the bank, etc. Concrete instances of the merging distance can be found in Section \Cref{experimental_setup:merging_parking_city_data}.
+The merge distance can be intuitively understood as the radius around a public amenity. It is defined to represent the parking area that is relevant for a particular public amenity, or, more straightforward, the walking distance from the parked car to, e.g., the restaurant, the office, the bank, etc. Concrete instances of the merging distance can be found in \Cref{experimental_setup:merging_parking_city_data}.
 
 \subsection{Clustering}
 \label{concept:clustering}
 In a realistic scenario, the available parking data does not cover the whole city surface. In fact, it is a fraction of it. Therefore, we first separate the area \textit{with} parking data from the area \textit{without} parking data. Based on this initial split, we perform clustering to further separate these regions into smaller areas. By splitting into city areas, we are making sure that smaller regions lead to more representative parking profiles and therefore parking estimations. 
 
-As we want an exclusively location-based separation, we may employ K-Means, DBSCAN or OPTICS to cluster the city areas. The distance is calculated between (latitude, longitude)-pairs of location unit coordinates corresponding to one parking unit. There are two clustering processes executed, one for the city area \textit{with} parking data, another one for the city area \textit{without} parking data. The number of clusters chosen in each area is kept proportional to the number of total location units that each city area contains. Since having control over the number of clusters is the goal here, we choose to use K-Means, where we provide the number of expected clusters as input. More details on the concrete value of $k$ and an overview about the clusters can be found in Section \Cref{experimental_setup:clustering}.
+As we want an exclusively location-based separation, we may employ K-Means, DBSCAN or OPTICS to cluster the city areas. The distance is calculated between (latitude, longitude)-pairs of location unit coordinates corresponding to one parking unit. There are two clustering processes executed, one for the city area \textit{with} parking data, another one for the city area \textit{without} parking data. The number of clusters chosen in each area is kept proportional to the number of total location units that each city area contains. Since having control over the number of clusters is the goal here, we choose to use K-Means, where we provide the number of expected clusters as input. More details on the concrete value of $k$ and an overview about the clusters can be found in \Cref{experimental_setup:clustering}.
 
 \subsection{Similarity Functions}
 \label{realization:similarity_functions}
-To calculate the similarity of city areas, we use \textit{cosine similarity} and \textit{earth mover's distance}. For this, we use two representations of city areas: \textit{cluster vectors} and \textit{cluster Gaussians}. As data, we use the city data described in Section \Cref{sec:citydata}.
+To calculate the similarity of city areas, we use \textit{cosine similarity} and \textit{earth mover's distance}. For this, we use two representations of city areas: \textit{cluster vectors} and \textit{cluster Gaussians}. As data, we use the city data described in \Cref{sec:citydata}.
 
 \subsubsection{Cosine Similarity}
 \label{realization:vectors}
@@ -427,7 +427,7 @@ The criteria for division will be their average \textit{visiting duration} durat
 For example, a short duration category of up to 30 minutes, a medium duration between 31 and 90 minutes and a large duration of above 90 minutes stay.
 Each cluster gets represented by an $n$-dimensional vector, whose components correspond to the amenity categories.
 The magnitude of component $i$ is equal to the number of amenities of category $Cat_i$ that can be found in that particular cluster.
-Compare Figure \Cref{fig:cluster_vector} for a general representation.
+Compare \Cref{fig:cluster_vector} for a general representation.
 
 \begin{figure}[!ht]
 	\centering
@@ -456,7 +456,7 @@ A cluster that contains one amenity $A$ is represented as a Gaussian curve, i.e.
 The curve's center is at the average duration of the amenity $A$ and its standard deviation is the one of the amenity.
 When $n$ amenities $A$ exist in the cluster, the representation will be an $A$ curve multiplied $n$ times.
 Multiple amenities, each appearing multiple times, will result in a curve that is the linear combination of the individual representations of the amenities as normal distribution curves.
-Compare Figure \Cref{fig:gaussian} for a visualization of the summing process.
+Compare \Cref{fig:gaussian} for a visualization of the summing process.
 
 \begin{equation}
 emd(\mathcal{C}_i) = \sum_{j=1}^{|amenities|} K_{ij} \times A_j
@@ -500,7 +500,7 @@ Therefore, all cluster Gaussians will get normalized before emd is computed.
 \subsection{Machine Learning Models}
 \label{realization:machine_learning_models}
 The prediction of parking occupancy is realized using machine learning.
-We choose to explore this methodology, following the solid results machine learning models have delivered for the various smart parking settings investigated in Section \Cref{sec:relwork}. A machine learning model $\mathcal{M}$ will be trained for every cluster \textit{with} parking data.
+We choose to explore this methodology, following the solid results machine learning models have delivered for the various smart parking settings investigated in \Cref{sec:relwork}. A machine learning model $\mathcal{M}$ will be trained for every cluster \textit{with} parking data.
 
 The training data \textit{features} are composed of the parking data previously enumerated. We aggregate feature values around the location unit id, as on the cluster level this is irrelevant. The occupancy rate is set as the target variable. The model training and evaluation is performed in Python via the \textit{scikit-learn} library.
 
@@ -607,7 +607,7 @@ Further in the evaluation we assign it distances of 100m, 200m, and 400m.
 
 \subsection{Clustering}
 \label{experimental_setup:clustering}
-As established in Section \Cref{concept:clustering}, we apply K-Means to cluster the city areas.
+As established in \Cref{concept:clustering}, we apply K-Means to cluster the city areas.
 In the evaluation, we will refer to the number of clusters \textit{with} parking data as \textit{the number of clusters}.
 The area without parking data is going to be split into a proportional number of clusters, as the sizes of clusters should be kept roughly equal for both sides.
 It turns out that for SF\textit{park} the proportion is approximately $2.6$, following the division between the total number of blocks from each group.
@@ -615,7 +615,7 @@ We have chosen two numbers of clusters to run the evaluation, namely 8 clusters 
 The area without parking data will therefore have 20 and 41 clusters, respectively. 
 
 After running the K-Means clustering process, the Leaflet application map reveals the individual clusters by highlighting them on mouse-over.
-The clusters \textit{with} parking data will turn dark red, while the clusters \textit{without} parking data will appear in dark blue (cf. Figure \Cref{fig:highlighted_collage}). 
+The clusters \textit{with} parking data will turn dark red, while the clusters \textit{without} parking data will appear in dark blue (cf. \Cref{fig:highlighted_collage}). 
 
 \begin{figure}[!ht]
 	\centering
@@ -666,7 +666,7 @@ The results are shown in \Cref{tab:amenities_google_places} and the numbers are 
 \end{table}
 
 Alongside this information, we need the amenity categories in order to derive the \textit{cluster vectors}.
-As defined in Section \Cref{realization:vectors}, the categories are based on the visiting duration mean.
+As defined in \Cref{realization:vectors}, the categories are based on the visiting duration mean.
 We split them in three categories: 
 \begin{romanlist}
 	\item 	under half an hour,
@@ -675,11 +675,11 @@ We split them in three categories:
 \end{romanlist}
 The assigned partitions for every amenity are shown in a separator column in \Cref{tab:amenities_google_places}. 
 
-The computation of \textit{cluster Gaussians} relies on both the mean and standard deviation of the amenity visiting duration, as defined in Section \Cref{realization:gaussians}.
+The computation of \textit{cluster Gaussians} relies on both the mean and standard deviation of the amenity visiting duration, as defined in \Cref{realization:gaussians}.
 
 \subsection{Amenity area as similarity basis}
 \label{experimental_setup:amenity_area}
-Together with the similarity functions in Section \Cref{experimental_setup:urban_measure} we considered \textit{visiting duration} as the basis for creating the urban profile. However, there are other measures that reflect the parking demand towards an amenity, one of them being the area of the particular amenity. OpenStreeMap provides a polygon layer for a certain geographic bounding box, which contains information across all the surfaces in that region (recall Section \Cref{sec:citydata}). See Figure \Cref{fig:amenity_polygons} for a visualization of the polygons and their areas in OSM. In extracting this information we had two options. 
+Together with the similarity functions in \Cref{experimental_setup:urban_measure} we considered \textit{visiting duration} as the basis for creating the urban profile. However, there are other measures that reflect the parking demand towards an amenity, one of them being the area of the particular amenity. OpenStreeMap provides a polygon layer for a certain geographic bounding box, which contains information across all the surfaces in that region (recall \Cref{sec:citydata}). See \Cref{fig:amenity_polygons} for a visualization of the polygons and their areas in OSM. In extracting this information we had two options. 
 
 \begin{figure}[!ht]
 	\centering
@@ -753,7 +753,7 @@ Finally, \textit{weather data} and \textit{fuel data} are given per city, hence 
 
 \subsection{Aggregating training data}
 \label{experimental_setup:aggregating_training_data}
-As indicated in Section \Cref{realization:machine_learning_models}, the training data is aggregated across all blocks so that it becomes comparable to other clusters and can be used in training and testing models. The averaging is performed per timestamp, i.e., if multiple blocks have an occupancy record for the same time and block, the occupancy rate will be averaged for both of these. Features such as \textit{price} and \textit{parking capacity per block} are averaged as well. See \Cref{tab:aggregating_datapoints} for an example of this process. This means that the original collection of data records shrinks, which should decrease the training time. In \Cref{tab:models_training_points}, the expansion/shrinking rate is shown for various number of clusters.
+As indicated in \Cref{realization:machine_learning_models}, the training data is aggregated across all blocks so that it becomes comparable to other clusters and can be used in training and testing models. The averaging is performed per timestamp, i.e., if multiple blocks have an occupancy record for the same time and block, the occupancy rate will be averaged for both of these. Features such as \textit{price} and \textit{parking capacity per block} are averaged as well. See \Cref{tab:aggregating_datapoints} for an example of this process. This means that the original collection of data records shrinks, which should decrease the training time. In \Cref{tab:models_training_points}, the expansion/shrinking rate is shown for various number of clusters.
 
 \begin{table}
 	%\footnotesize
@@ -833,7 +833,7 @@ As indicated in Section \Cref{realization:machine_learning_models}, the training
 
 %\subsection{Model Evaluation for Clusters \textit{with} Parking Data}
 %\label{evaluation:training_testing_errors}
-In Figure \Cref{fig:cwith} a screenshot of the web application showing a sample of the results is illustrated. Figure \Cref{fig:cwith_table} displays the presented table in more detail.
+In \Cref{fig:cwith} a screenshot of the web application showing a sample of the results is illustrated. \Cref{fig:cwith_table} displays the presented table in more detail.
 
 \begin{figure}[!ht]
 	\centering
@@ -845,22 +845,22 @@ In Figure \Cref{fig:cwith} a screenshot of the web application showing a sample 
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.8\textwidth]{graphics/cwith_source_dt_cosine_table.png}
-	\caption{The pop-up table for the Leaflet application view of Figure \Cref{fig:cwith}.}
+	\caption{The pop-up table for the Leaflet application view of \Cref{fig:cwith}.}
 	\label{fig:cwith_table}
 \end{figure}
 
 \section{Evaluation}
 We shall evaluate various pieces of the system that has been presented. Firstly, in \Cref{evaluation:best_model}, we shall establish the machine learning method that achieves best results on average across clusters. 
 
-Section \Cref{evaluation:similarity_vs_estimation_sec} is the heart of the evaluation. It consists in comparing the cluster models' test error with the independently-computed similarity values between clusters. More specifically, a \textit{source} cluster's model will tested on a \textit{target} cluster and the error is correlated to the similarity between the \textit{source} and the \textit{target} clusters. Both \textit{cosine} and \textit{emd} functions will be used. The correlations will be expressed as Pearson- and Spearman's rank coefficients.
+\Cref{evaluation:similarity_vs_estimation_sec} is the heart of the evaluation. It consists in comparing the cluster models' test error with the independently-computed similarity values between clusters. More specifically, a \textit{source} cluster's model will tested on a \textit{target} cluster and the error is correlated to the similarity between the \textit{source} and the \textit{target} clusters. Both \textit{cosine} and \textit{emd} functions will be used. The correlations will be expressed as Pearson- and Spearman's rank coefficients.
 
-In the following Section \Cref{evaluation:estimations_cwout}, we take a look at the results of applying the models to clusters \textit{without parking data} and show screenshots from the concrete web application. Section \Cref{evaluation:entire_datapoints} looks at the model test errors and correlation results by skipping the aggregating step in machine learning training, i.e. instead of averaging the datapoints over timestamp per cluster, we build the cluster models using the entire occupancy data. 
+In the following \Cref{evaluation:estimations_cwout}, we take a look at the results of applying the models to clusters \textit{without parking data} and show screenshots from the concrete web application. \Cref{evaluation:entire_datapoints} looks at the model test errors and correlation results by skipping the aggregating step in machine learning training, i.e. instead of averaging the datapoints over timestamp per cluster, we build the cluster models using the entire occupancy data. 
 
-Section \Cref{evaluation:amenity_area} follows up on Section \Cref{experimental_setup:amenity_area} and uses the \textit{amenity area} as the basis for the similarity functions in calculating the correlations between model test errors and similarity values. Finally, in Section \Cref{evaluation:machine_learning_better} we question whether the similarity function approach is the most efficient and transfer its purpose to the machine learning phrase. The model will receive absolute \textit{cosine} and \textit{emd Gaussian} values as additional features and its model test error and correlation values will be compared to the ones from the original approach.
+\Cref{evaluation:amenity_area} follows up on \Cref{experimental_setup:amenity_area} and uses the \textit{amenity area} as the basis for the similarity functions in calculating the correlations between model test errors and similarity values. Finally, in \Cref{evaluation:machine_learning_better} we question whether the similarity function approach is the most efficient and transfer its purpose to the machine learning phrase. The model will receive absolute \textit{cosine} and \textit{emd Gaussian} values as additional features and its model test error and correlation values will be compared to the ones from the original approach.
 
 \subsection{Best Model Method}
 \label{evaluation:best_model}
-Models were trained using four methods: decision trees, support vector machines, multilayer perceptrons, gradient boosted trees. Section \Cref{evaluation:best_model_method} shows the distribution of best machine learning methods in case of 8 and 16 clusters.
+Models were trained using four methods: decision trees, support vector machines, multilayer perceptrons, gradient boosted trees. \Cref{evaluation:best_model_method} shows the distribution of best machine learning methods in case of 8 and 16 clusters.
 The values were obtained by summing up the number of times a method produced the least estimation error, i.e., RMSE, among the four methods for all combinations of clusters with parking data $(\mathcal{C}_{source}, \mathcal{C}_{target})$.
 Extreme gradient boosting claims the first spot in both cases.
 
@@ -993,7 +993,7 @@ The testing data records are composed of values equal to the averages of the res
 This is the case for \textit{parking price} and \textit{parking capacity}.
 One piece of data that still needs to be provided so that the estimation is computed is the date and time.
 For convenience, we choose the next day at the point when the user starts the model training. 
-An example of the estimation is visualized Figure \Cref{fig:cwout_table}.
+An example of the estimation is visualized \Cref{fig:cwout_table}.
 
 \begin{figure}[!ht]
 	\centering
