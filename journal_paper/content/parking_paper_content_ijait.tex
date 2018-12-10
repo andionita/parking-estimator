@@ -590,9 +590,14 @@ The types of the public amenities collected from the POIs are listed in \cref{ta
 \label{experimental_setup:merging_parking_city_data}
 In case of SF\textit{park}, the blocks are given in latitude and longitude.
 In OpenStreetMap, the geometry is set to EPSG 4326.
-With both systems using the same reference, we can therefore fix a \textit{merge distance}.
+With both systems using the same reference, we can define a \textit{merge distance}.
+\todo[inline]{MC I want to rephrase this a bit, see below. }
 The distance $d$ should express the impact that a POI $P$ has on the block $B$, when $dist(P, B) = d$. For instance, it expresses the impact of the parking demand that a restaurant induces on a parking block situated at $d$ meters away.
 Further in the evaluation we assign it distances of 100m, 200m, and 400m.
+\todo[inline]{MC New version. Kept meaning?}
+This merge distance $d$ is the distance between a parking lot and an amenity, under which we assume that the visitors of the amenity would use the parking lot.
+Further, in the evaluation we assign it distances of 100m, 200m, and 400m.
+
 
 \subsection{Clustering}
 \label{experimental_setup:clustering}
@@ -626,7 +631,9 @@ This piece of information is not accessible yet via the Google Places API\footno
 The results are shown in \Cref{tab:amenities_google_places} and the numbers are given in minutes and have been rounded to the nearest integer. We have included only amenities for which at least two stay duration sources were found. 
 
 \begin{table}[!ht]
-	\tbl{All amenities listed with their corresponding mean visiting information as collected from Google Places}
+	\tbl{All amenities listed with their corresponding mean visiting information as collected from Google Places. 
+The \emph{cat} column indicates whether the average visiting time is under half an hour (1), 31 to 90 minutes (2), or more than 1.5 hours (3).
+}
 	%\footnotesize
 	{\begin{tabular}{ | l | c | c | c || l | c | c | c |}
 		\hline		
@@ -658,12 +665,11 @@ Alongside this information, we need the amenity categories in order to derive th
 As defined in Section \Cref{realization:vectors}, the categories are based on the visiting duration mean.
 We split them in three categories: 
 \begin{romanlist}
-	\item 	under half an hour,
-	\item	31 to 90 minutes and
-	\item 	more than 1.5 hours. 
+	\item under half an hour,
+	\item 31 to 90 minutes and
+	\item more than 1.5 hours. 
 \end{romanlist}
-The assigned partitions for every amenity are shown in a separator column in \Cref{tab:amenities_google_places}. 
-
+The assigned partitions for every amenity are shown in \Cref{tab:amenities_google_places}. 
 The computation of \textit{cluster Gaussians} relies on both the mean and standard deviation of the amenity visiting duration, as defined in Section \Cref{realization:gaussians}.
 
 \subsection{Amenity area as similarity basis}
