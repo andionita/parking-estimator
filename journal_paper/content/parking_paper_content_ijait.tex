@@ -19,7 +19,9 @@ We start by giving an intuitive example which bridges the understanding path tow
 Further, other contributions to the field of smart parking are presented, followed by the concrete approach.
 The evaluation in this case carries out the instantiation of the proposed approach with an actual use case. We present the results and an analysis.
 We finish off by pointing out aspects that can be further pursued and by summarizing the outcome.
-This work is a short version of an earlier master thesis by the first author of this article~\cite{ionita2017master}.
+This work extends our previous work \cite{ionita2018park}. Compared to the previous paper, this work introduces additional related work as well as a more detailed and refined evaluation of our approach.
+Instead of aggregrating data points for the machine learning models over the timestamp, we build the cluster models using the entire occupancy data. 
+In addition, we refined the amenity value for the similarity functions. Finally, we evaluated if we can improve the results by using the similarity functions as additional features. 
 
 \section{Motivating Example}
 In this section, we provide a motivating example illustrating the necessity for introducing the concept of \emph{parking demand profiles} to improve the accuracy of machine learning models for predicting free parking spots in smart cities. 
@@ -541,12 +543,13 @@ Therefore, we first calculated the similarity score between every pair of cluste
 
 \subsection{SF\textit{park} parking data}
 \label{experimental_setup:sfpark}
-The SF\textit{park} data are visualized in Figure \Cref{fig:before_clustering} using a built Leaflet application.
-The actual SF\textit{park} data has some particularities.
+The SF\textit{park} data are visualized in Figure \ref{fig:before_clustering} using a Leaflet application built as part of this work.
+The actual SF\textit{park} data has some peculiarities.
 While the \textit{occupancy data} is provided with reference to \textit{blocks} as location units, all the other data sets use different location units.
 For the traffic and events data sets, the location units are street names.
 For parking revenue, they are districts.
 In case of weather and fuel price, the location reference is valid for the whole city of San Francisco. 
+Hence, there is a need to align the different data sets before they can be used together.
 
 \begin{figure}[!ht]
 	\centering
@@ -558,7 +561,7 @@ In case of weather and fuel price, the location reference is valid for the whole
 \subsection{OpenStreetMap for San Francisco}
 \label{experimental_setup:osm_for_sf}
 Following the selection of SF\textit{park} data as parking data, the city data is found in the corresponding OpenStreetMap layer for San Francisco.
-The actual public amenity information collected from POIs is listed in \Cref{tab:amenities_list}.
+The types of the public amenities collected from the POIs are listed in \cref{tab:amenities_list}.
 
 \begin{table}[!ht]
 	%\scriptsize
@@ -1051,6 +1054,11 @@ In \Cref{tab:correlation_values} the resulting correlations of testing errors wi
 		All models above were build using extreme gradient boosting.
 	\end{tabnote}
 \end{table}
+	
+	
+\subsection{Amenity area as similarity basis}
+\label{extensions:amenity_area}
+Together with the similarity functions we considered \textit{timespent} as the basis for creating the urban profile (recall \ref{evaluation:urban_measure}). However, there are other measures that reflect the parking demand corresponding towards an amenity, one of them being area of the particular amenity, which is available in OpenStreetMap. OSM provides a \textit{polygon layer} for a certain geographic bounding box, which contains information across all the surfaces in that region (recall \ref{sec:citydata}). In extracting this information we had two options. 
 
 \subsection{Amenity area results}
 \label{evaluation:amenity_area}
