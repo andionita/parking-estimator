@@ -328,7 +328,7 @@ The data was collected using parking sensors. These provided the central server 
 SF\textit{park} made available real-time information on parking rates and parking occupancy through a smart phone application. The SF\textit{park} project and its success played an important role when choosing to base our project on it.
 
 \section{Concept}
-For implementing our approach, we extract parking data from SF\textit{park}. In addition, we collect city data from various sources (cf. \cref{sec:citydata}). To ensure that our approach will be compatible with data available in other cities, we annotate our data using ontologies from the CityPulse project~\cite{city_pulse} and store them in RDF format. Afterwards, we merge the data sets and perform a clustering process. Next, we define the parking profile by introducing two similarity functions: \textit{cosine similarity} and \textit{earth mover's distance}.
+To implement our approach, we extract parking data from SF\textit{park}. In addition, we collect city data from various sources (cf. \cref{sec:citydata}). To ensure that our approach will be compatible with data available in other cities, we annotate our data using ontologies from the CityPulse project~\cite{city_pulse} and store them in RDF format. Afterwards, we merge the data sets and perform a clustering process. Next, we define the parking profile by introducing two similarity functions: \textit{cosine similarity} and \textit{earth mover's distance}.
 Finally, we explain the machine learning training process and define the estimations for clusters without parking data.
 
 %\begin{figure}
@@ -382,7 +382,7 @@ An overview of the different properties available in the data set are shown in \
 
 \subsection{City Data}
 \label{sec:citydata}
-We established that city data reflects parking demand in a city area. We obtain it by collecting public amenity information as provided by OpenSteetMap\footnote{\url{https://www.openstreetmap.org} The maps used in this article are \textcopyright OpenStreetMap contributors}. The OSM data is available as shapefiles containing geometries such as points, polylines and polygons. We extract the \textit{points of interest} (POIs). A POI contains an \textit{amenity} attribute indicating the public service located at this position as it was annotated by the OSM users (cf. \cref{fig:pois}).
+We established that city data reflects the parking demand in a city area. We obtain it by collecting public amenity information as provided by OpenSteetMap\footnote{\url{https://www.openstreetmap.org} The maps used in this article are \textcopyright OpenStreetMap contributors}. The OSM data is available as shapefiles containing geometries such as points, polylines and polygons. We extract the \textit{points of interest} (POIs). A POI contains an \textit{amenity} attribute (among others) indicating the public service located at this position as it was annotated by the OSM users (cf. \cref{fig:pois}).
 
 \begin{figure}[!ht]
 	\centering
@@ -418,7 +418,7 @@ The merge distance can be intuitively understood as the radius around a public a
 \label{concept:clustering}
 In a realistic scenario, the available parking data does not cover the whole city surface. In fact, it is a fraction of it. Therefore, we first separate the area \textit{with} parking data from the area \textit{without} parking data. Based on this initial split, we perform clustering to further separate these regions into smaller areas. By splitting into city areas, we are making sure that smaller regions lead to more representative parking profiles and therefore parking estimations. 
 
-As we want an exclusively location-based separation, we may employ K-Means, DBSCAN or OPTICS to cluster the city areas. The distance is calculated between (latitude, longitude)-pairs of location unit coordinates corresponding to one parking unit. There are two clustering processes executed, one for the city area \textit{with} parking data, another one for the city area \textit{without} parking data. The number of clusters chosen in each area is kept proportional to the number of total location units that each city area contains. Since having control over the number of clusters is the goal here, we choose to use K-Means, where we provide the number of expected clusters as input. More details on the concrete value of $k$ and an overview about the clusters can be found in \cref{experimental_setup:clustering}.
+As we want an exclusively location-based separation, we may employ K-Means, DBSCAN or OPTICS to cluster the city areas. The distance is calculated between $($latitude$,$ longitude$)$ -pairs of location unit coordinates corresponding to one parking unit. There are two clustering processes executed, one for the city area \textit{with} parking data, another one for the city area \textit{without} parking data. The number of clusters chosen in each area is kept proportional to the number of total location units that each city area contains. Since having control over the number of clusters is the goal here, we choose to use K-Means, where we provide the number of expected clusters as input. More details on the concrete value of $k$ and an overview about the clusters can be found in \cref{experimental_setup:clustering}.
 
 \subsection{Similarity Functions}
 \label{realization:similarity_functions}
@@ -427,7 +427,7 @@ To calculate the similarity of city areas, we use \textit{cosine similarity} and
 \subsubsection{Cosine Similarity}
 \label{realization:vectors}
 To form the cluster vectors, we first divide all amenities into categories $Cat_1, Cat_2, ..., Cat_n$.
-The criteria for division will be their average \textit{visiting duration} duration.
+The criteria for division will be their average visiting duration.
 For example, a short duration category of up to 30 minutes, a medium duration between 31 and 90 minutes and a large duration of above 90 minutes stay.
 Each cluster gets represented by an $n$-dimensional vector, whose components correspond to the amenity categories.
 The magnitude of component $i$ is equal to the number of amenities of category $Cat_i$ that can be found in that particular cluster.
@@ -440,7 +440,7 @@ Compare \cref{fig:cluster_vector} for a general representation.
 	\label{fig:cluster_vector}
 \end{figure}
 %\label{realization:cosine_similarity}
-The cosine similarity between two vectors is defined as the cosine of the angle between the two vectors:
+The \textit{cosine similarity} between two vectors is defined as the cosine of the angle between the two vectors:
 
 \begin{equation}
 cos(\theta)=\frac{A\cdot B}{{\lVert}A{\rVert}       
@@ -455,7 +455,7 @@ Unlike the earth mover's distance, the cosine similarity implementation uses the
 
 A cluster Gaussian is a \textit{kernel density estimation} among amenity probability distributions.
 In turn, an amenity probability distribution is represented as \textit{Gaussian kernel}.
-To construct a cluster Gaussian, we first collect the average visiting duration and standard deviation for the individual amenities.
+To construct a cluster Gaussian, we first collect the average visiting duration and standard deviation of the individual amenities.
 A cluster that contains one amenity $A$ is represented as a Gaussian curve, i.e., normal probability distribution.
 The curve's center is at the average duration of the amenity $A$ and its standard deviation is the one of the amenity.
 When $n$ amenities $A$ exist in the cluster, the representation will be an $A$ curve multiplied $n$ times.
@@ -473,17 +473,17 @@ where $A_j$ is an amenity that appears $K_{ij}$ times in the cluster $\mathcal{C
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.8\textwidth]{graphics/emd_gaussian_addition3.png}
-	\caption{The summing of Gaussians resulting in a cluster Gaussian.}
+	\caption{The iterative summing of Gaussians resulting in a cluster Gaussian - the outer graph.}
 	\label{fig:gaussian}
 \end{figure}
 
-The earth mover's distance (emd) is a measure used in statistics that roughly expresses the difference between position and magnitude of two curves.
+The \textit{earth mover's distance (emd)} is a measure used in statistics that roughly expresses the difference between position and magnitude of two curves.
 It is best explained by regarding the curves as the hull of earth piles.
 For two separate earth piles, emd computes the minimum effort of rearranging a pile so that the shape of the other pile is obtained.
 Moving P particles over a distance D is equal to the effort $P \times D$.
 A prerequisite for this operation is that the two piles need to contain the same quantity of earth.
 
-More rigorously, the earth mover's distance is better known in mathematics under the name Wasserstein Metric.
+More rigorously, the earth mover's distance is better known in mathematics under the name \textit{Wasserstein Metric}.
 Given two normal distributions $\mu_1=\mathcal{N}(m_1,C_1)$ and $\mu_2=\mathcal{N}(m_2,C_2)$, where $m_1$ and $m_2 \in \mathbb{R}^{n}$ are their respective expected values and $C_1$ and $C_2 \in \mathbb{R}^{n\times n}$.
 Then, the 2-Wasserstein distance between $\mu_1$ and $\mu_2$ is:
 
@@ -492,9 +492,9 @@ W_2(\mu_1,\mu_2)^2={\lVert}m_1-m_2{\rVert}^2_2+trace(C_1+C_2-2(C_2^{1/2}C_1C_2^{
 \end{equation}
 
 In practice, we will not apply the Wasserstein metric directly, but rather resort to some levels of discretization.
-First off, a number of so-called bins is determined.
+First off, a number of so-called \textit{bins} is determined.
 Each bin represents a unit on the $X$ axis, the same on which the visiting duration is expressed.
-We will take a number of buckets equal to the maximum amenity mean and add $3\times$ the largest standard deviation to it, as it is known that within $3\times$ standard deviation on both sides of the mean over 99\% of the Gaussian sum is covered.
+We will take a number of bins equal to the maximum amenity mean and add $3\times$ the largest standard deviation to it, as it is known that within $3\times$ standard deviation on both sides of the mean over 99\% of the Gaussian sum is covered.
 Moreover, an offset on the $X$-axis equal to $3\times$ the maximum standard deviation is used.
 This way, we are sure the landscape of summed Gaussians will easily fit into the number of bins.
 
@@ -504,15 +504,15 @@ Therefore, all cluster Gaussians will get normalized before emd is computed.
 \subsection{Machine Learning Models}
 \label{realization:machine_learning_models}
 The prediction of parking occupancy is realized using machine learning.
-We choose to explore this methodology, following the solid results machine learning models have delivered for the various smart parking settings investigated in \cref{sec:relwork}. A machine learning model $\mathcal{M}$ will be trained for every cluster \textit{with} parking data.
+We choose to explore this methodology following the solid results machine learning models have delivered for the various smart parking settings investigated in \cref{sec:relwork}. A machine learning model $\mathcal{M}$ will be trained for every cluster \textit{with} parking data.
 
 The training data \textit{features} are composed of the parking data previously enumerated. We aggregate feature values around the location unit id, as on the cluster level this is irrelevant. The occupancy rate is set as the target variable. The model training and evaluation is performed in Python via the \textit{scikit-learn} library.
 
-During the training phase, we evaluate different machine learning approaches ranging from simple decision trees over random forests to support vector machines and gradient boosting. In addition, we make use of grid search to determine the best model parameters for the current approach. As error metric, we use root mean square error and performed a ten-fold cross-validation. Furthermore, a model is evaluated on the other clusters with parking occupancy data.
+During the training phase, we evaluate different machine learning approaches ranging from simple decision trees over random forests to support vector machines and gradient boosting. In addition, we make use of grid search to determine the best model parameters for the current approach. As error metric we use \textit{root mean square error (RMSE)} and perform a ten-fold cross-validation. Furthermore, a model is evaluated on the other clusters with parking occupancy data.
 
 \subsection{Parking Occupancy Estimations}
 \label{realization:parking_occupancy_estimations}
-Once all models $\mathcal{M}$ have been built for the clusters \textit{with} parking data, making estimations on parking occupancy in these areas is straightforward. However, we want to apply these models, on the clusters that are missing parking data. We derive the \textit{estimation interval} for cluster $\mathcal{C}_{wout}^j$ based on the model of cluster $\mathcal{C}_{with}^i$ as follows.
+Once all models $\mathcal{M}$ have been built for the clusters \textit{with} parking data, making estimations on parking occupancy in these areas is straightforward. However, we want to apply these models on the clusters that are missing parking data. We derive the \textit{estimation interval} for cluster $\mathcal{C}_{wout}^j$ based on the model of cluster $\mathcal{C}_{with}^i$ as follows.
 
 For cosine similarity:
 \begin{equation}
@@ -532,7 +532,8 @@ $X$ is a parking data record containing feature values.
 The result is an \textit{estimation interval} that ``stretches'' the punctual estimation into an interval depending on the similarity value.
 The lower the similarity value is, the larger the length of the resulting estimation interval will be.
 
-Notice that $X$ should be valid for both $\mathcal{C}_{with}^i$ and $\mathcal{C}_{wout}^j$. The averaged values used for features related to the location unit id will be transferred as they are similar to those of the target cluster $\mathcal{C}_{wout}^j$.
+Notice that $X$ should be valid for both $\mathcal{C}_{with}^i$ and $\mathcal{C}_{wout}^j$. 
+The features that are missing in the target cluster $\mathcal{C}_{wout}^j$, i.e., price rate, parking capacity - will be filled in using the respective average values of the whole parking data. 
 
 Furthermore, we define an \textit{estimation intersection interval}, whose purpose is to narrow down the computed estimation interval.
 An estimation intersection interval for the clusters $\mathcal{C}_{with}^i$ and $\mathcal{C}_{wout}^j$ is computed by intersecting the \textit{estimation intervals} that have a better similarity among the clusters with data $\mathcal{C}_{with}^{0}, ..., \mathcal{C}_{with}^{i-1}$ and the same cluster without data $\mathcal{C}_{wout}^j$.
