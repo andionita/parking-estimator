@@ -7,19 +7,19 @@ Drivers that are circling for a parking space may cause safety issues, as they a
 When circling for parking spaces, additional fuel is consumed, which has an economical as well as an environmental impact.
 
 Existing parking spaces can be more efficiently occupied if the drivers know about their availability.
-This information needs to be available in advance, so that drivers can take the decision to drive towards a highly probable free parking space early enough and not get stuck in a traffic bottleneck.
+Should this information be accessible early enough, drivers can take the decision to drive towards a highly probable free parking space and not get stuck in a traffic bottleneck.
 A software system predicting available spaces would, ideally, take into account factors such as current parking space availability, traffic, events in the near vicinity, weather, and many more.
 Existing forecasting systems often start by collecting statistics on available parking spaces.
 Usually, mounted sensors observe when a car occupies and leaves a parking space.
-Acquiring the required data, however, be it on the parking spaces themselves or the complementary information, is, most of the time, the bottleneck for these approaches. 
+Acquiring the necessary data, however, be it on the parking spaces themselves or the complementary information, is, most of the time, the bottleneck for these approaches. 
 
-Our approach introduces the notion of a \textit{parking demand profile}, which reflects the time of the day where parking occurs and its duration for a given area.
+Our work introduces the notion of a \textit{parking demand profile}, which reflects the time of the day where parking occurs and its duration for a given area.
 Furthermore, we examine how machine learning models for parking occupancy can be transferred between city areas with a similar profile.
-We start by giving an intuitive example which bridges the understanding path towards the rest of the work.
+We start by giving an intuitive example that bridges the understanding path towards the rest of the work.
 Further, other contributions to the field of smart parking are presented, followed by the concrete approach.
-The evaluation in this case carries out the instantiation of the proposed approach with an actual use case. We present the results and an analysis.
+The evaluation in this case carries out the instantiation of the proposed approach with an actual use case. We present the results and their analysis.
 We finish off by pointing out aspects that can be further pursued and by summarizing the outcome.
-This work extends our previous work \cite{ionita2018park}. Compared to the previous paper, this work introduces additional related work as well as a more detailed and refined evaluation of our approach.
+This work extends our previous work \cite{ionita2018park}. Compared to the previous paper, this work introduces additional related material as well as a more detailed and refined evaluation of our approach.
 Instead of aggregrating data points for the machine learning models over the timestamp, we build the cluster models using the entire occupancy data. 
 In addition, we refined the amenity value for the similarity functions. Finally, we evaluated if we can improve the results by using the similarity functions as additional features. 
 
@@ -36,7 +36,7 @@ If the data were provided homogeneously (e.g., by using RDF and a well-defined o
 In addition, the application can be used in other cities, which provide their data based on the same ontology.
 
 Besides the understanding of the data, the data scientist still faces the problem of not covering all parking areas of the city. 
-If we assume that different models for the different parking areas have been built, it is unclear whether any of these models can be applied on untracked areas. 
+If we assume that different models have been built for the different parking areas, it is unclear whether any of these models can be applied on untracked areas. 
 Hence, our approach exploits the use of parking profiles which represent parking in a city area. One example would be an area consisting of office buildings. Here, parking demand is usually high during working time, e.g., between 8 and 18 o'clock. Two such areas, perhaps in different parts of a city, or even in different cities, likely have a similar parking situation, i.e., between 8 and 18 on weekdays there is a high parking demand. In case of restaurants, on the other hand, we see a spike in parking demand in the evening, usually from 18 until 22, and even more so on weekends. In residential areas, the cars are parked in the evening and leave again early in the morning. A measure that would capture parking demand will therefore be based on the stay duration of customers or employees of the particular services, the available number of shops and restaurants or other point of interests (e.g., event halls). 
 
 For such city areas (e.g., office buildings, restaurants, residential areas, etc.) that have parking occupancy data, the data scientist can build the predictive models. 
