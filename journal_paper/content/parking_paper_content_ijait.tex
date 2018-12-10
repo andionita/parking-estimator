@@ -20,7 +20,7 @@ Further, other contributions to the field of smart parking are presented, follow
 The evaluation in this case carries out the instantiation of the proposed approach with an actual use case. We present the results and their analysis.
 We finish off by pointing out aspects that can be further pursued and by summarizing the outcome.
 This work extends our previous work \cite{ionita2018park}. Compared to the previous paper, this work introduces additional related material as well as a more detailed and refined evaluation of our approach.
-Instead of aggregrating data points for the machine learning models over the timestamp, we build the cluster models using the entire occupancy data. 
+Instead of aggregating data points for the machine learning models over the timestamp, we build the cluster models using the entire occupancy data. 
 In addition, we refined the amenity value for the similarity functions. Finally, we evaluated if we can improve the results by using the similarity functions as additional features. 
 
 \section{Motivating Example}
@@ -415,10 +415,12 @@ Therefore, after establishing the coordinate systems of both geometries, we defi
 The merge distance can be intuitively understood as the radius around a public amenity. It is defined to represent the parking area that is relevant for a particular public amenity, or, more straightforward, the walking distance from the parked car to, e.g., the restaurant, the office, the bank, etc. Concrete instances of the merging distance can be found in \cref{experimental_setup:merging_parking_city_data}.
 
 \subsection{Clustering}
-\label{concept:clustering}
+\label{concept:clustering} 
 In a realistic scenario, the available parking data does not cover the whole city surface. In fact, it is a fraction of it. Therefore, we first separate the area \textit{with} parking data from the area \textit{without} parking data. Based on this initial split, we perform clustering to further separate these regions into smaller areas. By splitting into city areas, we are making sure that smaller regions lead to more representative parking profiles and therefore parking estimations. 
 
 As we want an exclusively location-based separation, we may employ K-Means, DBSCAN or OPTICS to cluster the city areas. The distance is calculated between $($latitude$,$ longitude$)$ -pairs of location unit coordinates corresponding to one parking unit. There are two clustering processes executed, one for the city area \textit{with} parking data, another one for the city area \textit{without} parking data. The number of clusters chosen in each area is kept proportional to the number of total location units that each city area contains. Since having control over the number of clusters is the goal here, we choose to use K-Means, where we provide the number of expected clusters as input. More details on the concrete value of $k$ and an overview about the clusters can be found in \cref{experimental_setup:clustering}.
+
+The practical take-away idea when working with clusters is that the location information, albeit not precise down to the street block, offers a clear indication on the area where a driver should search for parking.  
 
 \subsection{Similarity Functions}
 \label{realization:similarity_functions}
@@ -1031,17 +1033,10 @@ An example of the estimation is visualized \cref{fig:cwout_table}.
 \label{evaluation:entire_datapoints}
 Up to now, the evaluation involved models trained and tested on aggregated datapoints, as explained in \cref{experimental_setup:aggregating_training_data}. We ask ourselves, however, whether a model trained on all datapoints performs better when tested on an aggregated cluster. Or whether an aggregate model delivers better results on an all-datapoints cluster than a model trained on all datapoints? Here we experiment these combinations by training models on both all- and aggregate datapoints and apply them on both types of aggregation forms. 
 
-See \cref{tab:train_test_errors} for an overview of test errors for 8 and 16 clusters. One observes that the errors from models applied on aggregated datapoints are about 5 unit points (=5\%) smaller than the errors from models applied on all datapoints. This is naturally accounted for by the smaller spread of occupancy values that the aggregation brings with itself. As far as source models are concerned, there is no significant difference between the aggregate and all datapoint models, i.e. the margin is under 1\%.
+See \cref{tab:train_test_errors} for an overview of test errors for 8 and 16 clusters. One observes that the errors from models applied on aggregated datapoints are about 5 unit points (=5\%) smaller than the errors from models applied on all datapoints. This is naturally accounted for by the smaller spread of occupancy values that the aggregation brings with itself. As far as source models are concerned, there is no significant difference between the aggregate and all datapoint models, i.e. the margin is under 1\%. Regarding the number of clusters, the values for 8-cluster models are slightly better than 16-cluster models for aggregated datapoints, but lose for when the testing bed is all datapoints.
 
-In \cref{tab:correlation_values} the resulting correlations of testing errors with cosine- and emd similarity values are listed for models of 8 and 16 cluster configurations. Regarding the number of clusters, the values for 8-cluster models are clearly superior to the 16-cluster models. 
-	\todo[inline]{MC I disagree with this conclusion.
-	The best result for all datapoints is for cluster size 16 in table 9...
-}
-When comparing by target datapoints type, the models applied on aggregated datapoints have a slight edge, with the cosine- and rank cosine correlation values being on average closer to -1 and emd- and rank emd correlation values being closer to 1. However, for 16 clusters the correlations tendency is barely noticeable.
-\todo[inline]{MC There are two experiments: all and aggregate. Each of the experiments have a best result.
-Still, both are relevant as giving a driver a recommendation to search in a given area, instead of at a very specific place is still useful.
-Perhaps that point should be added to section 6 or even before.
-}
+In \cref{tab:correlation_values} the resulting correlations of testing errors with cosine- and emd similarity values are listed for models of 8 and 16 cluster configurations. It follows that the cosine- and rank cosine correlation values are on average closer to -1 in the 8-clusters case. The same applies for emd- and rank emd correlation values, which are closer to 1 in this case. The correlation values for 16-clusters are obviously weaker than for 8-clusters. In both sections, the aggregate datapoints target is superior to the all datapoints target.
+
 \begin{table}[!ht]
 	%\centering
 	%\small
@@ -1053,11 +1048,11 @@ Perhaps that point should be added to section 6 or even before.
 		{cluster size} & {datapoints source} & {datapoints target} & {test error} \\ \hline
 		8	&	aggregate 	&	aggregate 	& 	\textbf{20.19} 	\\ \hline
 		8	&	all 		&	aggregate 	& 	21.37	\\ \hline \hline
-		8	&	aggregate 	&	all 		& 	26.25	\\ \hline
+		8	&	aggregate 	&	all 		& 	\textbf{26.25}	\\ \hline
 		8	&	all			& 	all 		&	26.68	\\ \hline \hline
 		16	&	aggregate	& 	aggregate 	&	\textbf{20.47}	\\ \hline
 		16	&	all			& 	aggregate 	& 	21.32	\\ \hline \hline
-		16	&	aggregate	& 	all 		& 	25.97	\\ \hline
+		16	&	aggregate	& 	all 		& 	\textbf{25.97}	\\ \hline
 		16	&	all			&	all 		&	26.52	\\ \hline \hline
 	\end{tabular}}
 	\label{tab:train_test_errors}
@@ -1078,11 +1073,11 @@ Perhaps that point should be added to section 6 or even before.
 		8	&	aggregate 	&	aggregate 	& 	\textbf{-0.53}	&	\textbf{-0.52}	&	0.30	&	0.17 	\\ \hline
 		8	&	all 		&	aggregate 	& 	-0.53	&	-0.43	&	\textbf{0.37}	&	\textbf{0.27}	\\ \hline \hline
 		8	&	aggregate 	&	all 		& 	-0.35	&	-0.36	&	0.20	&	0.14	\\ \hline
-		8	&	all			& 	all 		&	-0.41	&	-0.43	&	0.34	&	0.25	\\ \hline \hline
+		8	&	all			& 	all 		&	\textbf{-0.41}	&	\textbf{-0.43}	&	\textbf{0.34}	&	\textbf{0.25}	\\ \hline \hline
 		16	&	aggregate	& 	aggregate 	&	-0.16	&	-0.11	&	0.10	&	0.05	\\ \hline
 		16	&	all			& 	aggregate 	& 	\textbf{-0.18}	&	\textbf{-0.17}	&	\textbf{0.22}	&	\textbf{0.17}	\\ \hline \hline
 		16	&	aggregate	& 	all 		& 	-0.09	&	-0.06	&	0.08	&	0.00	\\ \hline
-		16	&	all			&	all 		&	-0.10	&	-0.11	&	0.17	&	0.08	\\ \hline \hline
+		16	&	all			&	all 		&	\textbf{-0.10}	&	\textbf{-0.11}	&	\textbf{0.17}	&	\textbf{0.08}	\\ \hline \hline
 	\end{tabular}}
 	\label{tab:correlation_values}
 	\begin{tabnote}
@@ -1092,12 +1087,9 @@ Perhaps that point should be added to section 6 or even before.
 	
 	
 \subsection{Amenity area as similarity basis}
-\label{extensions:amenity_area}
-Together with the similarity functions we considered \textit{timespent} as the basis for creating the urban profile (recall \ref{experimental_setup:urban_measure}). 
-\todo[inline]{MC I think this was too repetitive. I also merged these two subsections.  }
-%However, there are other measures that reflect the parking demand corresponding towards an amenity, one of them being area of the particular amenity, which is available in OpenStreetMap. OSM provides a \textit{polygon layer} for a certain geographic bounding box, which contains information across all the surfaces in that region (recall \ref{sec:citydata}). In extracting this information we had two options. 
-%\subsection{Amenity area results}
 \label{evaluation:amenity_area}
+Together with the similarity functions we considered \textit{timespent} as the basis for creating the urban profile (recall \ref{experimental_setup:urban_measure}). 
+
 Following up on \cref{experimental_setup:amenity_area} and taking \textit{amenity area} as the basis for the cosine- and emd similarity values leads in practice to correlations listed in \cref{tab:correlation_amenity_area} for 8- and 16 cluster configurations. The superiority of the correlation values using \textit{visiting duration} is observed both for cosine- and rank cosine correlations, which are closer to -1, and for the emd- and rank emd correlations, which are nearer to 1. All correlation values for 16 clusters are, however, relatively weak in absolute measures.
 
 \begin{table}[!ht]
@@ -1144,9 +1136,7 @@ One can choose to add the city data as further training information for clusters
 
 We subsequently build \textit{extended machine learning models} that additionally contain the features above. Since these features are identical for all datapoints in a cluster, the model needs to be trained on multiple clusters. Therefore, models on $n-1$ out of $n$ clusters will be build and tested on the remaining cluster. These \textit{all-but-one} or \textit{total models} will be constructed for all $n$ combinations of $n-1$ clusters and their averaged test errors will compared to total models that contain the normal features. The resulting test errors are shown in \cref{tab:extended_models_comparison} for various number of clusters. 
 
-With one single exception the simple total models achieve a better prediction performance, meaning that the addition of the two features did not help with finding better parking occupancy values for the test clusters, 
-\todo[inline]{MC I added the following extra info. Is this the model used in these experiments? The point in adding this is that it might just be that the gradient boosting is the best model for this data.} 
-using the gradient boost model we used in our experiments.
+With one single exception, when the simple total models achieve a better prediction performance, the addition of the two features did not help with finding better parking occupancy values for the test clusters, at least using the gradient boost model we used in our experiments.
 
 \begin{table}[!ht]
 	%\footnotesize
@@ -1206,17 +1196,14 @@ To further investigate parking occupancy prediction given the assumptions in thi
 	Overall, more and finer city data, together with an appropriate representation and similarity function could eventually improve the occupancy estimations for clusters without parking data. 
 	
 	\item \textbf{Experiment with other clustering methods}
-	Our approach is dependent on the fact that the computed k-Means clusters are of approximately same size. Such clusters are likely to contain a similar number of amenities and similarity values can be accurately computed based on them, e.g. cosine similarity is dependent on the absolute number of amenities in each category
-	\todo[inline]{MC No, it is not.}
-	. In contrast, emd is robust to the number of amenities as the resulting emd Gaussian is normalized. Nevertheless, clustering alternatives to K-Means such as DBSCAN may improve the similarity computation. Even though it primarily focuses on local density of neighborhoods, DBSCAN can be made to keep the cluster sizes more or less even, hence perhaps produce better cosine similarity results. 
+	Our approach is dependent on the fact that the computed K-Means clusters are of approximately the same size. Ideally, this would mean that the number of amenities of a certain visiting duration is virtually equal between clusters. But since for both cosine similarity and emd it is not the absolute number of amenities for a certain visiting duration value that matters, instead the relative number between certain visiting duration values, it may be that clusters of clearly opposite sizes are very similar. All the more is the reason to experiment with other clustering methods, such as DBSCAN and OPTICS. Both focus on detecting clusters based on density of neighborhoods, which may translate in practice into separating regions in the city that are more sparse, e.g., large office areas, from regions that are very dense, e.g., residential or old town areas.
 	
 	\item \textbf{Apply semi-supervised machine learning}.
-	\todo[inline]{MC Why do you call this semi-supervised?}
 	Another relevant machine learning approach in this case is based on organizing the city areas as an undirected graph.
 	The vertices represent the clusters with their respective occupancy data, while the edges between them are assigned similarity values.
 	Initially, only a part of the vertices have the occupancy value known, i.e., the clusters with parking data, while the rest has undetermined occupancy, i.e., the clusters without parking data.
 	At each step, the value for a vertex whose value is undetermined is being computed by considering the occupancies of the linked vertices and their corresponding similarity values.
-	\todo[inline]{MC I came up with the following inspired by the previous one. Is it the same?}
+	
 	\item \textbf{Accounting for completely filled parking spaces in the vicinity}.
 	Currently, we only take information from nearby amenities into account for the model.
 	However, one could imagine that when nearby areas have completely full parking areas, then cars will `spill over' to the area under investigation.
@@ -1226,8 +1213,7 @@ To further investigate parking occupancy prediction given the assumptions in thi
 
 \section{Conclusion}
 In this work, we have presented our work on approximating street parking occupancy in cities.
-\todo[inline]{MC The next sentence is too complicated to read. I am not even 100\% sure what it means.}
-Under the assumption that parking data is lacking, in order to build scalable occupancy prediction systems, we proposed an alternative solution to the ones previously developed for this problem.
+Under the assumption that parking occupancy data is lacking in certain areas, we proposed an alternative solution to the ones previously developed for this problem.
 We built parking demand profiles by using complementary city data, which localize various types of public amenities and indicate the average visiting duration there.
 All data has been made available in an established RDF format, so that it can be easily reused.
 We merged the \textit{parking data} with the \textit{city data} by matching parking \textit{location units} to \textit{points of interest}, split the city into clustered areas, and built machine learning models for them.
@@ -1242,15 +1228,14 @@ The city data was collected from OpenStreetMap as amenity information, and from 
 Both sources are open and free of charge.
 Over 30 types of public amenities were found in the San Francisco blocks, which corroborated with over 470 Google Places sources, lead to building the urban measures and similarity values. 
 
-The results confirmed that clustering the city into smaller areas yields better occupancy estimations than those of entire city area models.
-\todo[inline]{MC Perhaps add: However, making these areas too small results in models which do not generalize as well.}
 Following our tests, the best machine learning model for our problem setting turned out to be \textit{extreme gradient boosting}.
 We used the clusters \textit{with} parking data for the evaluation of the similarity values and calculated correlation coefficients between the similarity values and the estimation errors, using both absolute values and ranks.
 The best correlation were reached for the 100m merge distance for 8 clusters, averaging at $-0.55$ as Pearson Coefficient and $-0.49$ as Spearman's rank coefficient.
 In the same configuration, both \textit{cosine similarity} and \textit{emd distance} reached their best results from all the test configurations.
-Overall, \textit{cosine similarity} achieved better correlations than \textit{emd}.
-Finally, the models for 8 clusters produced superior results over the models for 16 clusters. 
 
+We further investigated the test error and correlation values when models were built and tested on all datapoints instead of aggregated datapoints. Even if we did not discover an optimal pattern here, we showed that the aggregation factor plays a role in finding the best estimations and it cannot be ruled out. 
+
+Overall, we touched upon several aspects that influence parking occupancy and provide a ground for further experimentation, which can further enhance parking occupancy estimations when transferring models from monitored to unmonitored regions.
 
 %\section{Note}
 %Some inconsistencies in the evaluation results for, e.g. testing errors built with the same models for the same data aggregation and other attributes, might be observed. 
