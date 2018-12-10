@@ -674,7 +674,10 @@ The computation of \textit{cluster Gaussians} relies on both the mean and standa
 
 \subsection{Amenity area as similarity basis}
 \label{experimental_setup:amenity_area}
-Together with the similarity functions in Section \Cref{experimental_setup:urban_measure} we considered \textit{visiting duration} as the basis for creating the urban profile. However, there are other measures that reflect the parking demand towards an amenity, one of them being the area of the particular amenity. OpenStreeMap provides a polygon layer for a certain geographic bounding box, which contains information across all the surfaces in that region (recall Section \Cref{sec:citydata}). See Figure \Cref{fig:amenity_polygons} for a visualization of the polygons and their areas in OSM. In extracting this information we had two options. 
+Together with the similarity functions in \cref{experimental_setup:urban_measure} we considered \textit{visiting duration} as the basis for creating the urban profile. However, there are other factors that affect the parking demand towards an amenity.
+Obviously one of them is the amount of people visiting the amenity.
+As we do not have data about this aspect, we use the area of the amenity as a proxy, assuming that larger places would have more visitors.
+OpenStreetMap provides a polygon layer for a certain geographic bounding box, which contains information across all the surfaces in that region (recall \cref{sec:citydata}). See \cref{fig:amenity_polygons} for a visualization of the polygons and their areas in OSM. 
 
 \begin{figure}[!ht]
 	\centering
@@ -683,16 +686,25 @@ Together with the similarity functions in Section \Cref{experimental_setup:urban
 	\label{fig:amenity_polygons}
 \end{figure}
 
-Matching the amenities' POIs with the containing OSM polygon and then computing the polygon areas per amenity was the option tried first. This has several drawbacks. The relation POI:polygon is in practice by no means 1:1, i.e. many cases arose where multiple POIs were contained by the same polygon, in which situation the area was split between them; a POI might also be on the edge of several polygons, in which case we have to either (arbitrarily) assign it to the first polygon or to all. The deciding factor against this option was, however, the high \textit{coefficient of variation} for the area values. 
+To extract this information we investigated two options.
+Matching the amenities' POIs with the containing OSM polygon and then computing the polygon areas per amenity was the option tried first. 
+This has several drawbacks. 
+The relation POI:polygon is in practice by no means 1:1.
+Many cases arose where multiple POIs were contained by the same polygon, in which situation the area was split between them; a POI might also be on the edge of several polygons, in which case we have to either (arbitrarily) assign it to the first polygon or to all. 
+The deciding factor against \todo[inline]{MC what does 'this option' refer to?} this option was, however, the high \textit{coefficient of variation} for the area values. 
+The coefficient of variation (CV) is a measure of dispersion of a probability distribution and is defined as the ratio between the standard deviation and the mean of a sample. %(cf. Equation \Cref{eq:cv}). 
+When calculating CV based on the matching of POI with the polygons, it came out $2.1$ (value is referenced below).
+\todo[inline]{MC I recall from our discussion that this value was higher as some recommendation. Do we have a reference for that? We should contrast it here.}
 
-The coefficient of variation (CV) is a measure of dispersion of a probability distribution and is defined as the ratio between the standard deviation and the mean of a sample (cf. Equation \Cref{eq:cv}). When calculating CV based on the matching of POI with the polygons, it came out $2.1$ (value is referenced below).
+%% MC: we have the defintion in the text. I think it it sufficient.
+%\begin{equation}
+%c_v = \frac{\sigma}{\mu} 
+%\label{eq:cv}
+%\end{equation}
 
-\begin{equation}
-c_v = \frac{\sigma}{\mu} 
-\label{eq:cv}
-\end{equation}
-
-The other option was to use the \textit{amenity} attribute in the polygon layer for the region. We could avoid the cumbersome matching by leveraging solely the polygon layer and calculating the amenity area mean and its standard deviation. The results are listed in \Cref{tab:amenity_area_values}. On top of that, the coefficient of variation is $0.9$ in this case, significantly lower than before. 
+The other option was to use the \textit{amenity} attribute in the polygon layer for the region. 
+We could avoid the cumbersome matching by leveraging solely the polygon layer and calculating the amenity area mean and its standard deviation. The results are listed in \Cref{tab:amenity_area_values}. 
+On top of that, the coefficient of variation is $0.9$ in this case, significantly lower than before. 
 
 Note that we have reduced the values in the table by a factor of 20, as it turned out that the actual mean and standard deviation were large enough to make the emd Gaussian computation extremely slow. As the standard deviation is linear with regard to the mean, both mean and standard deviation values were reduced conveniently. 
 
@@ -736,9 +748,10 @@ Note that we have reduced the values in the table by a factor of 20, as it turne
 \subsection{Model training and evaluation for clusters \emph{with} parking data}
 \label{experimental_setup:model_training}
 %We use four methods to train models for the clusters \textit{with} parking data: \textit{decision trees}, \textit{support vector machines}, \textit{multilayer perceptrons}, \textit{gradient boosted trees}. 
-As training data, the SF\textit{park} \textit{occupancy data} is used with \textit{street blocks} as location unit. It turns out that training on the additional SF\textit{park} data, i.e., traffic and events, encounters some problems. 
+As training data, the SF\textit{park} \textit{occupancy data} is used with \textit{street blocks} as location unit. 
+It turns out that training on the additional SF\textit{park} data, i.e., traffic and events, encounters some problems. 
 
-The \textit{traffic data} do not share the same location unit with the parking occupancy's street block. Even when aggregating traffic data on the district level, which is available for the occupancy data as well, it does not prove an additional value to the training. 
+The \textit{traffic data} do not share the same location unit with the parking occupancy's street block. Even when aggregating traffic data on the district level, which is available for the occupancy data as well, it did not prove an additional value to the training. 
 
 For the SF\textit{park} \textit{events data} we encounter the same problem as for the traffic data: the location unit does not match the block. In fact, the events are marked for streets, whose association to blocks is not determinable. 
 
