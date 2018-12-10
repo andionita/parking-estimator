@@ -871,19 +871,21 @@ In \Cref{fig:cwith} a screenshot of the web application showing a sample of the 
 \section{Evaluation}
 We shall evaluate various pieces of the system that has been presented. Firstly, in \Cref{evaluation:best_model}, we shall establish the machine learning method that achieves best results on average across clusters. 
 
-\Cref{evaluation:similarity_vs_estimation_sec} is the heart of the evaluation. It consists in comparing the cluster models' test error with the independently-computed similarity values between clusters. More specifically, a \textit{source} cluster's model will tested on a \textit{target} cluster and the error is correlated to the similarity between the \textit{source} and the \textit{target} clusters. Both \textit{cosine} and \textit{emd} functions will be used. The correlations will be expressed as Pearson- and Spearman's rank coefficients.
+\Cref{evaluation:similarity_vs_estimation_sec} is the heart of the evaluation. 
+There, we compare the cluster models' test error with the independently-computed similarity values between clusters. 
+More specifically, a \textit{source} cluster's model will tested on a \textit{target} cluster and the error is correlated to the similarity between the \textit{source} and the \textit{target} clusters. 
+Both \textit{cosine} and \textit{emd} functions will be used. The correlations will be expressed as Pearson- and Spearman's rank coefficients.
 
-In the following \Cref{evaluation:estimations_cwout}, we take a look at the results of applying the models to clusters \textit{without parking data} and show screenshots from the concrete web application. \Cref{evaluation:entire_datapoints} looks at the model test errors and correlation results by skipping the aggregating step in machine learning training, i.e. instead of averaging the datapoints over timestamp per cluster, we build the cluster models using the entire occupancy data. 
+Then, in \Cref{evaluation:estimations_cwout}, we take a look at the results of applying the models to clusters \textit{without parking data} and showcase the web application. \Cref{evaluation:entire_datapoints} looks at the model test errors and correlation results by skipping the aggregating step, i.e. instead of averaging the datapoints over timestamp per cluster, we build the cluster models using the entire occupancy data directly. 
 
 \Cref{evaluation:amenity_area} follows up on \Cref{experimental_setup:amenity_area} and uses the \textit{amenity area} as the basis for the similarity functions in calculating the correlations between model test errors and similarity values. Finally, in \Cref{evaluation:machine_learning_better} we question whether the similarity function approach is the most efficient and transfer its purpose to the machine learning phrase. The model will receive absolute \textit{cosine} and \textit{emd Gaussian} values as additional features and its model test error and correlation values will be compared to the ones from the original approach.
 
 \subsection{Best Model Method}
 \label{evaluation:best_model}
-Models were trained using four methods: decision trees, support vector machines, multilayer perceptrons, gradient boosted trees. \Cref{evaluation:best_model_method} shows the distribution of best machine learning methods in case of 8 and 16 clusters.
+Models were trained using four methods: decision trees, support vector machines, multilayer perceptrons, and gradient boosted trees. \Cref{evaluation:best_model_method} shows the distribution of best machine learning methods in case of 8 and 16 clusters.
 The values were obtained by summing up the number of times a method produced the least estimation error, i.e., RMSE, among the four methods for all combinations of clusters with parking data $(\mathcal{C}_{source}, \mathcal{C}_{target})$.
 Extreme gradient boosting claims the first spot in both cases.
-
-For further experiments in the evaluation we shall train the models exclusively with extreme gradient boosting.
+For further experiments in the evaluation we shall only report on models with extreme gradient boosting.
 
 \begin{table}[!ht]
 	%\centering
@@ -957,14 +959,15 @@ For further experiments in the evaluation we shall train the models exclusively 
 
 \subsection{Similarity Values vs. Estimation Errors}
 \label{evaluation:similarity_vs_estimation_sec}
-The central goal of this work is estimate the occupancy for clusters where no parking data is available using model predictions and pair-wise cluster similarity values. If the model prediction accuracy can be measured on clusters with parking data by means of their test errors, we still need to show that the cluster similarity values express indeed a similarity of occupancy. We shall use clusters with parking data to check this and use the model predictions as occupancy references: the higher the absolute correlation between the cluster similarity values and the model test errors, the better the accuracy of the cluster similarity. Concretely, for every pair of clusters ($\mathcal{C}_{source}, \mathcal{C}_{target}$) a model $\mathcal{M}_{\mathcal{C}_{source}}$ is trained on $\mathcal{C}_{source}$ and its test prediction error on $\mathcal{M}_{\mathcal{C}_{source}}(\mathcal{C}_{target})$ shall be correlated with the cosine and emd similarity values between $\mathcal{C}_{source}$ and $\mathcal{C}_{target}$. Here we use two correlation coefficients: the Pearson correlation coefficient and Spearman's rank correlation coefficient, resulting in four correlation measures: 
+The central goal of this work is estimate the occupancy for clusters where no parking data is available using model predictions and pair-wise cluster similarity values. If the model prediction accuracy can be measured on clusters with parking data by means of their test errors, we still need to show that the cluster similarity values express indeed a similarity of occupancy. We shall use clusters with parking data to check this and use the model predictions as occupancy references: the higher the absolute correlation between the cluster similarity values and the model test errors, the better the accuracy of the cluster similarity. Concretely, for every pair of clusters ($\mathcal{C}_{source}, \mathcal{C}_{target}$), a model $\mathcal{M}_{\mathcal{C}_{source}}$ is trained on $\mathcal{C}_{source}$ and its test prediction \todo[inline]{MC Is it the error which is correlated or the actual value?}
+error ($\mathcal{M}_{\mathcal{C}_{source}}(\mathcal{C}_{target})$) shall be correlated with the cosine and emd similarity values between $\mathcal{C}_{source}$ and $\mathcal{C}_{target}$. Here we use two correlation coefficients: the Pearson correlation coefficient and Spearman's rank correlation coefficient, resulting in four correlation measures: 
 \begin{romanlist}
 	\item	cosine (Pearson) correlation
 	\item 	cosine (Spearman's) rank correlation
 	\item 	emd (Pearson) correlation
 	\item 	emd (Spearman's) rank correlation. 
 \end{romanlist}
-The evaluation was performed for configurations of 8 and respectively 16 clusters. Additionally, we varied the \textit{merge distance} to see how the correlation behaves. The similarity values are hence calculated for 100m, 200m, and 400m merge distance respectively. In \Cref{tab:similarity_vs_estimation} the final results are shown. For each correlation measure (\textit{cosine}, \textit{rank cosine}, \textit{emd}, \textit{rank emd}) the value is averaged across all clusters. Due to their mathematical meaning explained in \Cref{realization:similarity_functions}, for cosine measure a negative correlation is optimal, whereas for emd a positive correlation value is beneficial. The models taken were trained with gradient boosted trees. 
+The evaluation was performed for configurations of 8 and respectively 16 clusters. Additionally, we varied the \textit{merge distance} to see how the correlation behaves. The similarity values are hence calculated for 100m, 200m, and 400m merge distance respectively. In \Cref{tab:similarity_vs_estimation} the final results are shown. For each correlation measure (\textit{cosine}, \textit{rank cosine}, \textit{emd}, \textit{rank emd}) the value is averaged across all clusters. Due to their mathematical meaning explained in \Cref{realization:similarity_functions}, for cosine measure a negative correlation is optimal, whereas for emd a positive correlation value is beneficial. The models were trained with gradient boosted trees. 
 	
 We notice that the cosine similarity achieves better results than emd for the same testing configuration, peaking for 8 clusters and 100m merge distance. Its average Pearson coefficient is $-0.55$, while the mean Spearman rank coefficient is $-0.49$. emd positively correlates the most for the same testing configuration (8 clusters, 100m), when the average Pearson coefficient is at $0.28$ and Spearman's rank coefficient equals $0.23$. There is a clear descending trend in correlations, as the merge distance increases.  Also, the results for 8 clusters are superior to the ones when the city is split in 16 clusters. 
 
@@ -1029,9 +1032,11 @@ An example of the estimation is visualized \Cref{fig:cwout_table}.
 
 %Furthermore, we added a configuration with 32 clusters on which we tested or hypotheses.
 
+\todo[inline]{MC Got till here.}
+
 \subsection{Models built on all occupancy datapoints}
 \label{evaluation:entire_datapoints}
-Up to now, the evaluation involved models trained and tested on aggregated datapoints, as explained in \Cref{experimental_setup:aggregating_training_data}. We ask ourselves however, whether a model trained on all datapoints performs better when tested on an aggregated cluster. Or whether an aggregate model deliver better results on an all-datapoints cluster than a model trained on all datapoints? Here we experiment these combinations by training models on both all- and aggregate datapoints and apply them on both types of aggregation forms. 
+Up to now, the evaluation involved models trained and tested on aggregated datapoints, as explained in \Cref{experimental_setup:aggregating_training_data}. We ask ourselves, however, whether a model trained on all datapoints performs better when tested on an aggregated cluster. Or whether an aggregate model delivers better results on an all-datapoints cluster than a model trained on all datapoints? Here we experiment these combinations by training models on both all- and aggregate datapoints and apply them on both types of aggregation forms. 
 
 See \Cref{tab:train_test_errors} for an overview of test errors for 8 and 16 clusters. One observes that the errors from models applied on aggregated datapoints are about 5 unit points (=5\%) smaller than the errors from models applied on all datapoints. This is naturally accounted for by the smaller spread of occupancy values that the aggregation brings with itself. As far as source models are concerned, there is no significant difference between the aggregate and all datapoint models, i.e. the margin is under 1\%.
 
