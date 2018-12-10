@@ -559,7 +559,7 @@ In the following, we describe the pre-evaluation setup, consisting of practical 
 The first elements needed for evaluation are parking and city data. As parking data, we use those from the SF\textit{park} project and determine the data sets that are relevant for our purposes. As city data, we take OpenStreetMap data from San Francisco and obtain the available public amenity information. Google Places provides the visiting duration values for the amenities. Based on these data sets, we determine relevant values for the \textit{merge distance}. Since we cannot evaluate the performance of our approach using clusters \textit{without} data, we evaluated the performance on clusters for which occupancy data were available. 
 Therefore, we first calculated the similarity score between every pair of clusters ($\mathcal{C}_{source}, \mathcal{C}_{target}$), after which the estimation errors were computed by applying the model of cluster $\mathcal{C}_{source}$ to $\mathcal{C}_{target}$, for all such pairs of clusters.
 
-\subsection{SF\textit{park} parking data}
+\subsection{SF\textit{park} Parking Data}
 \label{experimental_setup:sfpark}
 The SF\textit{park} data are visualized in Figure \ref{fig:before_clustering} using a Leaflet application built as part of this work.
 The actual SF\textit{park} data has some peculiarities.
@@ -604,7 +604,7 @@ The types of the public amenities collected from the POIs are listed in \cref{ta
 	\label{tab:amenities_list}
 \end{table}
 
-\subsection{Merging parking and city data}
+\subsection{Merging Parking and City Data}
 \label{experimental_setup:merging_parking_city_data}
 In case of SF\textit{park}, the blocks are given in latitude and longitude.
 In OpenStreetMap, the geometry is set to EPSG 4326.
@@ -634,7 +634,7 @@ The clusters \textit{with} parking data will turn dark red, while the clusters \
 
 The resulting aggregated blocks are worth taking into account when training the machine learning models, as these will average over pieces of information contained in individual blocks. 
 
-\subsection{Similarity functions}
+\subsection{Similarity Functions}
 \label{experimental_setup:urban_measure}
 Before computing \textit{cluster vectors} and \textit{cluster Gaussians}, we will establish the visiting duration in every amenity.
 For this, we use information gathered from Google Places available via Google Maps\footnote{http://maps.google.com}.
@@ -686,7 +686,7 @@ We split them in three categories:
 The assigned partitions for every amenity are shown in \cref{tab:amenities_google_places}. 
 The computation of \textit{cluster Gaussians} relies on both the mean and standard deviation of the amenity visiting duration, as defined in \cref{realization:gaussians}.
 
-\subsection{Amenity area as similarity basis}
+\subsection{Amenity Area as Similarity Basis}
 \label{experimental_setup:amenity_area}
 Together with the similarity functions in \cref{experimental_setup:urban_measure} we considered \textit{visiting duration} as the basis for creating the urban profile. However, there are other factors that affect the parking demand towards an amenity.
 Obviously one of them is the amount of people visiting the amenity.
@@ -709,7 +709,7 @@ The relation POI $\colon$ polygon is in practice by no means 1 $\colon$ 1.
 Many cases arose where multiple POIs were contained by the same polygon, in which situation the area was split between them; a POI might also be on the edge of several polygons, in which case we have to either (arbitrarily) assign it to the first polygon or to all. 
 The deciding factor against this approach was, however, the fact that the \textit{coefficient of variation}, i.e., the ratio between the standard deviation and the mean of the sample, is larger than $1$, i.e., $2.1$ to be precise.  
 
-\item \textbf{Amenity attribute in Polygon layer}. The other option was to use the \textit{amenity} attribute from the polygon layer of the region. 
+\item \textbf{Amenity attribute in polygon layer}. The other option was to use the \textit{amenity} attribute from the polygon layer of the region. 
 We could avoid the cumbersome matching by leveraging solely the polygon layer and calculating the amenity area mean and its standard deviation. The results are listed in \cref{tab:amenity_area_values}. 
 On top of that, the coefficient of variation is $0.9$ in this case, significantly lower than before. 
 
@@ -754,7 +754,7 @@ Note that we have reduced the values in the table by a factor of 20, as it turne
 	\end{tabnote}
 \end{table}
 
-\subsection{Model training and evaluation for clusters \emph{with} parking data}
+\subsection{Model Training and Evaluation for Clusters \emph{with} Parking Data}
 \label{experimental_setup:model_training}
 %We use four methods to train models for the clusters \textit{with} parking data: \textit{decision trees}, \textit{support vector machines}, \textit{multilayer perceptrons}, \textit{gradient boosted trees}. 
 As training data, the SF\textit{park} \textit{occupancy data} is used with \textit{street blocks} as location unit. 
@@ -768,7 +768,7 @@ For the SF\textit{park} \textit{events data} we encounter the same problem as fo
 
 Finally, \textit{weather data} and \textit{fuel data} are given per city, hence making even less an impact to improve the model.  
 
-\subsection{Aggregating training data}
+\subsection{Aggregating Training Data}
 \label{experimental_setup:aggregating_training_data}
 As indicated in \cref{realization:machine_learning_models}, the training data is aggregated across all blocks so that it becomes comparable to other clusters and can be used in training and testing models. The averaging is performed per timestamp, i.e., if multiple blocks have an occupancy record for the same time and block, the occupancy rate will be averaged for both of these. Features such as \textit{price} and \textit{parking capacity per block} are averaged as well. See \cref{tab:aggregating_datapoints} for an example of this process. This means that the original collection of data records shrinks, which should decrease the training time. In \cref{tab:models_training_points}, the expansion/shrinking rate is shown for various number of clusters.
 
@@ -1029,7 +1029,7 @@ An example of the estimation is visualized \cref{fig:cwout_table}.
 
 %Furthermore, we added a configuration with 32 clusters on which we tested or hypotheses.
 
-\subsection{Models built on all occupancy datapoints}
+\subsection{Models Built on All Occupancy Datapoints}
 \label{evaluation:entire_datapoints}
 Up to now, the evaluation involved models trained and tested on aggregated datapoints, as explained in \cref{experimental_setup:aggregating_training_data}. We ask ourselves, however, whether a model trained on all datapoints performs better when tested on an aggregated cluster. Or whether an aggregate model delivers better results on an all-datapoints cluster than a model trained on all datapoints? Here we experiment these combinations by training models on both all- and aggregate datapoints and apply them on both types of aggregation forms. 
 
@@ -1086,7 +1086,7 @@ In \cref{tab:correlation_values} the resulting correlations of testing errors wi
 \end{table}
 	
 	
-\subsection{Amenity area as similarity basis}
+\subsection{Amenity Area as Similarity Basis}
 \label{evaluation:amenity_area}
 Together with the similarity functions we considered \textit{timespent} as the basis for creating the urban profile (recall \ref{experimental_setup:urban_measure}). 
 
@@ -1112,7 +1112,7 @@ Following up on \cref{experimental_setup:amenity_area} and taking \textit{amenit
 		\label{tab:correlation_amenity_area}
 \end{table}
 
-\subsection{Extended prediction models}
+\subsection{Extended Prediction Models}
 \label{evaluation:machine_learning_better}
 An alternative to building urban measures and similarity functions is to let the machine learning model find out the similarities by itself. 
 One can choose to add the city data as further training information for clusters. The purpose is to produce better predictions by leveraging unknown patterns in the city data. Hence, features representing the \textit{cosine} and \textit{emd} functions are added to the model, as follows: 
@@ -1171,7 +1171,7 @@ With one single exception, when the simple total models achieve a better predict
 \end{table}
 	
 	
-\section{Further possible variations}
+\section{Further Possible Variations}
 \label{conclusion:future_work}
 To further investigate parking occupancy prediction given the assumptions in this work, there are several improvements or alternative approaches that can be experimented with.
 
@@ -1212,7 +1212,7 @@ To further investigate parking occupancy prediction given the assumptions in thi
 
 
 \section{Conclusion}
-In this work, we have presented our work on approximating street parking occupancy in cities.
+In this work we have presented our work on approximating street parking occupancy in cities.
 Under the assumption that parking occupancy data is lacking in certain areas, we proposed an alternative solution to the ones previously developed for this problem.
 We built parking demand profiles by using complementary city data, which localize various types of public amenities and indicate the average visiting duration there.
 All data has been made available in an established RDF format, so that it can be easily reused.
