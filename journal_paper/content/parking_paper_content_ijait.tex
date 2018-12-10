@@ -1038,8 +1038,12 @@ Up to now, the evaluation involved models trained and tested on aggregated datap
 
 See \cref{tab:train_test_errors} for an overview of test errors for 8 and 16 clusters. One observes that the errors from models applied on aggregated datapoints are about 5 unit points (=5\%) smaller than the errors from models applied on all datapoints. This is naturally accounted for by the smaller spread of occupancy values that the aggregation brings with itself. As far as source models are concerned, there is no significant difference between the aggregate and all datapoint models, i.e. the margin is under 1\%.
 
-In \cref{tab:correlation_values} the resulting correlations of testing errors with cosine- and emd similarity values are listed for models of 8 and 16 cluster configurations. Regarding the number of clusters, the values for 8-cluster models are clearly superior to the 16-cluster models. When comparing by target datapoints type, the models applied on aggregated datapoints have a slight edge, with the cosine- and rank cosine correlation values being on average closer to -1 and emd- and rank emd correlation values being closer to 1. However, for 16 clusters the correlations tendency is barely noticeable.
-	
+In \cref{tab:correlation_values} the resulting correlations of testing errors with cosine- and emd similarity values are listed for models of 8 and 16 cluster configurations. Regarding the number of clusters, the values for 8-cluster models are clearly superior to the 16-cluster models. 
+	\todo[inline]{MC I disagree with this conclusion.
+	The best result for all datapoints is for cluster size 16 in table 9...
+}
+When comparing by target datapoints type, the models applied on aggregated datapoints have a slight edge, with the cosine- and rank cosine correlation values being on average closer to -1 and emd- and rank emd correlation values being closer to 1. However, for 16 clusters the correlations tendency is barely noticeable.
+\todo[inline]{MC There are two experiments: all and aggregate. Each of the experiments have a best result.}
 \begin{table}[!ht]
 	%\centering
 	%\small
