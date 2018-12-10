@@ -698,28 +698,17 @@ To extract this information we investigated two options.
 \item \textbf{Polygon containing POI}. 
 Matching the amenities' POIs with the containing OSM polygon and then computing the polygon areas per amenity was the option tried first. 
 This has several drawbacks. 
-The relation POI:polygon is in practice by no means 1:1.
+The relation POI $\colon$ polygon is in practice by no means 1 $\colon$ 1.
 Many cases arose where multiple POIs were contained by the same polygon, in which situation the area was split between them; a POI might also be on the edge of several polygons, in which case we have to either (arbitrarily) assign it to the first polygon or to all. 
-The deciding factor against this approach was, however, the fact that the coefficient of variation, i.e., the ratio between the standard deviation and the mean of the sample, is larger than $1$, i.e., $2.1$ to be precise.  
+The deciding factor against this approach was, however, the fact that the \textit{coefficient of variation}, i.e., the ratio between the standard deviation and the mean of the sample, is larger than $1$, i.e., $2.1$ to be precise.  
 
-%high \textit{coefficient of variation} for the area values. 
-%The coefficient of variation (CV) is a measure of dispersion of a probability distribution and is defined as the ratio between the standard deviation and the mean of a sample. %(cf. Equation \cref{eq:cv}). 
-%When calculating CV based on the matching of POI with the polygons, it came out $2.1$ (value is referenced below).
-%\todo[inline]{MC I recall from our discussion that this value was higher as some recommendation. Do we have a reference for that? We should contrast it here.}
-
-%% MC: we have the defintion in the text. I think it it sufficient.
-%\begin{equation}
-%c_v = \frac{\sigma}{\mu} 
-%\label{eq:cv}
-%\end{equation}
-
-\item \textbf{Amenity attribute in Polygon layer}. The other option was to use the \textit{amenity} attribute in the polygon layer for the region. 
+\item \textbf{Amenity attribute in Polygon layer}. The other option was to use the \textit{amenity} attribute from the polygon layer of the region. 
 We could avoid the cumbersome matching by leveraging solely the polygon layer and calculating the amenity area mean and its standard deviation. The results are listed in \cref{tab:amenity_area_values}. 
 On top of that, the coefficient of variation is $0.9$ in this case, significantly lower than before. 
 
-\end{romanlist}
-
 Note that we have reduced the values in the table by a factor of 20, as it turned out that the actual mean and standard deviation were large enough to make the emd Gaussian computation extremely slow. As the standard deviation is linear with regard to the mean, both mean and standard deviation values were reduced conveniently. 
+
+\end{romanlist}
 
 \begin{table}[!ht]
 	%\footnotesize
@@ -961,8 +950,7 @@ For further experiments in the evaluation we shall only report on models with ex
 
 \subsection{Similarity Values vs. Estimation Errors}
 \label{evaluation:similarity_vs_estimation_sec}
-The central goal of this work is estimate the occupancy for clusters where no parking data is available using model predictions and pair-wise cluster similarity values. If the model prediction accuracy can be measured on clusters with parking data by means of their test errors, we still need to show that the cluster similarity values express indeed a similarity of occupancy. We shall use clusters with parking data to check this and use the model predictions as occupancy references: the higher the absolute correlation between the cluster similarity values and the model test errors, the better the accuracy of the cluster similarity. Concretely, for every pair of clusters ($\mathcal{C}_{source}, \mathcal{C}_{target}$), a model $\mathcal{M}_{\mathcal{C}_{source}}$ is trained on $\mathcal{C}_{source}$ and its test prediction \todo[inline]{MC Is it the error which is correlated or the actual value?}
-error ($\mathcal{M}_{\mathcal{C}_{source}}(\mathcal{C}_{target})$) shall be correlated with the cosine and emd similarity values between $\mathcal{C}_{source}$ and $\mathcal{C}_{target}$. Here we use two correlation coefficients: the Pearson correlation coefficient and Spearman's rank correlation coefficient, resulting in four correlation measures: 
+The central goal of this work is estimate the occupancy for clusters where no parking data is available using model predictions and pair-wise cluster similarity values. If the model prediction accuracy can be measured on clusters with parking data by means of their test errors, we still need to show that the cluster similarity values express indeed a similarity of occupancy. We shall use clusters with parking data to check this and use the model predictions as occupancy references: the higher the absolute correlation between the cluster similarity values and the model test errors, the better the accuracy of the cluster similarity. Concretely, for every pair of clusters ($\mathcal{C}_{source}, \mathcal{C}_{target}$), a model $\mathcal{M}_{\mathcal{C}_{source}}$ is trained on $\mathcal{C}_{source}$ and its test error ($\mathcal{M}_{\mathcal{C}_{source}}(\mathcal{C}_{target})$) shall be correlated with the cosine and emd similarity values between $\mathcal{C}_{source}$ and $\mathcal{C}_{target}$. Here we use two correlation coefficients: the Pearson correlation coefficient and Spearman's rank correlation coefficient, resulting in four correlation measures: 
 \begin{romanlist}
 	\item	cosine (Pearson) correlation
 	\item 	cosine (Spearman's) rank correlation
@@ -1033,8 +1021,6 @@ An example of the estimation is visualized \cref{fig:cwout_table}.
 %In the following we present some extensions and variations that consolidate the approach presented, if not improve upon it. 
 
 %Furthermore, we added a configuration with 32 clusters on which we tested or hypotheses.
-
-\todo[inline]{MC Got till here.}
 
 \subsection{Models built on all occupancy datapoints}
 \label{evaluation:entire_datapoints}
