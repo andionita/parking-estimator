@@ -700,10 +700,12 @@ Matching the amenities' POIs with the containing OSM polygon and then computing 
 This has several drawbacks. 
 The relation POI:polygon is in practice by no means 1:1.
 Many cases arose where multiple POIs were contained by the same polygon, in which situation the area was split between them; a POI might also be on the edge of several polygons, in which case we have to either (arbitrarily) assign it to the first polygon or to all. 
-The deciding factor against this approach was, however, the high \textit{coefficient of variation} for the area values. 
-The coefficient of variation (CV) is a measure of dispersion of a probability distribution and is defined as the ratio between the standard deviation and the mean of a sample. %(cf. Equation \cref{eq:cv}). 
-When calculating CV based on the matching of POI with the polygons, it came out $2.1$ (value is referenced below).
-\todo[inline]{MC I recall from our discussion that this value was higher as some recommendation. Do we have a reference for that? We should contrast it here.}
+The deciding factor against this approach was, however, the fact that the coefficient of variation, i.e., the ratio between the standard deviation and the mean of the sample, is larger than $1$, i.e., $2.1$ to be precise.  
+
+%high \textit{coefficient of variation} for the area values. 
+%The coefficient of variation (CV) is a measure of dispersion of a probability distribution and is defined as the ratio between the standard deviation and the mean of a sample. %(cf. Equation \cref{eq:cv}). 
+%When calculating CV based on the matching of POI with the polygons, it came out $2.1$ (value is referenced below).
+%\todo[inline]{MC I recall from our discussion that this value was higher as some recommendation. Do we have a reference for that? We should contrast it here.}
 
 %% MC: we have the defintion in the text. I think it it sufficient.
 %\begin{equation}
@@ -714,6 +716,8 @@ When calculating CV based on the matching of POI with the polygons, it came out 
 \item \textbf{Amenity attribute in Polygon layer}. The other option was to use the \textit{amenity} attribute in the polygon layer for the region. 
 We could avoid the cumbersome matching by leveraging solely the polygon layer and calculating the amenity area mean and its standard deviation. The results are listed in \cref{tab:amenity_area_values}. 
 On top of that, the coefficient of variation is $0.9$ in this case, significantly lower than before. 
+
+\end{romanlist}
 
 Note that we have reduced the values in the table by a factor of 20, as it turned out that the actual mean and standard deviation were large enough to make the emd Gaussian computation extremely slow. As the standard deviation is linear with regard to the mean, both mean and standard deviation values were reduced conveniently. 
 
