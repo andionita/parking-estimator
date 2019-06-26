@@ -1,0 +1,81 @@
+\documentclass{article}
+
+\usepackage{enumitem}
+
+\begin{document}
+	\section{Introduction}
+	
+	\section{Related Work}
+	
+	\section{Assumption behind the Approach}
+	* the time spent in locations in the city reflects the parking demand
+	* motivational example
+	
+	\section{Approach}
+		The approach, in its generic form, is split into ? steps. It begins by acquiring access to data that contains information about parking occupancy for a certain area. To spatially reference the parking data, it is mapped to geographically corresponding OpenStreetMap (OSM) data. The Points-of-Interest (POIs) from the OSM data are spatially clustered so that the individual clusters are of about the same size. A machine learning model is trained on parking data for each cluster. Also, for each cluster, mathematical representations are constructed based on the OSM data. Next, similarity values are computed between pairs of clusters using Cosine Similarity and Earth Mover's Distance. Finally, estimations of parking occupancy are computed by applying the models on areas without parking data with the similarity values factored in.   
+		
+		\begin{enumerate}[label=\Roman*]
+		
+		%\item{Collect/retrieve parking dataset for a city}
+		
+		%\item{Fix/replace/fill in missing values/cleanse parking dataset}
+		
+		\item{Get access to data that contains parking occupancy information for a city}
+		* defined spatial area
+		* over a certain period of time
+		* with a certain frequency (preferred by hour)
+		* as homogeneous dataset as possible -> data is available for the same period of time in the whole area
+		* preferably from one source; multiple sources tend to bring different inaccuracies in the recording of data; hence for one source the inaccuracies would be consistent among the entire dataset
+		* data is annotated in RDF format
+		
+		\item{Map the parking data to OpenStreetMap layers}
+		* download OpenStreetMap points-, lines- and polygon layers for a bounding box that includes all the geographical coordinates of the parking data points
+		
+	
+		\item{Cluster the spatially-referenced data into multiple city areas}
+		* use a clustering algorithm that yields clusters of about the same size (same number of parking data points included)
+		* size of clusters is important in order to keep the computations between the clusters at the same order of magnitude
+		
+		
+		\item{Build machine learning models for each city area}
+		* use parking occupancy as target variable
+		* methods used are Decision Trees, Support Vector Machines, Multilayer Perceptron, and Boosted Trees
+					
+		\item{Build mathematical representations for each city area}
+		* use amenity information, locations where people work, go shopping, do sports, etc. 
+		* amenity information is found in POIs and Polygons
+		* collect time-spent information for each amenity using third party sources, e.g. Google Maps
+		* construct a time-spent vector by composing categories of amenities split by time-spent and the amenity cardinalities
+		* construct a density estimation kernel using amenity time-spent information and amenity cardinality 
+		* remind the assumption that time spent information reflects parking demand
+			
+		\item{Compute similarity values between any two city areas}
+		* apply cosine similarity pairwise on the vectors representing the city areas
+		* apply earth mover's distance pairwise on the density estimation kernels representing the city areas
+		
+		\item{Apply models on city areas that do not have parking information}
+		* apply machine learning models on data records from city areas that do not have parking information mapped
+		* records are: time-point, ...
+		* in the result the similarity between the source city area and the target city area is factored in
+		* the result as parking occupancy is an interval		
+		* the smaller the similarity, the larger will be the parking occupancy interval
+		* the parking occupancy interval is expressed between 0% and 100%
+		
+		\end{enumerate}
+		
+	\section{Evaluation setup}
+	* get parking data from San Francisco: SFpark
+	* get OSM data from San Francisco
+	* get time-spent for San Francisco's amenities from Google Maps
+	
+	\section{Evaluation}
+				
+		\begin{enumerate}[label=\Roman*.]
+			\item{Apply ML models between city areas with parking data}
+			
+			\item{Calculate correlations between error deviations of ML model predictions and similarity values for any two city areas}	
+			
+			* multiple variations
+		\end{enumerate}
+				
+\end{document}
