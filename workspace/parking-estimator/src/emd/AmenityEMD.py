@@ -16,6 +16,8 @@ import pandas as pd
 import matplotlib.pylab as pl
 import matplotlib.pyplot as plt
 from scipy.stats import wasserstein_distance
+import sshtunnel
+from sshtunnel import SSHTunnelForwarder
 
 def calculateGaussianForCwith(cid):
     '''
@@ -32,12 +34,12 @@ def calculateGaussianForCwith(cid):
                                                         INNER JOIN amenities a ON c.dimname = a.name
                                                         WHERE c.has_occupancy AND c.cid = """ + str(cid) + """
                                                         ORDER BY a.name""", engine)
-    current_volume = 0
+    current_sum = 0
     current_gaussian = np.zeros((n_bins))
     for index, row in amenitiesForClustersWith.iterrows():
         if row['stdev_duration'] == 0 or np.isnan(row['stdev_duration']):
             continue
-        current_volume += row['dimvalue']
+        current_sum += row['dimvalue']
         #current_gaussian += row['dimvalue'] * ot.datasets.get_1D_gauss(n_bins,
 #                                                                       m=offset + row['mean_duration'],
 #                                                                       s=row['stdev_duration'])
@@ -45,10 +47,14 @@ def calculateGaussianForCwith(cid):
                                                                     m = offset + row['mean_duration'],
                                                                     #m = row['mean_duration'],
                                                                     s = row['stdev_duration'])
+    magnitude = 0
+    for i in range(n_bins):
+        magnitude += i*current_gaussian[i]
 
     # Normalize Gaussian
-    current_gaussian /= current_volume
-
+    current_gaussian /= current_sum
+    stmt = gaussiansTable.update().where(gaussiansTable.c.cid==int(cid)).where(gaussiansTable.c.has_occupancy==True).values(emdvalue=magnitude)
+    conn.execute(stmt)
     return current_gaussian
 
 
@@ -67,12 +73,12 @@ def calculateGaussianForCwout(cid):
                                                         INNER JOIN amenities a ON c.dimname = a.name
                                                         WHERE NOT c.has_occupancy AND c.cid = """ + str(cid) + """
                                                         ORDER BY a.name""", engine)
-    current_volume = 0
+    current_sum = 0
     current_gaussian = np.zeros((n_bins))
     for index, row in amenitiesForClustersWout.iterrows():
         if row['stdev_duration'] == 0 or np.isnan(row['stdev_duration']):
             continue
-        current_volume += row['dimvalue']
+        current_sum += row['dimvalue']
         #current_gaussian += row['dimvalue'] * ot.datasets.get_1D_gauss(n_bins,
         #                                                               m=offset + row['mean_duration'],
         #                                                               s=row['stdev_duration'])
@@ -82,7 +88,15 @@ def calculateGaussianForCwout(cid):
                                                                        s = row['stdev_duration'])
 
     # Normalize gaussian
-    current_gaussian /= current_volume
+    current_gaussian /= current_sum
+
+    magnitude = 0
+    for i in range(n_bins):
+        magnitude += i*current_gaussian[i]
+
+    stmt = gaussiansTable.update().where(gaussiansTable.c.cid==int(cid)).where(gaussiansTable.c.has_occupancy==False).values(emdvalue=magnitude)
+    conn.execute(stmt)
+
     return current_gaussian
 
 
@@ -132,6 +146,7 @@ if __name__ == "__main__":
     conn = engine.connect()
     metadata = MetaData(engine)
     similarityTable = Table('cluster_similarity', metadata, autoload=True)
+    gaussiansTable = Table('cluster_emd_gaussians', metadata, autoload=True)
 
     # Retrieving the bordering values for all Gaussians
     limits = pd.read_sql_query("SELECT MAX(mean_duration), MIN(mean_duration), MAX(stdev_duration) FROM amenities", engine)
