@@ -50,7 +50,7 @@
 		
 		Splitting the data into multiple groups is central to the goal of the approach. Specifically, having city areas without parking data completely separated from the city areas with parking data so that the latter can later serve as estimation basis for the former. 
 		
-		The splitting in the two groups will be spatially. Including any other property, such as building metadata, in the clustering algorithm would result in incontinuous areas, which would defeat the ultimate purpose of a driver finding a parking space inside a certain radius. Furthermore, the resulting clusters should be of about the same size, as it helps to make inferences later in the process. Averaging the occupancy among the parking spaces inside a cluster, for instance, is less representative for another cluster that has a number of parking spaces of a different order of magnitude.		
+		The sepatation of the two groups will be done spatially. Including any other property, such as building metadata, in the clustering algorithm would result in incontinuous areas, which would defeat the ultimate purpose of a driver finding a parking space inside a certain radius. Furthermore, the resulting clusters should be of about the same size, as it helps to make inferences later in the process. Averaging the occupancy among the parking spaces inside a cluster, for instance, is less representative for another cluster that has a number of parking spaces of a different order of magnitude.		
 		
 		\item{Build machine learning models for each city area}
 		For each city area cluster a machine learning model will be built. The predictor variables includes date and time, parking lot capacity, and parking price, while the target variable is the parking occupancy. 
