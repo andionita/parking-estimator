@@ -16,24 +16,25 @@
 	
 	\section{Related Work}
 
-	\section{Idea behind the Approach and assumptions}
+	\section{Idea behind the Approach}
 	The approach presented offers a solution to estimating parking occupancy without the help of sensor data. It is based on the observation that parking is determined by the specificities of city areas. Two residential neighborhoods of similar sizes, perhaps far apart from each other, will have very similar parking occupancies: high during nighttime and low during daytime. This will likely differ significantly from office areas, which tend to have most parking spaces occupied during the day and free during the night. Restaurants or shopping centers may represent another distinct category, where customers park usually during the evenings and on weekends, while in the other times they are not very busy, therefore producing a low parking occupancy.
 	
 	Looking at a city from above, we can see a pattern: the types of buildings and the time people spend there determines parking behavior. The presented approach will build on this pattern in order to estimate the level of parking occupancy. Specifically, it will use amenity types and time-spent data to complement established machine learning algorithms in order to arrive at parking levels in places where such forecasts cannot be made only with straightforward models.
 	
 	The approach will \textit{not} infer parking levels solely based on building metadata and busy times. This information is currently not enough and other factors regarding the city would be needed to arrive at a direct result. Some cities have better parking infrastructures while fitting the same number of people in the offices as cities with scant parking facilities. In the former parking will likely be concentrated around the offices, while in the latter the cars will probably be distributed uniformly around a larger area around the offices. To circumvent these inconsistencies between cities, we focus on single cities, where parking infrastructure is likely the same given the type of amenities and their dimension. This could be extended to cities in a region or a whole country, depending on the specifics.
 	
-	The approach will therefore use the (dis)similarities between city areas, with their respective amenity types and time-spent information, to help infer parking occupancy. Hence, we assume that an estimation model can be transferred from a source city area A to a target city area B without any amendment, provided A and B are perfectly similar according to their parking profile. In contrast, the parking occupancy estimation will very much differ if A and B are dissimilar. Specifically, the approach will not offer a precise result in this case, resorting to an interval express the possible parking level.
+	The approach will therefore use the (dis)similarities between city areas, with their respective amenity types and time-spent information, to help infer parking occupancy. It is assumed that an estimation model can be transferred from a source city area A to a target city area B without any amendment, provided A and B are perfectly similar according to their parking profile. In contrast, the parking occupancy estimation will very much differ if A and B are dissimilar. Specifically, the approach will not offer a precise result in this case, resorting to an interval that expresses the possible parking level.
 	
-	\subsection{Motivational example}
+	\subsection{Motivational Example}
 	The dimension of the problem we are attempting to solve here is best illustrated with a concrete scenario.
 	
 	Bob is excited about the interview with a big IT company in his city. He will be driving to the office building located in the one of several office sites in the city. Bob does not like being late, even more so on this occasion and he wants to leave himself enough buffer time before he arrives at the company reception desk. He has no idea about the parking situation on site, however. In this city, he could spend up to half an hour to find a free parking space. Therefore Bob uses a new parking app, that can estimate the parking levels at almost every location; the system does not employ sensors everywhere, instead it works by extending the parking behavior from a site to another depending on their specificity, be it offices, restaurants, shopping or residential. Bob likes the idea and enters his estimated time of arrival at the site and sees that the parking occupancy there will be between 60\% and 80\%. This is good enough for him, he knows that at least 1 out of 5 spaces will be free on average and will likely find a spot in a few minutes. He is suddenly more confident about his punctuality and can now drive more assured to the interview.
 		
 	\section{Approach}
-	The approach, in its generic form, is split into several steps. It begins by acquiring access to data that contains information about parking occupancy for a certain area. To spatially reference the parking data, it is mapped to geographically corresponding OpenStreetMap (OSM) data. The Points-of-Interest (POIs) from the OSM data are spatially clustered so that the individual clusters are of about the same size. A machine learning model is trained on parking data for each cluster. Also, for each cluster, mathematical representations are constructed based on the OSM data. Next, similarity values are computed between pairs of clusters using Cosine Similarity and Earth Mover's Distance. Finally, estimations of parking occupancy are computed by applying the models on areas without parking data with the similarity values factored in.   
+	The approach, in its generic form, is split into several steps. It begins by acquiring access to data that contains information about parking occupancy for a certain area. To spatially reference the parking data, it is mapped to geographically corresponding OpenStreetMap (OSM) data. The Points-of-Interest (POIs) from the OSM data are spatially clustered so that the individual clusters are of about the same size. Machine Learning models are trained on parking data for the computed clusters. For each cluster mathematical representations are constructed based on the OSM data, which are then used to compute similarity values using Cosine Similarity and Earth Mover's Distance. Finally, estimations of parking occupancy are computed by applying the models on areas without parking data with the similarity values factored in.   
 	
 	\subsection{Overview}
+	Here are the application steps described in more detail. 
 	
 	\begin{enumerate}[label=\Roman*]
 				
@@ -159,7 +160,7 @@
 	During the training phase, we evaluate different machine learning approaches using decision trees, support vector machines, multilayer perceptrons and boosted trees. As error metric we use \textit{root mean square error (RMSE)} and perform a ten-fold cross-validation. A model will be evaluated on other clusters with parking occupancy data.
 	
 	\subsection{Build mathematical representations for city areas}
-	Using amenity data from OSM and time-spend information we build cluster vectors and density estimation kernels respectively.
+	Using amenity data from OSM and time-spent information we build cluster vectors and density estimation kernels respectively.
 	
 	To form the cluster vectors, we first divide all amenities into categories $Cat_1, Cat_2, ..., Cat_n$. The criteria for division will be their average visiting duration. For example, a short duration category of up to 30 minutes, a medium duration between 31 and 90 minutes and a large duration of above 90 minutes stay. Each cluster gets represented by an $n$-dimensional vector, whose components correspond to the amenity categories. The magnitude of component $i$ is equal to the number of amenities of category $Cat_i$ that can be found in that particular cluster. Compare \cref{fig:cluster_vector} for a general representation.
 	
@@ -251,7 +252,7 @@
 	$$\forall i \in \{0,...,|\mathcal{C}_{with}|-1\} \text{ and } \forall j \in \{0,...,|\mathcal{C}_{wout}|-1\}$$.
 	
 	\section{Evaluation setup}
-	In the following, practical considerations are made in preparation for the evaluation itself. The sources, formats and other relevant specifics for the data used will be described. Included are parking data, OpenStreetMap data and time-spend information.
+	In the following, practical considerations are made in preparation for the evaluation itself. The sources, formats and other relevant specifics for the data used will be described. Included are parking data, OpenStreetMap data and time-spent information.
 	
 	As parking data, we use the SF\textit{park} project. The San Francisco city project collected extensive data to improve its parking situation in 2011. Besides parking occupancy, the main dataset contain information on parking lot capacity and parking price. Further datasets include traffic, event, weather and gas price information.
 	

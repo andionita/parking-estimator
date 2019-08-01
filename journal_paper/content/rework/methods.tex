@@ -1,0 +1,70 @@
+%\documentclass{article}
+\documentclass{ws-ijait}
+
+\begin{document}
+	
+	\begin{table}
+		\tbl{Overview of the machine learning methods used}
+		{\begin{tabular}{lp{4cm}lp{4cm}}	
+				\toprule
+				Predictor Variables & & Target Variable & \\
+				%\midrule
+				\colrule
+				timestamp & split into \textit{year} as integer, \textit{calendar week} : [1 - 52] as integer, \textit{weekday} : [1 - 7] as integer, and \textit{hour} : [0 - 23] as integer & parking occupancy & : [0 - 100] as floating point number \\
+				parking capacity & as floating point number, when aggregated, otherwise as integer & & \\
+				parking price & as floating point number & & \\
+				 &  & & \\
+				%\midrule
+				\colrule
+				Decision Tree Parameters & & SVM Parameters & \\
+				%\midrule
+				\colrule
+				Model Selection & randomized search on hyper-parameters for 10 iterations & Model Selection & Epsilon-Support Vector Regession model with fixed parameters \\
+				min\_samples\_split & : [2, 3, 4, 5] as the minimum number of samples required to split an internal node & kernel & radial basis function \\
+				min\_samples\_leaf & : [0.03 - 0.1] as the minimum number of samples required to be a leaf of a node & C & penalty parameters equal to 1 \\
+				max\_features & : [0.7, 0.8, 0.9, 1] as the number of features (as fraction from all available features) to consider at each split & gamma & kernel coefficient for the kernel equal to 0.01 \\
+				criterion & : [mean squared error, mean absolute error] as the function to measure the quality of a split &  &  \\
+				min\_weight\_fraction\_leaf & : [0, 0.1, 0.2] as the minimum weighted fraction of the total sum of weights from all the input samples required to be a leaf node & & \\
+				%\midrule
+				\colrule
+				MLP Parameters & & XGB Parameters & \\
+				%\midrule	 
+				\colrule
+				Model Selection & Multi-layer Perceptron regressor with fixed parameters & Model Selection & Exhaustive search over specified parameter values for an Extreme Gradient Boosting model \\
+				
+				hidden\_layer\_sizes & $(7, 11)$ as tuple representing the number of neurons in each hidden layer & max\_depth & : [2, 3] as maximum tree depth for base learners \\
+				
+				max\_iterations & 500 as the number of iterations the solver iterates until convergenge & n\_estimators & : [50, 100] as the number of trees to fit\\
+				
+				& & learning\_rate & : [0.1, 0.25] as boosting learning rate ($\eta$)
+				
+				%\bottomrule
+				\botrule
+		\end{tabular}}
+		%\begin{tabnote}
+		%\end{tabnote}
+		\label{tab:ml_params}
+	\end{table}
+	
+	\begin{table}
+		\tbl{Input data for models when predicting occupancy for city areas without parking data. The date has been chosen arbitrarily with several times equally spaced throughout the day. The price rate and total spots values are equal to the approximate averages of the entire parking dataset.}
+		{\begin{tabular}{cccc}	
+				\toprule
+				Date & Time & Price Rate & Total Spots \\
+				%\midrule
+				\colrule
+				2017-11-04 & 	00:00 & 1.0 & 20 \\
+							& 	03:00 & 1.0 & 20 \\
+							& 	06:00 & 1.0 & 20 \\
+							& 	09:00 & 1.0 & 20 \\
+							& 	12:00 & 1.0 & 20 \\
+							& 	15:00 & 1.0 & 20 \\
+							& 	18:00 & 1.0 & 20 \\
+							& 	21:00 & 1.0 & 20 \\
+				\botrule
+		\end{tabular}}
+		\label{tab:ml_cwout}
+	\end{table}		
+	
+	
+\end{document}
