@@ -1,7 +1,7 @@
 \section{Introduction}
 	The parking problem and traffic congestion are commonplace in cities nowadays. While the number of cars continues to increase\cite{car_increase}, studies show that about 30\% of the traffic in cities is caused by cars that are actively searching for parking\cite{traffic_congestion}. Often it is the lack of planning on behalf of cities that does not accommodate parking facilities proportional to building developments\cmmnt{search ref}, which leads to double-parking, more accidents due to distracted drivers, more busy traffic, and, ultimately, a waste of fuel\cite{inrix_study}. As infrastructure solutions are not always optimal and take a long time to implement, there are other strategies to overcome these issues.
 	
-	Parking can be managed more efficiently if parking spaces would work on an allocation basis, with each driver reserving a spot of her choosing. Accounting for each individual spot and managing its reservations is, however, unrealistic and unsustainable at the moment. Merely providing an overview of areas with clusters of free parking spaces would already be a step forward. Suppose a driver would have access to a service that indicates city areas with free parking spaces at the time when she is arriving in the area. The system would take into account the usual parking levels in the various city areas depending on the day of the week and the time of day. Additional information such as current traffic, event data and weather would improve its estimations. Aware of this sort of parking information beforehand, the driver would pick a traveling path that is less busy through the city and spent significantly less time finding a parking spot that is limited to the area indicated.
+	Parking can be managed more efficiently if parking spaces would work on an allocation basis, with each driver reserving a spot of her choosing. Accounting for each individual spot and managing its reservations is, however, unrealistic and unsustainable at the moment. Merely providing an overview of areas with free parking spaces would be a big help. Suppose a driver would have access to such a service that indicates free parking spaces at the time when she is arriving in the area. The system would take into account the usual parking levels in the respective area depending on the day of the week and the time of day. Additional information such as current traffic, event data and weather would improve its estimations. Being aware of this sort of parking information beforehand, the driver would pick a traveling path that is less busy through the city and spent significantly less time finding a parking spot that is limited to the area indicated.
 	
 	This work introduces an approach inspired by the vision to produce parking occupancy estimations for city areas without any previous measurements and taking into account the city infrastructure and the parking data from other areas. This paper extends our previous work\cite{ionita2018park,ionita2017master}, by enriching the evaluation and exploring alternative assumptions of the original approach. The approach distinguishes itself from related research by including open Geographical Information System (GIS) data into the prediction computation.
 	
@@ -806,32 +806,32 @@
 		%	\end{tabnote}
 	\end{table}
 	
-	\section{Further Possible Variations}
+	\section{Further possible variations}
 	%\label{conclusion:future_work}
-	To further investigate parking occupancy prediction given the assumptions in this work, there are several improvements or alternative approaches that can be experimented with.
+	To further investigate parking occupancy prediction given the assumptions in this work, there are several improvements or alternative approaches that can be experimented with:
 	
 	\begin{romanlist}
-		\item \textbf{Use other parking settings}.
-		In the present work, several pieces of data could not be integrated because of merging issues, i.e., the location unit did not coincide with the occupancy data's block.
+		\item \textbf{Use parking data from other locations.}
+		In the present work, several pieces of data could not be integrated because of merging issues, i.e., the location units among multiple datasets did not coincide.
 		Traffic, events, weather, etc. might improve estimation results and hence the final estimations for clusters without parking data.
 		Other sources for parking occupancy data can be found for the cities of Cologne~\cite{cologne_data}, Zurich~\cite{zurich_data}, Santa Monica~\cite{santa_monica_data}.
 		In Germany, Deutsche Bahn provides an API to obtain data from parking around train stations~\cite{dbbahn_data}.
 		Data pertaining to street occupancy is, however, hard to find.
 		At the time of writing, open data portals mostly provide the location of parking lots, parking meters, parking prices and opening times, if applicable.  
 		
-		\item \textbf{Gather better time spent information}
-		Accessing data on the time people spend in various amenities is restricted by Google by not providing an API for it. Other social media services, such as Foursquare offers, however, information on how busy an amenity is by means of the number of check-ins that people send from their phones\footnote{https://developer.foursquare.com/docs/api/endpoints}\footnote{https://developer.foursquare.com/docs/api/venues/details}. The API is however subject to costs and we have not tried it. By gathering more information automatically than we managed to collect manually, the evaluating similarity values based on the time spent information will likely increase in accuracy and so will the resulting correlation values.  
+		\item \textbf{Gather better \textit{time spent} information}
+		Accessing data on the time durations people spend in various amenities is restricted by Google by not providing an API for it. Other social media services, such as Foursquare offers information on how busy an amenity is by means of the number of check-ins that people send from their phones\footnote{https://developer.foursquare.com/docs/api/endpoints}  \footnote{https://developer.foursquare.com/docs/api/venues/details}. The API is however subject to costs and we have not tried it. By gathering more information automatically than we managed to collect manually, the evaluating similarity values based on the time spent information will likely increase in accuracy and so will the resulting correlation values.  
 		
-		\item \textbf{Use more city data}.
+		\item \textbf{Use more OSM (meta)data}.
 		The mathematical representations in the present work are relying on public amenities available from OpenStreetMap.
-		OSM has great potential as a collaborative map service but it lacks many pieces of information that could be useful.
-		Data such as opening hours would be interesting to include in the mathematical representations, which would then take into account the number of public amenities that are available at a certain point in time.
-		Furthermore, the stay duration data collected for the present approach is currently limited.
-		Adding more stay duration data may fine tune the emerging similarity values.
+		OSM has great potential as a collaborative map service but it currently still lacks many pieces of information that could be useful (in comparison with Google's time spent information, for example).
+		Data such as opening hours, if it would be widely available, would be interesting to include in the mathematical representations, which would then take into account the number of public amenities that are available at a certain point in time.
+		%Furthermore, the stay duration data collected for the present approach is currently limited.
+		%Adding more stay duration data may fine tune the emerging similarity values.
 		Overall, more and finer city data, together with an appropriate representation and similarity function could eventually improve the occupancy estimations for clusters without parking data. 
 		
 		\item \textbf{Experiment with other clustering methods}
-		Our approach is dependent on the fact that the computed K-Means clusters are of approximately the same size. Ideally, this would mean that the number of amenities of a certain time spent value is virtually equal between clusters. But since for both cosine similarity and emd it is not the absolute number of amenities for a certain time spent value that matters, instead the relative number between certain time spent values, it may be that clusters of clearly opposite sizes are very similar. All the more is the reason to experiment with other clustering methods, such as DBSCAN and OPTICS. Both focus on detecting clusters based on density of neighborhoods, which may translate in practice into separating regions in the city that are more sparse, e.g., large office areas, from regions that are very dense, e.g., residential or old town areas.
+		Our approach is dependent on the fact that the computed K-Means clusters are of approximately the same size. Ideally, this would mean that the number of amenities of a certain \textit{time spent} value is virtually equal between clusters. But since for both cosine similarity and emd it is not the absolute number of amenities for a certain \textit{time spent} value that matters, instead the relative number between certain \textit{time spent} values, it may be that clusters of clearly opposite sizes are very similar. All the more is the reason to experiment with other clustering methods, such as DBSCAN and OPTICS. Both focus on detecting clusters based on density of neighborhoods, which may translate in practice into separating regions in the city that are more sparse, e.g., large office areas, from regions that are very dense, e.g., residential or old town areas.
 		
 		\item \textbf{Apply semi-supervised machine learning}.
 		Another relevant machine learning approach in this case is based on organizing the city areas as an undirected graph.
@@ -842,7 +842,7 @@
 		\item \textbf{Accounting for completely filled parking spaces in the vicinity}.
 		Currently, we only take information from nearby amenities into account for the model.
 		However, one could imagine that when nearby areas have completely full parking areas, then cars will `spill over' to the area under investigation.
-		A model having to account for this type of factors would, however, be a lot more complicated.
+		A model having to account for this type of factors would, however, be a lot more complicated to express.
 	\end{romanlist} 
 	
 	
