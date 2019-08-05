@@ -12,33 +12,33 @@
 	Improving the parking situation using sensor data has been a subject of research especially since 2000. In a 2017 survey\cite{lin}\cite{lin2}, Lin compiles an overview of the advances in smart parking by splitting the results into three categories: \textit{information collection}, \textit{system deployment}, and \textit{service dissemination}.
 	
 	\subsection{Information collection}
-	Under information collection, the survey lists all techniques to acquire parking information. Static sensors are usually mounted around parking meters, in the ground or on nearby lamp posts. The dynamic sensors are usually managed through a wireless network infrastructure and are present inside cars, such as taxis, which travel through the city and collect roadside information on parking. In both cases, the piece of transmitted information is an occupancy change bit: either the car has left or arrived at a parking space. A number of types of sensors are usually being used in the process: infrared sensors, ultrasonic sensors, accelerators, optical sensors, inductive loops, piezoelectric sensors, cameras, acoustic sensors. Most of the time, the captured data requires post-processing in the form of image or audio recognition before arriving at the target occupancy information. Some of the captured information also raises privacy issues, as it contains sensitive data about the car and driver. Smartphones provide the means to collect data and can have a great impact through crowdsourcing, if the users are given incentives to enable the respective smartphone functions that automatically collect information. Conversely, the parking application may give drivers incentives to initiate the data transmission themselves and report the parking situation on site. 
+	Under information collection, the survey lists all techniques to acquire parking information. Static sensors are usually mounted around parking meters, in the ground or on nearby lamp posts. The dynamic sensors are usually managed through a wireless network infrastructure and are present inside cars, such as taxis, which travel through the city and collect roadside information on parking. In both cases, the piece of transmitted information is an occupancy change bit: either the car has left or arrived at a parking space. A number of types of sensors are usually being used in the process: infrared sensors, ultrasonic sensors, accelerators, optical sensors, inductive loops, piezoelectric sensors, cameras, acoustic sensors. Most of the time, the captured data requires post-processing in the form of image or audio recognition before arriving at the target occupancy information. Some of the captured information also raises privacy issues as it contains sensitive data about the car and driver. Smartphones provide the means to collect data and have a great impact through crowdsourcing if the users are given incentives to enable the respective smartphone functions that automatically collect information. Conversely, the parking application may give drivers incentives to initiate the data transmission themselves and report the parking situation on site. 
 	
 	Data collection based on smartphone-integrated sensors has had numerous research publications, as it spared the authors to produce and mount special-purpose senors. Xu et al.\cite{xu} makes real-time parking availability estimations based on a system that aggregates the data coming in from mobile phones. The system uses algorithms based on statistical weighted schemes and Kalman filters. Additionally, the authors create parking availability profiles based on historical data and using statistical algorithms. 
 	
 	Chen et al.\cite{zchen} developed an Android application that finds a parking location at park-and-ride facilities by calculating the probability of parking availability and taking in consideration the shortest travel time. The authors employ fuzzy logic to model the uncertainty of parking availability, with the fuzzy membership function being linear. The authors proposed multiple criteria in finding the best parking location, such as train frequency, service quality, and parking-and-ride price. 
 	
-	PocketParker is a crowdsourcing system, proposed by Nandugudi et al.\cite{nandugudi}, that uses smartphone data to predict parking availability. The system is used for parking lots. It requires no input from the user, it notices automatically when a user starts to drive or stops, i.e., departure and arrival events. Based on these two events, the system builds a probability distribution model that is used to answer queries about parking availability. PocketParker has proved robust to hidden parkers, i.e., parking vehicles that are not using the application. In the authors' simulation, it has reached 94\% rate for parking availability prediction with 105 users over 45 days. 
+	PocketParker is a crowdsourcing system, proposed by Nandugudi et al.\cite{nandugudi} that uses smartphone data to predict parking availability. The system is used for parking lots. It requires no input from the user, it notices automatically when a user starts to drive or stops, i.e., departure and arrival events. Based on these two events, the system builds a probability distribution model that is used to answer queries about parking availability. PocketParker has proved robust to hidden parkers, i.e., parking vehicles that are not using the application. In the authors' simulation, it has reached 94\% rate for parking availability prediction with 105 users over 45 days. 
 	
-	Koster et al.\cite{koster} propose a smartphone-based solution that recognizes when drivers arrive or leave parking spaces. A ``Bayesian approach'' and Hidden Markov Models (HMM) are used to model the parking spaces and respond to user queries for the next parking space. The HMM are based on gathered historical data. As answer to the user query is a parking space nearby and the probability of it being free at the respective time. The authors emphasize the non-intrusive nature of the solution, where drivers only have to minimally interact with their phones to get a recommended free parking space.
+	Koster et al.\cite{koster} propose a smartphone-based solution that recognizes when drivers arrive or leave parking spaces. A ``Bayesian approach'' and Hidden Markov Models (HMM) are used to model the parking spaces and respond to user queries for the next parking space. The HMM are based on gathered historical data. The answer to the user query is a parking space nearby and the probability if it is free at the respective time. The authors emphasize the non-intrusive nature of the solution where drivers only have to minimally interact with their phones to get a recommended free parking space.
 	
 	\subsection{System Deployment}
-	Regarding system deployment, the smart parking survey refers to the varieties of parking systems, looks into how well they scale, and touches upon the data analysis side. The parking system software is the interface between data sources and the users. Software systems are often in the form reservation systems, typically run by municipalities or private car parks. These systems may also provide guiding assistance in arriving to the desired parking lot or at the individual parking space. The vacancy prediction component informs the drivers about the availability of parking spaces at the destination, either in real-time or at a specific date and time.
+	Regarding system deployment, the smart parking survey\cite{lin} refers to the varieties of parking systems, looks into how well they scale, and touches upon the data analysis side. The parking system software is the interface between data sources and the users. Software systems are often in the form of reservation systems, typically run by municipalities or private car parks. These systems may also provide guiding assistance in arriving to the desired parking lot or at the individual parking space. The vacancy prediction component informs the drivers about the availability of parking spaces at the destination, either in real-time or at a specific date and time.
 	
 	There are several research publications that include parking system worth mentioning. Rajabioun and Ioannou\cite{rajabioun2013} introduce an information system for parking guidance that enables communication between vehicles and the infrastructure. It proposes a prediction algorithm that forecasts the availability for parking locations based on real-time parking information. It takes into account parameters such as parking duration, arrival time, destination, pricing, walking distance, parking capacity, rates of vehicles occupying and leaving parking spots, time restrictions, parking rules, events that disrupt parking availability, etc. Their algorithm uses a probabilistic density distribution model. The parking data was collected both from on-street parking meters and off-street garages in Los Angeles and San Francisco, USA. In a following paper, Rajabioun and Ioannou\cite{rajabioun2015} propose a multivariate autoregressive model that considers the temporal and spatial correlations of parking availability when making predictions. 
 	
-	Tiedemann et al.\cite{tiedemann} present the development of a prediction system that gives estimated occupancies for parking spaces. The occupancy data is collected online via roadside parking sensors and the prediction is realized using neural gas machine learning combined with data threads. The authors notice that some factors play a significant part in the predictions, such as holidays, weather and use the neural gas clustering to separate the data, before the data thread method is applied. 
+	Tiedemann et al.\cite{tiedemann} present the development of a prediction system that gives estimated occupancies for parking spaces. The occupancy data is collected online via roadside parking sensors and the prediction is realized using neural gas machine learning combined with data threads. The authors notice that some factors play a significant part in the predictions, such as holidays, weather and use the neural gas clustering to separate the data before the data thread method is applied. 
 	
-	Richter et al.\cite{richter} address the parking prediction problem with the focus on model storage in vehicles. The authors train models of various granularity that would predict parking availability based on the information contained: a one-day model per road segment, a three-day model per road segment, and a seven-day model per road segment. Additionally, models based on regions and time intervals computed by clustering are tried out. Hierarchical clustering with complete linkage is employed. The models are evaluated on street data from the SF\textit{park} project\cite{sfpark_open_data}. The application of clustering before building the models shows a 99\% decrease of model storage space. The prediction success rate is at about 70\%. 
+	Richter et al.\cite{richter} address the parking prediction problem with the focus on model storage in vehicles. The authors train models of various granularity that would predict parking availability based on the information contained: A one-day model per road segment, a three-day model per road segment, and a seven-day model per road segment. Additionally, models based on regions and time intervals computed by clustering are tried out. Hierarchical clustering with complete linkage is employed. The models are evaluated on street data from the SF\textit{park} project\cite{sfpark_open_data}. The application of clustering before building the models shows a 99\% decrease of model storage space. The prediction success rate is at about 70\%. 
 	
-	With iParker, Kotb et al.\cite{kotb} propose a system that handles parking reservations. It achieves resource allocation so that drivers will pay less for parking, while parking managers receive more resource utilization and hence reach higher revenue. The system is based on mixed-linear programming (MILP). The system uses dynamic resource allocation and pricing models to achieve its goal. At its evaluation, it was reported to cut the cost for drivers by 28\%, achieving a 21\% increase in resource utilization, and it increased the total revenue for parking management by 16\%. 
+	With iParker, Kotb et al.\cite{kotb} propose a system that handles parking reservations. It achieves resource allocation so that drivers pay less for parking, while parking managers receive more resource utilization and hence reach higher revenue. The system is based on mixed-linear programming (MILP). The system uses dynamic resource allocation and pricing models to achieve its goal. At its evaluation, it was reported to cut the cost for drivers by 28\%, achieving a 21\% increase in resource utilization, and it increased the total revenue for parking management by 16\%. 
 	
 	Shin and Jun\cite{shin} propose an algorithm for smart parking that assigns cars to parking facilities in the city. The criteria based on which the assigning is realized includes driving distance to the parking facility, walking distance from the parking facility to the destination, parking cost, and traffic congestion. The real-time data is collected from parking facilities and from sensors that are integrated in cruising cars. The data is transferred from the central server, where it is managed through a wired/wireless telecommunication network. The authors test their approach in Luxembourg City. The results of the simulations showed improved figures for average driving duration, average walking distance, parking failing rate, parking utilization rate, average standard deviation on the number of guided cars to each parking facility, average occupancy ratio of parking facility, and for the parking facility occupancy rate. 
 	
-	ParkNet, developed by Mathur et al.\cite{mathur} is a system made up of vehicles that captures parking space information while driving. Every ParkNet vehicle is equipped with a GPS receiver and an ultrasonic sensor facing sideways. The latter determines whether it passes by parking spaces and whether they are occupied. The data is sent to a central server that aggregates it, in order to build parking space occupancy maps in real-time. The information is queried by clients that search for a free parking space. The system was evaluated in Highland Park, New Jersey and San Francisco on 500 miles road-side parking data and yield 95\% accurate parking maps and 90\% parking occupancy accuracy. The authors show that the system can further be improved if the sensors are fitted into taxicabs or city buses.
+	ParkNet, developed by Mathur et al.\cite{mathur} is a system made up of vehicles that captures parking space information while driving. Every ParkNet vehicle is equipped with a GPS receiver and an ultrasonic sensor facing sideways. The latter determines whether it passes by parking spaces and whether they are occupied. The data is sent to a central server that aggregates it in order to build parking space occupancy maps in real-time. The information is queried by clients that search for a free parking space. The system was evaluated in Highland Park, New Jersey and San Francisco on 500 miles road-side parking data and yield 95\% accurate parking maps and 90\% parking occupancy accuracy. The authors show that the system can further be improved if the sensors are fitted into taxicabs or city buses.
 	
 	\subsection{Data Dissemination}
-	Under data dissemination, the survey addresses the capability of sharing parking information. This scenario occurs in decentralized parking systems, where the cars find out about free parking spaces in an area where other cars merely drive by and report the real-time situation. 
+	Under data dissemination, the survey\cite{lin} addresses the capability of sharing parking information. This scenario occurs in decentralized parking systems, where the cars find out about free parking spaces in an area where other cars merely drive by and report the real-time situation. 
 	
 	A selected group of publication is driven by the information exchange approach. Caliskan et al.\cite{caliskan} model the prediction of available parking spaces as a vehicular ad-hoc network (VANET). The network disseminates parking data in order to help with the estimation of future occupancy of parking lots. The pieces of disseminated data are timestamp, total capacity of parking lot, number of parking spaces that are currently occupied, the arrival rate, and the parking rate. The latter two are used in the modeling of continuous-time homogeneous Markov chains. The approach is otherwise based on queuing theory. 
 	
@@ -47,7 +47,7 @@
 	Also based on VANETs is Szczurek et al.\cite{szczurek} work, which propose a novel approach that combines machine learning with the information disseminated in ad-hoc vehicular networks. The building blocks of the system are parking reports, which are issued by vehicles leaving a parking space and comprise a report identifier, a location, and a timestamp. The parking reports are being learned by a model, which then indicates whether a parking is available for a specific vehicle. A conditional relevance is used to determine whether a particular report is useful for a specific vehicle. This is modeled using a Naive Bayes method. A parking availability report R is labeled relevant by vehicle V, if the parking space referenced in R is available when V reaches it. Upon evaluation of the methods, the authors reported an improvement in parking discovery times for vehicles.
 	
 	\section{The SFpark project}
-	To implement and evaluate our idea, we use the data from the SF\textit{park} project. This project was realized by the San Francisco Municipal Transportation Agency (SFMTA), the city agency that manages the city's transportation, which includes on-street parking\cite{sfpark}\cite{sfpark_evaluation}, with the goal to improve parking availability. The SFMTA had the possibility of changing parking rates for on-street parking meters on short notice. Before the project started, parking rates were the same all day, every day, independent of the parking demand. By implementing a demand responsive pricing scheme, parking availability improved dramatically.
+	To implement and evaluate our idea, we use the data from the SF\textit{park} project. This project was realized by the San Francisco Municipal Transportation Agency (SFMTA), the city agency that manages the city's transportation, which includes on-street parking\cite{sfpark} \cite{sfpark_evaluation}, with the goal to improve parking availability. The SFMTA had the possibility of changing parking rates for on-street parking meters on short notice. Before the project started, parking rates were the same all day, every day, independent of the parking demand. By implementing a demand responsive pricing scheme, parking availability improved dramatically.
 	
 	Dynamic pricing is a way to control parking occupancy. Parking prices are raised in areas that are almost fully occupied, whereas areas with low parking rates get assigned a lower price. A more advanced version adjusts the prices when enough demands received by the parking system would point to a future parking overload in the respective area.
 	
@@ -58,16 +58,16 @@
 	\section{Idea behind the Approach}
 	The approach presented offers a solution to estimating parking occupancy without the help of sensor data. It is based on the observation that parking is determined by the specificities of city areas. Two residential neighborhoods of similar sizes, perhaps far apart from each other, will have very similar parking occupancies: high during nighttime and low during daytime. This will likely differ significantly from office areas, which tend to have most parking spaces occupied during the day and free during the night. Restaurants or shopping centers may represent another distinct category, where customers park usually during the evenings and on weekends, while in the other times they are not very busy, therefore producing a low parking occupancy.
 	
-	Looking at a city from above, we can see a pattern: the types of buildings and the time people spend there determines parking behavior. The presented approach will build on this pattern in order to estimate the level of parking occupancy. Specifically, it will use amenity types and time-spent data to complement established machine learning algorithms in order to arrive at parking levels in places where such forecasts cannot be made only with straightforward models.
+	Looking at a city from above, we can identify a pattern: the types of buildings and the time people spend there determines parking behavior. The presented approach builds on this pattern in order to estimate the level of parking occupancy. Specifically, it uses amenity types and time-spent data to complement established machine learning algorithms in order to arrive at parking levels in places where such forecasts cannot be made only with straightforward models.
 	
-	The approach will \textit{not} infer parking levels solely based on building metadata and busy times. This information is currently not enough and other factors regarding the city would be needed to arrive at a direct result. Some cities have better parking infrastructures while fitting the same number of people in the offices as cities with scant parking facilities. In the former parking will likely be concentrated around the offices, while in the latter the cars will probably be distributed uniformly around a larger area around the offices. To circumvent these inconsistencies between cities, we focus on single cities, where parking infrastructure is likely the same given the type of amenities and their dimension. This could be extended to cities in a region or a whole country, depending on the specifics.
+	The approach does \textit{not} infer parking levels solely based on building metadata and busy times. This information is currently not enough and other factors regarding the city would be needed to arrive at a direct result. Some cities have better parking infrastructures while fitting the same number of people in the offices as cities with scant parking facilities. In the former parking are likely concentrated around the offices, while in the latter the cars are probably distributed uniformly around a larger area around the offices. To circumvent these inconsistencies between cities, we focus on single cities, where parking infrastructure is likely the same given the type of amenities and their dimension. This could be extended to cities in a region or a whole country, depending on the specifics.
 	
-	The approach will therefore use the (dis)similarities between city areas, with their respective amenity types and time-spent information, to help infer parking occupancy. It is assumed that an estimation model can be transferred from a source city area A to a target city area B without any amendment, provided A and B are perfectly similar according to their parking profile. In contrast, the parking occupancy estimation will very much differ if A and B are dissimilar. Specifically, the approach will not offer a precise result in this case, resorting to an interval that expresses the possible parking level.
+	The approach therefore uses the (dis)similarities between city areas, with their respective amenity types and time-spent information to help infer parking occupancy. It is assumed that an estimation model can be transferred from a source city area A to a target city area B without any amendment, provided A and B are perfectly similar according to their parking profile. In contrast, the parking occupancy estimation would very much differ if A and B are dissimilar. Specifically, the approach does not offer a precise result in this case, resorting to an interval that expresses the possible parking level.
 	
 	\subsection{Motivational Example}
 	The dimension of the problem we are attempting to solve here is best illustrated with a concrete scenario.
 	
-	Bob is excited about the interview with a big IT company in his city. He will be driving to the office building located in the one of several office sites in the city. Bob does not like being late, even more so on this occasion and he wants to leave himself enough buffer time before he arrives at the company reception desk. He has no idea about the parking situation on site, however. In this city, he could spend up to half an hour to find a free parking space. Therefore Bob uses a new parking app, that can estimate the parking levels at almost every location; the system does not employ sensors everywhere, instead it works by extending the parking behavior from a site to another depending on their specificity, be it offices, restaurants, shopping or residential. Bob likes the idea and enters his estimated time of arrival at the site and sees that the parking occupancy there will be between 60\% and 80\%. This is good enough for him, he knows that at least 1 out of 5 spaces will be free on average and will likely find a spot in a few minutes. He is suddenly more confident about his punctuality and can now drive more assured to the interview.
+	Bob is excited about the interview with a big IT company in his city. He will be driving to the office building located in the one of several office sites in the city. Bob does not like being late, even more so on this occasion and he wants to leave himself enough buffer time before he arrives at the company reception desk. He has no idea about the parking situation on site, however. In this city, he could spend up to half an hour to find a free parking space. Therefore, Bob uses a new parking app, that can estimate the parking levels at almost every location; the system does not employ sensors everywhere, instead it works by extending the parking behavior from a site to another depending on their specificity, be it offices, restaurants, shopping or residential. Bob likes the idea and enters his estimated time of arrival at the site and sees that the parking occupancy there will be between 60\% and 80\%. This is good enough for him, he knows that at least 1 out of 5 spaces will be free on average and will likely find a spot in a few minutes. He is suddenly more confident about his punctuality and can now drive more assured to the interview.
 	
 	\section{Approach}
 	The approach, in its generic form, is split into several steps. It begins by acquiring access to data that contains information about parking occupancy for a desired area. The parking data is mapped geographically using OpenStreetMap (OSM).
@@ -101,7 +101,7 @@
 		\item{\textbf{Build mathematical representations for the city areas}}
 		
 		%Since the time spent information is assumed to reflect parking demand, this data will help us augment the occupancy estimations. 
-		Amenities and time spend information are organized in mathematical objects to reflect the parking demand in their respective city areas. Emerging will be cluster vectors, which serve in cosine similarity computation and cluster gaussians, that contribute to calculating earth mover's distance between city areas.
+		Amenities and time spend information are organized in mathematical objects to reflect the parking demand in their respective city areas. Emerging will be cluster vectors, which serve in cosine similarity computation and cluster gaussians that contribute to calculating earth mover's distance between city areas.
 
 		\item{\textbf{Compute similarity values between any two city areas}}
 		
@@ -109,13 +109,13 @@
 		
 		\item{\textbf{Apply models on city areas that do not have parking information}}
 		
-		When computing the occupancy in clustered city areas with no parking data, the elements built up to now come together. Basically, the machine learning models are applied to the clustered areas without parking data. In the result, the similarity measure between the originating model area and the target area is factored in. In practice, this means that input data for the models will need to be constructed. The result outputted by the model will be extended in form of an interval upon applying the similarity value: the smaller the similarity, the more the interval will be stretched around the original occupancy result. Occupancy values are expressed between 0\% and 100\%.
+		When computing the occupancy in clustered city areas with no parking data, the elements built up to now come together. Basically, the machine learning models are applied to the clustered areas without parking data. In the result, the similarity measure between the originating model area and the target area is factored in. In practice, this means that input data for the models will need to be constructed. The result output of the model will be extended in form of an interval upon applying the similarity value: the smaller the similarity, the more the interval will be stretched around the original occupancy result. Occupancy values are expressed between 0\% and 100\%.
 		
 	%\end{enumerate}
 	\end{romanlist}
 	
 	\subsection{Get access to parking data}
-	We consider the following types of data as parking data. 
+	We consider the following types of data as parking data: 
 	\begin{romanlist}
 		\item \textit{parking occupancy} contains information on the availability of parking spaces at a defined location
 		\item \textit{traffic data} contains information regarding the street traffic intensity
@@ -128,7 +128,7 @@
 	A detailed overview of the SF\textit{park} dataset is shown in \cref{tab:sfpark_data}.
 	
 	\begin{table}
-		\tbl{Overview of the properties available in the data used from the SF\textit{park} project}
+		\tbl{Overview of the properties available in the data used from the SF\textit{park} project.}
 		{\begin{tabular}{lp{4cm}lp{4cm}}	
 				\toprule
 				Parking Occupancy & & Traffic & \\
@@ -171,19 +171,19 @@
 	\begin{figure}[!ht]
 		\centering
 		\includegraphics[width=0.8\textwidth]{graphics/initial_view_before_clusteringV7.png}
-		\caption{The blocks accounted in SF\textit{park}. The light blue ones are blocks \textit{without} parking data, the light red ones are \textit{with} parking data.}
+		\caption{The blocks accounted in SF\textit{park}. The light blue ones are blocks \textit{without} parking data, the light red ones are \textit{with} parking data~\protect\cite{web_application}.}
 		\label{fig:before_clustering}
 	\end{figure}
 		
 	\subsection{Map parking data to OpenStreetMap layers}
-	We complement the parking data by downloading OpenSteetMap\footnote{\url{https://www.openstreetmap.org} The maps used in this article are \textcopyright OpenStreetMap contributors} data corresponding to the location where the parking data belongs to. OSM data is generally available as shapefiles containing the geometry layers: points, polylines, and polygons. We extract the \textit{points of interest} (POIs), which, among multiple attributes, contain the \textit{amenity} attribute indicating the public service, facility, or type of building located at this position as it was annotated by the OSM users (cf. \cref{fig:pois}). The types of the public amenities collected from the POIs are listed in \cref{tab:amenities_list}. The polylines layer contains artifacts mostly in linear form, such as streets or foot paths. Polylines are less interesting for our problem and therefore we will ignore them. The polygons layer contains artifacts of polygon shapes such as buildings, parks, university campuses, etc. Polygon objects may contain an amenity attribute as well, in practice the authors have found it often empty, however. When the attribute is present, it enables us to compute the area of the amenity and make an inference towards the capacity of the building.
+	We complement the parking data by downloading OpenSteetMap\footnote{\url{https://www.openstreetmap.org} The maps used in this article are \textcopyright OpenStreetMap contributors.} data corresponding to the location where the parking data belongs to. OSM data is generally available as shapefiles containing the geometry layers: points, polylines, and polygons. We extract the \textit{points of interest} (POIs), which, among multiple attributes, contain the \textit{amenity} attribute indicating the public service, facility, or type of building located at this position as it was annotated by the OSM users (cf. \cref{fig:pois}). The types of the public amenities collected from the POIs are listed in \cref{tab:amenities_list}. The polylines layer contains artifacts mostly in linear form, such as streets or foot paths. Polylines are less interesting for our problem and therefore we ignore them. The polygons layer contains artifacts of polygon shapes such as buildings, parks, university campuses, etc. Polygon objects may contain an amenity attribute as well, in practice the authors have found it often empty, however. When the attribute is present, it enables us to compute the area of the amenity and make an inference towards the capacity of the building.
 	
 	For the San Francisco area corresponding to the SF\textit{park} project, the OSM file containing the above described layers amounts to about 173M. Inside there are 30,798 POI entries, out of which 5,462 have a non-empty amenity attribute. The number of polygon entries is 147,881.  
 	
 	\begin{figure}[!ht]
 		\centering
 		\includegraphics[width=0.8\textwidth]{graphics/cafes_restaurants_banks_larger.png}
-		\caption{A map indicating public amenities (cafes, restaurants, banks) found at points of interest in OSM.}
+		\caption{A map indicating public amenities (cafes, restaurants, banks) found at points of interest in OSM (customly built by the authors).}
 		\label{fig:pois}
 	\end{figure}
 	
@@ -210,12 +210,12 @@
 		\label{tab:amenities_list}
 	\end{table}
 	
-	Furthermore, we collect the vising duration corresponding to the amenities. We have found that this information is offered by Google Places and FourSquare. The latter data is available via an API, however the access is not free of charge. We used Google Places instead and collected data corresponding to the parking data's location. An example of the service is found within Google Maps for smartphones. It displays typical visiting duration or \textit{time spent} values and popularity of the place for specific time intervals, obtained by Google using a crowsourcing approach that averages the values received from users' smart phone location (cf. \cref{fig:visit_duration}). To obtain the time spend values, we manually extract information from 470 places in San Francisco, for which a maximum duration of stay was provided (the minimum duration is not always given)\footnote{This piece of information is not accessible yet via the Google Places API. Google Feature Request: \url{https://issuetracker.google.com/issues/35827350}}. The results are shown in \cref{tab:amenities_google_places} and the time spent values are provided in minutes and have been rounded to the nearest integer. We have included only amenities for which at least two stay duration sources were found. 
+	Furthermore, we collect the vising duration corresponding to the amenities. We have found that this information is offered by Google Places and FourSquare. The latter data is available via an API, however the access is not free of charge. We used Google Places instead and collected data corresponding to the parking data's location. An example of the service is found within Google Maps for smartphones. It displays typical visiting duration or \textit{time spent} values and popularity of the place for specific time intervals, obtained by Google using a crowsourcing approach that averages the values received from users' smart phone location (cf. \cref{fig:visit_duration}). To obtain the time spent values, we manually extract information from 470 places in San Francisco, for which a maximum duration of stay was provided (the minimum duration is not always given)\footnote{This piece of information is not accessible yet via the Google Places API. Google Feature Request: \url{https://issuetracker.google.com/issues/35827350}}. The results are shown in \cref{tab:amenities_google_places} and the time spent values are provided in minutes and have been rounded to the nearest integer. We have included only amenities for which at least two stay duration sources were found. 
 	
 	\begin{figure}[!ht]
 		\centering
 		\includegraphics[width=0.8\textwidth]{graphics/google_visit_duration.png}
-		\caption{An example of \textit{time spent} information found on Google Maps.}
+		\caption{An example of \textit{time spent} information found on Google Maps~\protect\cite{google_business}.}
 		\label{fig:visit_duration}
 	\end{figure}
 	
@@ -262,7 +262,7 @@
 	\begin{figure}[!ht]
 		\centering
 		\includegraphics[width=\textwidth]{graphics/highlighted_collage.png}
-		\caption{Highlighted cluster \textit{with} parking data on the left side and a cluster \textit{without} parking data on the right side.}
+		\caption{Highlighted cluster \textit{with} parking data on the left side and a cluster \textit{without} parking data on the right side~\protect\cite{web_application}.}
 		\label{fig:highlighted_collage}
 	\end{figure}
 	
@@ -299,7 +299,7 @@
 				\end{tabular}
 		\end{tabular}}
 		\begin{tabnote}
-			In the first subtable, three distinct blocks belonging to a cluster are transformed into two entries by averaging \textit{price rate}, \textit{total spots} and \textit{occupied} attributes for the two distinct timestamps (second subtable)
+			In the first subtable, three distinct blocks belonging to a cluster are transformed into two entries by averaging \textit{price rate}, \textit{total spots} and \textit{occupied} attributes for the two distinct timestamps (second subtable).
 		\end{tabnote}
 		\label{tab:aggregating_datapoints}
 	\end{table}
@@ -308,7 +308,7 @@
 		%\setlength\extrarowheight{5pt}
 		%\centering
 		%\footnotesize
-		\tbl{Number of datapoints aggregated per timestamp vs. all datapoints alongside the shrinking rate for 8, 16 and 32 clusters}
+		\tbl{Number of datapoints aggregated per timestamp vs. all datapoints alongside the shrinking rate for 8, 16 and 32 clusters.}
 		{\begin{tabular}{ | c | c | c | c | } %| c | S[table-format=5.0] | S[table-format=6] | S[table-format=2.1] |
 				\hline
 				{cluster size} & {aggregated datapoints} & {all datapoints} & {shrinking rate} \\ \hline
@@ -317,18 +317,18 @@
 				32 & 6257 &	29355 &	4.6 \\ \hline
 		\end{tabular}}
 		\begin{tabnote}
-			Values have been averaged across clusters
+			Values have been averaged across clusters.
 		\end{tabnote}
 		%\captionsetup{justification=centering}
 		\label{tab:models_training_points}
 	\end{table}
 	
-	The model training and evaluation is performed in Python via the \textit{scikit-learn} library. During the training phase, we evaluate models such as decision trees, support vector machines, multilayer perceptrons and boosted trees using $sklearn.tree.DecisionTreeRegressor$, $sklearn.svm.SVR$, $sklearn.neural\_network.multilayer\_perceptron.MLPRegressor$, and $xgboost.XGBRegressor$ respectively. As error metric we use \textit{root mean square error} (RMSE) and perform a five-fold cross-validation. A model will be evaluated on other clusters with parking occupancy data.
+	The model training and evaluation is performed in Python via the \textit{scikit-learn} library. During the training phase, we evaluate models such as decision trees, support vector machines, multilayer perceptrons and boosted trees using $sklearn.tree.DecisionTreeRegressor$, $sklearn.svm.SVR$, $sklearn.neural\_network.multilayer\_perceptron.MLPRegressor$, and $xgboost.XGBRegressor$ respectively. As error metric, we use \textit{root mean square error} (RMSE) and perform a five-fold cross-validation. A model will be evaluated on other clusters with parking occupancy data.
 	
 	Specific details on the actual training of the models can be found in the table \cref{tab:ml_params}. Upon training the models, the clusters can be visualized in the web application as shown in \cref{fig:cwith} as screenshot. \Cref{fig:cwith_table} displays the presented table in more detail.
 	
 	\begin{table}
-		\tbl{Overview of the machine learning methods used, their inputs and parameters}
+		\tbl{Overview of the machine learning methods used, their inputs and parameters.}
 		{\begin{tabular}{lp{4cm}lp{4cm}}	
 				\toprule
 				Predictor Variables & & Target Variable & \\
@@ -373,19 +373,19 @@
 	\begin{figure}[!ht]
 		\centering
 		\includegraphics[width=0.8\textwidth]{graphics/cwith_source_dt_cosine.png}
-		\caption{Selected cluster \textit{with} parking data and the pop-up table in the Leaflet application.}
+		\caption{Selected cluster \textit{with} parking data and the pop-up table in the Leaflet application~\protect\cite{web_application}.}
 		\label{fig:cwith}
 	\end{figure}
 	
 	\begin{figure}[!ht]
 		\centering
 		\includegraphics[width=0.8\textwidth]{graphics/cwith_source_dt_cosine_table.png}
-		\caption{The pop-up table for the Leaflet application view of \cref{fig:cwith}.}
+		\caption{The pop-up table for the Leaflet application view of \cref{fig:cwith}~\protect\cite{web_application}.}
 		\label{fig:cwith_table}
 	\end{figure}
 	
 	\subsection{Building mathematical representations for city areas}
-	Using amenity data from OSM and time-spent information we build cluster vectors and density estimation kernels.
+	Using amenity data from OSM and time-spent information, we build cluster vectors and density estimation kernels.
 	
 	To form the cluster vectors, we first divide all amenities into categories $Cat_1, Cat_2, ..., Cat_n$. The criteria for division will be their average time spent values. Each cluster gets represented by an $n$-dimensional vector, whose components correspond to the amenity categories. The magnitude of component $i$ is equal to the number of amenities of category $Cat_i$ that can be found in that particular cluster. For example, a short duration category of up to 30 minutes, a medium duration between 31 and 90 minutes and a large duration of above 90 minutes stay. Compare \cref{fig:cluster_vector} for a general representation.
 	
@@ -409,14 +409,14 @@
 	emd(\mathcal{C}_i) = \sum_{j=1}^{|amenities|} K_{ij} \times A_j
 	\end{equation}
 	
-	$$\forall i \in \{1,..|clusters|\} \text{ and } \forall j \in \{1,..|amenities|\}$$
+	$\forall i \in \{1,..|clusters|\} \text{ and } \forall j \in \{1,..|amenities|\}$
 	
-	where $A_j$ is an amenity that appears $K_{ij}$ times in the cluster $\mathcal{C}_i$.
+	where $A_j$ is an amenity that appears $K_{ij}$ times in the cluster $\mathcal{C}_i$. \\
 	
 	\begin{figure}[!ht]
 		\centering
 		\includegraphics[width=0.7\textwidth]{graphics/emd_gaussian_addition3.png}
-		\caption{The iterative summing of Gaussian curves representing the amenity time spent information resulting in a cluster Gaussian as the outer hull.}
+		\caption{The iterative summing of Gaussian curves representing the amenity time spent information resulting in a cluster Gaussian as the outer hull (graph obtained inside the Python application using the matplotlib package.}
 		\label{fig:gaussian}
 	\end{figure}
 	
@@ -431,7 +431,7 @@
 	cos(\theta)=\frac{A\cdot B}{{\lVert}A{\rVert}       
 		_2{\lVert}B{\rVert}_2}=\frac{\sum_{i=1}^n{A_iB_i}}{\sqrt{\sum_{i=1}^n{A_i^2}}\sqrt{\sum_{i=1}^n{B_i^2}}}
 	\end{equation}
-	where $A_i$ and $B_i$ are the components of vector A and respectively. 
+	where $A_i$ and $B_i$ are the components of vector A and respectively. \\
 	
 	The \textit{earth mover's distance} (emd) is a measure used in statistics that roughly expresses the difference between position and magnitude of two curves. It is best explained by regarding the curves as the hull of earth piles. For two separate earth piles, emd computes the minimum effort of rearranging a pile so that the shape of the other pile is obtained. Moving P particles over a distance D is equal to the effort $P \times D$. A prerequisite for this operation is that the two piles need to contain the same quantity of earth.
 	
@@ -488,7 +488,7 @@
 	
 	\subsection{Best model method}
 	\label{sec:bestmodel}
-	Of the models were trained using the four methods (decision trees, support vector machines, multilayer perceptrons, and gradient boosted trees), \Cref{evaluation:best_model_method} shows the distribution of best machine learning methods in case of 8 and 16 clusters. The values were obtained by summing up the number of times a method produced the smallest estimation error, i.e., RMSE, among the four methods for all combinations of clusters with parking data $(\mathcal{C}_{source}, \mathcal{C}_{target})$.
+	Of the models were trained using the four methods (decision trees, support vector machines, multilayer perceptrons, and gradient boosted trees), \cref{evaluation:best_model_method} shows the distribution of best machine learning methods in case of 8 and 16 clusters. The values were obtained by summing up the number of times a method produced the smallest estimation error, i.e., RMSE, among the four methods for all combinations of clusters with parking data $(\mathcal{C}_{source}, \mathcal{C}_{target})$.
 	Extreme gradient boosting claims the first spot in both cases.
 	In further experiments in the evaluation we shall only report on models trained using extreme gradient boosting.
 	
@@ -496,7 +496,7 @@
 		%\centering
 		%\small
 		%\setlength\extrarowheight{5pt}
-		\tbl{The fraction of best models among decision trees, support vector machine, multilayer perceptron and gradient boosting  measured as RMSE when applied on all pairs of clusters}
+		\tbl{The fraction of best models among decision trees, support vector machine, multilayer perceptron and gradient boosting  measured as RMSE when applied on all pairs of clusters.}
 		{\begin{tabular}{ | c | c | c | c | c |}
 				\hline
 				& \textbf{dt} & \textbf{svm} & \textbf{mlp} & \textbf{xgb} \\ \hline
@@ -513,7 +513,7 @@
 	
 	%and use the model predictions as occupancy references
 	 
-	Concretely, for every pair of clusters ($\mathcal{C}_{source}, \mathcal{C}_{target}$), a model $\mathcal{M}_{\mathcal{C}_{source}}$ is trained on $\mathcal{C}_{source}$ and its test error ($\mathcal{M}_{\mathcal{C}_{source}}(\mathcal{C}_{target})$) shall be correlated with the cosine and emd similarity values between $\mathcal{C}_{source}$ and $\mathcal{C}_{target}$. Here we use two correlation coefficients: the Pearson correlation coefficient and Spearman's rank correlation coefficient, which results in four correlation measures: 
+	Concretely, for every pair of clusters ($\mathcal{C}_{source}, \mathcal{C}_{target}$), a model $\mathcal{M}_{\mathcal{C}_{source}}$ is trained on $\mathcal{C}_{source}$ and its test error ($\mathcal{M}_{\mathcal{C}_{source}}(\mathcal{C}_{target})$) shall be correlated with the cosine and emd similarity values between $\mathcal{C}_{source}$ and $\mathcal{C}_{target}$. Here, we use two correlation coefficients: the Pearson correlation coefficient and Spearman's rank correlation coefficient, which results in four correlation measures: 
 	\begin{romanlist}
 		\item	cosine (Pearson) correlation
 		\item 	cosine (Spearman's) rank correlation
@@ -572,7 +572,7 @@
 		\centering
 		\includegraphics[width=0.8\textwidth]{graphics/cwout_cosine_table.png}
 		\caption{The pop-up table of a cluster without data.
-			Notice the drop-down list from which the time can be selected. There are 8 times to select, equally spaced throughout the day that followed our experiment. The similarity values are rounded off. The results are expressed in intervals of occupancy. The successive intersection of intervals succeeds only for the first two values, afterwards it is empty.}
+			Notice the drop-down list from which the time can be selected. There are 8 times to select, equally spaced throughout the day that followed our experiment. The similarity values are rounded off. The results are expressed in intervals of occupancy. The successive intersection of intervals succeeds only for the first two values, afterwards it is empty ~\protect\cite{web_application}.}
 		\label{fig:cwout_table}
 	\end{figure}
 	
@@ -598,16 +598,16 @@
 				
 	\subsection{Models built on all occupancy datapoints}
 	Up to now, the evaluation involved models trained and tested- on aggregated datapoints. 
-	We ask ourselves, however, whether a model trained on all datapoints performs better than when tested on an aggregated cluster. Or whether an aggregate model delivers better results on an all-datapoints cluster than a model trained on all datapoints? Here we experiment these combinations by training models on both all- and aggregate datapoints and apply them on both types of aggregation forms. 
+	We ask ourselves, however, whether a model trained on all datapoints performs better than when tested on an aggregated cluster. Or whether an aggregate model delivers better results on an all-datapoints cluster than a model trained on all datapoints? Here, we experiment these combinations by training models on both all- and aggregate datapoints and apply them on both types of aggregation forms. 
 	
-	See \cref{tab:train_test_errors} for an overview of test errors for 8 and 16 clusters. One observes that the errors from models applied on aggregated datapoints are about 5 unit points (5\%) smaller than the errors from models applied on all datapoints. This is naturally accounted for by the smaller spread of occupancy values that the aggregation brings with itself. As far as source models are concerned, there is no significant difference between the aggregate and all datapoint models, i.e. the margin is under 1\%. Regarding the number of clusters, the values for 8-cluster models are slightly better than 16-cluster models for aggregated datapoints, but lose when the testing bed is equal to all datapoints.
+	See \cref{tab:train_test_errors} for an overview of test errors for 8 and 16 clusters. One observes that the errors from models applied on aggregated datapoints are about 5 unit points (5\%) smaller than the errors from models applied on all datapoints. This is naturally accounted for by the smaller spread of occupancy values that the aggregation brings with itself. As far as source models are concerned, there is no significant difference between the aggregate and all datapoint models, i.e., the margin is under 1\%. Regarding the number of clusters, the values for 8-cluster models are slightly better than 16-cluster models for aggregated datapoints, but lose when the testing bed is equal to all datapoints.
 	
 	In \cref{tab:correlation_values} the resulting correlations of testing errors with cosine- and emd similarity values are listed for models of 8 and 16 cluster configurations. It follows that the cosine- and rank cosine correlation values are on average closer to -1 in the 8-cluster case. The same applies for emd- and rank emd correlation values, which are closer to 1 in this case. The correlation values for 16 clusters are obviously weaker than for 8 clusters. In both sections, the aggregate datapoints target is superior to the all datapoints target.
 	
 	\begin{table}[!ht]
 		%\centering
 		%\small
-		\tbl{Test error for ML models build alternatively with all- and aggregated datapoints}
+		\tbl{Test error for ML models build alternatively with all- and aggregated datapoints.}
 		%\setlength\extrarowheight{5pt}
 		%\resizebox{\textwidth}{!}{
 		{\begin{tabular}{ | c | c | c | c | c | c | }
@@ -633,7 +633,7 @@
 		%\small
 		%\setlength\extrarowheight{5pt}
 		%\resizebox{\textwidth}{!}{
-		\tbl{Resulting correlation values for ML models built using all- and aggregated datapoints}
+		\tbl{Resulting correlation values for ML models built using all- and aggregated datapoints.}
 		{\begin{tabular}{ | c | c | c | c | c | c | c | }
 				\hline
 				{cluster size} & {datapoints source} & {datapoints target} & cosine & rank\_cosine & emd & rank\_emd \\ \hline
@@ -652,16 +652,16 @@
 		%\end{tabnote}
 	\end{table}
 						
-	\subsection{Amenity Area as similarity Basis}
+	\subsection{Amenity area as similarity basis}
 	We considered time spent information as the basis for creating the urban profile. However, there are other factors that affect the parking demand towards an amenity.
-	Obviously one of them is the amount of people visiting the amenity.
+	Obviously, one of them is the amount of people visiting the amenity.
 	As we do not have data about this aspect, we use the area of the amenity as a proxy, assuming that larger places would have more visitors.
 	OpenStreetMap provides a polygon layer for a certain geographic bounding box, which contains information across all the surfaces in that region. See \cref{fig:amenity_polygons} for a visualization of the polygons and their areas in OSM. 
 	
 	\begin{figure}[!ht]
 		\centering
 		\includegraphics[width=\textwidth]{graphics/amenity_polygons4.png}
-		\caption{OSM screenshot emphasizing polygons as buildings and the amenities that are housed by them}
+		\caption{OSM screenshot emphasizing polygons as buildings and the amenities that are housed by them~\protect\cite{openstreetmap}.}
 		\label{fig:amenity_polygons}
 	\end{figure}
 	
@@ -684,7 +684,7 @@
 	
 	\begin{table}[!ht]
 		%\footnotesize
-		\tbl{Amenity area values gathered and averaged from OMS polygon layer for the SF\textit{park} region}
+		\tbl{Amenity area values gathered and averaged from OMS polygon layer for the SF\textit{park} region.}
 		{\begin{tabular}{ | l | c | c | c || l | c | c | c |}
 				\hline		
 				\textbf{amenity name} & \textbf{mean} & \textbf{stdev} & \textbf{cat} & \textbf{amenity name} & \textbf{mean} & \textbf{stdev} & \textbf{cat} \\ \hline
@@ -741,7 +741,7 @@
 		\label{tab:correlation_amenity_area}
 	\end{table}
 							
-	\subsection{Extended Prediction Models}
+	\subsection{Extended prediction models}
 	An alternative to building urban measures and similarity functions is to let the machine learning model find out the similarities by itself. 
 	One can choose to add the city data as further training information for clusters. The purpose is to produce better predictions by leveraging unknown patterns in the city data. Hence, features representing the \textit{cosine} and \textit{emd} functions are added to the model, as follows: 
 	\begin{romanlist}
@@ -769,7 +769,7 @@
 	
 	\begin{table}[!ht]
 		%\footnotesize
-		\tbl{Total models extended with cosine and emd features compared to total models with the previous feature set}
+		\tbl{Total models extended with cosine and emd features compared to total models with the previous feature set.}
 		{\begin{tabular}{ | c | c | c | c | }
 				\hline		
 				\textbf{cluster size}  & \textbf{model} & \textbf{test error average} \\ \hline
@@ -840,7 +840,7 @@
 	
 	
 	\section{Conclusion}
-	In this work we have presented our work on approximating street parking occupancy in cities.
+	In this work, we have presented our work on approximating street parking occupancy in cities.
 	Under the assumption that parking occupancy data is lacking in certain areas, we proposed an alternative solution to the ones previously developed for this problem.
 	We built parking demand profiles by using complementary city data, which localize various types of public amenities and indicate the average time spent value there.
 	All data has been made available in an established RDF format, so that it can be easily reused.
