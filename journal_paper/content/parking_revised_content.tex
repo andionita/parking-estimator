@@ -270,9 +270,9 @@
 	\end{figure}
 	
 	\subsection{Building Estimation Models}
-	The estimation of parking occupancy is realized using machine learning. We choose to explore this methodology following the solid results machine learning models have delivered for the various smart parking settings investigated in \cref{sec:spresearch}. A machine learning model $\mathcal{M}$ will be trained for every cluster \textit{with} parking data.
+	The estimation of parking occupancy is realized using machine learning. We choose to explore this methodology following the solid results machine learning models have delivered for the various smart parking investigations discussed in \cref{sec:spresearch}. A machine learning model $\mathcal{M}$ will be trained for every cluster \textit{with} parking data.
 	
-	The training data are composed from the parking occupancy data. Specifically, the timestamp, parking capacity and parking price act as predictor variables, while the occupancy rate is the target variable. Before training, data is aggregated across all blocks so that it becomes comparable to other clusters and can be used when training and testing models. The averaging is performed per timestamp, i.e., if multiple blocks have an occupancy record for the same time and block, the occupancy rate will be averaged across both of these. Features such as price and parking capacity per block are averaged as well. See \cref{tab:aggregating_datapoints} for an example of this process. This means that the original collection of data records shrinks, which should decrease the training time. In \cref{tab:models_training_points}, the shrinking rate is shown for various number of clusters. The resulting parking capacity, parking price and occupancy values are taken as as cluster representatives.
+	The training data are composed of the parking occupancy data. Specifically, the timestamp, parking capacity and parking price act as predictor variables, while the occupancy rate is the target variable. Before training, data is aggregated across all blocks so that it becomes comparable to other clusters and can be used when training and testing models. The averaging is performed per timestamp, i.e., if multiple blocks have an occupancy record for the same time and block, the occupancy rate will be averaged across both of these. Features such as price and parking capacity per block are averaged as well. See \cref{tab:aggregating_datapoints} for an example of this process. This means that the original collection of data records shrinks, which should decrease the training time. In \cref{tab:models_training_points}, the shrinking rate is shown for various number of clusters. The resulting parking capacity, parking price, and occupancy values are taken as cluster representatives.
 	
 	\begin{table}
 		%\footnotesize
@@ -283,7 +283,7 @@
 					\textbf{block id} & \textbf{timestamp} & \textbf{price rate} & \textbf{total spots} & \textbf{occupied} \\ \hline
 					902   & {2011-04-02 7:00:00} & 0 & 46 & 58 \\ \hline
 					32800 & {2011-04-02 7:00:00} & 0 & 32 & 2 \\ \hline
-					33005 & {2011-04-02 7:00:00} & 3 & 36 & 12 \\ \hline
+					33005 & {2011-04-02 7:00:00} & 3 & 36 & 12 \\ \hline \hline
 					902   & {2011-04-02 8:00:00} & 2 & 46 & 54 \\ \hline
 					32800 & {2011-04-02 8:00:00} & 4 & 32 & 5 \\ \hline
 					33005 & {2011-04-02 8:00:00} & 3 & 36 & 22 \\ \hline
@@ -327,6 +327,7 @@
 	\end{table}
 	
 	The model training and evaluation is performed in Python via the \textit{scikit-learn} library. During the training phase, we evaluate models such as \textit{decision trees}, \textit{support vector machines}, \textit{multilayer perceptrons} and \textit{boosted trees} using:
+	\cmmnt{I would not include these details}
 	\begin{enumerate}
 		\item $sklearn.tree.DecisionTreeRegressor$,
 		\item $sklearn.svm.SVR$,
@@ -335,7 +336,7 @@
 	\end{enumerate}
 	As error metric, we use \textit{root mean square error} (RMSE) and perform a five-fold cross-validation. A model will be evaluated on other clusters with parking occupancy data.
 	
-	Specific details on the actual training of the models can be found in the table \cref{tab:ml_params}. Upon training the models, the clusters can be visualized in the web application as shown in \cref{fig:cwith} as screenshot. \Cref{fig:cwith_table} displays the presented table in more detail.
+	Specific details on the actual training of the models can be found in the table \cref{tab:ml_params}. Upon training the models, the clusters can be visualized with the web application as shown in \cref{fig:cwith} as screenshot. \Cref{fig:cwith_table} displays the presented table in more detail.
 	
 	\begin{table}
 		\tbl{Overview of the machine learning methods used, their inputs and parameters.}
