@@ -71,7 +71,7 @@
 	
 	\section{Approach}
 	The approach, in its generic form, is split into several steps. It begins by acquiring access to data that contains information about parking occupancy for a desired area. The parking data is mapped geographically using OpenStreetMap (OSM).
-	Next, the points of interest (POIs) contained in the OSM data are spatially clustered so that the individual clusters are of about the same size. Afterwards, machine learning models are trained on parking data for the computed clusters. For each cluster, mathematical representations are constructed based on the OSM data, which are then used to compute similarity values using cosine similarity and earth mover's distance. Finally, estimations of parking occupancy are computed by applying the models on areas without parking data with the similarity values factored in.   
+	Next, the points of interest (POIs) contained in the OSM data are spatially clustered so that the individual clusters are of about the same size. Afterwards, machine learning models are trained on parking data for the computed clusters. For each cluster, mathematical representations are constructed based on the OSM data, which are then used to compute similarity values using \textit{cosine similarity} and \textit{earth mover's distance}. Finally, estimations of parking occupancy are computed by applying the models on areas without parking data with the similarity values factored in.   
 	
 	To make the process more clear, the application steps are described separately and abstracted from any specific implementation details.
 	
@@ -96,16 +96,16 @@
 		
 		\item{\textbf{Build machine learning models for the clustered city areas}}
 		
-		A freshly split city area that contains parking data will have a occupancy estimation model. In the training process, the predictor variables includes the measurement timestamp, parking lot capacity, and parking price, while the target variable is the parking occupancy. Methods used for building the models are Decision Trees, Support Vector Machines, Multilayer Perceptrons, and Boosted Trees.
+		A freshly split city area that contains parking data will have a occupancy estimation model. In the training process, the predictor variables includes the measurement timestamp, parking lot capacity, and parking price, while the target variable is the parking occupancy. Methods used for building the models are \textit{decision trees}, \textit{support vector machines}, \textit{multilayer perceptrons}, and \textit{boosted trees}.
 		
 		\item{\textbf{Build mathematical representations for the city areas}}
 		
 		%Since the time spent information is assumed to reflect parking demand, this data will help us augment the occupancy estimations. 
-		Amenities and time spend information are organized in mathematical objects to reflect the parking demand in their respective city areas. Emerging will be cluster vectors, which serve in cosine similarity computation and cluster Gaussians that contribute to calculating earth mover's distance between city areas.
+		Amenities and time spend information are organized in mathematical objects to reflect the parking demand in their respective city areas. Emerging will be \textit{cluster vectors}, which serve in \textit{cosine similarity} computation and \textit{cluster Gaussians} that contribute to calculating \textit{earth mover's distance} between city areas.
 
 		\item{\textbf{Compute similarity values between any two city areas}}
 		
-		The built mathematical representations make it possible to compute similarity measures between city areas. Cosine similarity and earth mover's distance are defined and computed for every pair of city areas.
+		The built mathematical representations make it possible to compute similarity measures between city areas. \textit{Cosine similarity} and \textit{earth mover's distance} are defined and computed for every pair of city areas.
 		
 		\item{\textbf{Apply models on city areas that do not have parking information}}
 		
@@ -210,7 +210,7 @@
 		\label{tab:amenities_list}
 	\end{table}
 	
-	Furthermore, we collect the vising duration corresponding to the amenities. We have found that this information is offered by Google Places and FourSquare. The latter data is available via an API, however the access is not free of charge. We used Google Places instead and collected data corresponding to the parking data's location. An example of the service is found within Google Maps for smartphones. It displays typical visiting duration or \textit{time spent} values and popularity of the place for specific time intervals, obtained by Google using a crowsourcing approach that averages the values received from users' smart phone location (cf. \cref{fig:visit_duration}). To obtain the time spent values, we manually extract information from 470 places in San Francisco, for which a maximum duration of stay was provided (the minimum duration is not always given)\footnote{This piece of information is not accessible yet via the Google Places API. Google Feature Request: \url{https://issuetracker.google.com/issues/35827350}}. The results are shown in \cref{tab:amenities_google_places} and the time spent values are provided in minutes and have been rounded to the nearest integer. We have included only amenities for which at least two stay duration sources were found. 
+	Furthermore, we collect the vising duration corresponding to the amenities. We have found that this information is offered by Google Places and FourSquare. The latter data is available via an API, however the access is not free of charge. We used Google Places instead and collected data corresponding to the parking data's location. An example of the service is found within Google Maps for smartphones. It displays typical visiting duration or \textit{time spent} values and popularity of the place for specific time intervals, obtained by Google using a crowsourcing approach that averages the values received from users' smart phone location (cf. \cref{fig:visit_duration}). To obtain the \textit{time spent} values, we manually extract information from 470 places in San Francisco, for which a maximum duration of stay was provided (the minimum duration is not always given)\footnote{This piece of information is not accessible yet via the Google Places API. Google Feature Request: \url{https://issuetracker.google.com/issues/35827350}}. The results are shown in \cref{tab:amenities_google_places} and the \textit{time spent} values are provided in minutes and have been rounded to the nearest integer. We have included only amenities for which at least two stay duration sources were found. 
 	
 	\begin{figure}[!ht]
 		\centering
@@ -220,7 +220,7 @@
 	\end{figure}
 	
 	\begin{table}[!ht]
-		\tbl{All amenities listed with their corresponding mean time spent information as collected from Google Places. 
+		\tbl{All amenities listed with their corresponding mean \textit{time spent} information as collected from Google Places. 
 			The \emph{cat} column indicates whether the average visiting time is under half an hour (1), 31 to 90 minutes (2), or more than 1.5 hours (3).
 		}
 		%\footnotesize
@@ -323,12 +323,12 @@
 		\label{tab:models_training_points}
 	\end{table}
 	
-	The model training and evaluation is performed in Python via the \textit{scikit-learn} library. During the training phase, we evaluate models such as decision trees, support vector machines, multilayer perceptrons and boosted trees using:
+	The model training and evaluation is performed in Python via the \textit{scikit-learn} library. During the training phase, we evaluate models such as \textit{decision trees}, \textit{support vector machines}, \textit{multilayer perceptrons} and \textit{boosted trees} using:
 	\begin{enumerate}
 		\item $sklearn.tree.DecisionTreeRegressor$,
 		\item $sklearn.svm.SVR$,
 		\item $sklearn.neural\_network.multilayer\_perceptron.MLPRegressor$, and
-		\item $xgboost.XGBRegressor$, respectively.
+		\item $xgboost.XGBRegressor$ respectively.
 	\end{enumerate}
 	As error metric, we use \textit{root mean square error} (RMSE) and perform a five-fold cross-validation. A model will be evaluated on other clusters with parking occupancy data.
 	
@@ -392,25 +392,25 @@
 	\end{figure}
 	
 	\subsection{Building mathematical representations for city areas}
-	Using amenity data from OSM and time-spent information, we build cluster vectors and density estimation kernels.
+	Using amenity data from OSM and time-spent information, we build \textit{cluster vectors} and density estimation kernels.
 	
-	To form the cluster vectors, we first divide all amenities into categories $Cat_1, Cat_2, ..., Cat_n$. The criteria for division will be their average time spent values. Each cluster gets represented by an $n$-dimensional vector, whose components correspond to the amenity categories. The magnitude of component $i$ is equal to the number of amenities of category $Cat_i$ that can be found in that particular cluster. For example, a short duration category of up to 30 minutes, a medium duration between 31 and 90 minutes and a large duration of above 90 minutes stay. Compare \cref{fig:cluster_vector} for a general representation.
+	To form the \textit{cluster vectors}, we first divide all amenities into categories $Cat_1, Cat_2, ..., Cat_n$. The criteria for division will be their average \textit{time spent} values. Each cluster gets represented by an $n$-dimensional vector, whose components correspond to the amenity categories. The magnitude of component $i$ is equal to the number of amenities of category $Cat_i$ that can be found in that particular cluster. For example, a short duration category of up to 30 minutes, a medium duration between 31 and 90 minutes and a large duration of above 90 minutes stay. Compare \cref{fig:cluster_vector} for a general representation.
 	
 	\begin{figure}[!ht]
 		\centering
 		\includestandalone[width=0.5\textwidth]{graphics/cluster_vector}
-		\caption{An example of a cluster vector representing amenity time spent information composed from for three categories.}
+		\caption{An example of a \textit{cluster vector} representing amenity \textit{time spent} information composed from for three categories.}
 		\label{fig:cluster_vector}
 	\end{figure}
 	
-	In the case of San Francisco, the categories are based on the time spent mean and are split in three categories. The assigned partitions for every amenity are shown in \cref{tab:amenities_google_places}.
+	In the case of San Francisco, the categories are based on the \textit{time spent} mean and are split in three categories. The assigned partitions for every amenity are shown in \cref{tab:amenities_google_places}.
 	\begin{romanlist}
 		\item $<$ 30 min,
 		\item 30 to 90 minutes, and
 		\item $>$ 90 minutes. 
 	\end{romanlist}
 	
-	A \textit{cluster Gaussian} is a \textit{kernel density estimation} among the probability distribution of an amenity's time spent value. We use a Gaussian kernel to express the probability distribution, hence the name. To construct a cluster Gaussian, we first collect the mean and standard deviation of the individual amenities' time spent values and then we construct its corresponding Gaussian curve. Multiple amenities, each appearing multiple times, will result in a curve that is the linear combination of the individual representations of the amenities as normal distribution curves. Compare \cref{fig:gaussian} for a visualization of the summing process.
+	A \textit{cluster Gaussian} is a \textit{kernel density estimation} among the probability distribution of an amenity's \textit{time spent} value. We use a Gaussian kernel to express the probability distribution, hence the name. To construct a \textit{cluster Gaussian}, we first collect the mean and standard deviation of the individual amenities' \textit{time spent} values and then we construct its corresponding Gaussian curve. Multiple amenities, each appearing multiple times, will result in a curve that is the linear combination of the individual representations of the amenities as normal distribution curves. Compare \cref{fig:gaussian} for a visualization of the summing process.
 	
 	\begin{equation}
 	emd(\mathcal{C}_i) = \sum_{j=1}^{|amenities|} K_{ij} \times A_j
@@ -423,16 +423,16 @@
 	\begin{figure}[!ht]
 		\centering
 		\includegraphics[width=0.7\textwidth]{graphics/emd_gaussian_addition3.png}
-		\caption{The iterative summing of Gaussian curves representing the amenity time spent information resulting in a cluster Gaussian as the outer hull (graph obtained inside the Python application using the matplotlib package.}
+		\caption{The iterative summing of Gaussian curves representing the amenity \textit{time spent} information resulting in a \textit{cluster Gaussian} as the outer hull (graph obtained inside the Python application using the matplotlib package.}
 		\label{fig:gaussian}
 	\end{figure}
 	
 	%In practice, we will not apply the Wasserstein metric directly, but rather resort to some levels of discretization. 
 	
-	In practice, the computation is discretized using bins. A bin represents a unit on the $X$ axis, the same on which the time spent value is expressed. We will take a number of bins equal to the maximum amenity mean and buffer them with $3\times$ the largest standard deviation, as it is known that within $3\times$ standard deviation on both sides of the mean over 99\% of the Gaussian sum is covered. Moreover, an offset on the $X$-axis equal to $3\times$ the maximum standard deviation is used. This way, we are sure the landscape of summed Gaussians will easily fit into the number of bins. The Gaussians are computed using Python's Optimal Transport package (OT), specifically using the $ot.datasets.make\_1D\_gauss$ module, by providing the number of bins, mean and standard deviation values.
+	In practice, the computation is discretized using bins. A bin represents a unit on the $X$ axis, the same on which the \textit{time spent} value is expressed. We will take a number of bins equal to the maximum amenity mean and buffer them with $3\times$ the largest standard deviation, as it is known that within $3\times$ standard deviation on both sides of the mean over 99\% of the Gaussian sum is covered. Moreover, an offset on the $X$-axis equal to $3\times$ the maximum standard deviation is used. This way, we are sure the landscape of summed Gaussians will easily fit into the number of bins. The Gaussians are computed using Python's Optimal Transport package (OT), specifically using the $ot.datasets.make\_1D\_gauss$ module, by providing the number of bins, mean and standard deviation values.
 	
 	\subsection{Compute similarities between city areas}
-	The \textit{cosine similarity} between two vectors is defined as the cosine of the angle between the two vectors. The cosine similarity implementation uses the direct mathematical formula by plugging in the magnitudes of the respective vector components.
+	The \textit{cosine similarity} between two vectors is defined as the cosine of the angle between the two vectors. The \textit{cosine similarity} implementation uses the direct mathematical formula by plugging in the magnitudes of the respective vector components.
 	
 	\begin{equation}
 	cos(\theta)=\frac{A\cdot B}{{\lVert}A{\rVert}       
@@ -448,12 +448,12 @@
 	W_2(\mu_1,\mu_2)^2={\lVert}m_1-m_2{\rVert}^2_2+trace(C_1+C_2-2(C_2^{1/2}C_1C_2^{1/2})^{1/2})
 	\end{equation}
 	
-	Notice that emd is applicable only when the sum under both Gaussian curves is equal. Therefore, all cluster Gaussians will get normalized before emd is computed. In practive, after summing up the respective Gaussians and arriving at the cluster Gaussians, the $scipy.stats$ module is used to compute emd by means of the $wasserstein\_distance$ method. Provided here are the bin ranges on the X axis and their Y axis values corresponding to the computed cluster Gaussians.
+	Notice that emd is applicable only when the sum under both Gaussian curves is equal. Therefore, all \textit{cluster Gaussians} will get normalized before emd is computed. In practive, after summing up the respective Gaussians and arriving at the \textit{cluster Gaussians}, the $scipy.stats$ module is used to compute emd by means of the $wasserstein\_distance$ method. Provided here are the bin ranges on the X axis and their Y axis values corresponding to the computed \textit{cluster Gaussians}.
 	
 	\subsection{Computing parking occupancy estimations}
 	Once all models $\mathcal{M}$ have been built for the clusters \textit{with} parking data, making estimations on parking occupancy in these areas is straightforward. The input data fed to the model is manufactured from averaging the predicted variables from the areas with parking data. However, we want to apply these models on the clusters that are missing parking data. We derive the \textit{estimation interval} for cluster $\mathcal{C}_{wout}^j$ based on the model of cluster $\mathcal{C}_{with}^i$ as follows.
 	
-	For cosine similarity:
+	For \textit{cosine similarity}:
 	\begin{equation}
 	E(\mathcal{C}_{with}^i,\mathcal{C}_{wout}^j) = [\mathcal{M}(\mathcal{C}_{with}^i) - (1 - sim_{ij}), \text{    } \mathcal{M}(\mathcal{C}_{with}^i) + (1 - sim_{ij})]
 	\end{equation}
@@ -491,11 +491,11 @@
 	\section{Evaluation}
 	We evaluate various pieces of the system that has been presented. Firstly, we  establish the machine learning method that achieves best results on average across clusters. Afterwards, we compare the cluster models' test errors with the independently-computed similarity values between clusters. More specifically, a \textit{source} cluster's model will tested on a \textit{target} cluster and the error is correlated to the similarity between the \textit{source} and the \textit{target} clusters. Both \textit{cosine} and \textit{emd} functions will be used. The correlations will be expressed as Pearson- and Spearman's rank coefficients. Afterwards, we take a look at the results of applying the models to clusters \textit{without parking data} and visualize the results. 
 	
-	Furthermore, some alternative method are investigated. Firstly, we look at the model test errors and correlation results by skipping the aggregating step, i.e., instead of averaging the datapoints over timestamp per cluster, we build the cluster models using the entire occupancy data directly. Secondly, we use the \textit{amenity area} as the basis for the similarity functions in calculating the correlations between model test errors and similarity values. Finally, we question whether the similarity function approach is the most efficient and transfer its purpose to the machine learning phrase. The model will receive absolute cosine vectors and cluster Gaussian values as additional features and its model test error and correlation values will be compared to the ones from the original approach.
+	Furthermore, some alternative method are investigated. Firstly, we look at the model test errors and correlation results by skipping the aggregating step, i.e., instead of averaging the datapoints over timestamp per cluster, we build the cluster models using the entire occupancy data directly. Secondly, we use the \textit{amenity area} as the basis for the similarity functions in calculating the correlations between model test errors and similarity values. Finally, we question whether the similarity function approach is the most efficient and transfer its purpose to the machine learning phrase. The model will receive absolute \textit{cosine vectors} and \textit{cluster Gaussian} values as additional features and its model test error and correlation values will be compared to the ones from the original approach.
 	
 	\subsection{Best model method}
 	\label{sec:bestmodel}
-	Of the models were trained using the four methods (decision trees, support vector machines, multilayer perceptrons, and gradient boosted trees), \cref{evaluation:best_model_method} shows the distribution of best machine learning methods in case of 8 and 16 clusters. The values were obtained by summing up the number of times a method produced the smallest estimation error, i.e., RMSE, among the four methods for all combinations of clusters with parking data $(\mathcal{C}_{source}, \mathcal{C}_{target})$.
+	Of the models were trained using the four methods (\textit{decision trees}, \textit{support vector machines}, \textit{multilayer perceptrons}, and \textit{gradient boosted trees}), \cref{evaluation:best_model_method} shows the distribution of best machine learning methods in case of 8 and 16 clusters. The values were obtained by summing up the number of times a method produced the smallest estimation error, i.e., RMSE, among the four methods for all combinations of clusters with parking data $(\mathcal{C}_{source}, \mathcal{C}_{target})$.
 	Extreme gradient boosting claims the first spot in both cases.
 	In further experiments in the evaluation we shall only report on models trained using extreme gradient boosting.
 	
@@ -503,7 +503,7 @@
 		%\centering
 		%\small
 		%\setlength\extrarowheight{5pt}
-		\tbl{The fraction of best models among decision trees, support vector machine, multilayer perceptron and gradient boosting  measured as RMSE when applied on all pairs of clusters.}
+		\tbl{The fraction of best models among \textit{decision trees}, \textit{support vector machines}, \textit{multilayer perceptrons} and \textit{extreme gradient boosting} measured as RMSE when applied on all pairs of clusters.}
 		{\begin{tabular}{ | c | c | c | c | c |}
 				\hline
 				& \textbf{dt} & \textbf{svm} & \textbf{mlp} & \textbf{xgb} \\ \hline
@@ -527,9 +527,9 @@
 		\item 	emd (Pearson) correlation
 		\item 	emd (Spearman's) rank correlation. 
 	\end{romanlist}
-	The evaluation was performed for configurations of 8 and 16 clusters respectively. Additionally, we varied the \textit{merge distance} between 100m, 200m, and 400m to see how the correlation behaves. In \cref{tab:similarity_vs_estimation} the final results are shown. A correlation result is averaged across all clusters. Due to their mathematical meaning, the cosine similarity values below zero express a positive correlation, whereas emd values above zero express a positive correlation. 
+	The evaluation was performed for configurations of 8 and 16 clusters respectively. Additionally, we varied the \textit{merge distance} between 100m, 200m, and 400m to see how the correlation behaves. In \cref{tab:similarity_vs_estimation} the final results are shown. A correlation result is averaged across all clusters. Due to their mathematical meaning, the \textit{cosine similarity} values below zero express a positive correlation, whereas emd values above zero express a positive correlation. 
 	
-	We notice that the cosine similarity achieves better results than emd for the same testing configuration, peaking for 8 clusters and 100m merge distance. Its average Pearson coefficient is $-0.55$, while the mean Spearman rank coefficient is $-0.49$. emd positively correlates the most for the same testing configuration (8 clusters, 100m), when the average Pearson coefficient is at $0.28$ and Spearman's rank coefficient equals $0.23$. There is a clear descending trend in correlations, as the merge distance increases.  Also, the results for 8 clusters are superior to the ones when the city is split in 16 clusters. Further in the evaluation runs we fix the merge distance to 100m.
+	We notice that the \textit{cosine similarity} achieves better results than emd for the same testing configuration, peaking for 8 clusters and 100m merge distance. Its average Pearson coefficient is $-0.55$, while the mean Spearman rank coefficient is $-0.49$. emd positively correlates the most for the same testing configuration (8 clusters, 100m), when the average Pearson coefficient is at $0.28$ and Spearman's rank coefficient equals $0.23$. There is a clear descending trend in correlations, as the merge distance increases.  Also, the results for 8 clusters are superior to the ones when the city is split in 16 clusters. Further in the evaluation runs we fix the merge distance to 100m.
 	
 	\begin{table}[!ht]
 		%\centering
@@ -562,7 +562,7 @@
 		\end{tabular}}
 		\label{tab:similarity_vs_estimation}
 		\begin{tabnote}
-			For cosine similarity the values show a negative correlation tendency, while for the correlation based on emd similarity expresses a positive correlation tendency. The correlations are measured using Pearson coefficient and Spearman's rank coefficient.
+			For \textit{cosine similarity} the values show a negative correlation tendency, while for the correlation based on emd similarity expresses a positive correlation tendency. The correlations are measured using Pearson coefficient and Spearman's rank coefficient.
 		\end{tabnote}
 	\end{table}
 				
@@ -660,7 +660,7 @@
 	\end{table}
 						
 	\subsection{Amenity area as similarity basis}
-	We considered time spent information to complement the amenity information as the basis for creating the mathematical representation. However, there are other factors that affect the parking demand towards an amenity.
+	We considered \textit{time spent} information to complement the amenity information as the basis for creating the mathematical representation. However, there are other factors that affect the parking demand towards an amenity.
 	Obviously, one of them is the amount of people visiting the amenity.
 	As we do not have data about this aspect, we use the area of the amenity as a proxy, assuming that larger places would have more visitors.
 	OpenStreetMap provides a polygon layer for a certain geographic bounding box, which contains information across all the surfaces in that region. See \cref{fig:amenity_polygons} for a visualization of the polygons and their areas in OSM. 
@@ -722,11 +722,11 @@
 		\end{tabular}}
 		\label{tab:amenity_area_values}
 		\begin{tabnote}
-			The mean and standard deviation values were reduced by a 20x factor. The categories for cosine vectors are 0 - 35, 36 - 100, 100+.
+			The mean and standard deviation values were reduced by a 20x factor. The categories for \textit{cosine vectors} are 0 - 35, 36 - 100, 100+.
 		\end{tabnote}
 	\end{table}
 	
-	By applying the procedure using the amenity area as similarity basis, we obtain the correlations values listed in \cref{tab:correlation_amenity_area} for 8- and 16 cluster configurations. The superiority of the correlation values using time spent value is observed both for cosine- and rank cosine correlations, which are closer to -1, and for the emd- and rank emd correlations respectively, which are nearer to 1. All correlation values for 16 clusters are, however, relatively weak in absolute measures.
+	By applying the procedure using the amenity area as similarity basis, we obtain the correlations values listed in \cref{tab:correlation_amenity_area} for 8- and 16 cluster configurations. The superiority of the correlation values using \textit{time spent} value is observed both for cosine- and rank cosine correlations, which are closer to -1, and for the emd- and rank emd correlations respectively, which are nearer to 1. All correlation values for 16 clusters are, however, relatively weak in absolute measures.
 	
 	\begin{table}[!ht]
 		%\centering
@@ -753,7 +753,7 @@
 	One can choose to add the city data as further training information for clusters. The purpose is to produce better predictions by leveraging unknown patterns in the city data. Hence, features representing the \textit{cosine} and \textit{emd} functions are added to the model, as follows: 
 	\begin{romanlist}
 		\item k features corresponding to the k categories the amenities are split in, i.e. the magnitudes of the vectors for each category;
-		\item a feature corresponding to the emd Gaussian value for that cluster, loosely interpreted as the "total accumulated time spent value" for that cluster, in case of time spent, or the "total accumulated area" among all amenities in that cluster, for the amenity area; mathematically it is expressed in \cref{eq:emd_gaussian_magnitude}
+		\item a feature corresponding to the emd Gaussian value for that cluster, loosely interpreted as the "total accumulated time spent value" for that cluster, in case of \textit{time spent}, or the "total accumulated area" among all amenities in that cluster, for the amenity area; mathematically it is expressed in \cref{eq:emd_gaussian_magnitude}
 		\begin{equation}
 		feature(emd)=x \cdot f(x)
 		\label{eq:emd_gaussian_magnitude}
@@ -820,18 +820,18 @@
 		At the time of writing, open data portals mostly provide the location of parking lots, parking meters, parking prices and opening times, if applicable.  
 		
 		\item \textbf{Gather better \textit{time spent} information}
-		Accessing data on the time durations people spend in various amenities is restricted by Google by not providing an API for it. Other social media services, such as Foursquare offers information on how busy an amenity is by means of the number of check-ins that people send from their phones\footnote{https://developer.foursquare.com/docs/api/endpoints}  \footnote{https://developer.foursquare.com/docs/api/venues/details}. The API is however subject to costs and we have not tried it. By gathering more information automatically than we managed to collect manually, the evaluating similarity values based on the time spent information will likely increase in accuracy and so will the resulting correlation values.  
+		Accessing data on the time durations people spend in various amenities is restricted by Google by not providing an API for it. Other social media services, such as Foursquare offers information on how busy an amenity is by means of the number of check-ins that people send from their phones\footnote{https://developer.foursquare.com/docs/api/endpoints}  \footnote{https://developer.foursquare.com/docs/api/venues/details}. The API is however subject to costs and we have not tried it. By gathering more information automatically than we managed to collect manually, the evaluating similarity values based on the \textit{time spent} information will likely increase in accuracy and so will the resulting correlation values.  
 		
 		\item \textbf{Use more OSM (meta)data}.
 		The mathematical representations in the present work are relying on public amenities available from OpenStreetMap.
-		OSM has great potential as a collaborative map service but it currently still lacks many pieces of information that could be useful (in comparison with Google's time spent information, for example).
+		OSM has great potential as a collaborative map service but it currently still lacks many pieces of information that could be useful (in comparison with Google's \textit{time spent} information, for example).
 		Data such as opening hours, if it would be widely available, would be interesting to include in the mathematical representations, which would then take into account the number of public amenities that are available at a certain point in time.
 		%Furthermore, the stay duration data collected for the present approach is currently limited.
 		%Adding more stay duration data may fine tune the emerging similarity values.
 		Overall, more and finer city data, together with an appropriate representation and similarity function could eventually improve the occupancy estimations for clusters without parking data. 
 		
 		\item \textbf{Experiment with other clustering methods}
-		Our approach is dependent on the fact that the computed K-Means clusters are of approximately the same size. Ideally, this would mean that the number of amenities of a certain \textit{time spent} value is virtually equal between clusters. But since for both cosine similarity and emd it is not the absolute number of amenities for a certain \textit{time spent} value that matters, instead the relative number between certain \textit{time spent} values, it may be that clusters of clearly opposite sizes are very similar. All the more is the reason to experiment with other clustering methods, such as DBSCAN and OPTICS. Both focus on detecting clusters based on density of neighborhoods, which may translate in practice into separating regions in the city that are more sparse, e.g., large office areas, from regions that are very dense, e.g., residential or old town areas.
+		Our approach is dependent on the fact that the computed K-Means clusters are of approximately the same size. Ideally, this would mean that the number of amenities of a certain \textit{time spent} value is virtually equal between clusters. But since for both \textit{cosine similarity} and emd it is not the absolute number of amenities for a certain \textit{time spent} value that matters, instead the relative number between certain \textit{time spent} values, it may be that clusters of clearly opposite sizes are very similar. All the more is the reason to experiment with other clustering methods, such as DBSCAN and OPTICS. Both focus on detecting clusters based on density of neighborhoods, which may translate in practice into separating regions in the city that are more sparse, e.g., large office areas, from regions that are very dense, e.g., residential or old town areas.
 		
 		\item \textbf{Apply semi-supervised machine learning}.
 		Another relevant machine learning approach in this case is based on organizing the city areas as an undirected graph.
@@ -850,11 +850,11 @@
 	We presented our work on approximating street parking occupancy in cities.
 	Given the fact that parking sensors cannot capture all parking areas and assuming that parking demand can be modeled using urban features, we proposed an alternative solution to the ones previously developed for this problem.
 	The data used was composed of parking data from the SFpark project, that investigated parking pricing in San Francisco, and OpenStreetMap. The two data sources were merged and afterwards split into small city areas that separated the regions that contained parking data and other regions that did not contain parking data.
-	We built mathematical representations for amenities, any form of facility or building in a city, and their time spent information, visiting duration that have been gathered using smartphones. This led to computing similarity values between city areas by applying functions such as cosine similarity and earth mover's distance to the mathematical objects.
+	We built mathematical representations for amenities, any form of facility or building in a city, and their \textit{time spent} information, visiting duration that have been gathered using smartphones. This led to computing similarity values between city areas by applying functions such as \textit{cosine similarity} and \textit{earth mover's distance} to the mathematical objects.
 	%All data has been made available in an established RDF format, so that it can be easily reused.
 	%We merged the parking data with the city data by matching parking location units to points of interest, split the city into clustered areas, and built machine learning models for them.
-	The K-Means algorithm was used to cluster the city areas, while four methods were employed to train models for the clusters: decision trees, support vector machines, multilayer perceptrons and extreme gradient boosting.
-	%Based on the city data, urban measures were built in the form of cluster vectors and cluster gaussians, both of which took advantage of the mean time spent value and its standard deviation.
+	The K-Means algorithm was used to cluster the city areas, while four methods were employed to train models for the clusters: \textit{decision trees}, \textit{support vector machines}, \textit{multilayer perceptrons} and \textit{extreme gradient boosting}.
+	%Based on the city data, urban measures were built in the form of cluster vectors and \textit{cluster Gaussians}, both of which took advantage of the mean time spent value and its standard deviation.
 	%The vectors were part of the cosine similarity computation, while gaussians contributed to the earth mover's distance calculation.
 	The occupancy estimations for clusters \textit{without} parking data were defined in terms of model estimations from clusters \textit{with} parking data and the corresponding cluster similarity values.
 	The estimations are expressed as intervals which extend the model prediction values by the magnitude of the similarity values. 
@@ -867,7 +867,7 @@
 	Following our experiments, the best machine learning model for our problem setting turned out to be extreme gradient boosting.
 	We used the clusters \textit{with} parking data for the evaluation of the similarity values and calculated correlation coefficients between the similarity values and the estimation errors, using both absolute values and ranks.
 	The best correlation were reached for the 100m merge distance for 8 clusters.
-	In the same configuration, both cosine similarity and emd reached their best results from all the experimented configurations.
+	In the same configuration, both \textit{cosine similarity} and emd reached their best results from all the experimented configurations.
 	
 	We further investigated the test error and correlation values when models were built and tested on all datapoints instead of aggregated datapoints. The aggregation factor has been shown to play a role in finding the best estimations.
 	
