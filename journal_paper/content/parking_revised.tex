@@ -1,3 +1,4 @@
+\pdfoutput=1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Trim Size: 9.75in x 6.5in
 %% Text Area: 8in (include Runningheads) x 5in
@@ -8,7 +9,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 
-\documentclass{ws-ijait}
+\documentclass{ws-ijait-2}
+
 
 \usepackage[utf8]{inputenc}
 
@@ -170,10 +172,14 @@
 \maketitle
 
 \begin{history}
-\received{(Day Month Year)}
-\revised{(Day Month Year)}
-\accepted{(Day Month Year)}
+%\received{(Day Month Year)}
+%\revised{(Day Month Year)}
+%\accepted{(Day Month Year)}
 %\comby{(xxxxxxxxxx)}
+\begin{center}
+	\linespread{0.4} \tiny  \noindent Preprint of an article to be published in Int J. on Artificial Intelligence Tools (IJAIT)  \copyright 2019 [copyright World Scientific Publishing Company] \url{https://www.worldscientific.com/worldscinet/ijait}.
+%	\linespread{2}\Large\bfseries The Great Thesis About Some Very Great Things Indeed With a Pretty Long Title That Will Probably Be Split Between at Least Two Lines	Or So
+\end{center}
 \end{history}
 
 \begin{abstract}
@@ -232,6 +238,8 @@ Using the derived similarity values, we analyze the adaptation of occupancy rate
 %\acmISBN{978-1-4503-5489-9/18/06}
 
 \keywords{smart parking, machine learning, semantic annotation, data mining}
+
+
 
 \input{parking_revised_content}
 

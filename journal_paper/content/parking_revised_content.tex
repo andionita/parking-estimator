@@ -1,3 +1,4 @@
+\pdfoutput=1
 \section{Introduction}
 	Parking problems and overall traffic congestion are commonplace in cities nowadays. While the number of cars continues to increase\cite{car_increase}, studies show that about 30\% of the traffic in cities is caused by cars that are actively searching for parking\cite{traffic_congestion}. Often it is the lack of planning on behalf of cities that does not accommodate parking facilities proportional to building developments\cite{transport_problems}, which leads to double-parking, more accidents due to distracted drivers, more busy traffic, and, ultimately, a waste of fuel\cite{inrix_study}. As infrastructure solutions are not always optimal and take a long time to implement, there are other strategies to overcome these issues.
 	
@@ -47,7 +48,7 @@
 	Also based on VANETs is Szczurek et al.\cite{szczurek} work, which propose a novel approach that combines machine learning with the information disseminated in ad-hoc vehicular networks. The building blocks of the system are parking reports, which are issued by vehicles leaving a parking space and comprise a report identifier, a location, and a timestamp. The parking reports are being learned by a model, which then indicates whether a parking is available for a specific vehicle. A conditional relevance is used to determine whether a particular report is useful for a specific vehicle. This is modeled using a Naive Bayes method. A parking availability report R is labeled relevant by vehicle V, if the parking space referenced in R is available when V reaches it. Upon evaluation of the methods, the authors reported an improvement in parking discovery times for vehicles.
 	
 	\section{The SFpark Project}
-	To implement and evaluate our proposal, we use the data from the SF\textit{park} project. This project was realized by the San Francisco Municipal Transportation Agency (SFMTA), the city agency that manages the city's transportation, which includes on-street parking\cite{sfpark, sfpark_evaluation}, with the goal to improve parking availability. The SFMTA had the possibility of changing parking rates for on-street parking meters on short notice. Before the project started, parking rates were the same all day, every day, independent of the parking demand. By implementing a demand responsive pricing scheme, parking availability improved dramatically.
+	To implement and evaluate our proposal, we use the data from the SF\textit{park} project. This project was realized by the San Francisco Municipal Transportation Agency (SFMTA), the city agency that manages the city's transportation, which includes on-street parking\cite{sfpark,sfpark_evaluation}, with the goal to improve parking availability. The SFMTA had the possibility of changing parking rates for on-street parking meters on short notice. Before the project started, parking rates were the same all day, every day, independent of the parking demand. By implementing a demand responsive pricing scheme, parking availability improved dramatically.
 	
 	Dynamic pricing is a way to control parking occupancy. Parking prices are raised in areas that are almost fully occupied, whereas areas with low parking rates get assigned a lower price. A more advanced version adjusts the prices when enough demands received by the parking system would point to a future parking overload in the respective area.
 	
@@ -171,7 +172,7 @@
 	
 	\begin{figure}[!ht]
 		\centering
-		\includegraphics[width=0.8\textwidth]{graphics/initial_view_before_clusteringV7.png}
+		\includegraphics[width=0.8\textwidth]{initial_view_before_clusteringV7.png}
 		\caption{The blocks accounted in SF\textit{park}. The light blue ones are blocks \textit{without} parking data, the light red ones are \textit{with} parking data~\protect\cite{web_application}.}
 		\label{fig:before_clustering}
 	\end{figure}
@@ -183,7 +184,7 @@
 	
 	\begin{figure}[!ht]
 		\centering
-		\includegraphics[width=0.8\textwidth]{graphics/cafes_restaurants_banks_larger.png}
+		\includegraphics[width=0.8\textwidth]{cafes_restaurants_banks_larger.png}
 		\caption{A map indicating public amenities (cafes, restaurants, banks) found at points of interest in OSM (customly built by the authors).}
 		\label{fig:pois}
 	\end{figure}
@@ -215,7 +216,7 @@
 	
 	\begin{figure}[!ht]
 		\centering
-		\includegraphics[width=0.8\textwidth]{graphics/google_visit_duration.png}
+		\includegraphics[width=0.8\textwidth]{google_visit_duration.png}
 		\caption{An example of \textit{time spent} information found on Google Places~\protect\cite{google_business}.}
 		\label{fig:visit_duration}
 	\end{figure}
@@ -264,7 +265,7 @@
 	
 	\begin{figure}[!ht]
 		\centering
-		\includegraphics[width=\textwidth]{graphics/highlighted_collage.png}
+		\includegraphics[width=\textwidth]{highlighted_collage.png}
 		\caption{Highlighted cluster \textit{with} parking data on the left side and a cluster \textit{without} parking data on the right side~\protect\cite{web_application}.}
 		\label{fig:highlighted_collage}
 	\end{figure}
@@ -383,14 +384,14 @@
 	
 	\begin{figure}[!ht]
 		\centering
-		\includegraphics[width=0.8\textwidth]{graphics/cwith_source_dt_cosine.png}
+		\includegraphics[width=0.8\textwidth]{cwith_source_dt_cosine.png}
 		\caption{Selected cluster \textit{with} parking data and the pop-up table in the Leaflet application~\protect\cite{web_application}.}
 		\label{fig:cwith}
 	\end{figure}
 	
 	\begin{figure}[!ht]
 		\centering
-		\includegraphics[width=0.8\textwidth]{graphics/cwith_source_dt_cosine_table.png}
+		\includegraphics[width=0.8\textwidth]{cwith_source_dt_cosine_table.png}
 		\caption{The pop-up table for the Leaflet application view of \cref{fig:cwith}~\protect\cite{web_application}.}
 		\label{fig:cwith_table}
 	\end{figure}
@@ -402,7 +403,7 @@
 	
 	\begin{figure}[!ht]
 		\centering
-		\includestandalone[width=0.5\textwidth]{graphics/cluster_vector}
+		\includestandalone[width=0.5\textwidth]{cluster_vector}
 		\caption{An example of a \textit{cluster vector} representing amenity \textit{time spent} information composed from for three categories.}
 		\label{fig:cluster_vector}
 	\end{figure}
@@ -426,7 +427,7 @@
 	
 	\begin{figure}[!ht]
 		\centering
-		\includegraphics[width=0.7\textwidth]{graphics/emd_gaussian_addition3.png}
+		\includegraphics[width=0.7\textwidth]{emd_gaussian_addition3.png}
 		\caption{The iterative summing of Gaussian curves representing the amenity \textit{time spent} information resulting in a \textit{cluster Gaussian} as the outer hull (graph obtained inside the Python application using the matplotlib package.}
 		\label{fig:gaussian}
 	\end{figure}
@@ -581,7 +582,7 @@
 	
 	\begin{figure}[!ht]
 		\centering
-		\includegraphics[width=0.8\textwidth]{graphics/cwout_cosine_table.png}
+		\includegraphics[width=0.8\textwidth]{cwout_cosine_table.png}
 		\caption{The pop-up table of a cluster without data.
 			Notice the drop-down list from which the time can be selected. There are 8 times to select, equally spaced throughout the day that followed our experiment. The similarity values are rounded off. The results are expressed in intervals of occupancy. The successive intersection of intervals succeeds only for the first two values, afterwards it is empty ~\protect\cite{web_application}.}
 		\label{fig:cwout_table}
@@ -671,7 +672,7 @@
 	
 	\begin{figure}[!ht]
 		\centering
-		\includegraphics[width=\textwidth]{graphics/amenity_polygons4.png}
+		\includegraphics[width=\textwidth]{amenity_polygons4.png}
 		\caption{OSM screenshot emphasizing polygons as buildings and the amenities that are housed by them~\protect\cite{openstreetmap}.}
 		\label{fig:amenity_polygons}
 	\end{figure}
